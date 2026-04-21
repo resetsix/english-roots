@@ -257,8 +257,7 @@ import { totalWordRoots } from '@/data/wordRoots'
     top: 0;
     bottom: 0;
     left: var(--learn-gutter);
-    border-left: 1px solid
-      color-mix(in srgb, var(--wr-red-pencil) 32%, transparent);
+    border-left: 1px solid var(--wr-margin-line);
     pointer-events: none;
   }
 
@@ -381,7 +380,7 @@ import { totalWordRoots } from '@/data/wordRoots'
   }
 
   :global(.learn-option:hover:not(:disabled)) {
-    border-color: var(--wr-blue-pencil);
+    border-color: var(--wr-focus);
   }
 
   :global(.learn-option.is-correct) {

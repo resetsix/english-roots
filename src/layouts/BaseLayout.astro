@@ -32,6 +32,20 @@ const navItems: NavItem[] = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <script is:inline>
+      try {
+        const settings = JSON.parse(
+          localStorage.getItem('wordRootSettings') || '{}',
+        )
+        if (settings.readingTheme === 'classic') {
+          document.documentElement.dataset.readingTheme = 'classic'
+        } else {
+          delete document.documentElement.dataset.readingTheme
+        }
+      } catch {
+        delete document.documentElement.dataset.readingTheme
+      }
+    </script>
     <link
       rel="preload"
       href="/fonts/LXGWWenKaiScreen.ttf"
@@ -71,7 +85,20 @@ const navItems: NavItem[] = [
       </main>
 
       <footer class="wr-footer">
-        <div class="wr-container">词词有据 · 单词 = 前缀 + 词根 + 后缀</div>
+        <div class="wr-footer__inner">
+          <span>词词有据 · 单词 = 前缀 + 词根 + 后缀</span>
+          <span class="wr-footer__related">
+            <span>音标有谱 ·</span>
+            <a
+              class="wr-footer__link"
+              href="https://english-ipa.netlify.app"
+              target="_blank"
+              rel="noreferrer"
+            >
+              english-ipa.netlify.app
+            </a>
+          </span>
+        </div>
       </footer>
     </div>
   </body>

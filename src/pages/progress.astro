@@ -53,6 +53,17 @@ import { totalWordRoots } from '@/data/wordRoots'
     </section>
 
     <section class="progress-card wr-panel">
+      <div class="progress-row">
+        <h2>阅读样式</h2>
+        <div class="theme-toggle" role="group" aria-label="阅读样式">
+          <button type="button" data-reading-theme="book"> 经典书页 </button>
+          <button type="button" data-reading-theme="classic"> 朱砂书页 </button>
+        </div>
+      </div>
+      <p>样式会保存在当前浏览器，并应用到所有页面。</p>
+    </section>
+
+    <section class="progress-card wr-panel">
       <h2>学习数据</h2>
       <div class="data-grid">
         <div>
@@ -82,7 +93,9 @@ import { totalWordRoots } from '@/data/wordRoots'
     exportLearningData,
     getAchievements,
     getProgress,
+    getReadingTheme,
     importLearningData,
+    setReadingTheme,
     updateStudyStreak,
   } from '@/lib/storage'
   import { wordRoots } from '@/data/wordRoots'
@@ -141,6 +154,34 @@ import { totalWordRoots } from '@/data/wordRoots'
     emptyEl.hidden = achievements.length > 0
   }
 
+  function applyReadingTheme(theme: 'book' | 'classic') {
+    document.documentElement.toggleAttribute(
+      'data-reading-theme',
+      theme === 'classic',
+    )
+    if (theme === 'classic') {
+      document.documentElement.dataset.readingTheme = 'classic'
+    }
+
+    document
+      .querySelectorAll<HTMLButtonElement>('button[data-reading-theme]')
+      .forEach((button) => {
+        const isSelected = button.dataset.readingTheme === theme
+        button.setAttribute('aria-pressed', String(isSelected))
+      })
+  }
+
+  document
+    .querySelectorAll<HTMLButtonElement>('button[data-reading-theme]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const theme =
+          button.dataset.readingTheme === 'classic' ? 'classic' : 'book'
+        setReadingTheme(theme)
+        applyReadingTheme(theme)
+      })
+    })
+
   document.querySelector('#export-data')?.addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(exportLearningData(), null, 2)], {
       type: 'application/json',
@@ -177,9 +218,11 @@ import { totalWordRoots } from '@/data/wordRoots'
   document.querySelector('#clear-data')?.addEventListener('click', () => {
     if (!window.confirm('确定要清除本地学习数据吗？此操作不可恢复。')) return
     clearLearningData()
+    applyReadingTheme('book')
     render()
   })
 
+  applyReadingTheme(getReadingTheme())
   render()
 </script>
 
@@ -217,6 +260,10 @@ import { totalWordRoots } from '@/data/wordRoots'
     gap: 12px;
   }
 
+  .progress-row h2 {
+    margin: 0;
+  }
+
   .progress-bar {
     height: 7px;
     overflow: hidden;
@@ -234,8 +281,8 @@ import { totalWordRoots } from '@/data/wordRoots'
     border-radius: inherit;
     background: linear-gradient(
       90deg,
-      var(--wr-red-pencil),
-      var(--wr-green-pencil)
+      var(--wr-progress-start),
+      var(--wr-progress-end)
     );
     transition: width 320ms ease;
   }
@@ -243,6 +290,33 @@ import { totalWordRoots } from '@/data/wordRoots'
   .progress-card p {
     color: var(--wr-ink-muted);
     margin: 12px 0 0;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 4px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-deep);
+    padding: 4px;
+  }
+
+  .theme-toggle button {
+    min-height: 34px;
+    border: 0;
+    border-radius: calc(var(--wr-radius) - 2px);
+    background: transparent;
+    color: var(--wr-ink-muted);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 6px 11px;
+  }
+
+  .theme-toggle button[aria-pressed='true'] {
+    background: var(--wr-paper-panel);
+    color: var(--wr-ink);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--wr-ink) 8%, transparent);
   }
 
   .achievements {
@@ -270,12 +344,8 @@ import { totalWordRoots } from '@/data/wordRoots'
     height: 34px;
     place-items: center;
     border-radius: var(--wr-radius);
-    background: color-mix(
-      in srgb,
-      var(--wr-red-pencil) 10%,
-      var(--wr-paper-panel)
-    );
-    color: var(--wr-red-pencil);
+    background: color-mix(in srgb, var(--wr-accent) 10%, var(--wr-paper-panel));
+    color: var(--wr-accent);
     font-weight: 850;
   }
 
@@ -307,6 +377,11 @@ import { totalWordRoots } from '@/data/wordRoots'
     .progress-stats,
     .data-grid {
       grid-template-columns: 1fr;
+    }
+
+    .progress-row {
+      align-items: flex-start;
+      flex-direction: column;
     }
   }
 </style>

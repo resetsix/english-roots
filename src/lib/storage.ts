@@ -23,12 +23,24 @@ export type Achievement = {
   unlockedAt: string
 }
 
+export type ReadingTheme = 'book' | 'classic'
+
+export type SettingsData = {
+  readingTheme: ReadingTheme
+}
+
 function readJson<T>(key: string): T | null {
   try {
     const data = localStorage.getItem(key)
     return data ? (JSON.parse(data) as T) : null
   } catch {
     return null
+  }
+}
+
+function createInitialSettings(): SettingsData {
+  return {
+    readingTheme: 'book',
   }
 }
 
@@ -42,6 +54,31 @@ function createInitialProgress(): ProgressData {
     studyStreak: 0,
     sessionCount: 0,
   }
+}
+
+export function getSettings(): SettingsData {
+  return {
+    ...createInitialSettings(),
+    ...(readJson<Partial<SettingsData>>(STORAGE_KEYS.settings) ?? {}),
+  }
+}
+
+export function saveSettings(settings: SettingsData) {
+  localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(settings))
+}
+
+export function getReadingTheme(): ReadingTheme {
+  const theme = getSettings().readingTheme
+  return theme === 'classic' ? 'classic' : 'book'
+}
+
+export function setReadingTheme(theme: ReadingTheme): SettingsData {
+  const settings = {
+    ...getSettings(),
+    readingTheme: theme,
+  }
+  saveSettings(settings)
+  return settings
 }
 
 export function getProgress(): ProgressData {
