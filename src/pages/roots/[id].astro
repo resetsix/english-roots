@@ -16,7 +16,7 @@ const { root } = Astro.props
 
 <BaseLayout title={`${root.root} - 词根详情`} activePath="/roots">
   <article class="wr-narrow root-detail" data-root-id={root.id}>
-    <a class="back-link" href="/roots">← 返回词根索引</a>
+    <a class="back-link" href="/roots">← 返回词根列表</a>
 
     <header class="detail-hero">
       <div class="wr-kicker">Root #{root.id}</div>
@@ -59,7 +59,7 @@ const { root } = Astro.props
     </section>
 
     <div class="detail-actions">
-      <a class="wr-button" href="/roots">返回索引</a>
+      <a class="wr-button" href="/roots">返回列表</a>
       <a
         class="wr-button wr-button--primary"
         href={`/learn?index=${root.id - 1}`}>从这里学习</a
