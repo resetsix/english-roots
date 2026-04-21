@@ -469,6 +469,7 @@ button {
 .wr-footer {
   border-top: 1px solid var(--wr-rule);
   color: var(--wr-ink-faint);
+  font-size: 0.86rem;
   padding: 34px 0;
   text-align: center;
 }
