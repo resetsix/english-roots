@@ -24,6 +24,8 @@ const navItems: NavItem[] = [
   { href: '/roots', label: '列表' },
   { href: '/progress', label: '进度' },
 ]
+
+const currentYear = new Date().getFullYear()
 ---
 
 <!doctype html>
@@ -98,6 +100,7 @@ const navItems: NavItem[] = [
               english-ipa.netlify.app
             </a>
           </span>
+          <span>©{currentYear} 未有期. All rights reserved.</span>
         </div>
       </footer>
     </div>
