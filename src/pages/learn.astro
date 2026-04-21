@@ -1,0 +1,529 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { totalWordRoots } from '@/data/wordRoots'
+---
+
+<BaseLayout title="学习模式 - 词词有据" activePath="/learn">
+  <section class="learn-shell wr-narrow">
+    <header class="learn-progress">
+      <div>
+        <span>当前</span>
+        <strong id="current-index">1/{totalWordRoots}</strong>
+      </div>
+      <div>
+        <span>已掌握</span>
+        <strong id="mastered-count">0</strong>
+      </div>
+    </header>
+
+    <article class="learn-card wr-panel" id="learn-card">
+      <div class="loading">加载中...</div>
+    </article>
+  </section>
+</BaseLayout>
+
+<script>
+  import { wordRoots } from '@/data/wordRoots'
+  import { displayOrigin } from '@/lib/origin'
+  import {
+    getProgress,
+    markRootAsMastered,
+    saveProgress,
+    updateStudyStreak,
+  } from '@/lib/storage'
+
+  const total = wordRoots.length
+  const card = document.querySelector<HTMLElement>('#learn-card')
+  const currentIndexText = document.querySelector('#current-index')
+  const masteredCount = document.querySelector('#mastered-count')
+  const params = new URLSearchParams(window.location.search)
+  const requestedIndexParam = params.get('index')
+  const requestedIndex =
+    requestedIndexParam === null ? NaN : Number(requestedIndexParam)
+  let currentIndex = Number.isFinite(requestedIndex)
+    ? requestedIndex
+    : getProgress().currentRootIndex
+
+  updateStudyStreak()
+
+  function escapeHtml(value: string) {
+    return value.replace(/[&<>"']/g, (char) => {
+      const entities: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      }
+      return entities[char]
+    })
+  }
+
+  function renderParts(
+    example: (typeof wordRoots)[number]['examples'][number],
+  ) {
+    const parts = [
+      example.breakdown.prefix ? ['prefix', example.breakdown.prefix] : null,
+      example.breakdown.root ? ['root', example.breakdown.root] : null,
+      example.breakdown.suffix ? ['suffix', example.breakdown.suffix] : null,
+    ].filter(Boolean) as [string, string][]
+
+    return parts
+      .map(([kind, text], index) => {
+        const plus = index > 0 ? '<span class="learn-plus">+</span>' : ''
+        return `${plus}<span class="wr-morpheme wr-morpheme--${kind}">${escapeHtml(text)}</span>`
+      })
+      .join('')
+  }
+
+  function syncProgressHeader() {
+    const progress = getProgress()
+    if (currentIndexText)
+      currentIndexText.textContent = `${currentIndex + 1}/${total}`
+    if (masteredCount)
+      masteredCount.textContent = String(progress.masteredRoots.length)
+  }
+
+  function normalizeIndex(index: number) {
+    if (index < 0) return total - 1
+    if (index >= total) return 0
+    return index
+  }
+
+  function renderRoot(index: number) {
+    currentIndex = normalizeIndex(index)
+    const root = wordRoots[currentIndex]
+    syncProgressHeader()
+    if (!card) return
+
+    card.innerHTML = `
+      <header class="learn-root-head">
+        <div class="wr-kicker">folio ${String(currentIndex + 1).padStart(3, '0')}</div>
+        <h1 class="wr-wordmark">${escapeHtml(root.root)}</h1>
+        <div class="learn-meta">
+          <span class="wr-chip">${escapeHtml(displayOrigin(root.origin))}</span>
+          <strong>${escapeHtml(root.meaning)}</strong>
+        </div>
+      </header>
+
+      <section class="learn-section">
+        <h2>词条边注</h2>
+        <p class="learn-description">${escapeHtml(root.description)}</p>
+      </section>
+
+      <section class="learn-section">
+        <h2>例词拆页</h2>
+        <div class="learn-examples">
+          ${root.examples
+            .map(
+              (example) => `
+                <div class="learn-example">
+                  <div class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</div>
+                  <div class="learn-example__parts">${renderParts(example)}</div>
+                  <strong>${escapeHtml(example.meaning)}</strong>
+                  <p>${escapeHtml(example.explanation)}</p>
+                </div>
+              `,
+            )
+            .join('')}
+        </div>
+      </section>
+
+      <section class="learn-section learn-quiz" data-correct="${root.quiz.correctAnswer}">
+        <h2>合上书以后</h2>
+        <p class="learn-question">${escapeHtml(root.quiz.question)}</p>
+        <div class="learn-options">
+          ${root.quiz.options
+            .map(
+              (option, optionIndex) => `
+                <button class="learn-option" type="button" data-index="${optionIndex}">
+                  <span>${escapeHtml(option)}</span>
+                  <span class="learn-option__icon" aria-hidden="true"></span>
+                </button>
+              `,
+            )
+            .join('')}
+        </div>
+        <p class="learn-feedback" hidden></p>
+      </section>
+
+      <div class="learn-actions" hidden>
+        <a class="wr-button" href="/roots/${root.id}">查看详情</a>
+        <button class="wr-button wr-button--primary" type="button" id="next-root">下一个词根</button>
+      </div>
+    `
+
+    const options = Array.from(
+      card.querySelectorAll<HTMLButtonElement>('.learn-option'),
+    )
+    const feedback = card.querySelector<HTMLElement>('.learn-feedback')
+    const actions = card.querySelector<HTMLElement>('.learn-actions')
+    const nextButton = card.querySelector<HTMLButtonElement>('#next-root')
+
+    options.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selected = Number(button.dataset.index)
+        const correct = root.quiz.correctAnswer
+        const isCorrect = selected === correct
+
+        options.forEach((option) => {
+          const optionIndex = Number(option.dataset.index)
+          option.disabled = true
+          option.classList.toggle('is-correct', optionIndex === correct)
+          option.classList.toggle(
+            'is-wrong',
+            optionIndex === selected && !isCorrect,
+          )
+          const icon = option.querySelector<HTMLElement>('.learn-option__icon')
+          if (icon) {
+            icon.dataset.state =
+              optionIndex === correct
+                ? 'correct'
+                : optionIndex === selected && !isCorrect
+                  ? 'wrong'
+                  : ''
+          }
+        })
+
+        if (feedback) {
+          feedback.hidden = false
+          feedback.classList.toggle('is-correct', isCorrect)
+          feedback.classList.toggle('is-wrong', !isCorrect)
+          feedback.innerHTML = isCorrect
+            ? '<span class="learn-feedback__icon" aria-hidden="true"></span><span>答对了，已计入掌握进度。</span>'
+            : `<span class="learn-feedback__icon" aria-hidden="true"></span><span>答错了。正确答案是：${escapeHtml(root.quiz.options[correct])}</span>`
+        }
+
+        if (isCorrect) markRootAsMastered(root.id)
+        syncProgressHeader()
+        if (actions) actions.hidden = false
+      })
+    })
+
+    nextButton?.addEventListener('click', () => {
+      const nextIndex = normalizeIndex(currentIndex + 1)
+      const progress = getProgress()
+      progress.currentRootIndex = nextIndex
+      saveProgress(progress)
+      renderRoot(nextIndex)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    })
+  }
+
+  renderRoot(currentIndex)
+</script>
+
+<style>
+  .learn-shell {
+    display: grid;
+    gap: 16px;
+  }
+
+  .learn-progress {
+    position: sticky;
+    top: 76px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: color-mix(in srgb, var(--wr-paper-panel) 92%, transparent);
+    backdrop-filter: blur(8px);
+    padding: 12px;
+  }
+
+  .learn-progress div {
+    display: flex;
+    gap: 8px;
+  }
+
+  .learn-progress span {
+    color: var(--wr-ink-muted);
+  }
+
+  .learn-card {
+    --learn-gutter: clamp(24px, 4vw, 34px);
+    --learn-content-pad: clamp(18px, 4vw, 32px);
+    position: relative;
+    padding-block: clamp(18px, 3vw, 28px);
+    padding-left: calc(var(--learn-gutter) + var(--learn-content-pad));
+    padding-right: var(--learn-content-pad);
+  }
+
+  .learn-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--learn-gutter);
+    border-left: 1px solid
+      color-mix(in srgb, var(--wr-red-pencil) 32%, transparent);
+    pointer-events: none;
+  }
+
+  .loading {
+    color: var(--wr-ink-muted);
+    padding: 48px 0;
+    text-align: center;
+  }
+
+  :global(.learn-root-head) {
+    border-bottom: 1px solid var(--wr-rule);
+    padding-bottom: clamp(18px, 3vw, 24px);
+    text-align: center;
+  }
+
+  :global(.learn-root-head h1) {
+    font-size: clamp(2.8rem, 8vw, 4.9rem);
+    line-height: 1;
+    margin: 8px 0 12px;
+  }
+
+  :global(.learn-meta) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  :global(.learn-section) {
+    margin-top: clamp(24px, 3.5vw, 30px);
+  }
+
+  :global(.learn-section h2) {
+    font-size: 1.18rem;
+    margin: 0 0 14px;
+  }
+
+  :global(.learn-description),
+  :global(.learn-quiz) {
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-deep) 62%,
+      var(--wr-paper-panel)
+    );
+    padding: clamp(16px, 2.5vw, 20px);
+  }
+
+  :global(.learn-description) {
+    color: var(--wr-ink-muted);
+    margin: 0;
+  }
+
+  :global(.learn-examples) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  :global(.learn-example) {
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    padding: 18px;
+  }
+
+  :global(.learn-example__word) {
+    font-size: 1.2rem;
+  }
+
+  :global(.learn-example__parts) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 9px 0;
+  }
+
+  :global(.learn-plus) {
+    color: var(--wr-ink-faint);
+  }
+
+  :global(.learn-example p) {
+    color: var(--wr-ink-muted);
+    margin: 4px 0 0;
+  }
+
+  :global(.learn-question) {
+    font-weight: 760;
+    margin: 0 0 12px;
+  }
+
+  :global(.learn-options) {
+    display: grid;
+    gap: 10px;
+  }
+
+  :global(.learn-option) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    cursor: pointer;
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  :global(.learn-option__icon) {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+  }
+
+  :global(.learn-option:hover:not(:disabled)) {
+    border-color: var(--wr-blue-pencil);
+  }
+
+  :global(.learn-option.is-correct) {
+    border-color: var(--wr-study);
+    background: var(--wr-study-soft);
+  }
+
+  :global(.learn-option.is-correct .learn-option__icon) {
+    color: var(--wr-study);
+  }
+
+  :global(.learn-option.is-wrong) {
+    border-color: var(--wr-danger);
+    background: color-mix(in oklch, var(--wr-danger) 12%, transparent);
+    color: var(--wr-danger);
+  }
+
+  :global(.learn-option.is-wrong .learn-option__icon) {
+    color: var(--wr-danger);
+  }
+
+  :global(.learn-option__icon[data-state='correct']::before) {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 10px;
+    height: 17px;
+    border-right: 3px solid currentColor;
+    border-bottom: 3px solid currentColor;
+    transform: rotate(42deg);
+  }
+
+  :global(.learn-option__icon[data-state='wrong']::before),
+  :global(.learn-option__icon[data-state='wrong']::after) {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 13px;
+    width: 16px;
+    height: 3px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  :global(.learn-option__icon[data-state='wrong']::before) {
+    transform: rotate(45deg);
+  }
+
+  :global(.learn-option__icon[data-state='wrong']::after) {
+    transform: rotate(-45deg);
+  }
+
+  :global(.learn-feedback) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--wr-radius);
+    margin: 12px 0 0;
+    padding: 12px;
+  }
+
+  :global(.learn-feedback[hidden]) {
+    display: none;
+  }
+
+  :global(.learn-feedback__icon) {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+  }
+
+  :global(.learn-feedback.is-correct) {
+    background: var(--wr-study-soft);
+  }
+
+  :global(.learn-feedback.is-correct .learn-feedback__icon) {
+    background: var(--wr-study);
+    color: var(--wr-paper);
+  }
+
+  :global(.learn-feedback.is-correct .learn-feedback__icon::before) {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 7px;
+    height: 13px;
+    border-right: 2.5px solid currentColor;
+    border-bottom: 2.5px solid currentColor;
+    transform: rotate(42deg);
+  }
+
+  :global(.learn-feedback.is-wrong) {
+    background: color-mix(in oklch, var(--wr-danger) 12%, transparent);
+    color: var(--wr-danger);
+  }
+
+  :global(.learn-feedback.is-wrong .learn-feedback__icon) {
+    background: var(--wr-danger);
+    color: var(--wr-paper);
+  }
+
+  :global(.learn-feedback.is-wrong .learn-feedback__icon::before),
+  :global(.learn-feedback.is-wrong .learn-feedback__icon::after) {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 11px;
+    width: 11px;
+    height: 2.5px;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  :global(.learn-feedback.is-wrong .learn-feedback__icon::before) {
+    transform: rotate(45deg);
+  }
+
+  :global(.learn-feedback.is-wrong .learn-feedback__icon::after) {
+    transform: rotate(-45deg);
+  }
+
+  :global(.learn-actions) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 640px) {
+    .learn-card {
+      --learn-gutter: 18px;
+      --learn-content-pad: 18px;
+    }
+
+    :global(.learn-examples) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

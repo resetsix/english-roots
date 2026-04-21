@@ -1,0 +1,195 @@
+---
+import RootCard from '@/components/RootCard.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { totalWordRoots, wordRoots } from '@/data/wordRoots'
+---
+
+<BaseLayout title="词根索引 - 词词有据" activePath="/roots">
+  <section class="wr-container roots-head">
+    <div>
+      <div class="wr-kicker">Card Drawer</div>
+      <h1 class="wr-page-title">词根索引</h1>
+      <p class="wr-lead">
+        按公式素材查找：输入词根、前缀、中文含义或例词，筛出可组合的卡片。
+      </p>
+    </div>
+    <div class="roots-count">
+      <span id="display-count">{totalWordRoots}</span>
+      <span>/ {totalWordRoots}</span>
+    </div>
+  </section>
+
+  <section class="wr-container roots-toolbar" aria-label="词根筛选">
+    <label class="roots-search">
+      <span class="sr-only">搜索词根</span>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="搜索 spect、看、inspect..."
+      />
+    </label>
+    <div class="roots-tabs">
+      <button class="roots-tab is-active" type="button" data-filter="all"
+        >全部</button
+      >
+      <button class="roots-tab" type="button" data-filter="Greek">希腊语</button
+      >
+      <button class="roots-tab" type="button" data-filter="Latin">拉丁语</button
+      >
+    </div>
+  </section>
+
+  <section class="wr-container roots-grid" id="roots-grid">
+    {wordRoots.map((root) => <RootCard root={root} />)}
+  </section>
+
+  <p class="wr-narrow empty-state" id="empty-state" hidden>
+    没有找到匹配的公式素材。
+  </p>
+</BaseLayout>
+
+<script>
+  const searchInput = document.querySelector<HTMLInputElement>('#search-input')
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-root-card]'),
+  )
+  const count = document.querySelector('#display-count')
+  const empty = document.querySelector<HTMLElement>('#empty-state')
+  const tabs = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.roots-tab'),
+  )
+  let filter = 'all'
+
+  function applyFilters() {
+    const keyword = searchInput?.value.trim().toLowerCase() ?? ''
+    let visibleCount = 0
+
+    cards.forEach((card) => {
+      const matchesKeyword = !keyword || card.dataset.search?.includes(keyword)
+      const matchesFilter = filter === 'all' || card.dataset.origin === filter
+      const visible = Boolean(matchesKeyword && matchesFilter)
+      card.hidden = !visible
+      if (visible) visibleCount += 1
+    })
+
+    if (count) count.textContent = String(visibleCount)
+    if (empty) empty.hidden = visibleCount > 0
+  }
+
+  searchInput?.addEventListener('input', applyFilters)
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      filter = tab.dataset.filter ?? 'all'
+      tabs.forEach((item) => item.classList.toggle('is-active', item === tab))
+      applyFilters()
+    })
+  })
+</script>
+
+<style>
+  .roots-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .roots-count {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: var(--wr-ink-faint);
+    white-space: nowrap;
+  }
+
+  .roots-count span:first-child {
+    color: var(--wr-ink);
+    font-size: 3rem;
+    font-weight: 850;
+    line-height: 1;
+  }
+
+  .roots-toolbar {
+    position: sticky;
+    top: 59px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-block: 1px solid var(--wr-rule);
+    background: color-mix(in srgb, var(--wr-paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    margin-top: 32px;
+    padding: 14px 0;
+  }
+
+  .roots-search {
+    flex: 1;
+  }
+
+  .roots-search input {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    color: var(--wr-ink);
+    padding: 0 14px;
+  }
+
+  .roots-search input:focus {
+    border-color: var(--wr-blue-pencil);
+    outline: none;
+  }
+
+  .roots-tabs {
+    display: flex;
+    gap: 6px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-deep);
+    padding: 4px;
+  }
+
+  .roots-tab {
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--wr-ink-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 7px 11px;
+  }
+
+  .roots-tab.is-active {
+    background: var(--wr-paper-panel);
+    color: var(--wr-ink);
+  }
+
+  .roots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .empty-state {
+    color: var(--wr-ink-muted);
+    margin-top: 56px;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .roots-head,
+    .roots-toolbar {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .roots-toolbar {
+      top: 109px;
+    }
+  }
+</style>

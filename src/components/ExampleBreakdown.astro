@@ -1,0 +1,64 @@
+---
+import type { WordExample } from '@/data/wordRoots'
+
+const { example } = Astro.props as { example: WordExample }
+const parts = [
+  example.breakdown.prefix ? ['prefix', example.breakdown.prefix] : null,
+  example.breakdown.root ? ['root', example.breakdown.root] : null,
+  example.breakdown.suffix ? ['suffix', example.breakdown.suffix] : null,
+].filter(Boolean) as [string, string][]
+---
+
+<div class="example-breakdown">
+  <div class="example-breakdown__word wr-wordmark">{example.word}</div>
+  <div
+    class="example-breakdown__parts"
+    aria-label={`${example.word} 的词素拆解`}
+  >
+    {
+      parts.map(([kind, text], index) => (
+        <>
+          {index > 0 && <span class="example-breakdown__plus">+</span>}
+          <span class={`wr-morpheme wr-morpheme--${kind}`}>{text}</span>
+        </>
+      ))
+    }
+  </div>
+  <div class="example-breakdown__meaning">{example.meaning}</div>
+  <p>{example.explanation}</p>
+</div>
+
+<style>
+  .example-breakdown {
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    padding: 18px;
+  }
+
+  .example-breakdown__word {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .example-breakdown__parts {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+
+  .example-breakdown__plus {
+    color: var(--wr-ink-faint);
+  }
+
+  .example-breakdown__meaning {
+    font-weight: 760;
+  }
+
+  .example-breakdown p {
+    color: var(--wr-ink-muted);
+    margin: 4px 0 0;
+  }
+</style>

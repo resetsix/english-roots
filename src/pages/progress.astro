@@ -1,0 +1,312 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { totalWordRoots } from '@/data/wordRoots'
+---
+
+<BaseLayout title="学习进度 - 词词有据" activePath="/progress">
+  <section class="wr-narrow progress-page">
+    <header>
+      <div class="wr-kicker">Study Ledger</div>
+      <h1 class="wr-page-title">学习日志</h1>
+      <p class="wr-lead">
+        学习数据只保存在当前浏览器。你可以导出 JSON
+        备份，也可以在需要时重新导入。
+      </p>
+    </header>
+
+    <section class="progress-stats">
+      <div class="wr-stat">
+        <div class="wr-stat__value">
+          <span id="mastered">0</span><span class="stat-total"
+            >/{totalWordRoots}</span
+          >
+        </div>
+        <div class="wr-stat__label">已掌握词根</div>
+      </div>
+      <div class="wr-stat">
+        <div class="wr-stat__value" id="level">Lv.1</div>
+        <div class="wr-stat__label">当前页阶</div>
+      </div>
+      <div class="wr-stat">
+        <div class="wr-stat__value" id="streak">0</div>
+        <div class="wr-stat__label">连续学习天数</div>
+      </div>
+    </section>
+
+    <section class="progress-card wr-panel">
+      <div class="progress-row">
+        <h2>整体进度</h2>
+        <strong id="percentage">0%</strong>
+      </div>
+      <div class="progress-bar" aria-hidden="true">
+        <div id="progress-fill"></div>
+      </div>
+      <p>距离下一级还需掌握 <strong id="to-next">10</strong> 个词根</p>
+    </section>
+
+    <section class="progress-card wr-panel">
+      <h2>书签</h2>
+      <div class="achievements" id="achievements"></div>
+      <p class="empty-achievements" id="empty-achievements">
+        还没有夹入任何书签。
+      </p>
+    </section>
+
+    <section class="progress-card wr-panel">
+      <h2>学习数据</h2>
+      <div class="data-grid">
+        <div>
+          <p>上次学习：<strong id="last-study">-</strong></p>
+          <p>学习次数：<strong id="sessions">0</strong></p>
+          <p>总积分：<strong id="score">0</strong></p>
+        </div>
+        <div class="data-actions">
+          <button class="wr-button" type="button" id="export-data"
+            >导出学习数据</button
+          >
+          <button class="wr-button" type="button" id="import-data"
+            >导入学习数据</button
+          >
+          <button class="wr-button danger-button" type="button" id="clear-data"
+            >清除学习数据</button
+          >
+        </div>
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<script>
+  import {
+    clearLearningData,
+    exportLearningData,
+    getAchievements,
+    getProgress,
+    importLearningData,
+    updateStudyStreak,
+  } from '@/lib/storage'
+  import { wordRoots } from '@/data/wordRoots'
+
+  updateStudyStreak()
+
+  function setText(id: string, value: string | number) {
+    const element = document.querySelector(`#${id}`)
+    if (element) element.textContent = String(value)
+  }
+
+  function formatLastStudy(dateText: string) {
+    const last = new Date(dateText)
+    const diffDays = Math.floor((Date.now() - last.getTime()) / 86_400_000)
+    if (diffDays <= 0) return '今天'
+    if (diffDays === 1) return '昨天'
+    return `${diffDays} 天前`
+  }
+
+  function render() {
+    const progress = getProgress()
+    const achievements = getAchievements()
+    const mastered = progress.masteredRoots.length
+    const percentage = Math.floor((mastered / wordRoots.length) * 100)
+    const toNext = Math.max(0, progress.level * 10 - mastered)
+
+    setText('mastered', mastered)
+    setText('level', `Lv.${progress.level}`)
+    setText('streak', progress.studyStreak)
+    setText('percentage', `${percentage}%`)
+    setText('to-next', toNext)
+    setText('last-study', formatLastStudy(progress.lastStudyDate))
+    setText('sessions', progress.sessionCount)
+    setText('score', progress.totalScore)
+
+    const fill = document.querySelector<HTMLElement>('#progress-fill')
+    if (fill) fill.style.width = `${percentage}%`
+
+    const achievementsEl = document.querySelector<HTMLElement>('#achievements')
+    const emptyEl = document.querySelector<HTMLElement>('#empty-achievements')
+    if (!achievementsEl || !emptyEl) return
+
+    achievementsEl.innerHTML = achievements
+      .map(
+        (achievement) => `
+          <div class="achievement">
+            <div class="achievement__icon">${achievement.icon}</div>
+            <strong>${achievement.title}</strong>
+            <span>${achievement.description}</span>
+          </div>
+        `,
+      )
+      .join('')
+
+    achievementsEl.hidden = achievements.length === 0
+    emptyEl.hidden = achievements.length > 0
+  }
+
+  document.querySelector('#export-data')?.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(exportLearningData(), null, 2)], {
+      type: 'application/json',
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `word-roots-progress-${Date.now()}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  })
+
+  document.querySelector('#import-data')?.addEventListener('click', () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'application/json,.json'
+    input.addEventListener('change', () => {
+      const file = input.files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.addEventListener('load', () => {
+        try {
+          importLearningData(JSON.parse(String(reader.result)))
+          render()
+        } catch {
+          window.alert('导入失败：文件格式不正确')
+        }
+      })
+      reader.readAsText(file)
+    })
+    input.click()
+  })
+
+  document.querySelector('#clear-data')?.addEventListener('click', () => {
+    if (!window.confirm('确定要清除本地学习数据吗？此操作不可恢复。')) return
+    clearLearningData()
+    render()
+  })
+
+  render()
+</script>
+
+<style>
+  .progress-page {
+    display: grid;
+    gap: 22px;
+  }
+
+  .progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .stat-total {
+    color: var(--wr-ink-faint);
+    font-size: 1.2rem;
+  }
+
+  .progress-card {
+    padding: 22px;
+  }
+
+  .progress-card h2 {
+    font-size: 1.12rem;
+    margin: 0 0 16px;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .progress-bar {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-deep) 68%,
+      var(--wr-paper-panel)
+    );
+  }
+
+  #progress-fill {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      var(--wr-red-pencil),
+      var(--wr-green-pencil)
+    );
+    transition: width 320ms ease;
+  }
+
+  .progress-card p {
+    color: var(--wr-ink-muted);
+    margin: 12px 0 0;
+  }
+
+  .achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+  }
+
+  .achievement {
+    display: grid;
+    gap: 4px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-deep) 54%,
+      var(--wr-paper-panel)
+    );
+    padding: 14px;
+  }
+
+  .achievement__icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: var(--wr-radius);
+    background: color-mix(
+      in srgb,
+      var(--wr-red-pencil) 10%,
+      var(--wr-paper-panel)
+    );
+    color: var(--wr-red-pencil);
+    font-weight: 850;
+  }
+
+  .achievement span {
+    color: var(--wr-ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .empty-achievements {
+    margin: 0;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .data-actions {
+    display: grid;
+    gap: 10px;
+  }
+
+  .danger-button {
+    color: var(--wr-danger);
+  }
+
+  @media (max-width: 760px) {
+    .progress-stats,
+    .data-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

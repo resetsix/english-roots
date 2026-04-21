@@ -1,0 +1,78 @@
+---
+import '../styles/global.css'
+
+type NavItem = {
+  href: string
+  label: string
+}
+
+type Props = {
+  title?: string
+  description?: string
+  activePath?: string
+}
+
+const {
+  title = '词词有据',
+  description = '用词根公式记英语单词。',
+  activePath = '/',
+} = Astro.props as Props
+
+const navItems: NavItem[] = [
+  { href: '/learn', label: '学习' },
+  { href: '/flashcard', label: '闪卡' },
+  { href: '/roots', label: '索引' },
+  { href: '/progress', label: '进度' },
+]
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link
+      rel="preload"
+      href="/fonts/LXGWWenKaiScreen.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="word-root-app">
+      <nav class="wr-nav" aria-label="主导航">
+        <div class="wr-container wr-nav__inner">
+          <a class="wr-brand" href="/">
+            <span class="wr-brand-mark" aria-hidden="true">词</span>
+            <span>词词有据</span>
+          </a>
+
+          <div class="wr-nav__links">
+            {
+              navItems.map((item) => (
+                <a
+                  class="wr-nav__link"
+                  href={item.href}
+                  aria-current={activePath === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </nav>
+
+      <main class="wr-main">
+        <slot />
+      </main>
+
+      <footer class="wr-footer">
+        <div class="wr-container">词词有据 · 单词 = 前缀 + 词根 + 后缀</div>
+      </footer>
+    </div>
+  </body>
+</html>

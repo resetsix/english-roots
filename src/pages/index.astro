@@ -1,0 +1,420 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { totalWordRoots, wordRoots } from '@/data/wordRoots'
+
+const featuredRoots = wordRoots.slice(0, 6)
+---
+
+<BaseLayout
+  activePath="/"
+  description="用词汇公式记英语单词：单词 = 前缀 + 词根 + 后缀。"
+>
+  <section class="home-hero wr-container grid items-center">
+    <div class="min-w-0">
+      <div class="wr-kicker">Pocket Etymology</div>
+      <h1 class="home-title wr-page-title">
+        把单词拆成<br />可记忆的公式
+      </h1>
+      <p class="home-lead wr-lead">
+        单词不是硬记，而是有公式可循：前缀 + 词根 +
+        后缀。前缀调方向，词根表核心，后缀变词性。
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a class="wr-button wr-button--primary" href="/learn">开始学习</a>
+        <a class="wr-button" href="/roots">浏览词根</a>
+      </div>
+    </div>
+
+    <div
+      class="word-lab wr-panel relative max-w-full min-w-0"
+      aria-label="词汇公式演示"
+    >
+      <div class="word-lab__label">index card 01</div>
+      <div
+        class="word-lab__word wr-wordmark block max-w-full overflow-hidden"
+        id="demo-word"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span
+          class="block translate-y-0 will-change-transform"
+          id="demo-word-track"
+        >
+          <span
+            class="block max-w-full overflow-hidden whitespace-nowrap"
+            id="demo-word-current">happy</span
+          >
+          <span
+            class="block max-w-full overflow-hidden whitespace-nowrap"
+            id="demo-word-next"
+            aria-hidden="true"
+          >
+            <span class="word-lab__word-prefix">un</span>happy
+          </span>
+        </span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2.5" id="demo-parts">
+        <span class="wr-morpheme wr-morpheme--prefix" id="demo-prefix" hidden
+          >un</span
+        >
+        <span class="word-lab__plus font-extrabold" id="demo-plus" hidden
+          >+</span
+        >
+        <span class="wr-morpheme wr-morpheme--root" id="demo-root">happy</span>
+      </div>
+      <div class="word-lab__meaning mt-6 border-t">
+        <span class="inline-block" id="demo-meaning-text">happy = 开心</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wr-container wr-section">
+    <div class="wr-grid wr-grid--3">
+      <div class="wr-stat">
+        <div class="wr-stat__value">{totalWordRoots}</div>
+        <div class="wr-stat__label">可组合的词汇公式素材</div>
+      </div>
+      <div class="wr-stat">
+        <div class="wr-stat__value">1000+</div>
+        <div class="wr-stat__label">例词拆解</div>
+      </div>
+      <div class="wr-stat">
+        <div class="wr-stat__value" id="home-progress">待学习</div>
+        <div class="wr-stat__label">学习进度</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wr-container wr-section">
+    <h2 class="wr-section-title">先看几组公式素材</h2>
+    <div class="home-feature-grid grid">
+      {
+        featuredRoots.map((root) => (
+          <a
+            class="home-feature-card grid no-underline"
+            href={`/roots/${root.id}`}
+          >
+            <span class="wr-wordmark">{root.root}</span>
+            <span class="home-feature-card__meaning">{root.meaning}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { totalWordRoots } from '@/data/wordRoots'
+  import { getProgress } from '@/lib/storage'
+
+  const examples: Array<[string, string, string, string]> = [
+    ['happy', '', 'happy', 'happy = 开心'],
+    ['unhappy', 'un', 'happy', 'un + happy = 不开心'],
+    ['kind', '', 'kind', 'kind = 友善'],
+    ['unkind', 'un', 'kind', 'un + kind = 不友善'],
+    ['known', '', 'known', 'known = 已知'],
+    ['unknown', 'un', 'known', 'un + known = 未知'],
+  ]
+
+  let index = 0
+  let isRolling = false
+  const wordTrack = document.querySelector('#demo-word-track')
+  const currentWord = document.querySelector('#demo-word-current')
+  const nextWord = document.querySelector('#demo-word-next')
+  const prefix = document.querySelector('#demo-prefix')
+  const plus = document.querySelector('#demo-plus')
+  const root = document.querySelector('#demo-root')
+  const parts = document.querySelector('#demo-parts')
+  const meaningText = document.querySelector('#demo-meaning-text')
+  const shouldReduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches
+  const rollDurationMs = 780
+  const detailsDelayMs = 360
+  const detailsFadeDurationMs = 360
+  const homeProgress = document.querySelector('#home-progress')
+  const masteredCount = getProgress().masteredRoots.length
+
+  if (homeProgress) {
+    homeProgress.textContent =
+      masteredCount > 0 ? `${masteredCount}/${totalWordRoots}` : '待学习'
+  }
+
+  function renderWord(target: Element, wordValue: string, prefixValue: string) {
+    target.textContent = ''
+    if (prefixValue && wordValue.startsWith(prefixValue)) {
+      const prefixMark = document.createElement('span')
+      prefixMark.className = 'word-lab__word-prefix'
+      prefixMark.textContent = prefixValue
+      target.append(prefixMark, wordValue.slice(prefixValue.length))
+      return
+    }
+    target.textContent = wordValue
+  }
+
+  function renderDetails(
+    nextPrefix: string,
+    nextRoot: string,
+    nextMeaning: string,
+  ) {
+    if (!prefix || !plus || !root || !meaningText) return
+    prefix.toggleAttribute('hidden', !nextPrefix)
+    plus.toggleAttribute('hidden', !nextPrefix)
+    prefix.textContent = nextPrefix
+    root.textContent = nextRoot
+    meaningText.textContent = nextMeaning
+  }
+
+  async function updateDetails(
+    nextPrefix: string,
+    nextRoot: string,
+    nextMeaning: string,
+  ) {
+    if (!parts || !meaningText || shouldReduceMotion) {
+      renderDetails(nextPrefix, nextRoot, nextMeaning)
+      return
+    }
+
+    const fadeOutAnimations = [
+      parts.animate(
+        [
+          { opacity: 1, transform: 'translateY(0)' },
+          { opacity: 0, transform: 'translateY(4px)' },
+        ],
+        {
+          duration: detailsFadeDurationMs / 2,
+          easing: 'cubic-bezier(0.4, 0, 1, 1)',
+          fill: 'forwards',
+        },
+      ),
+      meaningText.animate(
+        [
+          { opacity: 1, transform: 'translateY(0)' },
+          { opacity: 0, transform: 'translateY(4px)' },
+        ],
+        {
+          duration: detailsFadeDurationMs / 2,
+          easing: 'cubic-bezier(0.4, 0, 1, 1)',
+          fill: 'forwards',
+        },
+      ),
+    ]
+
+    await Promise.all(fadeOutAnimations.map((animation) => animation.finished))
+    renderDetails(nextPrefix, nextRoot, nextMeaning)
+    fadeOutAnimations.forEach((animation) => animation.cancel())
+
+    const fadeInAnimations = [
+      parts.animate(
+        [
+          { opacity: 0, transform: 'translateY(4px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        {
+          duration: detailsFadeDurationMs / 2,
+          easing: 'cubic-bezier(0, 0, 0.2, 1)',
+          fill: 'forwards',
+        },
+      ),
+      meaningText.animate(
+        [
+          { opacity: 0, transform: 'translateY(4px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        {
+          duration: detailsFadeDurationMs / 2,
+          easing: 'cubic-bezier(0, 0, 0.2, 1)',
+          fill: 'forwards',
+        },
+      ),
+    ]
+
+    await Promise.all(fadeInAnimations.map((animation) => animation.finished))
+    fadeInAnimations.forEach((animation) => animation.cancel())
+  }
+
+  function commitWord(nextWordValue: string, nextPrefix: string) {
+    if (!wordTrack || !currentWord || !nextWord) return
+    renderWord(currentWord, nextWordValue, nextPrefix)
+    renderWord(nextWord, nextWordValue, nextPrefix)
+    wordTrack.getAnimations().forEach((animation) => animation.cancel())
+    isRolling = false
+  }
+
+  window.setInterval(() => {
+    if (isRolling) return
+    index = (index + 1) % examples.length
+    const [nextWordValue, nextPrefix, nextRoot, nextMeaning] = examples[index]
+    if (
+      !wordTrack ||
+      !currentWord ||
+      !prefix ||
+      !plus ||
+      !root ||
+      !meaningText
+    ) {
+      updateDetails(nextPrefix, nextRoot, nextMeaning)
+      return
+    }
+
+    if (shouldReduceMotion || !nextWordValue) {
+      renderWord(currentWord, nextWordValue, nextPrefix)
+      updateDetails(nextPrefix, nextRoot, nextMeaning)
+      return
+    }
+
+    isRolling = true
+    const nextWordItem = document.querySelector('#demo-word-next')
+    if (!nextWordItem) {
+      isRolling = false
+      return
+    }
+    renderWord(nextWordItem, nextWordValue, nextPrefix)
+    window.setTimeout(
+      () => updateDetails(nextPrefix, nextRoot, nextMeaning),
+      detailsDelayMs,
+    )
+
+    const animation = wordTrack.animate(
+      [{ transform: 'translateY(0)' }, { transform: 'translateY(-50%)' }],
+      {
+        duration: rollDurationMs,
+        easing: 'cubic-bezier(0.22, 0.78, 0.18, 1)',
+      },
+    )
+    animation.addEventListener(
+      'finish',
+      () => commitWord(nextWordValue, nextPrefix),
+      { once: true },
+    )
+  }, 3200)
+</script>
+
+<style>
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.78fr);
+    gap: clamp(28px, 4.6vw, 58px);
+    padding-block: clamp(28px, 6vh, 70px);
+  }
+
+  .home-title {
+    max-width: 8.7em;
+    font-size: clamp(3rem, 5.4vw, 4.7rem);
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .home-lead {
+    max-width: 680px;
+    color: color-mix(in srgb, var(--wr-ink-muted) 88%, var(--wr-ink));
+  }
+
+  .word-lab {
+    container-type: inline-size;
+    padding: clamp(30px, 3vw, 38px) clamp(30px, 3vw, 40px)
+      clamp(30px, 3vw, 38px) clamp(40px, 3.4vw, 50px);
+    border-color: color-mix(in srgb, var(--wr-rule-strong) 54%, var(--wr-rule));
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-panel) 94%,
+      var(--wr-paper-deep)
+    );
+  }
+
+  .word-lab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 22px;
+    border-left: 1px solid
+      color-mix(in srgb, var(--wr-red-pencil) 38%, transparent);
+  }
+
+  .word-lab__label {
+    color: var(--wr-ink-faint);
+    font-family: 'SF Mono', 'Cascadia Code', ui-monospace, monospace;
+    font-size: 0.82rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .word-lab__word {
+    margin: 28px 0 22px;
+    block-size: 1.1em;
+    font-size: clamp(2.45rem, 6vw, 4.1rem);
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    text-overflow: clip;
+    word-break: break-word;
+  }
+
+  .word-lab__plus {
+    color: var(--wr-ink-faint);
+  }
+
+  .word-lab__word-prefix {
+    color: var(--wr-red-pencil);
+    text-shadow: 0 0 18px
+      color-mix(in srgb, var(--wr-red-pencil) 24%, transparent);
+  }
+
+  .word-lab__meaning {
+    border-color: color-mix(in srgb, var(--wr-rule-strong) 42%, var(--wr-rule));
+    color: color-mix(in srgb, var(--wr-ink-muted) 88%, var(--wr-ink));
+    padding-top: 18px;
+    font-size: 1.08rem;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .home-feature-card {
+    gap: 6px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    padding: 14px;
+  }
+
+  .home-feature-card__meaning {
+    color: var(--wr-ink-muted);
+    font-size: 0.86rem;
+  }
+
+  @supports (font-size: 1cqw) {
+    .word-lab__word {
+      font-size: clamp(2.45rem, 12.5cqw, 4.1rem);
+    }
+  }
+
+  @media (min-width: 1081px) {
+    .home-hero {
+      min-height: clamp(440px, 58vh, 650px);
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .home-hero {
+      grid-template-columns: 1fr;
+      padding-block: 26px 44px;
+    }
+
+    .word-lab {
+      max-width: 38rem;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .home-title {
+      font-size: clamp(2.35rem, 11vw, 3.65rem);
+    }
+
+    .home-feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
