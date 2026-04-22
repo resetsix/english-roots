@@ -18,17 +18,17 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '开心',
     suffix: '',
     suffixMeaning: '',
-    meaning: '开心'
+    meaning: '开心',
   },
   {
     word: 'unhappy',
     prefix: 'un',
-    prefixMeaning: '不',
+    prefixMeaning: '否定含义',
     root: 'happy',
     rootMeaning: '开心',
     suffix: '',
     suffixMeaning: '',
-    meaning: '不开心'
+    meaning: '不开心',
   },
   {
     word: 'kindness',
@@ -37,8 +37,8 @@ export const heroExamples: HeroExample[] = [
     root: 'kind',
     rootMeaning: '善良',
     suffix: 'ness',
-    suffixMeaning: '状态/性质',
-    meaning: '善良'
+    suffixMeaning: '状态',
+    meaning: '善良',
   },
   {
     word: 'careful',
@@ -47,8 +47,8 @@ export const heroExamples: HeroExample[] = [
     root: 'care',
     rootMeaning: '关心',
     suffix: 'ful',
-    suffixMeaning: '充满',
-    meaning: '小心的'
+    suffixMeaning: '充满...的',
+    meaning: '小心的',
   },
   {
     word: 'fearless',
@@ -57,8 +57,8 @@ export const heroExamples: HeroExample[] = [
     root: 'fear',
     rootMeaning: '害怕',
     suffix: 'less',
-    suffixMeaning: '没有',
-    meaning: '无畏的'
+    suffixMeaning: '没有...的',
+    meaning: '无畏的',
   },
   {
     word: 'teacher',
@@ -67,8 +67,8 @@ export const heroExamples: HeroExample[] = [
     root: 'teach',
     rootMeaning: '教',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '老师'
+    suffixMeaning: '做这事的人',
+    meaning: '老师',
   },
   {
     word: 'visible',
@@ -77,28 +77,28 @@ export const heroExamples: HeroExample[] = [
     root: 'vis',
     rootMeaning: '看',
     suffix: 'ible',
-    suffixMeaning: '能够',
-    meaning: '可见的'
+    suffixMeaning: '可以...的',
+    meaning: '可见的',
   },
   {
     word: 'invisible',
     prefix: 'in',
-    prefixMeaning: '不',
+    prefixMeaning: '否定含义',
     root: 'vis',
     rootMeaning: '看',
     suffix: 'ible',
-    suffixMeaning: '能够',
-    meaning: '不可见的'
+    suffixMeaning: '可以...的',
+    meaning: '不可见的',
   },
   {
     word: 'preview',
     prefix: 'pre',
-    prefixMeaning: '预先',
+    prefixMeaning: '提前',
     root: 'view',
     rootMeaning: '看',
     suffix: '',
     suffixMeaning: '',
-    meaning: '预览'
+    meaning: '预览',
   },
   {
     word: 'review',
@@ -108,7 +108,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '看',
     suffix: '',
     suffixMeaning: '',
-    meaning: '复习'
+    meaning: '复习',
   },
   {
     word: 'rewrite',
@@ -118,17 +118,17 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '写',
     suffix: '',
     suffixMeaning: '',
-    meaning: '重写'
+    meaning: '重写',
   },
   {
     word: 'return',
     prefix: 're',
-    prefixMeaning: '回',
+    prefixMeaning: '回退',
     root: 'turn',
     rootMeaning: '转',
     suffix: '',
     suffixMeaning: '',
-    meaning: '返回'
+    meaning: '返回',
   },
   {
     word: 'transport',
@@ -138,7 +138,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '运送',
     suffix: '',
     suffixMeaning: '',
-    meaning: '运输'
+    meaning: '运输',
   },
   {
     word: 'export',
@@ -148,7 +148,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '运送',
     suffix: '',
     suffixMeaning: '',
-    meaning: '出口'
+    meaning: '出口',
   },
   {
     word: 'import',
@@ -158,7 +158,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '运送',
     suffix: '',
     suffixMeaning: '',
-    meaning: '进口'
+    meaning: '进口',
   },
   {
     word: 'biology',
@@ -168,7 +168,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '生命',
     suffix: 'logy',
     suffixMeaning: '学科',
-    meaning: '生物学'
+    meaning: '生物学',
   },
   {
     word: 'geology',
@@ -178,17 +178,17 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '地球',
     suffix: 'logy',
     suffixMeaning: '学科',
-    meaning: '地质学'
+    meaning: '地质学',
   },
   {
     word: 'telephone',
     prefix: 'tele',
-    prefixMeaning: '远',
+    prefixMeaning: '远程',
     root: 'phone',
     rootMeaning: '声音',
     suffix: '',
     suffixMeaning: '',
-    meaning: '电话'
+    meaning: '电话',
   },
   {
     word: 'action',
@@ -197,8 +197,8 @@ export const heroExamples: HeroExample[] = [
     root: 'act',
     rootMeaning: '做',
     suffix: 'ion',
-    suffixMeaning: '名词',
-    meaning: '行动'
+    suffixMeaning: '变成名词',
+    meaning: '行动',
   },
   {
     word: 'creation',
@@ -207,8 +207,8 @@ export const heroExamples: HeroExample[] = [
     root: 'create',
     rootMeaning: '创造',
     suffix: 'ion',
-    suffixMeaning: '名词',
-    meaning: '创造'
+    suffixMeaning: '变成名词',
+    meaning: '创造',
   },
   {
     word: 'movement',
@@ -217,8 +217,8 @@ export const heroExamples: HeroExample[] = [
     root: 'move',
     rootMeaning: '移动',
     suffix: 'ment',
-    suffixMeaning: '结果/行为',
-    meaning: '运动'
+    suffixMeaning: '变成名词',
+    meaning: '运动',
   },
   {
     word: 'reader',
@@ -227,8 +227,8 @@ export const heroExamples: HeroExample[] = [
     root: 'read',
     rootMeaning: '读',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '读者'
+    suffixMeaning: '做这事的人',
+    meaning: '读者',
   },
   {
     word: 'writer',
@@ -237,8 +237,8 @@ export const heroExamples: HeroExample[] = [
     root: 'write',
     rootMeaning: '写',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '作者'
+    suffixMeaning: '做这事的人',
+    meaning: '作者',
   },
   {
     word: 'worker',
@@ -247,8 +247,8 @@ export const heroExamples: HeroExample[] = [
     root: 'work',
     rootMeaning: '工作',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '工人'
+    suffixMeaning: '做这事的人',
+    meaning: '工人',
   },
   {
     word: 'hopeful',
@@ -257,8 +257,8 @@ export const heroExamples: HeroExample[] = [
     root: 'hope',
     rootMeaning: '希望',
     suffix: 'ful',
-    suffixMeaning: '充满',
-    meaning: '充满希望的'
+    suffixMeaning: '充满...的',
+    meaning: '充满希望的',
   },
   {
     word: 'hopeless',
@@ -267,8 +267,8 @@ export const heroExamples: HeroExample[] = [
     root: 'hope',
     rootMeaning: '希望',
     suffix: 'less',
-    suffixMeaning: '没有',
-    meaning: '无望的'
+    suffixMeaning: '没有...的',
+    meaning: '无望的',
   },
   {
     word: 'rebuild',
@@ -278,27 +278,27 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '建造',
     suffix: '',
     suffixMeaning: '',
-    meaning: '重建'
+    meaning: '重建',
   },
   {
     word: 'unlock',
     prefix: 'un',
-    prefixMeaning: '反向/解除',
+    prefixMeaning: '相反 / 解除',
     root: 'lock',
     rootMeaning: '锁',
     suffix: '',
     suffixMeaning: '',
-    meaning: '解锁'
+    meaning: '解锁',
   },
   {
     word: 'dislike',
     prefix: 'dis',
-    prefixMeaning: '不/相反',
+    prefixMeaning: '否定含义',
     root: 'like',
     rootMeaning: '喜欢',
     suffix: '',
     suffixMeaning: '',
-    meaning: '不喜欢'
+    meaning: '不喜欢',
   },
   {
     word: 'misread',
@@ -308,17 +308,17 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '读',
     suffix: '',
     suffixMeaning: '',
-    meaning: '误读'
+    meaning: '误读',
   },
   {
     word: 'subway',
     prefix: 'sub',
-    prefixMeaning: '下面',
+    prefixMeaning: '下方',
     root: 'way',
     rootMeaning: '路',
     suffix: '',
     suffixMeaning: '',
-    meaning: '地铁'
+    meaning: '地铁',
   },
   {
     word: 'midday',
@@ -328,7 +328,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '白天',
     suffix: '',
     suffixMeaning: '',
-    meaning: '正午'
+    meaning: '正午',
   },
   {
     word: 'payment',
@@ -337,8 +337,8 @@ export const heroExamples: HeroExample[] = [
     root: 'pay',
     rootMeaning: '支付',
     suffix: 'ment',
-    suffixMeaning: '结果/行为',
-    meaning: '付款'
+    suffixMeaning: '变成名词',
+    meaning: '付款',
   },
   {
     word: 'playful',
@@ -347,8 +347,8 @@ export const heroExamples: HeroExample[] = [
     root: 'play',
     rootMeaning: '玩',
     suffix: 'ful',
-    suffixMeaning: '充满',
-    meaning: '爱玩的'
+    suffixMeaning: '充满...的',
+    meaning: '爱玩的',
   },
   {
     word: 'useful',
@@ -357,8 +357,8 @@ export const heroExamples: HeroExample[] = [
     root: 'use',
     rootMeaning: '使用',
     suffix: 'ful',
-    suffixMeaning: '充满',
-    meaning: '有用的'
+    suffixMeaning: '充满...的',
+    meaning: '有用的',
   },
   {
     word: 'useless',
@@ -367,8 +367,8 @@ export const heroExamples: HeroExample[] = [
     root: 'use',
     rootMeaning: '使用',
     suffix: 'less',
-    suffixMeaning: '没有',
-    meaning: '无用的'
+    suffixMeaning: '没有...的',
+    meaning: '无用的',
   },
   {
     word: 'slowly',
@@ -377,8 +377,8 @@ export const heroExamples: HeroExample[] = [
     root: 'slow',
     rootMeaning: '慢',
     suffix: 'ly',
-    suffixMeaning: '方式',
-    meaning: '慢慢地'
+    suffixMeaning: '变成副词',
+    meaning: '慢慢地',
   },
   {
     word: 'quickly',
@@ -387,8 +387,8 @@ export const heroExamples: HeroExample[] = [
     root: 'quick',
     rootMeaning: '快',
     suffix: 'ly',
-    suffixMeaning: '方式',
-    meaning: '快速地'
+    suffixMeaning: '变成副词',
+    meaning: '快速地',
   },
   {
     word: 'singer',
@@ -397,8 +397,8 @@ export const heroExamples: HeroExample[] = [
     root: 'sing',
     rootMeaning: '唱',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '歌手'
+    suffixMeaning: '做这事的人',
+    meaning: '歌手',
   },
   {
     word: 'painter',
@@ -407,8 +407,8 @@ export const heroExamples: HeroExample[] = [
     root: 'paint',
     rootMeaning: '画',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '画家'
+    suffixMeaning: '做这事的人',
+    meaning: '画家',
   },
   {
     word: 'actor',
@@ -417,8 +417,8 @@ export const heroExamples: HeroExample[] = [
     root: 'act',
     rootMeaning: '表演',
     suffix: 'or',
-    suffixMeaning: '人',
-    meaning: '演员'
+    suffixMeaning: '做这事的人',
+    meaning: '演员',
   },
   {
     word: 'visitor',
@@ -427,28 +427,28 @@ export const heroExamples: HeroExample[] = [
     root: 'visit',
     rootMeaning: '访问',
     suffix: 'or',
-    suffixMeaning: '人',
-    meaning: '访客'
+    suffixMeaning: '做这事的人',
+    meaning: '访客',
   },
   {
     word: 'enable',
     prefix: 'en',
-    prefixMeaning: '使',
+    prefixMeaning: '使变成',
     root: 'able',
     rootMeaning: '能够',
     suffix: '',
     suffixMeaning: '',
-    meaning: '使能够'
+    meaning: '使能够',
   },
   {
     word: 'disable',
     prefix: 'dis',
-    prefixMeaning: '去除',
+    prefixMeaning: '否定含义',
     root: 'able',
     rootMeaning: '能够',
     suffix: '',
     suffixMeaning: '',
-    meaning: '使失效'
+    meaning: '使失效',
   },
   {
     word: 'reopen',
@@ -458,27 +458,27 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '打开',
     suffix: '',
     suffixMeaning: '',
-    meaning: '重新打开'
+    meaning: '重新打开',
   },
   {
     word: 'prepay',
     prefix: 'pre',
-    prefixMeaning: '预先',
+    prefixMeaning: '提前',
     root: 'pay',
     rootMeaning: '支付',
     suffix: '',
     suffixMeaning: '',
-    meaning: '预付'
+    meaning: '预付',
   },
   {
     word: 'postwar',
     prefix: 'post',
-    prefixMeaning: '之后',
+    prefixMeaning: '在...之后',
     root: 'war',
     rootMeaning: '战争',
     suffix: '',
     suffixMeaning: '',
-    meaning: '战后的'
+    meaning: '战后的',
   },
   {
     word: 'overwork',
@@ -488,57 +488,57 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '工作',
     suffix: '',
     suffixMeaning: '',
-    meaning: '过度工作'
+    meaning: '过度工作',
   },
   {
     word: 'undersea',
     prefix: 'under',
-    prefixMeaning: '下面',
+    prefixMeaning: '下方',
     root: 'sea',
     rootMeaning: '海',
     suffix: '',
     suffixMeaning: '',
-    meaning: '海底的'
+    meaning: '海底的',
   },
   {
     word: 'nonstop',
     prefix: 'non',
-    prefixMeaning: '不',
+    prefixMeaning: '否定含义',
     root: 'stop',
     rootMeaning: '停止',
     suffix: '',
     suffixMeaning: '',
-    meaning: '不停的'
+    meaning: '不停的',
   },
   {
     word: 'indoor',
     prefix: 'in',
-    prefixMeaning: '里面',
+    prefixMeaning: '向内',
     root: 'door',
     rootMeaning: '门',
     suffix: '',
     suffixMeaning: '',
-    meaning: '室内的'
+    meaning: '室内的',
   },
   {
     word: 'outdoor',
     prefix: 'out',
-    prefixMeaning: '外面',
+    prefixMeaning: '向外',
     root: 'door',
     rootMeaning: '门',
     suffix: '',
     suffixMeaning: '',
-    meaning: '户外的'
+    meaning: '户外的',
   },
   {
     word: 'foresight',
     prefix: 'fore',
-    prefixMeaning: '前方',
+    prefixMeaning: '提前',
     root: 'sight',
     rootMeaning: '看见',
     suffix: '',
     suffixMeaning: '',
-    meaning: '远见'
+    meaning: '远见',
   },
   {
     word: 'helper',
@@ -547,8 +547,8 @@ export const heroExamples: HeroExample[] = [
     root: 'help',
     rootMeaning: '帮助',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '帮手'
+    suffixMeaning: '做这事的人',
+    meaning: '帮手',
   },
   {
     word: 'runner',
@@ -557,8 +557,8 @@ export const heroExamples: HeroExample[] = [
     root: 'run',
     rootMeaning: '跑',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '跑步者'
+    suffixMeaning: '做这事的人',
+    meaning: '跑步者',
   },
   {
     word: 'builder',
@@ -567,8 +567,8 @@ export const heroExamples: HeroExample[] = [
     root: 'build',
     rootMeaning: '建造',
     suffix: 'er',
-    suffixMeaning: '人',
-    meaning: '建造者'
+    suffixMeaning: '做这事的人',
+    meaning: '建造者',
   },
   {
     word: 'joyful',
@@ -577,8 +577,8 @@ export const heroExamples: HeroExample[] = [
     root: 'joy',
     rootMeaning: '快乐',
     suffix: 'ful',
-    suffixMeaning: '充满',
-    meaning: '快乐的'
+    suffixMeaning: '充满...的',
+    meaning: '快乐的',
   },
   {
     word: 'sadness',
@@ -587,8 +587,8 @@ export const heroExamples: HeroExample[] = [
     root: 'sad',
     rootMeaning: '悲伤',
     suffix: 'ness',
-    suffixMeaning: '状态/性质',
-    meaning: '悲伤'
+    suffixMeaning: '状态',
+    meaning: '悲伤',
   },
   {
     word: 'darkness',
@@ -597,8 +597,8 @@ export const heroExamples: HeroExample[] = [
     root: 'dark',
     rootMeaning: '黑暗',
     suffix: 'ness',
-    suffixMeaning: '状态/性质',
-    meaning: '黑暗'
+    suffixMeaning: '状态',
+    meaning: '黑暗',
   },
   {
     word: 'softness',
@@ -607,8 +607,8 @@ export const heroExamples: HeroExample[] = [
     root: 'soft',
     rootMeaning: '柔软',
     suffix: 'ness',
-    suffixMeaning: '状态/性质',
-    meaning: '柔软'
+    suffixMeaning: '状态',
+    meaning: '柔软',
   },
   {
     word: 'freedom',
@@ -617,8 +617,8 @@ export const heroExamples: HeroExample[] = [
     root: 'free',
     rootMeaning: '自由',
     suffix: 'dom',
-    suffixMeaning: '领域/状态',
-    meaning: '自由'
+    suffixMeaning: '状态',
+    meaning: '自由',
   },
   {
     word: 'wisdom',
@@ -627,8 +627,8 @@ export const heroExamples: HeroExample[] = [
     root: 'wis',
     rootMeaning: '知道',
     suffix: 'dom',
-    suffixMeaning: '领域/状态',
-    meaning: '智慧'
+    suffixMeaning: '状态',
+    meaning: '智慧',
   },
   {
     word: 'friendship',
@@ -638,7 +638,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '朋友',
     suffix: 'ship',
     suffixMeaning: '关系',
-    meaning: '友谊'
+    meaning: '友谊',
   },
   {
     word: 'leadership',
@@ -647,8 +647,8 @@ export const heroExamples: HeroExample[] = [
     root: 'leader',
     rootMeaning: '领导者',
     suffix: 'ship',
-    suffixMeaning: '身份/能力',
-    meaning: '领导力'
+    suffixMeaning: '身份',
+    meaning: '领导力',
   },
   {
     word: 'childhood',
@@ -658,7 +658,7 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '孩子',
     suffix: 'hood',
     suffixMeaning: '时期',
-    meaning: '童年'
+    meaning: '童年',
   },
   {
     word: 'remake',
@@ -668,27 +668,27 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '制作',
     suffix: '',
     suffixMeaning: '',
-    meaning: '重做'
+    meaning: '重做',
   },
   {
     word: 'replace',
     prefix: 're',
-    prefixMeaning: '重新',
+    prefixMeaning: '再次',
     root: 'place',
     rootMeaning: '放置',
     suffix: '',
     suffixMeaning: '',
-    meaning: '替换'
+    meaning: '替换',
   },
   {
     word: 'pretest',
     prefix: 'pre',
-    prefixMeaning: '预先',
+    prefixMeaning: '提前',
     root: 'test',
     rootMeaning: '测试',
     suffix: '',
     suffixMeaning: '',
-    meaning: '预考'
+    meaning: '预考',
   },
   {
     word: 'disconnect',
@@ -698,27 +698,27 @@ export const heroExamples: HeroExample[] = [
     rootMeaning: '连接',
     suffix: '',
     suffixMeaning: '',
-    meaning: '断开'
+    meaning: '断开',
   },
   {
     word: 'connect',
     prefix: 'con',
-    prefixMeaning: '共同',
+    prefixMeaning: '一起',
     root: 'nect',
     rootMeaning: '连接',
     suffix: '',
     suffixMeaning: '',
-    meaning: '连接'
+    meaning: '连接',
   },
   {
     word: 'protect',
     prefix: 'pro',
-    prefixMeaning: '向前/为了',
+    prefixMeaning: '向前',
     root: 'tect',
     rootMeaning: '遮盖',
     suffix: '',
     suffixMeaning: '',
-    meaning: '保护'
+    meaning: '保护',
   },
   {
     word: 'education',
@@ -727,7 +727,287 @@ export const heroExamples: HeroExample[] = [
     root: 'educ',
     rootMeaning: '引导',
     suffix: 'ation',
-    suffixMeaning: '行为/结果',
-    meaning: '教育'
-  }
+    suffixMeaning: '变成名词',
+    meaning: '教育',
+  },
+  {
+    word: 'antibody',
+    prefix: 'anti',
+    prefixMeaning: '抗击',
+    root: 'body',
+    rootMeaning: '身体',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '抗体',
+  },
+  {
+    word: 'counteract',
+    prefix: 'counter',
+    prefixMeaning: '对抗',
+    root: 'act',
+    rootMeaning: '做',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '抵消',
+  },
+  {
+    word: 'decode',
+    prefix: 'de',
+    prefixMeaning: '去除',
+    root: 'code',
+    rootMeaning: '密码',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '解码',
+  },
+  {
+    word: 'devalue',
+    prefix: 'de',
+    prefixMeaning: '向下',
+    root: 'value',
+    rootMeaning: '价值',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '贬值',
+  },
+  {
+    word: 'eject',
+    prefix: 'e',
+    prefixMeaning: '向外',
+    root: 'ject',
+    rootMeaning: '扔',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '弹出',
+  },
+  {
+    word: 'empower',
+    prefix: 'em',
+    prefixMeaning: '使变成',
+    root: 'power',
+    rootMeaning: '力量',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '赋予力量',
+  },
+  {
+    word: 'internet',
+    prefix: 'inter',
+    prefixMeaning: '在...之间',
+    root: 'net',
+    rootMeaning: '网',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '互联网',
+  },
+  {
+    word: 'microscope',
+    prefix: 'micro',
+    prefixMeaning: '微小',
+    root: 'scope',
+    rootMeaning: '看',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '显微镜',
+  },
+  {
+    word: 'monologue',
+    prefix: 'mono',
+    prefixMeaning: '单一',
+    root: 'logue',
+    rootMeaning: '说话',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '独白',
+  },
+  {
+    word: 'superman',
+    prefix: 'super',
+    prefixMeaning: '超越',
+    root: 'man',
+    rootMeaning: '人',
+    suffix: '',
+    suffixMeaning: '',
+    meaning: '超人',
+  },
+  {
+    word: 'natural',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'nature',
+    rootMeaning: '自然',
+    suffix: 'al',
+    suffixMeaning: '变成形容词',
+    meaning: '自然的',
+  },
+  {
+    word: 'activate',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'active',
+    rootMeaning: '活跃',
+    suffix: 'ate',
+    suffixMeaning: '变成动词',
+    meaning: '激活',
+  },
+  {
+    word: 'difference',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'differ',
+    rootMeaning: '不同',
+    suffix: 'ence',
+    suffixMeaning: '变成名词',
+    meaning: '差异',
+  },
+  {
+    word: 'different',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'differ',
+    rootMeaning: '不同',
+    suffix: 'ent',
+    suffixMeaning: '变成形容词',
+    meaning: '不同的',
+  },
+  {
+    word: 'heroic',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'hero',
+    rootMeaning: '英雄',
+    suffix: 'ic',
+    suffixMeaning: '变成形容词',
+    meaning: '英雄的',
+  },
+  {
+    word: 'heroism',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'hero',
+    rootMeaning: '英雄',
+    suffix: 'ism',
+    suffixMeaning: '主义',
+    meaning: '英雄主义',
+  },
+  {
+    word: 'artist',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'art',
+    rootMeaning: '艺术',
+    suffix: 'ist',
+    suffixMeaning: '做这事的人',
+    meaning: '艺术家',
+  },
+  {
+    word: 'activity',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'active',
+    rootMeaning: '活跃',
+    suffix: 'ity',
+    suffixMeaning: '变成名词',
+    meaning: '活动',
+  },
+  {
+    word: 'active',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'act',
+    rootMeaning: '行动',
+    suffix: 'ive',
+    suffixMeaning: '变成形容词',
+    meaning: '活跃的',
+  },
+  {
+    word: 'memorize',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'memory',
+    rootMeaning: '记忆',
+    suffix: 'ize',
+    suffixMeaning: '变成动词',
+    meaning: '记住',
+  },
+  {
+    word: 'sunny',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'sun',
+    rootMeaning: '太阳',
+    suffix: 'y',
+    suffixMeaning: '变成形容词',
+    meaning: '晴朗的',
+  },
+  {
+    word: 'failure',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'fail',
+    rootMeaning: '失败',
+    suffix: 'ure',
+    suffixMeaning: '变成名词',
+    meaning: '失败',
+  },
+  {
+    word: 'imaginary',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'imagine',
+    rootMeaning: '想象',
+    suffix: 'ary',
+    suffixMeaning: '变成形容词',
+    meaning: '想象的',
+  },
+  {
+    word: 'social',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'soci',
+    rootMeaning: '社会',
+    suffix: 'ial',
+    suffixMeaning: '变成形容词',
+    meaning: '社会的',
+  },
+  {
+    word: 'painting',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'paint',
+    rootMeaning: '画',
+    suffix: 'ing',
+    suffixMeaning: '变成名词',
+    meaning: '画作',
+  },
+  {
+    word: 'romantic',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'romance',
+    rootMeaning: '浪漫',
+    suffix: 'tic',
+    suffixMeaning: '变成形容词',
+    meaning: '浪漫的',
+  },
+  {
+    word: 'membership',
+    prefix: '',
+    prefixMeaning: '',
+    root: 'member',
+    rootMeaning: '成员',
+    suffix: 'ship',
+    suffixMeaning: '身份',
+    meaning: '会员身份',
+  },
+  {
+    word: 'synchronize',
+    prefix: 'syn',
+    prefixMeaning: '同步',
+    root: 'chron',
+    rootMeaning: '时间',
+    suffix: 'ize',
+    suffixMeaning: '变成动词',
+    meaning: '同步',
+  },
 ]

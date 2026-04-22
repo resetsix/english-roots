@@ -27,7 +27,7 @@ export const wordRoots: WordRoot[] = [
     id: 1,
     root: 'a-/an-',
     origin: 'Greek',
-    meaning: '不，无，非',
+    meaning: '否定含义',
     meaningEn: 'a',
     description: `a-/an- 来自希腊语，表示「没有、缺乏」。想象一个「anonymous（匿名的）」人，就是没有（an-）名字（onym）的人。这个前缀在医学术语中特别常见，比如 anemia（贫血）= 没有（an-）血（emia）。`,
     examples: [
@@ -227,7 +227,7 @@ export const wordRoots: WordRoot[] = [
     id: 6,
     root: 'ex-/e-',
     origin: 'Latin',
-    meaning: '出，外',
+    meaning: '向外',
     meaningEn: 'ex',
     description: `ex-/e- 表示「向外」。记住 exit（出口）：ex-（向外）+ it（走）= 向外走的地方。export（出口）= ex-（向外）+ port（运）→ 运出去。元音前会省略x变成e-，如 emit（发射）。`,
     examples: [
@@ -267,7 +267,7 @@ export const wordRoots: WordRoot[] = [
     id: 7,
     root: 'in-/im-',
     origin: 'Latin',
-    meaning: '进入，使',
+    meaning: '向内 / 否定含义',
     meaningEn: 'in',
     description: `in-/im- 有两个相反的意思，要根据词根判断：①进入（insert插入）②否定（impossible不可能）。辅音m/p/b前会变成im-，这是为了发音方便。记住：如果词根是形容词，in-通常表否定；如果是动词，通常表「进入」。`,
     examples: [
@@ -587,7 +587,7 @@ export const wordRoots: WordRoot[] = [
     id: 15,
     root: 'bi-',
     origin: 'Latin',
-    meaning: '两个，双',
+    meaning: '两个 / 双重',
     meaningEn: 'bi',
     description: `bi- 来自拉丁语「二、双」。bicycle（自行车）= bi-（双）+ cycle（轮）→ 双轮车。bilingual（双语的）= bi-（双）+ lingual（语言的）。`,
     examples: [
@@ -667,7 +667,7 @@ export const wordRoots: WordRoot[] = [
     id: 17,
     root: 'multi-',
     origin: 'Latin',
-    meaning: '多',
+    meaning: '多个 / 多重',
     meaningEn: 'multi',
     description: `multi- 表示「多」。multimedia（多媒体）、multinational（跨国的）。记住：multi- 强调「很多、多种」。`,
     examples: [
@@ -747,7 +747,7 @@ export const wordRoots: WordRoot[] = [
     id: 19,
     root: 'macro-',
     origin: 'Greek',
-    meaning: '大，宏观',
+    meaning: '宏大 / 宏观',
     meaningEn: 'macro',
     description: `macro- 表示「大、宏观」（与 micro- 相对）。macroeconomics（宏观经济学）= macro-（大）+ economics（经济学）。macroscopic（肉眼可见的）= macro-（大）+ scopic（看）。`,
     examples: [
@@ -867,7 +867,7 @@ export const wordRoots: WordRoot[] = [
     id: 22,
     root: 'co-/com-/con-',
     origin: 'Latin',
-    meaning: '共同',
+    meaning: '一起 / 共同',
     meaningEn: 'co',
     description: `co-/com-/con- 表示「共同、一起」。cooperate（合作）= co-（共同）+ operate（操作）→ 一起做事。company（公司）= com-（一起）+ pan（面包）+ -y → 一起吃面包的人 → 伙伴 → 公司。`,
     examples: [
@@ -1857,7 +1857,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '生命，心',
     meaningEn: 'anim',
-    description: `anim 表示「生命、心」。animal（动物）= anim（生命）+ -al → 有生命的东西。animate（使有生气）= anim（生命）+ -ate → 使有生命。unanimous（一致的）= un-（一）+ anim（心）+ -ous → 一条心的 → 一致的。`,
+    description: `anim 表示「生命、心」。animal（动物）= anim（生命）+ -al → 有生命的东西。animate（使有生气）= anim（生命）+ -ate → 使有生命。animation（动画）= anim（生命）+ -ation → 让画面像有生命一样动起来。`,
     examples: [
       {
         word: 'animal',
@@ -1870,12 +1870,6 @@ export const wordRoots: WordRoot[] = [
         breakdown: { prefix: '', root: 'anim', suffix: 'ate' },
         meaning: '使有生气',
         explanation: '使活→使有生气'
-      },
-      {
-        word: 'unanimous',
-        breakdown: { prefix: 'un', root: 'anim', suffix: 'ous' },
-        meaning: '一致的',
-        explanation: '一个心→一致的'
       },
       {
         word: 'magnanimous',
@@ -1892,7 +1886,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
       question: 'animal 的意思是什么？',
-      options: ["一致的", "宽宏大量的", "动物", "使有生气"],
+      options: ["动画", "宽宏大量的", "动物", "使有生气"],
       correctAnswer: 2
     }
   },
@@ -1903,7 +1897,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '死',
     meaningEn: 'mort',
-    description: `mort 表示「死」。mortal（凡人）= mort（死）+ -al → 会死的人 → 凡人。immortal（不朽的）= im-（不）+ mort（死）+ -al → 不会死的 → 不朽的。mortgage（抵押贷款）= mort（死）+ gage（抵押）→ 死了也要还的贷款。`,
+    description: `mort 表示「死」。mortal（凡人）= mort（死）+ -al → 会死的人 → 凡人。immortal（不朽的）= im-（不）+ mort（死）+ -al → 不会死的 → 不朽的。mortgage（抵押贷款）= mort（死）+ gage（承诺）→ 死约/不可更改的承诺 → 抵押。`,
     examples: [
       {
         word: 'mortal',
@@ -1921,7 +1915,7 @@ export const wordRoots: WordRoot[] = [
         word: 'mortgage',
         breakdown: { prefix: '', root: 'mort', suffix: 'gage' },
         meaning: '抵押',
-        explanation: '死的保证→抵押'
+        explanation: '死约/不可更改的承诺→抵押'
       },
       {
         word: 'mortuary',
@@ -2177,7 +2171,7 @@ export const wordRoots: WordRoot[] = [
     id: 51,
     root: 'ab-/abs-',
     origin: 'Latin',
-    meaning: '相反，变坏，离去',
+    meaning: '偏离 / 离去',
     meaningEn: 'away from',
     description: `ab-/abs- 表示「离开、相反」。abnormal（异常的）= ab-（离开）+ normal（正常）→ 偏离正常 → 异常。absorb（吸收）= ab-（离开）+ sorb（吸）→ 把东西吸走。注意：元音前用 ab-，辅音前用 abs-。`,
     examples: [
@@ -2355,7 +2349,7 @@ export const wordRoots: WordRoot[] = [
     id: 55,
     root: 'con-/com-/co-',
     origin: 'Latin',
-    meaning: '共同，一起',
+    meaning: '一起 / 共同',
     meaningEn: 'together',
     description: `co-/com-/con- 表示「共同、一起」。collaborate（合作）= co-（共同）+ labor（劳动）+ -ate → 一起劳动 → 合作。这个前缀会同化：com- 用于 b/p/m 前，con- 用于其他辅音前，co- 用于元音前。`,
     examples: [
@@ -2481,7 +2475,7 @@ export const wordRoots: WordRoot[] = [
     id: 58,
     root: 'mal-',
     origin: 'Latin',
-    meaning: '坏，恶',
+    meaning: '坏的 / 错误',
     meaningEn: 'bad',
     description: `mal- 表示「坏、恶」。malfunction（故障）= mal-（坏）+ function（功能）→ 功能坏了 → 故障。malicious（恶意的）= mal-（恶）+ -icious（的）→ 有恶意的。记住：mal- 的反义词是 bene-（好）。`,
     examples: [
@@ -2521,7 +2515,7 @@ export const wordRoots: WordRoot[] = [
     id: 59,
     root: 'mis-',
     origin: 'Old English',
-    meaning: '错，坏',
+    meaning: '错误',
     meaningEn: 'wrong, bad',
     description: `mis- 表示「错误、不当」，已在前面讲过。misfortune（不幸）= mis-（坏）+ fortune（运气）→ 坏运气 → 不幸。mislead（误导）= mis-（错）+ lead（引导）→ 引导错了 → 误导。`,
     examples: [
@@ -2601,7 +2595,7 @@ export const wordRoots: WordRoot[] = [
     id: 61,
     root: 'over-',
     origin: 'Old English',
-    meaning: '过度，超过',
+    meaning: '过度 / 在上方',
     meaningEn: 'too much, above',
     description: `over- 表示「过度、在上」，已在前面讲过。overlap（重叠）= over-（在上）+ lap（圈）→ 一圈压在另一圈上 → 重叠。overseas（海外的）= over-（越过）+ seas（海）→ 越过大海的 → 海外的。`,
     examples: [
@@ -2641,7 +2635,7 @@ export const wordRoots: WordRoot[] = [
     id: 62,
     root: 'per-',
     origin: 'Latin',
-    meaning: '贯穿，自始至终',
+    meaning: '贯穿 / 始终',
     meaningEn: 'through',
     description: `per- 表示「贯穿、彻底、完全」。perfect（完美的）= per-（完全）+ fect（做）→ 完全做好的 → 完美的。persist（坚持）= per-（彻底）+ sist（站）→ 彻底站稳 → 坚持。这是个强调「程度」的前缀。`,
     examples: [
@@ -2681,7 +2675,7 @@ export const wordRoots: WordRoot[] = [
     id: 63,
     root: 'pro-',
     origin: 'Latin',
-    meaning: '向前，在前',
+    meaning: '向前 / 支持',
     meaningEn: 'forward, before',
     description: `pro- 表示「向前、支持」，已在前面讲过。promote（促进）= pro-（向前）+ mot（移动）+ -e → 向前推动 → 促进。propose（提议）= pro-（向前）+ pos（放）+ -e → 向前放出来 → 提议。`,
     examples: [
@@ -2721,7 +2715,7 @@ export const wordRoots: WordRoot[] = [
     id: 64,
     root: 'retro-',
     origin: 'Latin',
-    meaning: '向后，回顾',
+    meaning: '向后 / 回退',
     meaningEn: 'backward',
     description: `retro- 表示「向后、回顾」。retrospect（回顾）= retro-（向后）+ spect（看）→ 向后看 → 回顾。retrograde（倒退的）= retro-（向后）+ grade（走）→ 往后走的 → 倒退的。`,
     examples: [
@@ -2755,7 +2749,7 @@ export const wordRoots: WordRoot[] = [
     id: 65,
     root: 'under-',
     origin: 'Old English',
-    meaning: '在下，不足',
+    meaning: '下方 / 不足',
     meaningEn: 'below, beneath',
     description: `under- 表示「在下、不足」，已在前面讲过。undergo（经历）= under-（在下）+ go（走）→ 在下面走过 → 经历。undermine（削弱）= under-（在下）+ mine（挖）→ 在下面挖 → 削弱根基。`,
     examples: [
@@ -2869,7 +2863,7 @@ export const wordRoots: WordRoot[] = [
     id: 68,
     root: 'extra-',
     origin: 'Latin',
-    meaning: '超出，额外',
+    meaning: '超出 / 额外',
     meaningEn: 'beyond, outside',
     description: `extra- 表示「超出、额外」。extraordinary（非凡的）= extra-（超出）+ ordinary（普通）→ 超出普通 → 非凡的。extracurricular（课外的）= extra-（额外）+ curricular（课程的）→ 课程以外的 → 课外的。`,
     examples: [
@@ -2903,7 +2897,7 @@ export const wordRoots: WordRoot[] = [
     id: 69,
     root: 'intra-/intro-',
     origin: 'Latin',
-    meaning: '内部，向内',
+    meaning: '内部 / 向内',
     meaningEn: 'within, inside',
     description: `intra-/intro- 表示「内部、向内」。introduce（介绍）= intro-（向内）+ duc（引）+ -e → 引进来 → 介绍。intranet（内网）= intra-（内部）+ net（网）→ 内部网络。和 inter-（之间）区分开。`,
     examples: [
@@ -3363,7 +3357,7 @@ export const wordRoots: WordRoot[] = [
       },
       {
         word: 'independent',
-        breakdown: { prefix: 'in', root: 'de', suffix: 'pend+ent' },
+        breakdown: { prefix: 'in', root: 'depend', suffix: 'ent' },
         meaning: '独立的',
         explanation: '不依靠→独立的'
       },
@@ -3647,7 +3641,7 @@ export const wordRoots: WordRoot[] = [
         word: 'advertise',
         breakdown: { prefix: 'ad', root: 'vert', suffix: 'ise' },
         meaning: '广告',
-        explanation: '转向→广告'
+        explanation: '使注意力转向→广告'
       }
     ],
     quiz: {
@@ -5361,7 +5355,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '单独',
     meaningEn: 'alone',
-    description: `sol/soli 表示「单独」。sole（唯一的）= sol（单独）+ -e → 单独的 → 唯一的。solitary（孤独的）= soli（单独）+ -ary（的）→ 单独的 → 孤独的。isolate（隔离）= iso-（单独）+ -late → 使单独 → 隔离。`,
+    description: `sol/soli 表示「单独」。sole（唯一的）= sol（单独）+ -e → 单独一个 → 唯一的。solitary（孤独的）= soli（单独）+ -ary（的）→ 单独的 → 孤独的。desolate（荒凉的）= de-（完全）+ sol（单独）+ -ate → 完全单独 → 荒凉的。`,
     examples: [
       {
         word: 'solo',
@@ -5376,10 +5370,10 @@ export const wordRoots: WordRoot[] = [
         explanation: '单独的→孤独的'
       },
       {
-        word: 'isolate',
-        breakdown: { prefix: 'i', root: 'sol', suffix: 'ate' },
-        meaning: '隔离',
-        explanation: '使单独→隔离'
+        word: 'sole',
+        breakdown: { prefix: '', root: 'sol', suffix: 'e' },
+        meaning: '唯一的',
+        explanation: '单独一个→唯一的'
       },
       {
         word: 'desolate',
@@ -5390,7 +5384,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'solitary 的意思是什么？',
-    options: ["隔离", "荒凉的", "孤独的", "独奏"],
+    options: ["唯一的", "荒凉的", "孤独的", "独奏"],
     correctAnswer: 2
   }
   },
@@ -5479,7 +5473,7 @@ export const wordRoots: WordRoot[] = [
     id: 131,
     root: '-able/-ible',
     origin: 'Latin',
-    meaning: '能...的，可...的',
+    meaning: '可以...的',
     meaningEn: 'capable of',
     description: `-able/-ible 是最常见的形容词后缀，表示「能...的、可...的」。readable = read（读）+ -able → 可读的。visible = vis（看）+ -ible → 可见的。注意：-able 用于完整单词后，-ible 多用于词根后。`,
     examples: [
@@ -5519,7 +5513,7 @@ export const wordRoots: WordRoot[] = [
     id: 132,
     root: '-al/-ial',
     origin: 'Latin',
-    meaning: '...的，关于...的',
+    meaning: '变成形容词',
     meaningEn: 'of, relating to',
     description: `-al/-ial 是形容词后缀，表示「...的、关于...的」。national = nation（国家）+ -al → 国家的。social = soci（社会）+ -al → 社会的。encial = essence（本质）+ -ial → 本质的。`,
     examples: [
@@ -5559,7 +5553,7 @@ export const wordRoots: WordRoot[] = [
     id: 133,
     root: '-ance/-ence',
     origin: 'Latin',
-    meaning: '状态，性质',
+    meaning: '变成名词',
     meaningEn: 'state, quality',
     description: `-ance/-ence 是名词后缀，表示「状态、性质、行为」。importance = import（重要）+ -ance → 重要性。confidence = confid（信任）+ -ence → 信心。-ance 和 -ence 的区别主要看前面的词根。`,
     examples: [
@@ -5599,7 +5593,7 @@ export const wordRoots: WordRoot[] = [
     id: 134,
     root: '-ant/-ent',
     origin: 'Latin',
-    meaning: '...的，...人',
+    meaning: '变成形容词 / 人',
     meaningEn: 'doing, person',
     description: `-ant/-ent 既可作形容词（...的），也可作名词（...人/物）。important（重要的）、assistant（助手）用 -ant。different（不同的）、student（学生）用 -ent。`,
     examples: [
@@ -5639,7 +5633,7 @@ export const wordRoots: WordRoot[] = [
     id: 135,
     root: '-ate',
     origin: 'Latin',
-    meaning: '使，做',
+    meaning: '变成动词',
     meaningEn: 'make, do',
     description: `-ate 是动词后缀，表示「使、做」。activate = activ（活）+ -ate → 使活跃。educate = educ（引出）+ -ate → 引出知识 → 教育。也可作形容词/名词后缀。`,
     examples: [
@@ -5719,7 +5713,7 @@ export const wordRoots: WordRoot[] = [
     id: 137,
     root: '-ify/-fy',
     origin: 'Latin',
-    meaning: '使，做',
+    meaning: '变成动词',
     meaningEn: 'make',
     description: `-ify/-fy 是动词后缀，表示「使、做」。simplify = simpl（简单）+ -ify → 使简单化。clarify = clar（清楚）+ -ify → 使清楚 → 澄清。satisfy = satis（足够）+ -fy → 使满足。`,
     examples: [
@@ -5759,7 +5753,7 @@ export const wordRoots: WordRoot[] = [
     id: 138,
     root: '-ing',
     origin: 'Old English',
-    meaning: '行为，过程',
+    meaning: '进行中 / 变名词',
     meaningEn: 'action, process',
     description: `-ing 是最常用的后缀之一：①现在分词（running）②动名词（swimming）③形容词（interesting）。understanding = under（理解）+ stand（站）+ -ing → 理解。`,
     examples: [
@@ -5799,7 +5793,7 @@ export const wordRoots: WordRoot[] = [
     id: 139,
     root: '-ion/-tion/-ation',
     origin: 'Latin',
-    meaning: '行为，状态，结果',
+    meaning: '变成名词',
     meaningEn: 'act, state, result',
     description: `-ion/-tion/-ation 是名词后缀，表示「行为、状态、结果」。action、education、creation。-tion 是最常见的形式，-ation 用于 -ate 动词后。`,
     examples: [
@@ -5839,7 +5833,7 @@ export const wordRoots: WordRoot[] = [
     id: 140,
     root: '-ism',
     origin: 'Greek/Latin',
-    meaning: '主义，行为，状态',
+    meaning: '主义 / 思想',
     meaningEn: 'doctrine, practice, state',
     description: `-ism 是名词后缀，表示「主义、行为、状态、学说」。capitalism（资本主义）、heroism（英雄主义）、tourism（旅游业）。常见于表示信仰、理论、制度的词。`,
     examples: [
@@ -5879,7 +5873,7 @@ export const wordRoots: WordRoot[] = [
     id: 141,
     root: '-ist',
     origin: 'Greek/Latin',
-    meaning: '...家，...者',
+    meaning: '做这事的人',
     meaningEn: 'person who',
     description: `-ist 是名词后缀，表示「...的人、...家」。artist（艺术家）、scientist（科学家）、pianist（钢琴家）。通常和 -ism 配对使用。`,
     examples: [
@@ -5919,7 +5913,7 @@ export const wordRoots: WordRoot[] = [
     id: 142,
     root: '-ity/-ty',
     origin: 'Latin',
-    meaning: '性质，状态',
+    meaning: '变成名词',
     meaningEn: 'quality, state',
     description: `-ity/-ty 是名词后缀，表示「性质、状态」。ability = abl（能）+ -ity → 能力。quality = qual（质量）+ -ity → 质量。safety = safe（安全）+ -ty → 安全。`,
     examples: [
@@ -5959,7 +5953,7 @@ export const wordRoots: WordRoot[] = [
     id: 143,
     root: '-ive',
     origin: 'Latin',
-    meaning: '...的，有...性质的',
+    meaning: '变成形容词',
     meaningEn: 'having the nature of',
     description: `-ive 是形容词后缀，表示「...的、有...性质的」。active（积极的）、creative（创造性的）、effective（有效的）。也可作名词（detective侦探）。`,
     examples: [
@@ -5999,9 +5993,9 @@ export const wordRoots: WordRoot[] = [
     id: 144,
     root: '-ize/-ise',
     origin: 'Greek/Latin',
-    meaning: '使，做',
+    meaning: '变成动词',
     meaningEn: 'make, cause to be',
-    description: `-less 是形容词后缀，表示「无...的、缺乏...的」。homeless = home（家）+ -less → 无家的。hopeless = hope（希望）+ -less → 无望的。和 -ful 相反。`,
+    description: `-ize/-ise 是动词后缀，表示「使成为、变成」。realize = real（真实）+ -ize → 使变真实 → 实现。organize = organ（器官/结构）+ -ize → 使有组织 → 组织。`,
     examples: [
       {
         word: 'realize',
@@ -6039,9 +6033,9 @@ export const wordRoots: WordRoot[] = [
     id: 145,
     root: '-less',
     origin: 'Old English',
-    meaning: '无，没有',
+    meaning: '没有...的',
     meaningEn: 'without',
-    description: `-ly 是副词后缀（偶尔作形容词），表示「...地、以...方式」。quickly = quick（快）+ -ly → 快速地。friendly = friend（朋友）+ -ly → 友好的（形容词）。`,
+    description: `-less 是形容词后缀，表示「没有...的、缺乏...的」。homeless = home（家）+ -less → 没有家的。hopeless = hope（希望）+ -less → 没有希望的。和 -ful 相反。`,
     examples: [
       {
         word: 'hopeless',
@@ -6079,9 +6073,9 @@ export const wordRoots: WordRoot[] = [
     id: 146,
     root: '-ly',
     origin: 'Old English',
-    meaning: '...地，...的',
+    meaning: '变成副词',
     meaningEn: 'in a manner',
-    description: `-ment 是名词后缀，表示「行为、结果、状态」。development = develop（发展）+ -ment → 发展。government = govern（统治）+ -ment → 政府。`,
+    description: `-ly 是副词后缀，也偶尔变成形容词。quickly = quick（快）+ -ly → 快速地。friendly = friend（朋友）+ -ly → 友好的。`,
     examples: [
       {
         word: 'quickly',
@@ -6119,9 +6113,9 @@ export const wordRoots: WordRoot[] = [
     id: 147,
     root: '-ment',
     origin: 'Latin',
-    meaning: '行为，结果，手段',
+    meaning: '变成名词',
     meaningEn: 'act, result, means',
-    description: `-ness 是名词后缀，表示「状态、性质」。happiness = happy（快乐）+ -ness → 快乐。kindness = kind（善良）+ -ness → 善良。最简单的名词化后缀。`,
+    description: `-ment 是名词后缀，表示「行为、结果、手段」。movement = move（移动）+ -ment → 运动。development = develop（发展）+ -ment → 发展的过程或结果。`,
     examples: [
       {
         word: 'movement',
@@ -6161,7 +6155,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '状态，性质',
     meaningEn: 'state, quality',
-    description: `-ous/-ious 是形容词后缀，表示「充满...的、有...性质的」。famous（著名的）、dangerous（危险的）、curious（好奇的）。-ious 用于词根或以 i 结尾的词后。`,
+    description: `-ness 是名词后缀，表示「状态、性质」。happiness = happy（快乐）+ -ness → 快乐的状态。kindness = kind（善良）+ -ness → 善良。最简单的名词化后缀之一。`,
     examples: [
       {
         word: 'happiness',
@@ -6199,9 +6193,9 @@ export const wordRoots: WordRoot[] = [
     id: 149,
     root: '-ous/-ious',
     origin: 'Latin',
-    meaning: '充满...的，有...性质的',
+    meaning: '变成形容词',
     meaningEn: 'full of, having',
-    description: `-ship 是名词后缀，表示「状态、关系、技能」。friendship（友谊）、leadership（领导力）、scholarship（奖学金）。常表示抽象的关系或地位。`,
+    description: `-ous/-ious 是形容词后缀，表示「充满...的、有...性质的」。famous（著名的）、dangerous（危险的）、curious（好奇的）。-ious 常用于词根或以 i 结尾的词后。`,
     examples: [
       {
         word: 'famous',
@@ -6239,7 +6233,7 @@ export const wordRoots: WordRoot[] = [
     id: 150,
     root: '-ure',
     origin: 'Latin',
-    meaning: '行为，结果，状态',
+    meaning: '变成名词',
     meaningEn: 'act, result, state',
     description: `-ure 是名词后缀，表示「行为、结果、状态」。pleasure（快乐）、pressure（压力）、failure（失败）。常用于拉丁词根后。`,
     examples: [
@@ -6281,7 +6275,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '生长',
     meaningEn: 'grow',
-    description: `cre/cresc 来自拉丁语「生长」。想象植物的「逐渐生长(crescendo)」过程。concrete（混凝土）= con-（一起）+ cre（生长）→ 长在一起的东西 → 凝结物。create（创造）= cre（生长）+ -ate → 让东西生长出来 → 创造。记住：increase = in-（向内）+ crease（生长）→ 向内生长 → 增加。`,
+    description: `cre/cresc 来自拉丁语「生长」。想象植物的「逐渐生长(crescendo)」过程。concrete（混凝土）= con-（一起）+ cre（生长）→ 长在一起/凝结成块的东西 → 具体的。create（创造）= cre（生长）+ -ate → 让东西生长出来 → 创造。记住：increase = in-（向内）+ crease（生长）→ 向内生长 → 增加。`,
     examples: [
       {
         word: 'create',
@@ -6305,7 +6299,7 @@ export const wordRoots: WordRoot[] = [
         word: 'concrete',
         breakdown: { prefix: 'con', root: 'cre', suffix: 'te' },
         meaning: '具体的',
-        explanation: '一起生长->具体的'
+        explanation: '长在一起/凝结成块->具体的'
       }
     ],
     quiz: {
@@ -7849,7 +7843,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '智慧',
     meaningEn: 'wisdom',
-    description: `soph 表示「智慧」（希腊语）。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。sophisticated（复杂的、老练的）= soph（智慧）+ -isticated → 有智慧的 → 老练的。sophomore（大二学生）= soph（智慧）+ more（愚蠢）→ 自以为聪明的傻瓜（讽刺意味）。`,
+    description: `soph 表示「智慧」（希腊语）。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。sophisticated（复杂的、老练的）= soph（智慧）+ -isticated → 有智慧的 → 老练的。sophomore（大二学生）= soph（智慧）+ mor（愚蠢）+ -e → 一半智慧一半愚蠢 → 大二学生。`,
     examples: [
       {
         word: 'philosophy',
@@ -7865,9 +7859,9 @@ export const wordRoots: WordRoot[] = [
       },
       {
         word: 'sophomore',
-        breakdown: { prefix: '', root: 'soph', suffix: 'omore' },
+        breakdown: { prefix: '', root: 'soph', suffix: 'mor+e' },
         meaning: '大二学生',
-        explanation: '智慧愚蠢->大二'
+        explanation: '一半智慧一半愚蠢->大二学生'
       }
     ],
     quiz: {
@@ -8763,7 +8757,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '路',
     meaningEn: 'way',
-    description: `vi/via 表示「路」。via（经由）、deviate（偏离）= de-（离开）+ vi（路）+ -ate → 离开道路 → 偏离。obvious（明显的）= ob-（在前）+ vi（路）+ -ous → 在路中间挡住的 → 明显的。previous（以前的）= pre-（在前）+ vi（路）+ -ous → 在路前面的 → 以前的。`,
+    description: `vi/via 表示「路」。via（经由）、deviate（偏离）= de-（离开）+ vi（路）+ -ate → 离开道路 → 偏离。obvious（明显的）= ob-（在前）+ vi（路）+ -ous → 挡在路上/摆在面前的 → 明显的。previous（以前的）= pre-（在前）+ vi（路）+ -ous → 在路前面的 → 以前的。`,
     examples: [
       {
         word: 'via',
@@ -8775,7 +8769,7 @@ export const wordRoots: WordRoot[] = [
         word: 'obvious',
         breakdown: { prefix: 'ob', root: 'vi', suffix: 'ous' },
         meaning: '明显的',
-        explanation: '在路上->明显的'
+        explanation: '挡在路上/摆在面前->明显的'
       },
       {
         word: 'deviate',
@@ -8831,19 +8825,13 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '男人,美德',
     meaningEn: 'man, virtue',
-    description: `vir 表示「男人、美德」。virtue（美德）原意「男子气概」。virtual（虚拟的）= vir（美德/本质）+ -ual → 本质上的 → 实际上的 → 虚拟的（接近真实）。virile（有男子气概的）= vir（男人）+ -ile → 男人的 → 有男子气概的。`,
+    description: `vir 表示「男人、美德」。virtue（美德）原意「男子气概」。virile（有男子气概的）= vir（男人）+ -ile → 男人的 → 有男子气概的。`,
     examples: [
       {
         word: 'virtue',
         breakdown: { prefix: '', root: 'vir', suffix: 'tue' },
         meaning: '美德',
         explanation: '男人->美德'
-      },
-      {
-        word: 'virtual',
-        breakdown: { prefix: '', root: 'vir', suffix: 'tual' },
-        meaning: '虚拟的',
-        explanation: '本质->虚拟的'
       },
       {
         word: 'virile',
@@ -8863,7 +8851,7 @@ export const wordRoots: WordRoot[] = [
     id: 221,
     root: '-age',
     origin: 'French',
-    meaning: '状态,行为',
+    meaning: '变成名词',
     meaningEn: 'state, action',
     description: `-age 是法语后缀，表示「状态、行为、结果」。package（包裹）= pack（打包）+ -age → 打包的结果。storage（储存）= store（储存）+ -age → 储存的状态。courage（勇气）= cor（心）+ -age → 心的状态 → 勇气。`,
     examples: [
@@ -8897,7 +8885,7 @@ export const wordRoots: WordRoot[] = [
     id: 222,
     root: '-ary/-ery/-ory',
     origin: 'Latin',
-    meaning: '地方,人',
+    meaning: '相关场所 / 形容词',
     meaningEn: 'place, person',
     description: `-ary/-ery/-ory 表示「地方、与...相关的人或物」。library（图书馆）= libr（书）+ -ary → 书的地方。bakery（面包店）= bake（烘焙）+ -ery → 烘焙的地方。factory（工厂）= fact（做）+ -ory → 做东西的地方。`,
     examples: [
@@ -8931,7 +8919,7 @@ export const wordRoots: WordRoot[] = [
     id: 223,
     root: '-dom',
     origin: 'Old English',
-    meaning: '状态,领域',
+    meaning: '领域 / 状态',
     meaningEn: 'state, domain',
     description: `-dom 是古英语后缀，表示「状态、领域」。freedom（自由）= free（自由）+ -dom → 自由的状态。kingdom（王国）= king（国王）+ -dom → 国王的领域。wisdom（智慧）= wise（智慧）+ -dom → 智慧的状态。`,
     examples: [
@@ -8965,7 +8953,7 @@ export const wordRoots: WordRoot[] = [
     id: 224,
     root: '-en',
     origin: 'Old English',
-    meaning: '使,变',
+    meaning: '变成动词',
     meaningEn: 'make, become',
     description: `-en 是古英语后缀，表示「使、变成」。widen（加宽）= wide（宽）+ -en → 使变宽。shorten（缩短）= short（短）+ -en → 使变短。strengthen（加强）= strength（力量）+ -en → 使变强。`,
     examples: [
@@ -9033,7 +9021,7 @@ export const wordRoots: WordRoot[] = [
     id: 226,
     root: '-ess',
     origin: 'Latin',
-    meaning: '女性',
+    meaning: '女性身份',
     meaningEn: 'female',
     description: `-ess 表示「女性」。actress（女演员）= actor（演员）+ -ess → 女性演员。princess（公主）= prince（王子）+ -ess → 女性王子。lioness（母狮）= lion（狮子）+ -ess → 女性狮子。`,
     examples: [
@@ -9067,7 +9055,7 @@ export const wordRoots: WordRoot[] = [
     id: 227,
     root: '-hood',
     origin: 'Old English',
-    meaning: '状态,身份',
+    meaning: '时期 / 状态',
     meaningEn: 'state, condition',
     description: `-hood 是古英语后缀，表示「状态、身份、时期」。childhood（童年）= child（孩子）+ -hood → 孩子的时期。neighborhood（邻里）= neighbor（邻居）+ -hood → 邻居的群体。motherhood（母亲身份）= mother（母亲）+ -hood → 母亲的状态。`,
     examples: [
@@ -9101,7 +9089,7 @@ export const wordRoots: WordRoot[] = [
     id: 228,
     root: '-ic/-ical',
     origin: 'Greek',
-    meaning: '...的',
+    meaning: '变成形容词',
     meaningEn: 'of, pertaining to',
     description: `-ic/-ical 来自希腊语，表示「...的」。historic（历史的）= histor（历史）+ -ic → 历史的。logical（逻辑的）= log（逻辑）+ -ical → 逻辑的。automatic（自动的）= auto（自己）+ mat（动）+ -ic → 自己动的。`,
     examples: [
