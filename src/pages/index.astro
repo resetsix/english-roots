@@ -27,6 +27,7 @@ const featuredRoots = wordRoots.slice(0, 6)
 
     <div
       class="word-lab wr-panel relative max-w-full min-w-0"
+      data-ready="false"
       aria-label="词汇公式演示"
     >
       <div class="word-lab__label">index card 01</div>
@@ -42,8 +43,10 @@ const featuredRoots = wordRoots.slice(0, 6)
         >
           <span
             class="block max-w-full overflow-hidden whitespace-nowrap"
-            id="demo-word-current">happy</span
+            id="demo-word-current"
           >
+            <span class="word-lab__word-prefix">un</span>happy
+          </span>
           <span
             class="block max-w-full overflow-hidden whitespace-nowrap"
             id="demo-word-next"
@@ -54,16 +57,20 @@ const featuredRoots = wordRoots.slice(0, 6)
         </span>
       </div>
       <div class="flex flex-wrap items-center gap-2.5" id="demo-parts">
-        <span class="wr-morpheme wr-morpheme--prefix" id="demo-prefix" hidden
-          >un</span
-        >
-        <span class="word-lab__plus font-extrabold" id="demo-plus" hidden
-          >+</span
-        >
-        <span class="wr-morpheme wr-morpheme--root" id="demo-root">happy</span>
+        <span class="wr-morpheme wr-morpheme--prefix">
+          <span class="word-lab__part-text">un</span>
+          <span class="word-lab__part-meaning">不</span>
+        </span>
+        <span class="word-lab__plus font-extrabold">+</span>
+        <span class="wr-morpheme wr-morpheme--root">
+          <span class="word-lab__part-text">happy</span>
+          <span class="word-lab__part-meaning">开心</span>
+        </span>
       </div>
       <div class="word-lab__meaning mt-6 border-t">
-        <span class="inline-block" id="demo-meaning-text">happy = 开心</span>
+        <span class="inline-block" id="demo-meaning-text"
+          >unhappy = 不开心</span
+        >
       </div>
     </div>
   </section>
@@ -79,7 +86,9 @@ const featuredRoots = wordRoots.slice(0, 6)
         <div class="wr-stat__label">例词拆解</div>
       </div>
       <div class="wr-stat">
-        <div class="wr-stat__value" id="home-progress">待学习</div>
+        <div class="wr-stat__value" id="home-progress" aria-live="polite">
+          待学习
+        </div>
         <div class="wr-stat__label">学习进度</div>
       </div>
     </div>
@@ -104,26 +113,19 @@ const featuredRoots = wordRoots.slice(0, 6)
 </BaseLayout>
 
 <script>
+  import { heroExamples, type HeroExample } from '@/data/heroExamples'
   import { totalWordRoots } from '@/data/wordRoots'
   import { getProgress } from '@/lib/storage'
 
-  const examples: Array<[string, string, string, string]> = [
-    ['happy', '', 'happy', 'happy = 开心'],
-    ['unhappy', 'un', 'happy', 'un + happy = 不开心'],
-    ['kind', '', 'kind', 'kind = 友善'],
-    ['unkind', 'un', 'kind', 'un + kind = 不友善'],
-    ['known', '', 'known', 'known = 已知'],
-    ['unknown', 'un', 'known', 'un + known = 未知'],
-  ]
+  const examples = heroExamples
 
+  let queue = shuffleExamples(examples)
   let index = 0
   let isRolling = false
+  const wordLab = document.querySelector('.word-lab')
   const wordTrack = document.querySelector('#demo-word-track')
   const currentWord = document.querySelector('#demo-word-current')
   const nextWord = document.querySelector('#demo-word-next')
-  const prefix = document.querySelector('#demo-prefix')
-  const plus = document.querySelector('#demo-plus')
-  const root = document.querySelector('#demo-root')
   const parts = document.querySelector('#demo-parts')
   const meaningText = document.querySelector('#demo-meaning-text')
   const shouldReduceMotion = window.matchMedia(
@@ -140,6 +142,33 @@ const featuredRoots = wordRoots.slice(0, 6)
       masteredCount > 0 ? `${masteredCount}/${totalWordRoots}` : '待学习'
   }
 
+  function shuffleExamples(source: HeroExample[], previousWord = '') {
+    const shuffled = [...source]
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const randomIndex = Math.floor(Math.random() * (i + 1))
+      const currentExample = shuffled[i]
+      shuffled[i] = shuffled[randomIndex]
+      shuffled[randomIndex] = currentExample
+    }
+
+    if (previousWord && shuffled[0]?.word === previousWord) {
+      const replacementIndex = shuffled.findIndex(
+        (example) => example.word !== previousWord,
+      )
+      if (replacementIndex > 0) {
+        const firstExample = shuffled[0]
+        shuffled[0] = shuffled[replacementIndex]
+        shuffled[replacementIndex] = firstExample
+      }
+    }
+
+    return shuffled
+  }
+
+  function getFormula(example: HeroExample) {
+    return `${example.word} = ${example.meaning}`
+  }
+
   function renderWord(target: Element, wordValue: string, prefixValue: string) {
     target.textContent = ''
     if (prefixValue && wordValue.startsWith(prefixValue)) {
@@ -152,26 +181,44 @@ const featuredRoots = wordRoots.slice(0, 6)
     target.textContent = wordValue
   }
 
-  function renderDetails(
-    nextPrefix: string,
-    nextRoot: string,
-    nextMeaning: string,
-  ) {
-    if (!prefix || !plus || !root || !meaningText) return
-    prefix.toggleAttribute('hidden', !nextPrefix)
-    plus.toggleAttribute('hidden', !nextPrefix)
-    prefix.textContent = nextPrefix
-    root.textContent = nextRoot
-    meaningText.textContent = nextMeaning
+  function renderDetails(example: HeroExample) {
+    if (!parts || !meaningText) return
+    const formulaParts = [
+      ['prefix', example.prefix, example.prefixMeaning],
+      ['root', example.root, example.rootMeaning],
+      ['suffix', example.suffix, example.suffixMeaning],
+    ].filter(([, value]) => value) as [string, string, string][]
+
+    parts.textContent = ''
+    formulaParts.forEach(([kind, value, meaning], partIndex) => {
+      if (partIndex > 0) {
+        const plus = document.createElement('span')
+        plus.className = 'word-lab__plus font-extrabold'
+        plus.textContent = '+'
+        parts.append(plus)
+      }
+
+      const part = document.createElement('span')
+      part.className = `wr-morpheme wr-morpheme--${kind}`
+      const partText = document.createElement('span')
+      partText.className = 'word-lab__part-text'
+      partText.textContent = value
+      part.append(partText)
+
+      if (meaning) {
+        const partMeaning = document.createElement('span')
+        partMeaning.className = 'word-lab__part-meaning'
+        partMeaning.textContent = meaning
+        part.append(partMeaning)
+      }
+      parts.append(part)
+    })
+    meaningText.textContent = getFormula(example)
   }
 
-  async function updateDetails(
-    nextPrefix: string,
-    nextRoot: string,
-    nextMeaning: string,
-  ) {
+  async function updateDetails(example: HeroExample) {
     if (!parts || !meaningText || shouldReduceMotion) {
-      renderDetails(nextPrefix, nextRoot, nextMeaning)
+      renderDetails(example)
       return
     }
 
@@ -201,7 +248,7 @@ const featuredRoots = wordRoots.slice(0, 6)
     ]
 
     await Promise.all(fadeOutAnimations.map((animation) => animation.finished))
-    renderDetails(nextPrefix, nextRoot, nextMeaning)
+    renderDetails(example)
     fadeOutAnimations.forEach((animation) => animation.cancel())
 
     const fadeInAnimations = [
@@ -233,33 +280,47 @@ const featuredRoots = wordRoots.slice(0, 6)
     fadeInAnimations.forEach((animation) => animation.cancel())
   }
 
-  function commitWord(nextWordValue: string, nextPrefix: string) {
-    if (!wordTrack || !currentWord || !nextWord) return
-    renderWord(currentWord, nextWordValue, nextPrefix)
-    renderWord(nextWord, nextWordValue, nextPrefix)
-    wordTrack.getAnimations().forEach((animation) => animation.cancel())
+  function commitWord(example: HeroExample) {
+    if (wordTrack && currentWord && nextWord) {
+      renderWord(currentWord, example.word, example.prefix)
+      renderWord(nextWord, example.word, example.prefix)
+      wordTrack.getAnimations().forEach((animation) => animation.cancel())
+    }
     isRolling = false
   }
 
+  function getNextExample() {
+    if (queue.length === 0) return null
+    index += 1
+    if (index >= queue.length) {
+      queue = shuffleExamples(examples, queue[queue.length - 1]?.word)
+      index = 0
+    }
+
+    return queue[index]
+  }
+
+  if (queue[0] && currentWord && nextWord) {
+    renderWord(currentWord, queue[0].word, queue[0].prefix)
+    renderWord(nextWord, queue[0].word, queue[0].prefix)
+    renderDetails(queue[0])
+  }
+
+  wordLab?.setAttribute('data-ready', 'true')
+
   window.setInterval(() => {
     if (isRolling) return
-    index = (index + 1) % examples.length
-    const [nextWordValue, nextPrefix, nextRoot, nextMeaning] = examples[index]
-    if (
-      !wordTrack ||
-      !currentWord ||
-      !prefix ||
-      !plus ||
-      !root ||
-      !meaningText
-    ) {
-      updateDetails(nextPrefix, nextRoot, nextMeaning)
+    const nextExample = getNextExample()
+    if (!nextExample) return
+
+    if (!wordTrack || !currentWord || !meaningText) {
+      updateDetails(nextExample)
       return
     }
 
-    if (shouldReduceMotion || !nextWordValue) {
-      renderWord(currentWord, nextWordValue, nextPrefix)
-      updateDetails(nextPrefix, nextRoot, nextMeaning)
+    if (shouldReduceMotion || !nextExample.word) {
+      renderWord(currentWord, nextExample.word, nextExample.prefix)
+      updateDetails(nextExample)
       return
     }
 
@@ -269,11 +330,8 @@ const featuredRoots = wordRoots.slice(0, 6)
       isRolling = false
       return
     }
-    renderWord(nextWordItem, nextWordValue, nextPrefix)
-    window.setTimeout(
-      () => updateDetails(nextPrefix, nextRoot, nextMeaning),
-      detailsDelayMs,
-    )
+    renderWord(nextWordItem, nextExample.word, nextExample.prefix)
+    window.setTimeout(() => updateDetails(nextExample), detailsDelayMs)
 
     const animation = wordTrack.animate(
       [{ transform: 'translateY(0)' }, { transform: 'translateY(-50%)' }],
@@ -284,7 +342,7 @@ const featuredRoots = wordRoots.slice(0, 6)
     )
     animation.addEventListener(
       'finish',
-      () => commitWord(nextWordValue, nextPrefix),
+      () => commitWord(nextExample),
       { once: true },
     )
   }, 3200)
@@ -321,6 +379,15 @@ const featuredRoots = wordRoots.slice(0, 6)
     );
   }
 
+  .word-lab > * {
+    opacity: 1;
+    transition: opacity 160ms ease;
+  }
+
+  .word-lab[data-ready='false'] > * {
+    opacity: 0;
+  }
+
   .word-lab::before {
     content: '';
     position: absolute;
@@ -351,6 +418,34 @@ const featuredRoots = wordRoots.slice(0, 6)
 
   .word-lab__plus {
     color: var(--wr-ink-faint);
+    line-height: 1;
+  }
+
+  #demo-parts {
+    align-content: center;
+    min-block-size: 2rem;
+  }
+
+  .word-lab .wr-morpheme {
+    align-items: baseline;
+    gap: 6px;
+    line-height: 1.2;
+  }
+
+  .word-lab__part-text {
+    font-size: 0.94rem;
+  }
+
+  .word-lab__part-meaning {
+    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .word-lab__part-meaning::before {
+    content: '·';
+    margin-right: 6px;
   }
 
   .word-lab__word-prefix {
@@ -361,8 +456,16 @@ const featuredRoots = wordRoots.slice(0, 6)
   .word-lab__meaning {
     border-color: color-mix(in srgb, var(--wr-rule-strong) 42%, var(--wr-rule));
     color: color-mix(in srgb, var(--wr-ink-muted) 88%, var(--wr-ink));
+    line-height: 1.45;
+    min-block-size: calc(1.08rem * 1.45 + 18px);
     padding-top: 18px;
     font-size: 1.08rem;
+  }
+
+  #home-progress {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+    min-inline-size: 7ch;
   }
 
   .home-feature-grid {
