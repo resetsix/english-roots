@@ -32,10 +32,12 @@ import { totalWordRoots, wordRoots } from '@/data/wordRoots'
       <button class="roots-tab is-active" type="button" data-filter="all"
         >全部</button
       >
-      <button class="roots-tab" type="button" data-filter="Greek">希腊语</button
+      <button class="roots-tab" type="button" data-filter="Greek">希腊</button>
+      <button class="roots-tab" type="button" data-filter="Latin">拉丁</button>
+      <button class="roots-tab" type="button" data-filter="Old English"
+        >古英语</button
       >
-      <button class="roots-tab" type="button" data-filter="Latin">拉丁语</button
-      >
+      <button class="roots-tab" type="button" data-filter="rare">冷门</button>
     </div>
   </section>
 
@@ -58,7 +60,15 @@ import { totalWordRoots, wordRoots } from '@/data/wordRoots'
   const tabs = Array.from(
     document.querySelectorAll<HTMLButtonElement>('.roots-tab'),
   )
+  const primaryOrigins = new Set(['Greek', 'Latin', 'Old English'])
   let filter = 'all'
+
+  function matchesOrigin(origin: string | undefined) {
+    if (filter === 'all') return true
+    if (!origin) return false
+    if (filter === 'rare') return !primaryOrigins.has(origin)
+    return origin === filter
+  }
 
   function applyFilters() {
     const keyword = searchInput?.value.trim().toLowerCase() ?? ''
@@ -66,7 +76,7 @@ import { totalWordRoots, wordRoots } from '@/data/wordRoots'
 
     cards.forEach((card) => {
       const matchesKeyword = !keyword || card.dataset.search?.includes(keyword)
-      const matchesFilter = filter === 'all' || card.dataset.origin === filter
+      const matchesFilter = matchesOrigin(card.dataset.origin)
       const visible = Boolean(matchesKeyword && matchesFilter)
       card.hidden = !visible
       if (visible) visibleCount += 1

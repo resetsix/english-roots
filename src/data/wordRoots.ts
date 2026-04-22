@@ -24,14 +24,14 @@ export type WordRoot = {
   }
 }
 
-export const wordRoots: WordRoot[] = [
+const baseWordRoots: WordRoot[] = [
   {
     id: 1,
     root: 'a-/an-',
     origin: 'Greek',
     meaning: '否定含义',
     meaningEn: 'a',
-    description: `a-/an- 来自希腊语，表示「没有、缺乏」。想象一个「anonymous（匿名的）」人，就是没有（an-）名字（onym）的人。这个前缀在医学术语中特别常见，比如 anemia（贫血）= 没有（an-）血（emia）。`,
+    description: `a-/an- 来自希腊语，代表「没有、缺乏」。想象一个「anonymous（匿名的）」人，就是没有（an-）名字（onym）的人。这个前缀在医学术语中特别常见，比如 anemia（贫血）= 没有（an-）血（emia）。`,
     examples: [
       {
         word: 'amoral',
@@ -69,7 +69,7 @@ export const wordRoots: WordRoot[] = [
     id: 2,
     root: 'anti-',
     origin: 'Greek',
-    meaning: '反对，相反',
+    meaning: '反对 / 抗击',
     meaningEn: 'anti',
     description: `anti- 源自希腊语 anti「对抗」。记住「抗生素 antibiotic」这个词：anti-（对抗）+ bio（生命）+ -tic（的），就是「对抗生命的」→ 专门对抗细菌的。从此你就能理解为什么「抗体 antibody」、「反战 antiwar」都用这个前缀。`,
     examples: [
@@ -109,7 +109,7 @@ export const wordRoots: WordRoot[] = [
     id: 3,
     root: 'counter-',
     origin: 'Latin',
-    meaning: '相反，对抗',
+    meaning: '相反 / 对抗',
     meaningEn: 'counter',
     description: `counter- 来自拉丁语，字面意思「相反方向」。想象拳击场上的「反击 counterattack」：counter-（反向）+ attack（攻击）。商店柜台叫 counter，因为是面对面（counter）站着交易的地方。`,
     examples: [
@@ -189,9 +189,9 @@ export const wordRoots: WordRoot[] = [
     id: 5,
     root: 'dis-',
     origin: 'Latin',
-    meaning: '不，分开',
+    meaning: '否定含义 / 分开',
     meaningEn: 'dis',
-    description: `dis- 表示「分离、相反」。记住 discover（发现）这个词：dis-（去掉）+ cover（覆盖物）= 把盖子揭开 → 发现。disappear = dis-（相反）+ appear（出现）→ 消失。这个前缀是英语中使用频率最高的否定前缀之一。`,
+    description: `dis- 代表「分离、相反」。记住 discover（发现）这个词：dis-（去掉）+ cover（覆盖物）= 把盖子揭开 → 发现。disappear = dis-（相反）+ appear（出现）→ 消失。这个前缀是英语中使用频率最高的否定前缀之一。`,
     examples: [
       {
         word: 'disagree',
@@ -231,7 +231,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '向外',
     meaningEn: 'ex',
-    description: `ex-/e- 表示「向外」。记住 exit（出口）：ex-（向外）+ it（走）= 向外走的地方。export（出口）= ex-（向外）+ port（运）→ 运出去。元音前会省略x变成e-，如 emit（发射）。`,
+    description: `ex-/e- 代表「向外」。记住 exit（出口）：ex-（向外）+ it（走）= 向外走的地方。export（出口）= ex-（向外）+ port（运）→ 运出去。元音前会省略x变成e-，如 emit（发射）。`,
     examples: [
       {
         word: 'export',
@@ -351,7 +351,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '在下，次',
     meaningEn: 'sub',
-    description: `sub- 表示「在下面」。submarine（潜水艇）= sub-（在下）+ marine（海）→ 在海下的船。subway（地铁）= sub-（在下）+ way（路）→ 在地下的路。注意：辅音前会变形，如 support = sup- + port。`,
+    description: `sub- 代表「在下面」。submarine（潜水艇）= sub-（在下）+ marine（海）→ 在海下的船。subway（地铁）= sub-（在下）+ way（路）→ 在地下的路。注意：辅音前会变形，如 support = sup- + port。`,
     examples: [
       {
         word: 'subway',
@@ -429,9 +429,9 @@ export const wordRoots: WordRoot[] = [
     id: 11,
     root: 'pre-',
     origin: 'Latin',
-    meaning: '在前，预先',
+    meaning: '提前',
     meaningEn: 'pre',
-    description: `pre- 表示「在前、提前」。predict（预测）= pre-（提前）+ dict（说）→ 提前说出来。preview（预览）= pre-（先）+ view（看）→ 先看一眼。这个前缀暗示「时间上靠前」。`,
+    description: `pre- 代表「在前、提前」。predict（预测）= pre-（提前）+ dict（说）→ 提前说出来。preview（预览）= pre-（先）+ view（看）→ 先看一眼。这个前缀暗示「时间上靠前」。`,
     examples: [
       {
         word: 'predict',
@@ -469,9 +469,9 @@ export const wordRoots: WordRoot[] = [
     id: 12,
     root: 'post-',
     origin: 'Latin',
-    meaning: '在后',
+    meaning: '在...之后',
     meaningEn: 'post',
-    description: `post- 表示「在后」。postpone（推迟）= post-（后）+ pone（放）→ 往后放。postwar（战后的）= post-（后）+ war（战争）→ 战争之后。与 pre- 相对。`,
+    description: `post- 代表「在后」。postpone（推迟）= post-（后）+ pone（放）→ 往后放。postwar（战后的）= post-（后）+ war（战争）→ 战争之后。与 pre- 相对。`,
     examples: [
       {
         word: 'postwar',
@@ -509,9 +509,9 @@ export const wordRoots: WordRoot[] = [
     id: 13,
     root: 're-',
     origin: 'Latin',
-    meaning: '再，回',
+    meaning: '再次 / 回退',
     meaningEn: 're',
-    description: `re- 是最常用的前缀之一，表示「再次、回」。return（返回）、review（复习）、recycle（回收利用）。记住：re- 的单词通常表示「重复做某事」或「回到原来的状态」。`,
+    description: `re- 是最常用的前缀之一，代表「再次、回」。return（返回）、review（复习）、recycle（回收利用）。记住：re- 的单词通常代表「重复做某事」或「回到原来的状态」。`,
     examples: [
       {
         word: 'return',
@@ -549,7 +549,7 @@ export const wordRoots: WordRoot[] = [
     id: 14,
     root: 'mono-',
     origin: 'Greek',
-    meaning: '单个，一',
+    meaning: '单一',
     meaningEn: 'mono',
     description: `mono- 来自希腊语「单个、一」。monologue（独白）= mono-（单个）+ logue（说）→ 一个人说 → 独白。monopoly（垄断）= mono-（单个）+ poly（卖）→ 只有一个人卖 → 垄断。monochrome（单色）= mono-（单）+ chrome（色）→ 单一颜色。`,
     examples: [
@@ -631,7 +631,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '三',
     meaningEn: 'tri',
-    description: `tri- 表示「三」。triangle（三角形）、tricycle（三轮车）。记住：tri- 总是和「3」相关。`,
+    description: `tri- 代表「三」。triangle（三角形）、tricycle（三轮车）。记住：tri- 总是和「3」相关。`,
     examples: [
       {
         word: 'triangle',
@@ -671,7 +671,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '多个 / 多重',
     meaningEn: 'multi',
-    description: `multi- 表示「多」。multimedia（多媒体）、multinational（跨国的）。记住：multi- 强调「很多、多种」。`,
+    description: `multi- 代表「多」。multimedia（多媒体）、multinational（跨国的）。记住：multi- 强调「很多、多种」。`,
     examples: [
       {
         word: 'multimedia',
@@ -751,7 +751,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '宏大 / 宏观',
     meaningEn: 'macro',
-    description: `macro- 表示「大、宏观」（与 micro- 相对）。macroeconomics（宏观经济学）= macro-（大）+ economics（经济学）。macroscopic（肉眼可见的）= macro-（大）+ scopic（看）。`,
+    description: `macro- 代表「大、宏观」（与 micro- 相对）。macroeconomics（宏观经济学）= macro-（大）+ economics（经济学）。macroscopic（肉眼可见的）= macro-（大）+ scopic（看）。`,
     examples: [
       {
         word: 'macroeconomics',
@@ -791,7 +791,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '小',
     meaningEn: 'mini',
-    description: `mini- 表示「小、迷你」。minimum（最小值）、miniature（微型）。记住：mini- 强调「小型化」，如 miniskirt（迷你裙）。`,
+    description: `mini- 代表「小、迷你」。minimum（最小值）、miniature（微型）。记住：mini- 强调「小型化」，如 miniskirt（迷你裙）。`,
     examples: [
       {
         word: 'minimum',
@@ -871,7 +871,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '一起 / 共同',
     meaningEn: 'co',
-    description: `co-/com-/con- 表示「共同、一起」。cooperate（合作）= co-（共同）+ operate（操作）→ 一起做事。company（公司）= com-（一起）+ pan（面包）+ -y → 一起吃面包的人 → 伙伴 → 公司。`,
+    description: `co-/com-/con- 代表「共同、一起」。cooperate（合作）= co-（共同）+ operate（操作）→ 一起做事。company（公司）= com-（一起）+ pan（面包）+ -y → 一起吃面包的人 → 伙伴 → 公司。`,
     examples: [
       {
         word: 'cooperation',
@@ -951,7 +951,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '穿过，转换',
     meaningEn: 'trans',
-    description: `trans- 表示「穿过、转变」。transport（运输）= trans-（穿过）+ port（运）→ 运送穿越。translate（翻译）= trans-（转）+ late（搬运）→ 把意思从一种语言转到另一种。`,
+    description: `trans- 代表「穿过、转变」。transport（运输）= trans-（穿过）+ port（运）→ 运送穿越。translate（翻译）= trans-（转）+ late（搬运）→ 把意思从一种语言转到另一种。`,
     examples: [
       {
         word: 'transport',
@@ -1077,7 +1077,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '看见',
     meaningEn: 'vis',
-    description: `vis/vid 也表示「看见」，但更强调「视觉」。television = tele-（远）+ vis（看）+ -ion → 看远处的东西。video（视频）直接来自拉丁语「我看到」。`,
+    description: `vis/vid 也代表「看见」，但更强调「视觉」。television = tele-（远）+ vis（看）+ -ion → 看远处的东西。video（视频）直接来自拉丁语「我看到」。`,
     examples: [
       {
         word: 'visible',
@@ -1123,7 +1123,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '听',
     meaningEn: 'aud',
-    description: `aud/audit 表示「听」。audio（音频）、audience（观众）= aud（听）+ -ience（人）→ 听的人。auditorium（礼堂）= audit（听）+ -orium（地方）→ 听的地方。`,
+    description: `aud/audit 代表「听」。audio（音频）、audience（观众）= aud（听）+ -ience（人）→ 听的人。auditorium（礼堂）= audit（听）+ -orium（地方）→ 听的地方。`,
     examples: [
       {
         word: 'audio',
@@ -1169,7 +1169,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '说',
     meaningEn: 'dict',
-    description: `dict 表示「说」。dictionary（字典）= dict（说）+ -ion（名词）+ -ary（的）→ 说明词语的书。predict（预测）= pre-（提前）+ dict（说）→ 提前说出来。`,
+    description: `dict 代表「说」。dictionary（字典）= dict（说）+ -ion（名词）+ -ary（的）→ 说明词语的书。predict（预测）= pre-（提前）+ dict（说）→ 提前说出来。`,
     examples: [
       {
         word: 'predict',
@@ -1215,7 +1215,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '写',
     meaningEn: 'scrib',
-    description: `scrib/script 表示「写」。describe（描述）= de-（完全）+ scrib（写）→ 详细写出来。manuscript（手稿）= manu-（手）+ script（写）→ 手写的东西。`,
+    description: `scrib/script 代表「写」。describe（描述）= de-（完全）+ scrib（写）→ 详细写出来。manuscript（手稿）= manu-（手）+ script（写）→ 手写的东西。`,
     examples: [
       {
         word: 'describe',
@@ -1261,7 +1261,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '写，画',
     meaningEn: 'graph',
-    description: `graph 表示「写、画、记录」。photograph（照片）= photo-（光）+ graph（画）→ 用光画出来的图。biography（传记）= bio-（生命）+ graph（写）→ 写人生的书。`,
+    description: `graph 代表「写、画、记录」。photograph（照片）= photo-（光）+ graph（画）→ 用光画出来的图。biography（传记）= bio-（生命）+ graph（写）→ 写人生的书。`,
     examples: [
       {
         word: 'photograph',
@@ -1307,7 +1307,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拿，带',
     meaningEn: 'port',
-    description: `port 表示「拿、带、运」。export（出口）= ex-（向外）+ port（运）→ 运出去。portable（便携的）= port（带）+ -able（可...的）→ 可以带着走的。`,
+    description: `port 代表「拿、带、运」。export（出口）= ex-（向外）+ port（运）→ 运出去。portable（便携的）= port（带）+ -able（可...的）→ 可以带着走的。`,
     examples: [
       {
         word: 'transport',
@@ -1353,7 +1353,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '引导',
     meaningEn: 'duct',
-    description: `duct/duc 表示「引导、带领」。conduct（引导）、educate（教育）= e-（向外）+ duc（引）+ -ate（使）→ 把知识引出来 → 教育。`,
+    description: `duct/duc 代表「引导、带领」。conduct（引导）、educate（教育）= e-（向外）+ duc（引）+ -ate（使）→ 把知识引出来 → 教育。`,
     examples: [
       {
         word: 'conduct',
@@ -1399,7 +1399,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '带，拿',
     meaningEn: 'fer',
-    description: `fer 表示「带、拿」。transfer（转移）= trans-（穿过）+ fer（带）→ 带过去。refer（提到）= re-（回）+ fer（带）→ 带回来说 → 提到。`,
+    description: `fer 代表「带、拿」。transfer（转移）= trans-（穿过）+ fer（带）→ 带过去。refer（提到）= re-（回）+ fer（带）→ 带回来说 → 提到。`,
     examples: [
       {
         word: 'transfer',
@@ -1445,7 +1445,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '送，放',
     meaningEn: 'mit',
-    description: `mit/miss 表示「送、放」。submit（提交）= sub-（向下）+ mit（送）→ 向下送 → 提交。mission（任务）= miss（送）+ -ion → 被派遣去做的事 → 任务。`,
+    description: `mit/miss 代表「送、放」。submit（提交）= sub-（向下）+ mit（送）→ 向下送 → 提交。mission（任务）= miss（送）+ -ion → 被派遣去做的事 → 任务。`,
     examples: [
       {
         word: 'admit',
@@ -1491,7 +1491,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '放',
     meaningEn: 'pos',
-    description: `pos/pon 表示「放置」。compose（组成）= com-（一起）+ pos（放）→ 放在一起 → 组成。postpone（推迟）= post-（后）+ pon（放）→ 往后放 → 推迟。`,
+    description: `pos/pon 代表「放置」。compose（组成）= com-（一起）+ pos（放）→ 放在一起 → 组成。postpone（推迟）= post-（后）+ pon（放）→ 往后放 → 推迟。`,
     examples: [
       {
         word: 'position',
@@ -1537,7 +1537,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '站',
     meaningEn: 'st',
-    description: `st/sta/stat 表示「站、立」。stand（站立）来自同源。station（车站）= stat（站）+ -ion → 站的地方。stable（稳定的）= sta（站）+ -ble（能...的）→ 能站稳的 → 稳定的。statue（雕像）= stat（站）+ -ue → 站着的东西。`,
+    description: `st/sta/stat 代表「站、立」。stand（站立）来自同源。station（车站）= stat（站）+ -ion → 站的地方。stable（稳定的）= sta（站）+ -ble（能...的）→ 能站稳的 → 稳定的。statue（雕像）= stat（站）+ -ue → 站着的东西。`,
     examples: [
       {
         word: 'stand',
@@ -1583,7 +1583,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '投，掷',
     meaningEn: 'ject',
-    description: `ject 表示「扔、投」。project（项目）= pro-（向前）+ ject（扔）→ 向前扔的计划。reject（拒绝）= re-（回）+ ject（扔）→ 扔回去 → 拒绝。inject（注射）= in-（进入）+ ject（扔）→ 扔进去 → 注射。`,
+    description: `ject 代表「扔、投」。project（项目）= pro-（向前）+ ject（扔）→ 向前扔的计划。reject（拒绝）= re-（回）+ ject（扔）→ 扔回去 → 拒绝。inject（注射）= in-（进入）+ ject（扔）→ 扔进去 → 注射。`,
     examples: [
       {
         word: 'project',
@@ -1629,7 +1629,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '心智',
     meaningEn: 'ment',
-    description: `ment 表示「心智、思考」。mental（精神的）、mention（提及）= ment（心智）+ -ion → 心里想到 → 提及。comment（评论）= com-（一起）+ ment（心智）+ -t → 一起思考 → 评论。`,
+    description: `ment 代表「心智、思考」。mental（精神的）、mention（提及）= ment（心智）+ -ion → 心里想到 → 提及。comment（评论）= com-（一起）+ ment（心智）+ -t → 一起思考 → 评论。`,
     examples: [
       {
         word: 'mental',
@@ -1675,7 +1675,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '感觉',
     meaningEn: 'sens',
-    description: `sens/sent 表示「感觉」。sense（感觉）、sensitive（敏感的）= sens（感觉）+ -itive → 有感觉的 → 敏感的。sentiment（情感）= sent（感觉）+ -iment → 感受 → 情感。`,
+    description: `sens/sent 代表「感觉」。sense（感觉）、sensitive（敏感的）= sens（感觉）+ -itive → 有感觉的 → 敏感的。sentiment（情感）= sent（感觉）+ -iment → 感受 → 情感。`,
     examples: [
       {
         word: 'sense',
@@ -1721,7 +1721,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '记忆',
     meaningEn: 'mem',
-    description: `mem/memor 表示「记忆」。memory（记忆）、remember（记得）= re-（再）+ member（记忆）→ 再次记起。memorial（纪念碑）= memor（记忆）+ -ial → 记忆的东西 → 纪念碑。`,
+    description: `mem/memor 代表「记忆」。memory（记忆）、remember（记得）= re-（再）+ member（记忆）→ 再次记起。memorial（纪念碑）= memor（记忆）+ -ial → 记忆的东西 → 纪念碑。`,
     examples: [
       {
         word: 'memory',
@@ -1767,7 +1767,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '生命',
     meaningEn: 'bio',
-    description: `bio 表示「生命」（希腊语）。biology（生物学）= bio（生命）+ log（学）+ -y → 研究生命的学问。biography（传记）= bio（生命）+ graph（写）+ -y → 写人生的书。antibiotic（抗生素）= anti-（对抗）+ bio（生命）+ -tic → 对抗生命的（细菌）。`,
+    description: `bio 代表「生命」（希腊语）。biology（生物学）= bio（生命）+ log（学）+ -y → 研究生命的学问。biography（传记）= bio（生命）+ graph（写）+ -y → 写人生的书。antibiotic（抗生素）= anti-（对抗）+ bio（生命）+ -tic → 对抗生命的（细菌）。`,
     examples: [
       {
         word: 'biology',
@@ -1813,7 +1813,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '生命，活',
     meaningEn: 'vit',
-    description: `vit/viv 表示「生命、活」。vital（至关重要的）= vit（生命）+ -al → 生命的 → 重要的。survive（生存）= sur-（超过）+ viv（活）+ -e → 活过来 → 生存。revive（复活）= re-（再）+ viv（活）+ -e → 再活过来 → 复活。`,
+    description: `vit/viv 代表「生命、活」。vital（至关重要的）= vit（生命）+ -al → 生命的 → 重要的。survive（生存）= sur-（超过）+ viv（活）+ -e → 活过来 → 生存。revive（复活）= re-（再）+ viv（活）+ -e → 再活过来 → 复活。`,
     examples: [
       {
         word: 'vital',
@@ -1859,7 +1859,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '生命，心',
     meaningEn: 'anim',
-    description: `anim 表示「生命、心」。animal（动物）= anim（生命）+ -al → 有生命的东西。animate（使有生气）= anim（生命）+ -ate → 使有生命。animation（动画）= anim（生命）+ -ation → 让画面像有生命一样动起来。`,
+    description: `anim 代表「生命、心」。animal（动物）= anim（生命）+ -al → 有生命的东西。animate（使有生气）= anim（生命）+ -ate → 使有生命。animation（动画）= anim（生命）+ -ation → 让画面像有生命一样动起来。`,
     examples: [
       {
         word: 'animal',
@@ -1899,7 +1899,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '死',
     meaningEn: 'mort',
-    description: `mort 表示「死」。mortal（凡人）= mort（死）+ -al → 会死的人 → 凡人。immortal（不朽的）= im-（不）+ mort（死）+ -al → 不会死的 → 不朽的。mortgage（抵押贷款）= mort（死）+ gage（承诺）→ 死约/不可更改的承诺 → 抵押。`,
+    description: `mort 代表「死」。mortal（凡人）= mort（死）+ -al → 会死的人 → 凡人。immortal（不朽的）= im-（不）+ mort（死）+ -al → 不会死的 → 不朽的。mortgage（抵押贷款）= mort（死）+ gage（承诺）→ 死约/不可更改的承诺 → 抵押。`,
     examples: [
       {
         word: 'mortal',
@@ -1945,7 +1945,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '时间',
     meaningEn: 'chron',
-    description: `chron 表示「时间」（希腊语）。chronic（慢性的）= chron（时间）+ -ic → 持续很长时间的 → 慢性的。chronological（按时间顺序的）= chron（时间）+ log（学）+ -ical → 时间顺序的。synchronize（同步）= syn-（一起）+ chron（时间）+ -ize → 时间一起 → 同步。`,
+    description: `chron 代表「时间」（希腊语）。chronic（慢性的）= chron（时间）+ -ic → 持续很长时间的 → 慢性的。chronological（按时间顺序的）= chron（时间）+ log（学）+ -ical → 时间顺序的。synchronize（同步）= syn-（一起）+ chron（时间）+ -ize → 时间一起 → 同步。`,
     examples: [
       {
         word: 'chronic',
@@ -1991,7 +1991,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '时间',
     meaningEn: 'temp',
-    description: `temp/tempor 表示「时间」（拉丁语）。temporary（临时的）= tempor（时间）+ -ary → 时间性的 → 临时的。contemporary（当代的）= con-（一起）+ tempor（时间）+ -ary → 同一时间的 → 当代的。`,
+    description: `temp/tempor 代表「时间」（拉丁语）。temporary（临时的）= tempor（时间）+ -ary → 时间性的 → 临时的。contemporary（当代的）= con-（一起）+ tempor（时间）+ -ary → 同一时间的 → 当代的。`,
     examples: [
       {
         word: 'temporary',
@@ -2037,7 +2037,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '年',
     meaningEn: 'ann',
-    description: `ann/enn 表示「年」。annual（年度的）= ann（年）+ -ual → 每年的。anniversary（周年纪念）= anni-（年）+ vers（转）+ -ary → 年份转一圈 → 周年。millennium（千年）= mill-（千）+ enn（年）+ -ium → 一千年。`,
+    description: `ann/enn 代表「年」。annual（年度的）= ann（年）+ -ual → 每年的。anniversary（周年纪念）= anni-（年）+ vers（转）+ -ary → 年份转一圈 → 周年。millennium（千年）= mill-（千）+ enn（年）+ -ium → 一千年。`,
     examples: [
       {
         word: 'annual',
@@ -2129,7 +2129,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '二',
     meaningEn: 'du',
-    description: `du/duo 表示「二、双」。dual（双的）、duet（二重奏）= du（二）+ -et → 两个人的表演。duplicate（复制）= du（二）+ plic（折）+ -ate → 折成两份 → 复制。`,
+    description: `du/duo 代表「二、双」。dual（双的）、duet（二重奏）= du（二）+ -et → 两个人的表演。duplicate（复制）= du（二）+ plic（折）+ -ate → 折成两份 → 复制。`,
     examples: [
       {
         word: 'dual',
@@ -2175,7 +2175,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '偏离 / 离去',
     meaningEn: 'away from',
-    description: `ab-/abs- 表示「离开、相反」。abnormal（异常的）= ab-（离开）+ normal（正常）→ 偏离正常 → 异常。absorb（吸收）= ab-（离开）+ sorb（吸）→ 把东西吸走。注意：元音前用 ab-，辅音前用 abs-。`,
+    description: `ab-/abs- 代表「离开、相反」。abnormal（异常的）= ab-（离开）+ normal（正常）→ 偏离正常 → 异常。absorb（吸收）= ab-（离开）+ sorb（吸）→ 把东西吸走。注意：元音前用 ab-，辅音前用 abs-。`,
     examples: [
       {
         word: 'abnormal',
@@ -2221,7 +2221,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '加强，朝向',
     meaningEn: 'to, toward',
-    description: `ad- 表示「朝向、加强」，是最常见的前缀之一。adapt（适应）= ad-（朝向）+ apt（合适）→ 朝着合适的方向调整 → 适应。注意：ad- 会同化，在不同辅音前变形，如 accept = ac-（朝向）+ cept（拿）。`,
+    description: `ad- 代表「朝向、加强」，是最常见的前缀之一。adapt（适应）= ad-（朝向）+ apt（合适）→ 朝着合适的方向调整 → 适应。注意：ad- 会同化，在不同辅音前变形，如 accept = ac-（朝向）+ cept（拿）。`,
     examples: [
       {
         word: 'adapt',
@@ -2267,7 +2267,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '进入，使',
     meaningEn: 'in, into',
-    description: `en-/em- 表示「使成为、进入」。enable（使能够）= en-（使）+ able（能）→ 使能够。encourage（鼓励）= en-（使）+ courage（勇气）→ 使有勇气。辅音 b/p/m 前用 em-，如 empower（授权）。`,
+    description: `en-/em- 代表「使成为、进入」。enable（使能够）= en-（使）+ able（能）→ 使能够。encourage（鼓励）= en-（使）+ courage（勇气）→ 使有勇气。辅音 b/p/m 前用 em-，如 empower（授权）。`,
     examples: [
       {
         word: 'enable',
@@ -2353,7 +2353,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '一起 / 共同',
     meaningEn: 'together',
-    description: `co-/com-/con- 表示「共同、一起」。collaborate（合作）= co-（共同）+ labor（劳动）+ -ate → 一起劳动 → 合作。这个前缀会同化：com- 用于 b/p/m 前，con- 用于其他辅音前，co- 用于元音前。`,
+    description: `co-/com-/con- 代表「共同、一起」。collaborate（合作）= co-（共同）+ labor（劳动）+ -ate → 一起劳动 → 合作。这个前缀会同化：com- 用于 b/p/m 前，con- 用于其他辅音前，co- 用于元音前。`,
     examples: [
       {
         word: 'cooperate',
@@ -2397,9 +2397,9 @@ export const wordRoots: WordRoot[] = [
     id: 56,
     root: 'contra-/counter-',
     origin: 'Latin',
-    meaning: '相反，对抗',
+    meaning: '相反 / 对抗',
     meaningEn: 'against',
-    description: `contra-/counter- 表示「相反、对抗」。contradict（矛盾）= contra-（相反）+ dict（说）→ 说相反的话 → 矛盾。contrast（对比）= contra-（相反）+ st（站）→ 站在对立面 → 对比。`,
+    description: `contra-/counter- 代表「相反、对抗」。contradict（矛盾）= contra-（相反）+ dict（说）→ 说相反的话 → 矛盾。contrast（对比）= contra-（相反）+ st（站）→ 站在对立面 → 对比。`,
     examples: [
       {
         word: 'contradict',
@@ -2439,7 +2439,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '前，预先',
     meaningEn: 'before',
-    description: `fore- 表示「在前、预先」。forecast（预报）= fore-（预先）+ cast（投）→ 预先投射出来 → 预报。foresee（预见）= fore-（预先）+ see（看）→ 预先看到。和 pre- 意思相近，但 fore- 更强调「时间或空间上在前面」。`,
+    description: `fore- 代表「在前、预先」。forecast（预报）= fore-（预先）+ cast（投）→ 预先投射出来 → 预报。foresee（预见）= fore-（预先）+ see（看）→ 预先看到。和 pre- 意思相近，但 fore- 更强调「时间或空间上在前面」。`,
     examples: [
       {
         word: 'forecast',
@@ -2479,7 +2479,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '坏的 / 错误',
     meaningEn: 'bad',
-    description: `mal- 表示「坏、恶」。malfunction（故障）= mal-（坏）+ function（功能）→ 功能坏了 → 故障。malicious（恶意的）= mal-（恶）+ -icious（的）→ 有恶意的。记住：mal- 的反义词是 bene-（好）。`,
+    description: `mal- 代表「坏、恶」。malfunction（故障）= mal-（坏）+ function（功能）→ 功能坏了 → 故障。malicious（恶意的）= mal-（恶）+ -icious（的）→ 有恶意的。记住：mal- 的反义词是 bene-（好）。`,
     examples: [
       {
         word: 'malfunction',
@@ -2519,7 +2519,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '错误',
     meaningEn: 'wrong, bad',
-    description: `mis- 表示「错误、不当」，已在前面讲过。misfortune（不幸）= mis-（坏）+ fortune（运气）→ 坏运气 → 不幸。mislead（误导）= mis-（错）+ lead（引导）→ 引导错了 → 误导。`,
+    description: `mis- 代表「错误、不当」，已在前面讲过。misfortune（不幸）= mis-（坏）+ fortune（运气）→ 坏运气 → 不幸。mislead（误导）= mis-（错）+ lead（引导）→ 引导错了 → 误导。`,
     examples: [
       {
         word: 'mistake',
@@ -2559,7 +2559,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '超过，外出',
     meaningEn: 'beyond, out',
-    description: `out- 表示「超出、向外」，已在前面讲过。output（输出）= out-（向外）+ put（放）→ 放出来的东西 → 输出。outlook（前景）= out-（向外）+ look（看）→ 向外看到的景象 → 前景。`,
+    description: `out- 代表「超出、向外」，已在前面讲过。output（输出）= out-（向外）+ put（放）→ 放出来的东西 → 输出。outlook（前景）= out-（向外）+ look（看）→ 向外看到的景象 → 前景。`,
     examples: [
       {
         word: 'outcome',
@@ -2599,7 +2599,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '过度 / 在上方',
     meaningEn: 'too much, above',
-    description: `over- 表示「过度、在上」，已在前面讲过。overlap（重叠）= over-（在上）+ lap（圈）→ 一圈压在另一圈上 → 重叠。overseas（海外的）= over-（越过）+ seas（海）→ 越过大海的 → 海外的。`,
+    description: `over- 代表「过度、在上」，已在前面讲过。overlap（重叠）= over-（在上）+ lap（圈）→ 一圈压在另一圈上 → 重叠。overseas（海外的）= over-（越过）+ seas（海）→ 越过大海的 → 海外的。`,
     examples: [
       {
         word: 'overcome',
@@ -2639,7 +2639,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '贯穿 / 始终',
     meaningEn: 'through',
-    description: `per- 表示「贯穿、彻底、完全」。perfect（完美的）= per-（完全）+ fect（做）→ 完全做好的 → 完美的。persist（坚持）= per-（彻底）+ sist（站）→ 彻底站稳 → 坚持。这是个强调「程度」的前缀。`,
+    description: `per- 代表「贯穿、彻底、完全」。perfect（完美的）= per-（完全）+ fect（做）→ 完全做好的 → 完美的。persist（坚持）= per-（彻底）+ sist（站）→ 彻底站稳 → 坚持。这是个强调「程度」的前缀。`,
     examples: [
       {
         word: 'perfect',
@@ -2679,7 +2679,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '向前 / 支持',
     meaningEn: 'forward, before',
-    description: `pro- 表示「向前、支持」，已在前面讲过。promote（促进）= pro-（向前）+ mot（移动）+ -e → 向前推动 → 促进。propose（提议）= pro-（向前）+ pos（放）+ -e → 向前放出来 → 提议。`,
+    description: `pro- 代表「向前、支持」，已在前面讲过。promote（促进）= pro-（向前）+ mot（移动）+ -e → 向前推动 → 促进。propose（提议）= pro-（向前）+ pos（放）+ -e → 向前放出来 → 提议。`,
     examples: [
       {
         word: 'progress',
@@ -2719,7 +2719,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '向后 / 回退',
     meaningEn: 'backward',
-    description: `retro- 表示「向后、回顾」。retrospect（回顾）= retro-（向后）+ spect（看）→ 向后看 → 回顾。retrograde（倒退的）= retro-（向后）+ grade（走）→ 往后走的 → 倒退的。`,
+    description: `retro- 代表「向后、回顾」。retrospect（回顾）= retro-（向后）+ spect（看）→ 向后看 → 回顾。retrograde（倒退的）= retro-（向后）+ grade（走）→ 往后走的 → 倒退的。`,
     examples: [
       {
         word: 'retrospect',
@@ -2742,7 +2742,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'retrograde 的意思是什么？',
-    options: ["回顾", "倒退", "快速的", "追溯的"],
+    options: ["回顾", "倒退", "变成动词", "追溯的"],
     correctAnswer: 1
   }
   },
@@ -2753,7 +2753,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '下方 / 不足',
     meaningEn: 'below, beneath',
-    description: `under- 表示「在下、不足」，已在前面讲过。undergo（经历）= under-（在下）+ go（走）→ 在下面走过 → 经历。undermine（削弱）= under-（在下）+ mine（挖）→ 在下面挖 → 削弱根基。`,
+    description: `under- 代表「在下、不足」，已在前面讲过。undergo（经历）= under-（在下）+ go（走）→ 在下面走过 → 经历。undermine（削弱）= under-（在下）+ mine（挖）→ 在下面挖 → 削弱根基。`,
     examples: [
       {
         word: 'understand',
@@ -2793,7 +2793,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '向后，反对',
     meaningEn: 'back, against',
-    description: `with- 表示「反对、向后」（古英语）。withdraw（撤退）= with-（向后）+ draw（拉）→ 向后拉 → 撤退。withstand（抵抗）= with-（反对）+ stand（站）→ 站着反对 → 抵抗。这个前缀比较少见。`,
+    description: `with- 代表「反对、向后」（古英语）。withdraw（撤退）= with-（向后）+ draw（拉）→ 向后拉 → 撤退。withstand（抵抗）= with-（反对）+ stand（站）→ 站着反对 → 抵抗。这个前缀比较少见。`,
     examples: [
       {
         word: 'withdraw',
@@ -2816,7 +2816,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'withdraw 的意思是什么？',
-    options: ["快速的", "撤退", "抵抗", "保留"],
+    options: ["相关场所", "撤退", "抵抗", "保留"],
     correctAnswer: 1
   }
   },
@@ -2827,7 +2827,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '向上，增强',
     meaningEn: 'up, upward',
-    description: `up- 表示「向上、增强」，已在前面讲过。update（更新）= up-（向上）+ date（日期）→ 更新到最新日期 → 更新。upright（直立的）= up-（向上）+ right（正）→ 向上站正 → 直立的。`,
+    description: `up- 代表「向上、增强」，已在前面讲过。update（更新）= up-（向上）+ date（日期）→ 更新到最新日期 → 更新。upright（直立的）= up-（向上）+ right（正）→ 向上站正 → 直立的。`,
     examples: [
       {
         word: 'upgrade',
@@ -2867,7 +2867,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '超出 / 额外',
     meaningEn: 'beyond, outside',
-    description: `extra- 表示「超出、额外」。extraordinary（非凡的）= extra-（超出）+ ordinary（普通）→ 超出普通 → 非凡的。extracurricular（课外的）= extra-（额外）+ curricular（课程的）→ 课程以外的 → 课外的。`,
+    description: `extra- 代表「超出、额外」。extraordinary（非凡的）= extra-（超出）+ ordinary（普通）→ 超出普通 → 非凡的。extracurricular（课外的）= extra-（额外）+ curricular（课程的）→ 课程以外的 → 课外的。`,
     examples: [
       {
         word: 'extraordinary',
@@ -2890,7 +2890,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'extracurricular 的意思是什么？',
-    options: ["快速的", "外星的", "课外的", "非凡的"],
+    options: ["状态", "外星的", "课外的", "非凡的"],
     correctAnswer: 2
   }
   },
@@ -2901,7 +2901,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '内部 / 向内',
     meaningEn: 'within, inside',
-    description: `intra-/intro- 表示「内部、向内」。introduce（介绍）= intro-（向内）+ duc（引）+ -e → 引进来 → 介绍。intranet（内网）= intra-（内部）+ net（网）→ 内部网络。和 inter-（之间）区分开。`,
+    description: `intra-/intro- 代表「内部、向内」。introduce（介绍）= intro-（向内）+ duc（引）+ -e → 引进来 → 介绍。intranet（内网）= intra-（内部）+ net（网）→ 内部网络。和 inter-（之间）区分开。`,
     examples: [
       {
         word: 'introduce',
@@ -2924,7 +2924,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'introduce 的意思是什么？',
-    options: ["介绍", "内网", "内省", "快速的"],
+    options: ["介绍", "内网", "内省", "向外"],
     correctAnswer: 0
   }
   },
@@ -2935,7 +2935,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '超，极',
     meaningEn: 'beyond, extremely',
-    description: `ultra- 表示「超、极」。ultraviolet（紫外线的）= ultra-（超）+ violet（紫色）→ 超越紫色的 → 紫外线的。ultrasound（超声波）= ultra-（超）+ sound（声音）→ 超出人耳听力范围的声音。`,
+    description: `ultra- 代表「超、极」。ultraviolet（紫外线的）= ultra-（超）+ violet（紫色）→ 超越紫色的 → 紫外线的。ultrasound（超声波）= ultra-（超）+ sound（声音）→ 超出人耳听力范围的声音。`,
     examples: [
       {
         word: 'ultramodern',
@@ -2958,7 +2958,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'ultrasound 的意思是什么？',
-    options: ["紫外线", "超现代的", "快速的", "超声波"],
+    options: ["紫外线", "超现代的", "相反", "超声波"],
     correctAnswer: 3
   }
   },
@@ -2969,7 +2969,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '做，行动',
     meaningEn: 'do, act',
-    description: `act/ag 表示「做、行动」。action（行动）、agent（代理人）= ag（做）+ -ent（人）→ 做事的人 → 代理人。react（反应）= re-（回）+ act（做）→ 做出回应 → 反应。`,
+    description: `act/ag 代表「做、行动」。action（行动）、agent（代理人）= ag（做）+ -ent（人）→ 做事的人 → 代理人。react（反应）= re-（回）+ act（做）→ 做出回应 → 反应。`,
     examples: [
       {
         word: 'action',
@@ -3015,7 +3015,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '走，前进',
     meaningEn: 'go, yield',
-    description: `ceed/cess/cede 表示「走、进行」，已在前面讲过。exceed（超过）= ex-（向外）+ ceed（走）→ 走出去 → 超过。recession（衰退）= re-（回）+ cess（走）+ -ion → 往回走 → 衰退。`,
+    description: `ceed/cess/cede 代表「走、进行」，已在前面讲过。exceed（超过）= ex-（向外）+ ceed（走）→ 走出去 → 超过。recession（衰退）= re-（回）+ cess（走）+ -ion → 往回走 → 衰退。`,
     examples: [
       {
         word: 'proceed',
@@ -3061,7 +3061,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '跑，流',
     meaningEn: 'run, flow',
-    description: `cur/curs/cours 表示「跑、流」。current（当前的）= cur（流）+ -ent → 正在流动的 → 当前的。occur（发生）= oc-（朝向）+ cur（跑）→ 跑过来 → 发生。course（课程）= cours（跑）+ -e → 跑的路线 → 课程。`,
+    description: `cur/curs/cours 代表「跑、流」。current（当前的）= cur（流）+ -ent → 正在流动的 → 当前的。occur（发生）= oc-（朝向）+ cur（跑）→ 跑过来 → 发生。course（课程）= cours（跑）+ -e → 跑的路线 → 课程。`,
     examples: [
       {
         word: 'current',
@@ -3107,7 +3107,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '做，制作',
     meaningEn: 'make, do',
-    description: `fac/fact/fect/fic 表示「做、制作」，已在前面讲过。manufacture（制造）= manu-（手）+ fact（做）+ -ure → 用手做 → 制造。artificial（人造的）= art（艺术）+ fic（做）+ -ial → 人工做的。`,
+    description: `fac/fact/fect/fic 代表「做、制作」，已在前面讲过。manufacture（制造）= manu-（手）+ fact（做）+ -ure → 用手做 → 制造。artificial（人造的）= art（艺术）+ fic（做）+ -ial → 人工做的。`,
     examples: [
       {
         word: 'factory',
@@ -3153,7 +3153,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '投掷，扔',
     meaningEn: 'throw',
-    description: `ject 表示「投掷、扔」，已在前面讲过。inject（注射）= in-（进入）+ ject（扔）→ 扔进去 → 注射。trajectory（轨迹）= tra-（穿过）+ ject（扔）+ -ory → 扔过去的路径 → 轨迹。`,
+    description: `ject 代表「投掷、扔」，已在前面讲过。inject（注射）= in-（进入）+ ject（扔）→ 扔进去 → 注射。trajectory（轨迹）= tra-（穿过）+ ject（扔）+ -ory → 扔过去的路径 → 轨迹。`,
     examples: [
       {
         word: 'project',
@@ -3199,7 +3199,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '来',
     meaningEn: 'come',
-    description: `ven/vent 表示「来」。event（事件）= e-（向外）+ vent（来）→ 出来的事情 → 事件。prevent（预防）= pre-（提前）+ vent（来）→ 提前来到前面阻挡 → 预防。convention（大会）= con-（一起）+ ven（来）+ -tion → 一起来的聚会 → 大会。`,
+    description: `ven/vent 代表「来」。event（事件）= e-（向外）+ vent（来）→ 出来的事情 → 事件。prevent（预防）= pre-（提前）+ vent（来）→ 提前来到前面阻挡 → 预防。convention（大会）= con-（一起）+ ven（来）+ -tion → 一起来的聚会 → 大会。`,
     examples: [
       {
         word: 'event',
@@ -3245,7 +3245,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拿，抓，接受',
     meaningEn: 'take, seize',
-    description: `cap/cept/ceiv/cip 表示「拿、抓、接受」。capture（捕获）= cap（抓）+ -ture → 抓住。accept（接受）= ac-（朝向）+ cept（拿）→ 朝着拿过来 → 接受。receive（收到）= re-（回）+ ceiv（拿）+ -e → 拿回来 → 收到。`,
+    description: `cap/cept/ceiv/cip 代表「拿、抓、接受」。capture（捕获）= cap（抓）+ -ture → 抓住。accept（接受）= ac-（朝向）+ cept（拿）→ 朝着拿过来 → 接受。receive（收到）= re-（回）+ ceiv（拿）+ -e → 拿回来 → 收到。`,
     examples: [
       {
         word: 'capture',
@@ -3291,7 +3291,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拿住，保持',
     meaningEn: 'hold',
-    description: `ten/tin/tain 表示「拿住、保持」。contain（包含）= con-（一起）+ tain（拿住）→ 一起拿住 → 包含。maintain（维持）= main-（手）+ tain（拿）→ 用手拿住 → 维持。continuous（连续的）= con-（一起）+ tin（拿住）+ -uous → 拿在一起不放 → 连续的。`,
+    description: `ten/tin/tain 代表「拿住、保持」。contain（包含）= con-（一起）+ tain（拿住）→ 一起拿住 → 包含。maintain（维持）= main-（手）+ tain（拿）→ 用手拿住 → 维持。continuous（连续的）= con-（一起）+ tin（拿住）+ -uous → 拿在一起不放 → 连续的。`,
     examples: [
       {
         word: 'contain',
@@ -3337,7 +3337,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '悬挂，支付',
     meaningEn: 'hang, weigh, pay',
-    description: `pend/pens/pond 表示「悬挂、支付」，已在前面讲过。suspend（暂停）= sus-（在下）+ pend（挂）→ 挂起来 → 暂停。compensate（补偿）= com-（一起）+ pens（支付）+ -ate → 一起支付 → 补偿。`,
+    description: `pend/pens/pond 代表「悬挂、支付」，已在前面讲过。suspend（暂停）= sus-（在下）+ pend（挂）→ 挂起来 → 暂停。compensate（补偿）= com-（一起）+ pens（支付）+ -ate → 一起支付 → 补偿。`,
     examples: [
       {
         word: 'depend',
@@ -3383,7 +3383,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拉，抽',
     meaningEn: 'draw, pull',
-    description: `tract 表示「拉、抽」，已在前面讲过。extract（提取）= ex-（向外）+ tract（拉）→ 拉出来 → 提取。distract（分心）= dis-（分开）+ tract（拉）→ 把注意力拉开 → 分心。`,
+    description: `tract 代表「拉、抽」，已在前面讲过。extract（提取）= ex-（向外）+ tract（拉）→ 拉出来 → 提取。distract（分心）= dis-（分开）+ tract（拉）→ 把注意力拉开 → 分心。`,
     examples: [
       {
         word: 'attract',
@@ -3429,7 +3429,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '压，挤',
     meaningEn: 'press',
-    description: `press 表示「压」，已在前面讲过。compress（压缩）= com-（一起）+ press（压）→ 压在一起 → 压缩。suppress（压制）= sup-（在下）+ press（压）→ 压在下面 → 压制。`,
+    description: `press 代表「压」，已在前面讲过。compress（压缩）= com-（一起）+ press（压）→ 压在一起 → 压缩。suppress（压制）= sup-（在下）+ press（压）→ 压在下面 → 压制。`,
     examples: [
       {
         word: 'pressure',
@@ -3475,7 +3475,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '站立',
     meaningEn: 'stand',
-    description: `sist 表示「站立」。consist（组成）= con-（一起）+ sist（站）→ 站在一起 → 组成。resist（抵抗）= re-（反）+ sist（站）→ 反着站 → 抵抗。insist（坚持）= in-（进入）+ sist（站）→ 站进去不动 → 坚持。`,
+    description: `sist 代表「站立」。consist（组成）= con-（一起）+ sist（站）→ 站在一起 → 组成。resist（抵抗）= re-（反）+ sist（站）→ 反着站 → 抵抗。insist（坚持）= in-（进入）+ sist（站）→ 站进去不动 → 坚持。`,
     examples: [
       {
         word: 'assist',
@@ -3521,7 +3521,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '建造',
     meaningEn: 'build',
-    description: `struct 表示「建造」，已在前面讲过。instruct（指导）= in-（进入）+ struct（建造）→ 在里面建造知识 → 指导。obstruct（阻碍）= ob-（反对）+ struct（建造）→ 建造障碍物 → 阻碍。`,
+    description: `struct 代表「建造」，已在前面讲过。instruct（指导）= in-（进入）+ struct（建造）→ 在里面建造知识 → 指导。obstruct（阻碍）= ob-（反对）+ struct（建造）→ 建造障碍物 → 阻碍。`,
     examples: [
       {
         word: 'structure',
@@ -3567,7 +3567,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '形状，形成',
     meaningEn: 'shape, form',
-    description: `form 表示「形状、形成」，已在前面讲过。inform（通知）= in-（进入）+ form（形成）→ 在脑中形成认知 → 通知。deform（变形）= de-（去除）+ form（形状）→ 去掉原来的形状 → 变形。`,
+    description: `form 代表「形状、形成」，已在前面讲过。inform（通知）= in-（进入）+ form（形成）→ 在脑中形成认知 → 通知。deform（变形）= de-（去除）+ form（形状）→ 去掉原来的形状 → 变形。`,
     examples: [
       {
         word: 'format',
@@ -3613,7 +3613,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '转',
     meaningEn: 'turn',
-    description: `vers/vert 表示「转」，已在前面讲过。reverse（颠倒）= re-（回）+ vers（转）→ 转回去 → 颠倒。divert（转移）= di-（分开）+ vert（转）→ 转到别的方向 → 转移。`,
+    description: `vers/vert 代表「转」，已在前面讲过。reverse（颠倒）= re-（回）+ vers（转）→ 转回去 → 颠倒。divert（转移）= di-（分开）+ vert（转）→ 转到别的方向 → 转移。`,
     examples: [
       {
         word: 'convert',
@@ -3659,7 +3659,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '重叠，折叠',
     meaningEn: 'fold',
-    description: `plic/plex/ply 表示「折叠、编织」，已在前面讲过。duplicate（复制）= du-（二）+ plic（折）+ -ate → 折成两份 → 复制。complex（复杂的）= com-（一起）+ plex（折）→ 折在一起 → 复杂的。`,
+    description: `plic/plex/ply 代表「折叠、编织」，已在前面讲过。duplicate（复制）= du-（二）+ plic（折）+ -ate → 折成两份 → 复制。complex（复杂的）= com-（一起）+ plex（折）→ 折在一起 → 复杂的。`,
     examples: [
       {
         word: 'complex',
@@ -3705,7 +3705,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '地方',
     meaningEn: 'place',
-    description: `loc 表示「地方」。location（位置）= loc（地方）+ -ation → 所在的地方 → 位置。allocate（分配）= al-（朝向）+ loc（地方）+ -ate → 分配到各个地方 → 分配。local（当地的）直接来自「地方」。`,
+    description: `loc 代表「地方」。location（位置）= loc（地方）+ -ation → 所在的地方 → 位置。allocate（分配）= al-（朝向）+ loc（地方）+ -ate → 分配到各个地方 → 分配。local（当地的）直接来自「地方」。`,
     examples: [
       {
         word: 'location',
@@ -3745,7 +3745,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '感情，痛苦',
     meaningEn: 'feeling, suffering',
-    description: `path 表示「感情、痛苦」。sympathy（同情）= sym-（共同）+ path（感情）+ -y → 共同的感情 → 同情。pathetic（可怜的）= path（痛苦）+ -etic（的）→ 让人感到痛苦的 → 可怜的。`,
+    description: `path 代表「感情、痛苦」。sympathy（同情）= sym-（共同）+ path（感情）+ -y → 共同的感情 → 同情。pathetic（可怜的）= path（痛苦）+ -etic（的）→ 让人感到痛苦的 → 可怜的。`,
     examples: [
       {
         word: 'sympathy',
@@ -3791,7 +3791,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '说，言',
     meaningEn: 'word, speech',
-    description: `log/logu/logue 表示「说、言、学」。dialogue（对话）= dia-（穿过）+ logue（说）→ 说来说去 → 对话。biology（生物学）= bio（生命）+ log（学）+ -y → 研究生命的学问 → 生物学。`,
+    description: `log/logu/logue 代表「说、言、学」。dialogue（对话）= dia-（穿过）+ logue（说）→ 说来说去 → 对话。biology（生物学）= bio（生命）+ log（学）+ -y → 研究生命的学问 → 生物学。`,
     examples: [
       {
         word: 'dialogue',
@@ -3837,7 +3837,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '看，观察',
     meaningEn: 'see, watch',
-    description: `scop 表示「看、观察」。telescope（望远镜）= tele-（远）+ scop（看）+ -e → 看远处的工具 → 望远镜。microscope（显微镜）= micro-（微小）+ scop（看）+ -e → 看微小东西的工具 → 显微镜。`,
+    description: `scop 代表「看、观察」。telescope（望远镜）= tele-（远）+ scop（看）+ -e → 看远处的工具 → 望远镜。microscope（显微镜）= micro-（微小）+ scop（看）+ -e → 看微小东西的工具 → 显微镜。`,
     examples: [
       {
         word: 'telescope',
@@ -3877,7 +3877,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '爱',
     meaningEn: 'love',
-    description: `phil 表示「爱」。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。Philadelphia（费城）= phil（爱）+ adelph（兄弟）+ -ia → 兄弟之爱的城市 → 费城（友爱之城）。`,
+    description: `phil 代表「爱」。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。Philadelphia（费城）= phil（爱）+ adelph（兄弟）+ -ia → 兄弟之爱的城市 → 费城（友爱之城）。`,
     examples: [
       {
         word: 'philosophy',
@@ -3917,7 +3917,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '声音',
     meaningEn: 'sound',
-    description: `phon 表示「声音」。telephone（电话）= tele-（远）+ phon（声音）+ -e → 远距离传声 → 电话。symphony（交响乐）= sym-（共同）+ phon（声音）+ -y → 共同的声音 → 交响乐。`,
+    description: `phon 代表「声音」。telephone（电话）= tele-（远）+ phon（声音）+ -e → 远距离传声 → 电话。symphony（交响乐）= sym-（共同）+ phon（声音）+ -y → 共同的声音 → 交响乐。`,
     examples: [
       {
         word: 'phone',
@@ -3957,7 +3957,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '精神，心理',
     meaningEn: 'mind, soul',
-    description: `psych 表示「精神、心理」。psychology（心理学）= psych（心理）+ log（学）+ -y → 研究心理的学问。psychiatrist（精神科医生）= psych（精神）+ iatr（治疗）+ -ist（人）→ 治疗精神的人 → 精神科医生。`,
+    description: `psych 代表「精神、心理」。psychology（心理学）= psych（心理）+ log（学）+ -y → 研究心理的学问。psychiatrist（精神科医生）= psych（精神）+ iatr（治疗）+ -ist（人）→ 治疗精神的人 → 精神科医生。`,
     examples: [
       {
         word: 'psychology',
@@ -3997,7 +3997,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '热',
     meaningEn: 'heat',
-    description: `therm 表示「热」。thermometer（温度计）= thermo（热）+ meter（测量）→ 测量热度的工具 → 温度计。thermal（热的）= therm（热）+ -al（的）→ 关于热的。`,
+    description: `therm 代表「热」。thermometer（温度计）= thermo（热）+ meter（测量）→ 测量热度的工具 → 温度计。thermal（热的）= therm（热）+ -al（的）→ 关于热的。`,
     examples: [
       {
         word: 'thermometer',
@@ -4037,7 +4037,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '地，地球',
     meaningEn: 'earth',
-    description: `geo 表示「地、地球」。geography（地理）= geo（地）+ graph（写）+ -y → 描写地球的学问 → 地理。geology（地质学）= geo（地）+ log（学）+ -y → 研究地球的学问 → 地质学。`,
+    description: `geo 代表「地、地球」。geography（地理）= geo（地）+ graph（写）+ -y → 描写地球的学问 → 地理。geology（地质学）= geo（地）+ log（学）+ -y → 研究地球的学问 → 地质学。`,
     examples: [
       {
         word: 'geography',
@@ -4077,7 +4077,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '水',
     meaningEn: 'water',
-    description: `hydr/hydro 表示「水」。hydrogen（氢）= hydro（水）+ gen（产生）→ 产生水的元素 → 氢（氢燃烧生成水）。dehydrate（脱水）= de-（去除）+ hydr（水）+ -ate → 去除水分 → 脱水。`,
+    description: `hydr/hydro 代表「水」。hydrogen（氢）= hydro（水）+ gen（产生）→ 产生水的元素 → 氢（氢燃烧生成水）。dehydrate（脱水）= de-（去除）+ hydr（水）+ -ate → 去除水分 → 脱水。`,
     examples: [
       {
         word: 'hydraulic',
@@ -4117,7 +4117,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '空气',
     meaningEn: 'air',
-    description: `aer/aero 表示「空气」。airplane（飞机）= aero（空气）+ plane（平面）→ 在空中飞的平面 → 飞机。aerobic（有氧的）= aero（空气）+ bio（生命）+ -ic → 需要空气的生命活动 → 有氧的。`,
+    description: `aer/aero 代表「空气」。airplane（飞机）= aero（空气）+ plane（平面）→ 在空中飞的平面 → 飞机。aerobic（有氧的）= aero（空气）+ bio（生命）+ -ic → 需要空气的生命活动 → 有氧的。`,
     examples: [
       {
         word: 'aeroplane',
@@ -4157,7 +4157,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '星星',
     meaningEn: 'star',
-    description: `astro/aster 表示「星星」。astronaut（宇航员）= astro（星）+ naut（航行者）→ 在星空中航行的人 → 宇航员。astronomy（天文学）= astro（星）+ nom（法则）+ -y → 研究星星运行规律的学问 → 天文学。`,
+    description: `astro/aster 代表「星星」。astronaut（宇航员）= astro（星）+ naut（航行者）→ 在星空中航行的人 → 宇航员。astronomy（天文学）= astro（星）+ nom（法则）+ -y → 研究星星运行规律的学问 → 天文学。`,
     examples: [
       {
         word: 'astronomy',
@@ -4197,7 +4197,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '光',
     meaningEn: 'light',
-    description: `photo 表示「光」。photograph（照片）= photo（光）+ graph（画）→ 用光画出来的图 → 照片。photosynthesis（光合作用）= photo（光）+ synthesis（合成）→ 利用光合成 → 光合作用。`,
+    description: `photo 代表「光」。photograph（照片）= photo（光）+ graph（画）→ 用光画出来的图 → 照片。photosynthesis（光合作用）= photo（光）+ synthesis（合成）→ 利用光合成 → 光合作用。`,
     examples: [
       {
         word: 'photograph',
@@ -4237,7 +4237,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '测量',
     meaningEn: 'measure',
-    description: `meter/metr 表示「测量」。thermometer（温度计）= thermo（热）+ meter（测量）→ 测量温度的工具。diameter（直径）= dia-（穿过）+ meter（测量）→ 穿过圆心测量的距离 → 直径。`,
+    description: `meter/metr 代表「测量」。thermometer（温度计）= thermo（热）+ meter（测量）→ 测量温度的工具。diameter（直径）= dia-（穿过）+ meter（测量）→ 穿过圆心测量的距离 → 直径。`,
     examples: [
       {
         word: 'thermometer',
@@ -4277,7 +4277,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '手',
     meaningEn: 'hand',
-    description: `man/manu 表示「手」。manual（手册）= manu（手）+ -al（的）→ 手边的书 → 手册。manufacture（制造）= manu（手）+ fact（做）+ -ure → 用手做 → 制造。manicure（修指甲）= mani（手）+ cure（护理）→ 护理手 → 修指甲。`,
+    description: `man/manu 代表「手」。manual（手册）= manu（手）+ -al（的）→ 手边的书 → 手册。manufacture（制造）= manu（手）+ fact（做）+ -ure → 用手做 → 制造。manicure（修指甲）= mani（手）+ cure（护理）→ 护理手 → 修指甲。`,
     examples: [
       {
         word: 'manual',
@@ -4317,7 +4317,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin/Greek',
     meaning: '脚',
     meaningEn: 'foot',
-    description: `ped/pod 表示「脚」。pedestrian（行人）= ped（脚）+ -estrian → 用脚走的人 → 行人。pedal（踏板）= ped（脚）+ -al → 用脚踩的东西 → 踏板。tripod（三脚架）= tri-（三）+ pod（脚）→ 三只脚的架子。注意：ped 来自拉丁语，pod 来自希腊语。`,
+    description: `ped/pod 代表「脚」。pedestrian（行人）= ped（脚）+ -estrian → 用脚走的人 → 行人。pedal（踏板）= ped（脚）+ -al → 用脚踩的东西 → 踏板。tripod（三脚架）= tri-（三）+ pod（脚）→ 三只脚的架子。注意：ped 来自拉丁语，pod 来自希腊语。`,
     examples: [
       {
         word: 'pedestrian',
@@ -4357,7 +4357,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '头',
     meaningEn: 'head',
-    description: `cap/capit 表示「头」。captain（队长）= capit（头）+ -ain → 头头 → 队长。capital（首都）= capit（头）+ -al → 头等重要的城市 → 首都。decapitate（斩首）= de-（去除）+ capit（头）+ -ate → 去掉头 → 斩首。`,
+    description: `cap/capit 代表「头」。captain（队长）= capit（头）+ -ain → 头头 → 队长。capital（首都）= capit（头）+ -al → 头等重要的城市 → 首都。decapitate（斩首）= de-（去除）+ capit（头）+ -ate → 去掉头 → 斩首。`,
     examples: [
       {
         word: 'capital',
@@ -4397,7 +4397,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '身体',
     meaningEn: 'body',
-    description: `corp/corpor 表示「身体、团体」。corporation（公司）= corpor（团体）+ -ation → 团体组织 → 公司。corpse（尸体）= corp（身体）+ -se → 死亡的身体 → 尸体。incorporate（合并）= in-（进入）+ corpor（团体）+ -ate → 合并成一个团体。`,
+    description: `corp/corpor 代表「身体、团体」。corporation（公司）= corpor（团体）+ -ation → 团体组织 → 公司。corpse（尸体）= corp（身体）+ -se → 死亡的身体 → 尸体。incorporate（合并）= in-（进入）+ corpor（团体）+ -ate → 合并成一个团体。`,
     examples: [
       {
         word: 'corporation',
@@ -4437,7 +4437,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '心',
     meaningEn: 'heart',
-    description: `cord/cor 表示「心」。cordial（热情的）= cord（心）+ -ial（的）→ 发自内心的 → 热情的。record（记录）= re-（回）+ cord（心）→ 放回心里记住 → 记录。courage（勇气）= cor（心）+ -age → 心的力量 → 勇气。`,
+    description: `cord/cor 代表「心」。cordial（热情的）= cord（心）+ -ial（的）→ 发自内心的 → 热情的。record（记录）= re-（回）+ cord（心）→ 放回心里记住 → 记录。courage（勇气）= cor（心）+ -age → 心的力量 → 勇气。`,
     examples: [
       {
         word: 'record',
@@ -4477,7 +4477,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '牙齿',
     meaningEn: 'tooth',
-    description: `dent/dont 表示「牙齿」。dentist（牙医）= dent（牙齿）+ -ist（人）→ 治牙齿的人 → 牙医。dental（牙科的）= dent（牙齿）+ -al（的）→ 关于牙齿的。orthodontist（正畸医生）= ortho-（正）+ dont（牙齿）+ -ist → 矫正牙齿的医生。`,
+    description: `dent/dont 代表「牙齿」。dentist（牙医）= dent（牙齿）+ -ist（人）→ 治牙齿的人 → 牙医。dental（牙科的）= dent（牙齿）+ -al（的）→ 关于牙齿的。orthodontist（正畸医生）= ortho-（正）+ dont（牙齿）+ -ist → 矫正牙齿的医生。`,
     examples: [
       {
         word: 'dentist',
@@ -4517,7 +4517,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '脸，面',
     meaningEn: 'face',
-    description: `fac/face 表示「脸、面」。surface（表面）= sur-（在上）+ face（面）→ 在上面的一层 → 表面。interface（界面）= inter-（之间）+ face（面）→ 两者之间的接触面 → 界面。deface（损坏外观）= de-（去除）+ face（面）→ 破坏表面 → 损坏外观。`,
+    description: `fac/face 代表「脸、面」。surface（表面）= sur-（在上）+ face（面）→ 在上面的一层 → 表面。interface（界面）= inter-（之间）+ face（面）→ 两者之间的接触面 → 界面。deface（损坏外观）= de-（去除）+ face（面）→ 破坏表面 → 损坏外观。`,
     examples: [
       {
         word: 'surface',
@@ -4557,7 +4557,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '群体',
     meaningEn: 'flock, gather',
-    description: `greg 表示「群体、聚集」。congregation（集会）= con-（一起）+ greg（群）+ -ation → 聚成一群 → 集会。segregate（隔离）= se-（分开）+ greg（群）+ -ate → 从群体中分开 → 隔离。aggregate（总计）= ag-（朝向）+ greg（群）+ -ate → 聚到一起 → 总计。`,
+    description: `greg 代表「群体、聚集」。congregation（集会）= con-（一起）+ greg（群）+ -ation → 聚成一群 → 集会。segregate（隔离）= se-（分开）+ greg（群）+ -ate → 从群体中分开 → 隔离。aggregate（总计）= ag-（朝向）+ greg（群）+ -ate → 聚到一起 → 总计。`,
     examples: [
       {
         word: 'gregarious',
@@ -4597,7 +4597,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拿住，居住',
     meaningEn: 'have, dwell',
-    description: `habit/hibit 表示「拿住、居住」。inhabit（居住）= in-（里面）+ habit（住）→ 住在里面 → 居住。exhibit（展览）= ex-（向外）+ hibit（拿）→ 拿出来给人看 → 展览。prohibit（禁止）= pro-（在前）+ hibit（拿）→ 提前拿住阻止 → 禁止。`,
+    description: `habit/hibit 代表「拿住、居住」。inhabit（居住）= in-（里面）+ habit（住）→ 住在里面 → 居住。exhibit（展览）= ex-（向外）+ hibit（拿）→ 拿出来给人看 → 展览。prohibit（禁止）= pro-（在前）+ hibit（拿）→ 提前拿住阻止 → 禁止。`,
     examples: [
       {
         word: 'habit',
@@ -4637,7 +4637,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '读，选',
     meaningEn: 'read, choose',
-    description: `leg/lect 表示「读、选、收集」。legend（传奇）= leg（读）+ -end → 值得阅读的故事 → 传奇。select（选择）= se-（分开）+ lect（选）→ 分开挑选 → 选择。collect（收集）= col-（一起）+ lect（收集）→ 收集到一起。`,
+    description: `leg/lect 代表「读、选、收集」。legend（传奇）= leg（读）+ -end → 值得阅读的故事 → 传奇。select（选择）= se-（分开）+ lect（选）→ 分开挑选 → 选择。collect（收集）= col-（一起）+ lect（收集）→ 收集到一起。`,
     examples: [
       {
         word: 'legible',
@@ -4677,7 +4677,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '自由',
     meaningEn: 'free',
-    description: `liber 表示「自由」。liberal（自由的）= liber（自由）+ -al（的）→ 自由的。liberty（自由）= liber（自由）+ -ty → 自由状态。liberate（解放）= liber（自由）+ -ate（使）→ 使自由 → 解放。`,
+    description: `liber 代表「自由」。liberal（自由的）= liber（自由）+ -al（的）→ 自由的。liberty（自由）= liber（自由）+ -ty → 自由状态。liberate（解放）= liber（自由）+ -ate（使）→ 使自由 → 解放。`,
     examples: [
       {
         word: 'liberty',
@@ -4717,7 +4717,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '语言，舌头',
     meaningEn: 'language, tongue',
-    description: `lingu/langu 表示「语言、舌头」。language（语言）直接来自 langu。bilingual（双语的）= bi-（双）+ lingu（语言）+ -al → 会两种语言的。linguistics（语言学）= lingu（语言）+ -istics（学）→ 研究语言的学问。`,
+    description: `lingu/langu 代表「语言、舌头」。language（语言）直接来自 langu。bilingual（双语的）= bi-（双）+ lingu（语言）+ -al → 会两种语言的。linguistics（语言学）= lingu（语言）+ -istics（学）→ 研究语言的学问。`,
     examples: [
       {
         word: 'language',
@@ -4757,7 +4757,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '文字，字母',
     meaningEn: 'letter',
-    description: `liter 表示「文字、字母」。literature（文学）= liter（文字）+ -ature → 文字作品 → 文学。literal（字面的）= liter（字母）+ -al（的）→ 按字母理解的 → 字面的。literate（有文化的）= liter（文字）+ -ate（的）→ 认识字的 → 有文化的。`,
+    description: `liter 代表「文字、字母」。literature（文学）= liter（文字）+ -ature → 文字作品 → 文学。literal（字面的）= liter（字母）+ -al（的）→ 按字母理解的 → 字面的。literate（有文化的）= liter（文字）+ -ate（的）→ 认识字的 → 有文化的。`,
     examples: [
       {
         word: 'literature',
@@ -4797,7 +4797,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '大',
     meaningEn: 'great, large',
-    description: `magn/maj/max 表示「大」。magnificent（壮丽的）= magn（大）+ -ificent（的）→ 很大很华丽的 → 壮丽的。major（主要的）= maj（大）+ -or → 更大的 → 主要的。maximum（最大值）= max（大）+ -imum（最）→ 最大的。`,
+    description: `magn/maj/max 代表「大」。magnificent（壮丽的）= magn（大）+ -ificent（的）→ 很大很华丽的 → 壮丽的。major（主要的）= maj（大）+ -or → 更大的 → 主要的。maximum（最大值）= max（大）+ -imum（最）→ 最大的。`,
     examples: [
       {
         word: 'magnificent',
@@ -4837,7 +4837,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '小',
     meaningEn: 'small',
-    description: `min/mini 表示「小」。minimum（最小值）= min（小）+ -imum（最）→ 最小的。minimize（最小化）= min（小）+ -imize（使）→ 使最小化。miniature（微型的）= mini（小）+ -ature → 小型的东西 → 微型的。`,
+    description: `min/mini 代表「小」。minimum（最小值）= min（小）+ -imum（最）→ 最小的。minimize（最小化）= min（小）+ -imize（使）→ 使最小化。miniature（微型的）= mini（小）+ -ature → 小型的东西 → 微型的。`,
     examples: [
       {
         word: 'minimum',
@@ -4877,7 +4877,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '新',
     meaningEn: 'new',
-    description: `nov 表示「新」。novel（小说）= nov（新）+ -el → 新奇的故事 → 小说。innovate（创新）= in-（进入）+ nov（新）+ -ate → 引入新东西 → 创新。renovate（翻新）= re-（再）+ nov（新）+ -ate → 重新变新 → 翻新。`,
+    description: `nov 代表「新」。novel（小说）= nov（新）+ -el → 新奇的故事 → 小说。innovate（创新）= in-（进入）+ nov（新）+ -ate → 引入新东西 → 创新。renovate（翻新）= re-（再）+ nov（新）+ -ate → 重新变新 → 翻新。`,
     examples: [
       {
         word: 'novel',
@@ -4917,7 +4917,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '数',
     meaningEn: 'number',
-    description: `number/numer 表示「数」。numeral（数字）= numer（数）+ -al → 数的符号 → 数字。numerous（许多的）= numer（数）+ -ous（的）→ 数量多的 → 许多的。enumerate（列举）= e-（向外）+ numer（数）+ -ate → 数出来 → 列举。`,
+    description: `number/numer 代表「数」。numeral（数字）= numer（数）+ -al → 数的符号 → 数字。numerous（许多的）= numer（数）+ -ous（的）→ 数量多的 → 许多的。enumerate（列举）= e-（向外）+ numer（数）+ -ate → 数出来 → 列举。`,
     examples: [
       {
         word: 'numerous',
@@ -4957,7 +4957,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '顺序',
     meaningEn: 'order',
-    description: `ord/ordin 表示「顺序」。order（顺序）直接来自 ord。ordinary（普通的）= ordin（顺序）+ -ary（的）→ 按常规顺序的 → 普通的。coordinate（协调）= co-（一起）+ ordin（顺序）+ -ate → 按相同顺序一起 → 协调。`,
+    description: `ord/ordin 代表「顺序」。order（顺序）直接来自 ord。ordinary（普通的）= ordin（顺序）+ -ary（的）→ 按常规顺序的 → 普通的。coordinate（协调）= co-（一起）+ ordin（顺序）+ -ate → 按相同顺序一起 → 协调。`,
     examples: [
       {
         word: 'order',
@@ -4997,7 +4997,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '相等',
     meaningEn: 'equal',
-    description: `par/peer 表示「相等」。compare（比较）= com-（一起）+ par（相等）+ -e → 放在一起看是否相等 → 比较。peer（同辈）= peer（相等）→ 地位相等的人 → 同辈。parity（平等）= par（相等）+ -ity → 相等状态 → 平等。`,
+    description: `par/peer 代表「相等」。compare（比较）= com-（一起）+ par（相等）+ -e → 放在一起看是否相等 → 比较。peer（同辈）= peer（相等）→ 地位相等的人 → 同辈。parity（平等）= par（相等）+ -ity → 相等状态 → 平等。`,
     examples: [
       {
         word: 'compare',
@@ -5037,7 +5037,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '部分',
     meaningEn: 'part',
-    description: `part/port 表示「部分」。part（部分）直接使用。participate（参与）= part（部分）+ -icip（拿）+ -ate → 拿一部分 → 参与。portion（一份）= port（部分）+ -ion → 分出的一部分 → 一份。`,
+    description: `part/port 代表「部分」。part（部分）直接使用。participate（参与）= part（部分）+ -icip（拿）+ -ate → 拿一部分 → 参与。portion（一份）= port（部分）+ -ion → 分出的一部分 → 一份。`,
     examples: [
       {
         word: 'partition',
@@ -5077,7 +5077,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '通过，走',
     meaningEn: 'pass',
-    description: `pass 表示「通过、走」。passage（通道）= pass（通过）+ -age → 通过的地方 → 通道。passport（护照）= pass（通过）+ port（港口）→ 通过港口的文件 → 护照。surpass（超越）= sur-（超过）+ pass（走）→ 走过前面 → 超越。`,
+    description: `pass 代表「通过、走」。passage（通道）= pass（通过）+ -age → 通过的地方 → 通道。passport（护照）= pass（通过）+ port（港口）→ 通过港口的文件 → 护照。surpass（超越）= sur-（超过）+ pass（走）→ 走过前面 → 超越。`,
     examples: [
       {
         word: 'passage',
@@ -5117,7 +5117,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '寻求，问',
     meaningEn: 'seek, ask',
-    description: `quest/quir/quis 表示「寻求、问」。question（问题）= quest（问）+ -ion → 提出来问的事情 → 问题。require（需要）= re-（回）+ quir（寻求）+ -e → 寻求得到 → 需要。acquire（获得）= ac-（朝向）+ quir（寻求）+ -e → 寻求到 → 获得。`,
+    description: `quest/quir/quis 代表「寻求、问」。question（问题）= quest（问）+ -ion → 提出来问的事情 → 问题。require（需要）= re-（回）+ quir（寻求）+ -e → 寻求得到 → 需要。acquire（获得）= ac-（朝向）+ quir（寻求）+ -e → 寻求到 → 获得。`,
     examples: [
       {
         word: 'question',
@@ -5157,7 +5157,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '统治，直',
     meaningEn: 'rule, straight',
-    description: `reg/rect 表示「统治、直」。region（地区）= reg（统治）+ -ion → 统治的区域 → 地区。correct（正确的）= cor-（完全）+ rect（直）→ 完全笔直的 → 正确的。direct（直接的）= di-（分开）+ rect（直）→ 笔直分开 → 直接的。`,
+    description: `reg/rect 代表「统治、直」。region（地区）= reg（统治）+ -ion → 统治的区域 → 地区。correct（正确的）= cor-（完全）+ rect（直）→ 完全笔直的 → 正确的。direct（直接的）= di-（分开）+ rect（直）→ 笔直分开 → 直接的。`,
     examples: [
       {
         word: 'regulate',
@@ -5197,7 +5197,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '跳',
     meaningEn: 'jump, leap',
-    description: `sal/sult 表示「跳」。assault（攻击）= as-（朝向）+ sault（跳）→ 跳向敌人 → 攻击。result（结果）= re-（回）+ sult（跳）→ 跳回来的东西 → 结果。insult（侮辱）= in-（进入）+ sult（跳）→ 跳到脸上 → 侮辱。`,
+    description: `sal/sult 代表「跳」。assault（攻击）= as-（朝向）+ sault（跳）→ 跳向敌人 → 攻击。result（结果）= re-（回）+ sult（跳）→ 跳回来的东西 → 结果。insult（侮辱）= in-（进入）+ sult（跳）→ 跳到脸上 → 侮辱。`,
     examples: [
       {
         word: 'salute',
@@ -5237,7 +5237,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '服务，保持',
     meaningEn: 'serve, keep',
-    description: `serv 表示「服务、保持」。service（服务）= serv（服务）+ -ice → 服务。preserve（保存）= pre-（提前）+ serv（保持）+ -e → 提前保持住 → 保存。deserve（值得）= de-（完全）+ serv（服务）→ 完全为之服务 → 值得。`,
+    description: `serv 代表「服务、保持」。service（服务）= serv（服务）+ -ice → 服务。preserve（保存）= pre-（提前）+ serv（保持）+ -e → 提前保持住 → 保存。deserve（值得）= de-（完全）+ serv（服务）→ 完全为之服务 → 值得。`,
     examples: [
       {
         word: 'serve',
@@ -5277,7 +5277,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '记号，信号',
     meaningEn: 'mark, sign',
-    description: `sign 表示「记号、信号」。signal（信号）= sign（记号）+ -al → 标记 → 信号。significant（重要的）= sign（记号）+ -ificant（的）→ 有标志性的 → 重要的。assign（分配）= as-（朝向）+ sign（标记）→ 做标记分配 → 分配。`,
+    description: `sign 代表「记号、信号」。signal（信号）= sign（记号）+ -al → 标记 → 信号。significant（重要的）= sign（记号）+ -ificant（的）→ 有标志性的 → 重要的。assign（分配）= as-（朝向）+ sign（标记）→ 做标记分配 → 分配。`,
     examples: [
       {
         word: 'signal',
@@ -5317,7 +5317,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '相似',
     meaningEn: 'like, similar',
-    description: `simil/sembl 表示「相似」。similar（相似的）= simil（相似）+ -ar（的）→ 相似的。resemble（相像）= re-（回）+ sembl（相似）+ -e → 看起来相似 → 相像。assemble（集合）= as-（朝向）+ sembl（一起）+ -e → 聚到一起 → 集合。`,
+    description: `simil/sembl 代表「相似」。similar（相似的）= simil（相似）+ -ar（的）→ 相似的。resemble（相像）= re-（回）+ sembl（相似）+ -e → 看起来相似 → 相像。assemble（集合）= as-（朝向）+ sembl（一起）+ -e → 聚到一起 → 集合。`,
     examples: [
       {
         word: 'similar',
@@ -5357,7 +5357,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '单独',
     meaningEn: 'alone',
-    description: `sol/soli 表示「单独」。sole（唯一的）= sol（单独）+ -e → 单独一个 → 唯一的。solitary（孤独的）= soli（单独）+ -ary（的）→ 单独的 → 孤独的。desolate（荒凉的）= de-（完全）+ sol（单独）+ -ate → 完全单独 → 荒凉的。`,
+    description: `sol/soli 代表「单独」。sole（唯一的）= sol（单独）+ -e → 单独一个 → 唯一的。solitary（孤独的）= soli（单独）+ -ary（的）→ 单独的 → 孤独的。desolate（荒凉的）= de-（完全）+ sol（单独）+ -ate → 完全单独 → 荒凉的。`,
     examples: [
       {
         word: 'solo',
@@ -5397,7 +5397,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '呼吸，精神',
     meaningEn: 'breathe, spirit',
-    description: `spir 表示「呼吸、精神」。spirit（精神）= spir（呼吸）+ -it → 呼吸 → 精神（古人认为呼吸是生命和精神的象征）。inspire（激励）= in-（进入）+ spir（呼吸）+ -e → 吹气进去 → 激励。expire（到期）= ex-（向外）+ spir（呼吸）+ -e → 呼出最后一口气 → 到期。`,
+    description: `spir 代表「呼吸、精神」。spirit（精神）= spir（呼吸）+ -it → 呼吸 → 精神（古人认为呼吸是生命和精神的象征）。inspire（激励）= in-（进入）+ spir（呼吸）+ -e → 吹气进去 → 激励。expire（到期）= ex-（向外）+ spir（呼吸）+ -e → 呼出最后一口气 → 到期。`,
     examples: [
       {
         word: 'spirit',
@@ -5437,7 +5437,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '触摸',
     meaningEn: 'touch',
-    description: `tang/tact/ting 表示「触摸」。tangible（有形的）= tang（触摸）+ -ible（能...的）→ 能触摸到的 → 有形的。contact（接触）= con-（一起）+ tact（触摸）→ 一起触摸 → 接触。intact（完整的）= in-（不）+ tact（触摸）→ 没被触碰过的 → 完整的。`,
+    description: `tang/tact/ting 代表「触摸」。tangible（有形的）= tang（触摸）+ -ible（能...的）→ 能触摸到的 → 有形的。contact（接触）= con-（一起）+ tact（触摸）→ 一起触摸 → 接触。intact（完整的）= in-（不）+ tact（触摸）→ 没被触碰过的 → 完整的。`,
     examples: [
       {
         word: 'tangible',
@@ -5477,7 +5477,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '可以...的',
     meaningEn: 'capable of',
-    description: `-able/-ible 是最常见的形容词后缀，表示「能...的、可...的」。readable = read（读）+ -able → 可读的。visible = vis（看）+ -ible → 可见的。注意：-able 用于完整单词后，-ible 多用于词根后。`,
+    description: `-able/-ible 是最常见的形容词后缀，代表「能...的、可...的」。readable = read（读）+ -able → 可读的。visible = vis（看）+ -ible → 可见的。注意：-able 用于完整单词后，-ible 多用于词根后。`,
     examples: [
       {
         word: 'readable',
@@ -5517,7 +5517,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成形容词',
     meaningEn: 'of, relating to',
-    description: `-al/-ial 是形容词后缀，表示「...的、关于...的」。national = nation（国家）+ -al → 国家的。social = soci（社会）+ -al → 社会的。encial = essence（本质）+ -ial → 本质的。`,
+    description: `-al/-ial 是形容词后缀，代表「...的、关于...的」。national = nation（国家）+ -al → 国家的。social = soci（社会）+ -al → 社会的。encial = essence（本质）+ -ial → 本质的。`,
     examples: [
       {
         word: 'natural',
@@ -5557,7 +5557,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成名词',
     meaningEn: 'state, quality',
-    description: `-ance/-ence 是名词后缀，表示「状态、性质、行为」。importance = import（重要）+ -ance → 重要性。confidence = confid（信任）+ -ence → 信心。-ance 和 -ence 的区别主要看前面的词根。`,
+    description: `-ance/-ence 是名词后缀，代表「状态、性质、行为」。importance = import（重要）+ -ance → 重要性。confidence = confid（信任）+ -ence → 信心。-ance 和 -ence 的区别主要看前面的词根。`,
     examples: [
       {
         word: 'importance',
@@ -5637,7 +5637,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成动词',
     meaningEn: 'make, do',
-    description: `-ate 是动词后缀，表示「使、做」。activate = activ（活）+ -ate → 使活跃。educate = educ（引出）+ -ate → 引出知识 → 教育。也可作形容词/名词后缀。`,
+    description: `-ate 是动词后缀，代表「使、做」。activate = activ（活）+ -ate → 使活跃。educate = educ（引出）+ -ate → 引出知识 → 教育。也可作形容词/名词后缀。`,
     examples: [
       {
         word: 'create',
@@ -5677,7 +5677,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '充满...的',
     meaningEn: 'full of',
-    description: `-ful 是形容词后缀，表示「充满...的」。beautiful = beauty（美）+ -ful → 充满美的 → 美丽的。careful = care（关心）+ -ful → 充满关心的 → 小心的。注意：只有一个 l。`,
+    description: `-ful 是形容词后缀，代表「充满...的」。beautiful = beauty（美）+ -ful → 充满美的 → 美丽的。careful = care（关心）+ -ful → 充满关心的 → 小心的。注意：只有一个 l。`,
     examples: [
       {
         word: 'beautiful',
@@ -5717,7 +5717,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成动词',
     meaningEn: 'make',
-    description: `-ify/-fy 是动词后缀，表示「使、做」。simplify = simpl（简单）+ -ify → 使简单化。clarify = clar（清楚）+ -ify → 使清楚 → 澄清。satisfy = satis（足够）+ -fy → 使满足。`,
+    description: `-ify/-fy 是动词后缀，代表「使、做」。simplify = simpl（简单）+ -ify → 使简单化。clarify = clar（清楚）+ -ify → 使清楚 → 澄清。satisfy = satis（足够）+ -fy → 使满足。`,
     examples: [
       {
         word: 'simplify',
@@ -5797,7 +5797,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成名词',
     meaningEn: 'act, state, result',
-    description: `-ion/-tion/-ation 是名词后缀，表示「行为、状态、结果」。action、education、creation。-tion 是最常见的形式，-ation 用于 -ate 动词后。`,
+    description: `-ion/-tion/-ation 是名词后缀，代表「行为、状态、结果」。action、education、creation。-tion 是最常见的形式，-ation 用于 -ate 动词后。`,
     examples: [
       {
         word: 'action',
@@ -5837,7 +5837,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek/Latin',
     meaning: '主义 / 思想',
     meaningEn: 'doctrine, practice, state',
-    description: `-ism 是名词后缀，表示「主义、行为、状态、学说」。capitalism（资本主义）、heroism（英雄主义）、tourism（旅游业）。常见于表示信仰、理论、制度的词。`,
+    description: `-ism 是名词后缀，代表「主义、行为、状态、学说」。capitalism（资本主义）、heroism（英雄主义）、tourism（旅游业）。常见于表示信仰、理论、制度的词。`,
     examples: [
       {
         word: 'socialism',
@@ -5877,7 +5877,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek/Latin',
     meaning: '做这事的人',
     meaningEn: 'person who',
-    description: `-ist 是名词后缀，表示「...的人、...家」。artist（艺术家）、scientist（科学家）、pianist（钢琴家）。通常和 -ism 配对使用。`,
+    description: `-ist 是名词后缀，代表「...的人、...家」。artist（艺术家）、scientist（科学家）、pianist（钢琴家）。通常和 -ism 配对使用。`,
     examples: [
       {
         word: 'artist',
@@ -5917,7 +5917,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成名词',
     meaningEn: 'quality, state',
-    description: `-ity/-ty 是名词后缀，表示「性质、状态」。ability = abl（能）+ -ity → 能力。quality = qual（质量）+ -ity → 质量。safety = safe（安全）+ -ty → 安全。`,
+    description: `-ity/-ty 是名词后缀，代表「性质、状态」。ability = abl（能）+ -ity → 能力。quality = qual（质量）+ -ity → 质量。safety = safe（安全）+ -ty → 安全。`,
     examples: [
       {
         word: 'ability',
@@ -5957,7 +5957,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成形容词',
     meaningEn: 'having the nature of',
-    description: `-ive 是形容词后缀，表示「...的、有...性质的」。active（积极的）、creative（创造性的）、effective（有效的）。也可作名词（detective侦探）。`,
+    description: `-ive 是形容词后缀，代表「...的、有...性质的」。active（积极的）、creative（创造性的）、effective（有效的）。也可作名词（detective侦探）。`,
     examples: [
       {
         word: 'active',
@@ -5986,7 +5986,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'positive 的意思是什么？',
-    options: ["快速的", "有效的", "积极的", "创造性的"],
+    options: ["下方", "有效的", "积极的", "创造性的"],
     correctAnswer: 2
   }
   },
@@ -5997,7 +5997,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek/Latin',
     meaning: '变成动词',
     meaningEn: 'make, cause to be',
-    description: `-ize/-ise 是动词后缀，表示「使成为、变成」。realize = real（真实）+ -ize → 使变真实 → 实现。organize = organ（器官/结构）+ -ize → 使有组织 → 组织。`,
+    description: `-ize/-ise 是动词后缀，代表「使成为、变成」。realize = real（真实）+ -ize → 使变真实 → 实现。organize = organ（器官/结构）+ -ize → 使有组织 → 组织。`,
     examples: [
       {
         word: 'realize',
@@ -6037,7 +6037,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '没有...的',
     meaningEn: 'without',
-    description: `-less 是形容词后缀，表示「没有...的、缺乏...的」。homeless = home（家）+ -less → 没有家的。hopeless = hope（希望）+ -less → 没有希望的。和 -ful 相反。`,
+    description: `-less 是形容词后缀，代表「没有...的、缺乏...的」。homeless = home（家）+ -less → 没有家的。hopeless = hope（希望）+ -less → 没有希望的。和 -ful 相反。`,
     examples: [
       {
         word: 'hopeless',
@@ -6117,7 +6117,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成名词',
     meaningEn: 'act, result, means',
-    description: `-ment 是名词后缀，表示「行为、结果、手段」。movement = move（移动）+ -ment → 运动。development = develop（发展）+ -ment → 发展的过程或结果。`,
+    description: `-ment 是名词后缀，代表「行为、结果、手段」。movement = move（移动）+ -ment → 运动。development = develop（发展）+ -ment → 发展的过程或结果。`,
     examples: [
       {
         word: 'movement',
@@ -6157,7 +6157,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '状态，性质',
     meaningEn: 'state, quality',
-    description: `-ness 是名词后缀，表示「状态、性质」。happiness = happy（快乐）+ -ness → 快乐的状态。kindness = kind（善良）+ -ness → 善良。最简单的名词化后缀之一。`,
+    description: `-ness 是名词后缀，代表「状态、性质」。happiness = happy（快乐）+ -ness → 快乐的状态。kindness = kind（善良）+ -ness → 善良。最简单的名词化后缀之一。`,
     examples: [
       {
         word: 'happiness',
@@ -6197,7 +6197,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成形容词',
     meaningEn: 'full of, having',
-    description: `-ous/-ious 是形容词后缀，表示「充满...的、有...性质的」。famous（著名的）、dangerous（危险的）、curious（好奇的）。-ious 常用于词根或以 i 结尾的词后。`,
+    description: `-ous/-ious 是形容词后缀，代表「充满...的、有...性质的」。famous（著名的）、dangerous（危险的）、curious（好奇的）。-ious 常用于词根或以 i 结尾的词后。`,
     examples: [
       {
         word: 'famous',
@@ -6237,7 +6237,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成名词',
     meaningEn: 'act, result, state',
-    description: `-ure 是名词后缀，表示「行为、结果、状态」。pleasure（快乐）、pressure（压力）、failure（失败）。常用于拉丁词根后。`,
+    description: `-ure 是名词后缀，代表「行为、结果、状态」。pleasure（快乐）、pressure（压力）、failure（失败）。常用于拉丁词根后。`,
     examples: [
       {
         word: 'failure',
@@ -6357,7 +6357,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '给',
     meaningEn: 'give',
-    description: `don/dot 表示「给予」。donate（捐赠）= don（给）+ -ate → 给出去 → 捐赠。pardon（原谅）= par-（完全）+ don（给）→ 完全给予（宽恕）→ 原谅。antidote（解毒剂）= anti-（对抗）+ dot（给）→ 给出对抗物 → 解毒剂。记住：gift 和 give 都与 don 同源。`,
+    description: `don/dot 代表「给予」。donate（捐赠）= don（给）+ -ate → 给出去 → 捐赠。pardon（原谅）= par-（完全）+ don（给）→ 完全给予（宽恕）→ 原谅。antidote（解毒剂）= anti-（对抗）+ dot（给）→ 给出对抗物 → 解毒剂。记住：gift 和 give 都与 don 同源。`,
     examples: [
       {
         word: 'donate',
@@ -6397,7 +6397,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '相等',
     meaningEn: 'equal',
-    description: `equ 表示「相等」。equal（相等的）、equation（方程式）= equ（相等）+ -ation → 相等的式子。adequate（足够的）= ad-（向）+ equ（相等）+ -ate → 达到相等水平 → 足够的。equity（公平）= equ（相等）+ -ity → 相等的状态 → 公平。`,
+    description: `equ 代表「相等」。equal（相等的）、equation（方程式）= equ（相等）+ -ation → 相等的式子。adequate（足够的）= ad-（向）+ equ（相等）+ -ate → 达到相等水平 → 足够的。equity（公平）= equ（相等）+ -ity → 相等的状态 → 公平。`,
     examples: [
       {
         word: 'equal',
@@ -6437,7 +6437,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '流',
     meaningEn: 'flow',
-    description: `flu/flux 表示「流动」。fluid（流体）、fluent（流利的）= flu（流）+ -ent → 流动的 → 流利的。influence（影响）= in-（进入）+ flu（流）+ -ence → 流进来 → 影响。influx（涌入）= in-（进入）+ flux（流）→ 流入 → 涌入。记住：flush（冲洗）也来自这个词根。`,
+    description: `flu/flux 代表「流动」。fluid（流体）、fluent（流利的）= flu（流）+ -ent → 流动的 → 流利的。influence（影响）= in-（进入）+ flu（流）+ -ence → 流进来 → 影响。influx（涌入）= in-（进入）+ flux（流）→ 流入 → 涌入。记住：flush（冲洗）也来自这个词根。`,
     examples: [
       {
         word: 'fluid',
@@ -6477,7 +6477,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '基础',
     meaningEn: 'base',
-    description: `found/fund 表示「基础、底部」。foundation（基础）= found（基）+ -ation → 打地基。profound（深刻的）= pro-（向前）+ found（底）→ 深到底部的 → 深刻的。fundamental（基本的）= fund（基）+ -amental → 基础的。`,
+    description: `found/fund 代表「基础、底部」。foundation（基础）= found（基）+ -ation → 打地基。profound（深刻的）= pro-（向前）+ found（底）→ 深到底部的 → 深刻的。fundamental（基本的）= fund（基）+ -amental → 基础的。`,
     examples: [
       {
         word: 'found',
@@ -6517,7 +6517,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '感激',
     meaningEn: 'thanks',
-    description: `grat 表示「感激、令人愉快」。grateful（感激的）、gratitude（感恩）= grat（感激）+ -itude。congratulate（祝贺）= con-（一起）+ grat（高兴）+ -ulate → 一起高兴 → 祝贺。ingratiate（讨好）= in-（使）+ grat（令人愉快）+ -iate → 使人高兴 → 讨好。`,
+    description: `grat 代表「感激、令人愉快」。grateful（感激的）、gratitude（感恩）= grat（感激）+ -itude。congratulate（祝贺）= con-（一起）+ grat（高兴）+ -ulate → 一起高兴 → 祝贺。ingratiate（讨好）= in-（使）+ grat（令人愉快）+ -iate → 使人高兴 → 讨好。`,
     examples: [
       {
         word: 'grateful',
@@ -6557,7 +6557,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '粘',
     meaningEn: 'stick',
-    description: `her/hes 表示「粘附、坚持」。adhere（坚持）= ad-（向）+ here（粘）→ 粘着 → 坚持。coherent（连贯的）= co-（一起）+ her（粘）+ -ent → 粘在一起的 → 连贯的。hesitate（犹豫）= hes（粘）+ -itate → 粘住不动 → 犹豫。`,
+    description: `her/hes 代表「粘附、坚持」。adhere（坚持）= ad-（向）+ here（粘）→ 粘着 → 坚持。coherent（连贯的）= co-（一起）+ her（粘）+ -ent → 粘在一起的 → 连贯的。hesitate（犹豫）= hes（粘）+ -itate → 粘住不动 → 犹豫。`,
     examples: [
       {
         word: 'adhere',
@@ -6597,7 +6597,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '判断',
     meaningEn: 'judge',
-    description: `jud/judic 表示「判断」。judge（法官）、prejudice（偏见）= pre-（提前）+ judice（判断）→ 提前判断 → 偏见。judicial（司法的）= judic（判断）+ -ial → 判断的 → 司法的。记住：justice（正义）也来自这个词根家族。`,
+    description: `jud/judic 代表「判断」。judge（法官）、prejudice（偏见）= pre-（提前）+ judice（判断）→ 提前判断 → 偏见。judicial（司法的）= judic（判断）+ -ial → 判断的 → 司法的。记住：justice（正义）也来自这个词根家族。`,
     examples: [
       {
         word: 'judge',
@@ -6637,7 +6637,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '法律,发誓',
     meaningEn: 'law, swear',
-    description: `jur/jus 表示「法律、发誓」。jury（陪审团）、justice（正义）= jus（法律）+ -tice。injure（伤害）= in-（违反）+ jur（法律）→ 违反正义 → 伤害。perjury（伪证）= per-（彻底）+ jur（发誓）+ -y → 违背誓言 → 伪证。`,
+    description: `jur/jus 代表「法律、发誓」。jury（陪审团）、justice（正义）= jus（法律）+ -tice。injure（伤害）= in-（违反）+ jur（法律）→ 违反正义 → 伤害。perjury（伪证）= per-（彻底）+ jur（发誓）+ -y → 违背誓言 → 伪证。`,
     examples: [
       {
         word: 'jury',
@@ -6677,7 +6677,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '边',
     meaningEn: 'side',
-    description: `later 表示「边、侧面」。lateral（侧面的）、collateral（抵押品）= col-（一起）+ later（边）+ -al → 在旁边的东西 → 抵押品。unilateral（单边的）= uni-（一）+ later（边）+ -al → 一边的。`,
+    description: `later 代表「边、侧面」。lateral（侧面的）、collateral（抵押品）= col-（一起）+ later（边）+ -al → 在旁边的东西 → 抵押品。unilateral（单边的）= uni-（一）+ later（边）+ -al → 一边的。`,
     examples: [
       {
         word: 'lateral',
@@ -6717,7 +6717,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '举起',
     meaningEn: 'raise',
-    description: `lev 表示「举起、轻」。elevator（电梯）= e-（向外）+ lev（举）+ -ator → 举起来的东西。lever（杠杆）= lev（举）+ -er → 举东西的工具。relevant（相关的）= re-（再）+ lev（举）+ -ant → 再次提起的 → 相关的。relieve（减轻）= re-（再）+ liev（举）→ 举起负担 → 减轻。`,
+    description: `lev 代表「举起、轻」。elevator（电梯）= e-（向外）+ lev（举）+ -ator → 举起来的东西。lever（杠杆）= lev（举）+ -er → 举东西的工具。relevant（相关的）= re-（再）+ lev（举）+ -ant → 再次提起的 → 相关的。relieve（减轻）= re-（再）+ liev（举）→ 举起负担 → 减轻。`,
     examples: [
       {
         word: 'elevate',
@@ -6757,7 +6757,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '液体',
     meaningEn: 'liquid',
-    description: `liqu 表示「液体」。liquid（液体）、liquidate（清算）= liqu（液体）+ -idate → 变成液体 → 清算（资产变现）。liquor（烈酒）直接来自 liqu。记住：liqu 暗示「流动性」，所以 liquid assets（流动资产）很形象。`,
+    description: `liqu 代表「液体」。liquid（液体）、liquidate（清算）= liqu（液体）+ -idate → 变成液体 → 清算（资产变现）。liquor（烈酒）直接来自 liqu。记住：liqu 暗示「流动性」，所以 liquid assets（流动资产）很形象。`,
     examples: [
       {
         word: 'liquid',
@@ -6780,7 +6780,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'liquidate 的意思是什么？',
-    options: ["清算", "液体", "酒", "快速的"],
+    options: ["清算", "液体", "酒", "一起"],
     correctAnswer: 0
   }
   },
@@ -6831,7 +6831,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '中间',
     meaningEn: 'middle',
-    description: `medi 表示「中间」。medium（中等的）、mediate（调解）= medi（中间）+ -ate → 站在中间 → 调解。medieval（中世纪的）= medi（中间）+ ev（时代）+ -al → 中间时代的。immediate（立即的）= im-（不）+ medi（中间）+ -ate → 没有中间环节的 → 立即的。`,
+    description: `medi 代表「中间」。medium（中等的）、mediate（调解）= medi（中间）+ -ate → 站在中间 → 调解。medieval（中世纪的）= medi（中间）+ ev（时代）+ -al → 中间时代的。immediate（立即的）= im-（不）+ medi（中间）+ -ate → 没有中间环节的 → 立即的。`,
     examples: [
       {
         word: 'medium',
@@ -6871,7 +6871,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '迁移',
     meaningEn: 'move',
-    description: `migr 表示「迁移」。migrate（迁徙）、immigrant（移民）= im-（进入）+ migr（迁移）+ -ant → 迁移进来的人。emigrate（移出）= e-（向外）+ migr（迁移）+ -ate → 迁移出去。记住：候鸟叫 migratory birds。`,
+    description: `migr 代表「迁移」。migrate（迁徙）、immigrant（移民）= im-（进入）+ migr（迁移）+ -ant → 迁移进来的人。emigrate（移出）= e-（向外）+ migr（迁移）+ -ate → 迁移出去。记住：候鸟叫 migratory birds。`,
     examples: [
       {
         word: 'migrate',
@@ -6911,7 +6911,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '方式,度量',
     meaningEn: 'manner, measure',
-    description: `mod 表示「方式、度量、适度」。mode（模式）、moderate（适度的）= mod（度量）+ -erate → 有度量的。modify（修改）= mod（方式）+ -ify → 改变方式。accommodate（容纳）= ac-（向）+ com-（一起）+ mod（适应）+ -ate → 使适应 → 容纳。`,
+    description: `mod 代表「方式、度量、适度」。mode（模式）、moderate（适度的）= mod（度量）+ -erate → 有度量的。modify（修改）= mod（方式）+ -ify → 改变方式。accommodate（容纳）= ac-（向）+ com-（一起）+ mod（适应）+ -ate → 使适应 → 容纳。`,
     examples: [
       {
         word: 'mode',
@@ -6951,7 +6951,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '移动',
     meaningEn: 'move',
-    description: `mot/mob/mov 表示「移动」。motion（运动）、mobile（移动的）= mob（动）+ -ile → 能动的。automobile（汽车）= auto-（自己）+ mobile（移动）→ 自己会动的。promote（促进）= pro-（向前）+ mot（动）→ 向前推动 → 促进。`,
+    description: `mot/mob/mov 代表「移动」。motion（运动）、mobile（移动的）= mob（动）+ -ile → 能动的。automobile（汽车）= auto-（自己）+ mobile（移动）→ 自己会动的。promote（促进）= pro-（向前）+ mot（动）→ 向前推动 → 促进。`,
     examples: [
       {
         word: 'motion',
@@ -6991,7 +6991,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '出生',
     meaningEn: 'born',
-    description: `nat/nasc 表示「出生」。nature（自然）、native（本地的）= nat（出生）+ -ive → 出生的地方。renaissance（文艺复兴）= re-（再）+ naiss（生）+ -ance → 再生 → 文艺复兴。nascent（新生的）= nasc（生）+ -ent → 正在出生的。`,
+    description: `nat/nasc 代表「出生」。nature（自然）、native（本地的）= nat（出生）+ -ive → 出生的地方。renaissance（文艺复兴）= re-（再）+ naiss（生）+ -ance → 再生 → 文艺复兴。nascent（新生的）= nasc（生）+ -ent → 正在出生的。`,
     examples: [
       {
         word: 'nature',
@@ -7031,7 +7031,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '否定',
     meaningEn: 'deny',
-    description: `neg 表示「否定」。negative（消极的）、neglect（忽视）= neg（否定）+ lect（选择）→ 不选择 → 忽视。negate（否定）= neg（否定）+ -ate。negotiate（谈判）= neg（否定）+ oti（闲暇）+ -ate → 不闲着 → 谈判（拉丁商人不闲着时就在谈生意）。`,
+    description: `neg 代表「否定」。negative（消极的）、neglect（忽视）= neg（否定）+ lect（选择）→ 不选择 → 忽视。negate（否定）= neg（否定）+ -ate。negotiate（谈判）= neg（否定）+ oti（闲暇）+ -ate → 不闲着 → 谈判（拉丁商人不闲着时就在谈生意）。`,
     examples: [
       {
         word: 'negative',
@@ -7071,7 +7071,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '名字',
     meaningEn: 'name',
-    description: `nom/nym 表示「名字」。name 来自同源词。anonymous（匿名的）= an-（无）+ onym（名字）+ -ous → 没有名字的。synonym（同义词）= syn-（相同）+ onym（名字）→ 名字相同的词。nominate（提名）= nomin（名字）+ -ate → 叫出名字 → 提名。`,
+    description: `nom/nym 代表「名字」。name 来自同源词。anonymous（匿名的）= an-（无）+ onym（名字）+ -ous → 没有名字的。synonym（同义词）= syn-（相同）+ onym（名字）→ 名字相同的词。nominate（提名）= nomin（名字）+ -ate → 叫出名字 → 提名。`,
     examples: [
       {
         word: 'name',
@@ -7111,7 +7111,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '标记',
     meaningEn: 'mark',
-    description: `not 表示「标记、注意」。note（笔记）、notice（注意）= not（标记）+ -ice → 看到标记 → 注意。notable（著名的）= not（标记）+ -able → 值得标记的 → 著名的。denote（表示）= de-（向下）+ not（标记）→ 向下标记 → 表示。`,
+    description: `not 代表「标记、注意」。note（笔记）、notice（注意）= not（标记）+ -ice → 看到标记 → 注意。notable（著名的）= not（标记）+ -able → 值得标记的 → 著名的。denote（表示）= de-（向下）+ not（标记）→ 向下标记 → 表示。`,
     examples: [
       {
         word: 'note',
@@ -7151,7 +7151,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '工作',
     meaningEn: 'work',
-    description: `oper 表示「工作」。operate（操作）、cooperate（合作）= co-（一起）+ oper（工作）+ -ate → 一起工作。opera（歌剧）原意是「作品」。operation（手术）= oper（工作）+ -ation → 工作过程 → 手术。`,
+    description: `oper 代表「工作」。operate（操作）、cooperate（合作）= co-（一起）+ oper（工作）+ -ate → 一起工作。opera（歌剧）原意是「作品」。operation（手术）= oper（工作）+ -ation → 工作过程 → 手术。`,
     examples: [
       {
         word: 'operate',
@@ -7174,7 +7174,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'opera 的意思是什么？',
-    options: ["快速的", "操作", "歌剧", "合作"],
+    options: ["提前", "操作", "歌剧", "合作"],
     correctAnswer: 2
   }
   },
@@ -7185,7 +7185,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '和平',
     meaningEn: 'peace',
-    description: `paci/peac 表示「和平」。pacific（和平的）、peace（和平）来自同源。pacify（使平静）= paci（和平）+ -fy → 使和平。appease（安抚）= ap-（向）+ pease（和平）→ 带向和平 → 安抚。`,
+    description: `paci/peac 代表「和平」。pacific（和平的）、peace（和平）来自同源。pacify（使平静）= paci（和平）+ -fy → 使和平。appease（安抚）= ap-（向）+ pease（和平）→ 带向和平 → 安抚。`,
     examples: [
       {
         word: 'peace',
@@ -7208,7 +7208,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'pacific 的意思是什么？',
-    options: ["和平", "快速的", "使平静", "太平洋"],
+    options: ["和平", "否定含义", "使平静", "太平洋"],
     correctAnswer: 3
   }
   },
@@ -7219,7 +7219,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '全部',
     meaningEn: 'all',
-    description: `pan 表示「全部」（希腊语）。panorama（全景）= pan（全）+ orama（看）→ 全部看到 → 全景。pandemic（大流行病）= pan（全）+ dem（人民）+ -ic → 影响全体人民的。panacea（万能药）= pan（全）+ acea（治疗）→ 治疗一切的药。`,
+    description: `pan 代表「全部」（希腊语）。panorama（全景）= pan（全）+ orama（看）→ 全部看到 → 全景。pandemic（大流行病）= pan（全）+ dem（人民）+ -ic → 影响全体人民的。panacea（万能药）= pan（全）+ acea（治疗）→ 治疗一切的药。`,
     examples: [
       {
         word: 'panorama',
@@ -7242,7 +7242,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'pandemic 的意思是什么？',
-    options: ["全景", "万能药", "快速的", "大流行"],
+    options: ["全景", "万能药", "变成名词", "大流行"],
     correctAnswer: 3
   }
   },
@@ -7253,7 +7253,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '父亲',
     meaningEn: 'father',
-    description: `patr/pater 表示「父亲」。father 来自同源词。patriot（爱国者）= patr（父）+ -iot → 爱祖国（父之国）的人。patron（赞助人）= patr（父）+ -on → 像父亲一样的人。patriarch（族长）= patr（父）+ arch（统治者）。`,
+    description: `patr/pater 代表「父亲」。father 来自同源词。patriot（爱国者）= patr（父）+ -iot → 爱祖国（父之国）的人。patron（赞助人）= patr（父）+ -on → 像父亲一样的人。patriarch（族长）= patr（父）+ arch（统治者）。`,
     examples: [
       {
         word: 'patriot',
@@ -7276,7 +7276,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'patriot 的意思是什么？',
-    options: ["赞助人", "父亲的", "爱国者", "快速的"],
+    options: ["赞助人", "父亲的", "爱国者", "做这事的人"],
     correctAnswer: 2
   }
   },
@@ -7287,7 +7287,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '推,驱动',
     meaningEn: 'drive',
-    description: `pel/puls 表示「推、驱动」。push 来自同源词。compel（强迫）= com-（一起）+ pel（推）→ 推在一起 → 强迫。propel（推进）= pro-（向前）+ pel（推）→ 向前推。impulse（冲动）= im-（进入）+ puls（推）→ 内心的推力 → 冲动。`,
+    description: `pel/puls 代表「推、驱动」。push 来自同源词。compel（强迫）= com-（一起）+ pel（推）→ 推在一起 → 强迫。propel（推进）= pro-（向前）+ pel（推）→ 向前推。impulse（冲动）= im-（进入）+ puls（推）→ 内心的推力 → 冲动。`,
     examples: [
       {
         word: 'propel',
@@ -7327,7 +7327,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '显示',
     meaningEn: 'show',
-    description: `phan/phen 表示「显示、显现」（希腊语）。phantom（幽灵）= phan（显现）+ -tom → 显现出来的东西。phenomenon（现象）= phen（显现）+ -omenon → 显现出来的事物。emphasis（强调）= em-（使）+ phas（显现）+ -is → 使显现 → 强调。`,
+    description: `phan/phen 代表「显示、显现」（希腊语）。phantom（幽灵）= phan（显现）+ -tom → 显现出来的东西。phenomenon（现象）= phen（显现）+ -omenon → 显现出来的事物。emphasis（强调）= em-（使）+ phas（显现）+ -is → 使显现 → 强调。`,
     examples: [
       {
         word: 'phantom',
@@ -7350,7 +7350,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'phenomenon 的意思是什么？',
-    options: ["幽灵", "现象", "强调", "快速的"],
+    options: ["幽灵", "现象", "强调", "可以...的"],
     correctAnswer: 1
   }
   },
@@ -7361,7 +7361,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '折叠',
     meaningEn: 'fold',
-    description: `plic 表示「折叠」。complicate（使复杂）= com-（一起）+ plic（折）+ -ate → 折在一起 → 复杂化。explicit（明确的）= ex-（向外）+ plic（折）+ -it → 展开折叠 → 明确的。implicate（牵连）= im-（进入）+ plic（折）+ -ate → 折进去 → 牵连。`,
+    description: `plic 代表「折叠」。complicate（使复杂）= com-（一起）+ plic（折）+ -ate → 折在一起 → 复杂化。explicit（明确的）= ex-（向外）+ plic（折）+ -it → 展开折叠 → 明确的。implicate（牵连）= im-（进入）+ plic（折）+ -ate → 折进去 → 牵连。`,
     examples: [
       {
         word: 'complicate',
@@ -7401,7 +7401,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '放',
     meaningEn: 'put',
-    description: `pon/pos/pound 表示「放置」。position（位置）= pos（放）+ -ition → 被放的地方。compose（组成）= com-（一起）+ pos（放）→ 放在一起 → 组成。expound（阐述）= ex-（向外）+ pound（放）→ 把想法放出来 → 阐述。`,
+    description: `pon/pos/pound 代表「放置」。position（位置）= pos（放）+ -ition → 被放的地方。compose（组成）= com-（一起）+ pos（放）→ 放在一起 → 组成。expound（阐述）= ex-（向外）+ pound（放）→ 把想法放出来 → 阐述。`,
     examples: [
       {
         word: 'component',
@@ -7441,7 +7441,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '点,刺',
     meaningEn: 'point, prick',
-    description: `punct 表示「点、刺」。puncture（刺穿）、punctual（准时的）= punct（点）+ -ual → 在点上的 → 准时的。punctuation（标点）= punct（点）+ -uation → 打点 → 标点。acupuncture（针灸）= acu（尖）+ punct（刺）+ -ure → 用尖刺 → 针灸。`,
+    description: `punct 代表「点、刺」。puncture（刺穿）、punctual（准时的）= punct（点）+ -ual → 在点上的 → 准时的。punctuation（标点）= punct（点）+ -uation → 打点 → 标点。acupuncture（针灸）= acu（尖）+ punct（刺）+ -ure → 用尖刺 → 针灸。`,
     examples: [
       {
         word: 'puncture',
@@ -7464,7 +7464,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'punctual 的意思是什么？',
-    options: ["针灸", "刺穿", "快速的", "准时的"],
+    options: ["针灸", "刺穿", "变成动词", "准时的"],
     correctAnswer: 3
   }
   },
@@ -7475,7 +7475,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '寻求',
     meaningEn: 'seek',
-    description: `quer/quis/quir 表示「寻求、询问」。question 来自同源。require（需要）= re-（再）+ quir（寻求）→ 再次寻求 → 需要。acquire（获得）= ac-（向）+ quir（寻求）→ 寻求到 → 获得。inquire（询问）= in-（向内）+ quir（寻求）→ 向内寻求 → 询问。`,
+    description: `quer/quis/quir 代表「寻求、询问」。question 来自同源。require（需要）= re-（再）+ quir（寻求）→ 再次寻求 → 需要。acquire（获得）= ac-（向）+ quir（寻求）→ 寻求到 → 获得。inquire（询问）= in-（向内）+ quir（寻求）→ 向内寻求 → 询问。`,
     examples: [
       {
         word: 'require',
@@ -7515,7 +7515,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '光线',
     meaningEn: 'ray',
-    description: `radi 表示「光线」。ray 来自同源。radio（广播）= radi（光线）+ -o → 辐射传播（无线电波）。radiant（光芒四射的）= radi（光线）+ -ant → 发射光线的。eradicate（根除）= e-（向外）+ radic（根）+ -ate → 连根拔起 → 根除。`,
+    description: `radi 代表「光线」。ray 来自同源。radio（广播）= radi（光线）+ -o → 辐射传播（无线电波）。radiant（光芒四射的）= radi（光线）+ -ant → 发射光线的。eradicate（根除）= e-（向外）+ radic（根）+ -ate → 连根拔起 → 根除。`,
     examples: [
       {
         word: 'radiate',
@@ -7538,7 +7538,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'radio 的意思是什么？',
-    options: ["无线电", "半径", "快速的", "辐射"],
+    options: ["无线电", "半径", "相关场所", "辐射"],
     correctAnswer: 0
   }
   },
@@ -7549,7 +7549,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '要求,问',
     meaningEn: 'ask',
-    description: `rog 表示「要求、询问」。interrogate（审问）= inter-（之间）+ rog（问）+ -ate → 反复问 → 审问。arrogant（傲慢的）= ar-（向）+ rog（要求）+ -ant → 向自己要求太多 → 傲慢的。prerogative（特权）= pre-（提前）+ rog（要求）+ -ative → 提前要求的权利 → 特权。`,
+    description: `rog 代表「要求、询问」。interrogate（审问）= inter-（之间）+ rog（问）+ -ate → 反复问 → 审问。arrogant（傲慢的）= ar-（向）+ rog（要求）+ -ant → 向自己要求太多 → 傲慢的。prerogative（特权）= pre-（提前）+ rog（要求）+ -ative → 提前要求的权利 → 特权。`,
     examples: [
       {
         word: 'interrogate',
@@ -7572,7 +7572,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'prerogative 的意思是什么？',
-    options: ["快速的", "特权", "傲慢的", "审问"],
+    options: ["状态", "特权", "傲慢的", "审问"],
     correctAnswer: 1
   }
   },
@@ -7583,7 +7583,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '神圣',
     meaningEn: 'sacred',
-    description: `sacr/secr 表示「神圣」。sacred（神圣的）、sacrifice（牺牲）= sacr（神圣）+ -ifice（做）→ 为神做的事 → 牺牲。consecrate（奉献）= con-（完全）+ secr（神圣）+ -ate → 使完全神圣 → 奉献。`,
+    description: `sacr/secr 代表「神圣」。sacred（神圣的）、sacrifice（牺牲）= sacr（神圣）+ -ifice（做）→ 为神做的事 → 牺牲。consecrate（奉献）= con-（完全）+ secr（神圣）+ -ate → 使完全神圣 → 奉献。`,
     examples: [
       {
         word: 'sacred',
@@ -7606,7 +7606,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'secret 的意思是什么？',
-    options: ["神圣的", "牺牲", "快速的", "秘密"],
+    options: ["神圣的", "牺牲", "向外", "秘密"],
     correctAnswer: 3
   }
   },
@@ -7617,7 +7617,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '足够',
     meaningEn: 'enough',
-    description: `sat 表示「足够」。satisfy（满足）= sat（足够）+ -isfy → 使足够 → 满足。saturate（饱和）= sat（足够）+ -urate → 达到足够的程度 → 饱和。insatiable（贪得无厌的）= in-（不）+ sat（足够）+ -iable → 永不满足的。`,
+    description: `sat 代表「足够」。satisfy（满足）= sat（足够）+ -isfy → 使足够 → 满足。saturate（饱和）= sat（足够）+ -urate → 达到足够的程度 → 饱和。insatiable（贪得无厌的）= in-（不）+ sat（足够）+ -iable → 永不满足的。`,
     examples: [
       {
         word: 'satisfy',
@@ -7640,7 +7640,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'insatiable 的意思是什么？',
-    options: ["满足", "饱和", "贪得无厌", "快速的"],
+    options: ["满足", "饱和", "贪得无厌", "相反"],
     correctAnswer: 2
   }
   },
@@ -7651,7 +7651,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '知道',
     meaningEn: 'know',
-    description: `sci 表示「知道」。science（科学）= sci（知道）+ -ence → 知识。conscience（良心）= con-（一起）+ sci（知道）+ -ence → 内心知道的东西 → 良心。conscious（有意识的）= con-（一起）+ sci（知道）+ -ous → 知道的 → 有意识的。`,
+    description: `sci 代表「知道」。science（科学）= sci（知道）+ -ence → 知识。conscience（良心）= con-（一起）+ sci（知道）+ -ence → 内心知道的东西 → 良心。conscious（有意识的）= con-（一起）+ sci（知道）+ -ous → 知道的 → 有意识的。`,
     examples: [
       {
         word: 'science',
@@ -7674,7 +7674,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'science 的意思是什么？',
-    options: ["良心", "科学", "快速的", "意识到的"],
+    options: ["良心", "科学", "下方", "意识到的"],
     correctAnswer: 1
   }
   },
@@ -7685,7 +7685,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '跟随',
     meaningEn: 'follow',
-    description: `sequ/secu 表示「跟随」。sequence（顺序）、consequence（结果）= con-（一起）+ sequ（跟随）+ -ence → 跟随而来的东西 → 结果。execute（执行）= ex-（向外）+ secu（跟随）+ -te → 跟着做出来 → 执行。`,
+    description: `sequ/secu 代表「跟随」。sequence（顺序）、consequence（结果）= con-（一起）+ sequ（跟随）+ -ence → 跟随而来的东西 → 结果。execute（执行）= ex-（向外）+ secu（跟随）+ -te → 跟着做出来 → 执行。`,
     examples: [
       {
         word: 'sequence',
@@ -7725,7 +7725,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '坐',
     meaningEn: 'sit',
-    description: `sid/sess 表示「坐」。sit 来自同源。session（会议）= sess（坐）+ -ion → 坐在一起 → 会议。resident（居民）= re-（反复）+ sid（坐）+ -ent → 反复坐在那里的人 → 居民。preside（主持）= pre-（在前）+ sid（坐）→ 坐在前面 → 主持。`,
+    description: `sid/sess 代表「坐」。sit 来自同源。session（会议）= sess（坐）+ -ion → 坐在一起 → 会议。resident（居民）= re-（反复）+ sid（坐）+ -ent → 反复坐在那里的人 → 居民。preside（主持）= pre-（在前）+ sid（坐）→ 坐在前面 → 主持。`,
     examples: [
       {
         word: 'reside',
@@ -7765,7 +7765,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '相似',
     meaningEn: 'like',
-    description: `simil/sembl 表示「相似」。similar（相似的）、resemble（类似）= re-（再）+ sembl（相似）→ 再次相似 → 类似。assemble（组装）= as-（向）+ sembl（一起）→ 聚集在一起 → 组装。simulate（模拟）= simul（相似）+ -ate → 做得相似 → 模拟。`,
+    description: `simil/sembl 代表「相似」。similar（相似的）、resemble（类似）= re-（再）+ sembl（相似）→ 再次相似 → 类似。assemble（组装）= as-（向）+ sembl（一起）→ 聚集在一起 → 组装。simulate（模拟）= simul（相似）+ -ate → 做得相似 → 模拟。`,
     examples: [
       {
         word: 'similar',
@@ -7805,7 +7805,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '声音',
     meaningEn: 'sound',
-    description: `son 表示「声音」。sound 来自同源。sonic（声音的）、resonance（共鸣）= re-（再）+ son（声音）+ -ance → 再次发声 → 共鸣。unison（一致）= uni-（一）+ son（声音）→ 一个声音 → 一致。`,
+    description: `son 代表「声音」。sound 来自同源。sonic（声音的）、resonance（共鸣）= re-（再）+ son（声音）+ -ance → 再次发声 → 共鸣。unison（一致）= uni-（一）+ son（声音）→ 一个声音 → 一致。`,
     examples: [
       {
         word: 'sound',
@@ -7845,7 +7845,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '智慧',
     meaningEn: 'wisdom',
-    description: `soph 表示「智慧」（希腊语）。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。sophisticated（复杂的、老练的）= soph（智慧）+ -isticated → 有智慧的 → 老练的。sophomore（大二学生）= soph（智慧）+ mor（愚蠢）+ -e → 一半智慧一半愚蠢 → 大二学生。`,
+    description: `soph 代表「智慧」（希腊语）。philosophy（哲学）= philo-（爱）+ soph（智慧）+ -y → 爱智慧 → 哲学。sophisticated（复杂的、老练的）= soph（智慧）+ -isticated → 有智慧的 → 老练的。sophomore（大二学生）= soph（智慧）+ mor（愚蠢）+ -e → 一半智慧一半愚蠢 → 大二学生。`,
     examples: [
       {
         word: 'philosophy',
@@ -7861,14 +7861,14 @@ export const wordRoots: WordRoot[] = [
       },
       {
         word: 'sophomore',
-        breakdown: { prefix: '', root: 'soph', suffix: 'mor+e' },
+        breakdown: { prefix: '', root: 'soph', suffix: 'omore' },
         meaning: '大二学生',
         explanation: '一半智慧一半愚蠢->大二学生'
       }
     ],
     quiz: {
     question: 'sophomore 的意思是什么？',
-    options: ["大二学生", "复杂的", "哲学", "快速的"],
+    options: ["大二学生", "复杂的", "哲学", "一起"],
     correctAnswer: 0
   }
   },
@@ -7879,7 +7879,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '看',
     meaningEn: 'look',
-    description: `spec/spic 表示「看」。respect（尊重）= re-（再）+ spect（看）→ 再看一眼 → 重视。inspect（检查）= in-（向内）+ spect（看）→ 向内看 → 检查。conspicuous（显眼的）= con-（完全）+ spic（看）+ -uous → 完全能看到的 → 显眼的。`,
+    description: `spec/spic 代表「看」。respect（尊重）= re-（再）+ spect（看）→ 再看一眼 → 重视。inspect（检查）= in-（向内）+ spect（看）→ 向内看 → 检查。conspicuous（显眼的）= con-（完全）+ spic（看）+ -uous → 完全能看到的 → 显眼的。`,
     examples: [
       {
         word: 'spectacle',
@@ -7919,7 +7919,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '球',
     meaningEn: 'ball',
-    description: `sphere 表示「球」（希腊语）。atmosphere（大气层）= atmo-（蒸汽）+ sphere（球）→ 蒸汽球 → 大气层。hemisphere（半球）= hemi-（半）+ sphere（球）→ 半个球。biosphere（生物圈）= bio-（生命）+ sphere（球）→ 生命球层。`,
+    description: `sphere 代表「球」（希腊语）。atmosphere（大气层）= atmo-（蒸汽）+ sphere（球）→ 蒸汽球 → 大气层。hemisphere（半球）= hemi-（半）+ sphere（球）→ 半个球。biosphere（生物圈）= bio-（生命）+ sphere（球）→ 生命球层。`,
     examples: [
       {
         word: 'sphere',
@@ -7942,7 +7942,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'sphere 的意思是什么？',
-    options: ["半球", "大气", "快速的", "球体"],
+    options: ["半球", "大气", "提前", "球体"],
     correctAnswer: 3
   }
   },
@@ -7953,7 +7953,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拉紧',
     meaningEn: 'draw tight',
-    description: `strain/strict 表示「拉紧」。strain（拉紧）、strict（严格的）= strict（拉紧）→ 拉得紧的 → 严格的。restrict（限制）= re-（反复）+ strict（拉紧）→ 反复拉紧 → 限制。constrict（收缩）= con-（一起）+ strict（拉紧）→ 一起拉紧 → 收缩。`,
+    description: `strain/strict 代表「拉紧」。strain（拉紧）、strict（严格的）= strict（拉紧）→ 拉得紧的 → 严格的。restrict（限制）= re-（反复）+ strict（拉紧）→ 反复拉紧 → 限制。constrict（收缩）= con-（一起）+ strict（拉紧）→ 一起拉紧 → 收缩。`,
     examples: [
       {
         word: 'strain',
@@ -7982,7 +7982,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'restrain 的意思是什么？',
-    options: ["区域", "拉紧", "限制", "快速的"],
+    options: ["区域", "拉紧", "限制", "否定含义"],
     correctAnswer: 2
   }
   },
@@ -7993,7 +7993,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '拿取',
     meaningEn: 'take',
-    description: `sum/sumpt 表示「拿取」。consume（消费）= con-（完全）+ sum（拿）→ 完全拿走 → 消费。assume（假设）= as-（向）+ sum（拿）→ 拿来（作为前提）→ 假设。presume（假定）= pre-（提前）+ sum（拿）→ 提前拿来 → 假定。`,
+    description: `sum/sumpt 代表「拿取」。consume（消费）= con-（完全）+ sum（拿）→ 完全拿走 → 消费。assume（假设）= as-（向）+ sum（拿）→ 拿来（作为前提）→ 假设。presume（假定）= pre-（提前）+ sum（拿）→ 提前拿来 → 假定。`,
     examples: [
       {
         word: 'assume',
@@ -8033,7 +8033,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '持有',
     meaningEn: 'hold',
-    description: `tain/ten/tin 表示「持有、保持」。contain（包含）= con-（一起）+ tain（持有）→ 持有在一起 → 包含。maintain（维持）= main-（手）+ tain（持有）→ 用手持有 → 维持。continue（继续）= con-（一起）+ tin（持有）+ -ue → 持续持有 → 继续。`,
+    description: `tain/ten/tin 代表「持有、保持」。contain（包含）= con-（一起）+ tain（持有）→ 持有在一起 → 包含。maintain（维持）= main-（手）+ tain（持有）→ 用手持有 → 维持。continue（继续）= con-（一起）+ tin（持有）+ -ue → 持续持有 → 继续。`,
     examples: [
       {
         word: 'sustain',
@@ -8073,7 +8073,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '技术',
     meaningEn: 'art, skill',
-    description: `techn 表示「技术」（希腊语）。technology（技术）= techn（技术）+ log（学）+ -y → 技术学。technique（技巧）= techn（技术）+ -ique → 技术方法。technician（技术员）= techn（技术）+ -ician（人）→ 技术人员。`,
+    description: `techn 代表「技术」（希腊语）。technology（技术）= techn（技术）+ log（学）+ -y → 技术学。technique（技巧）= techn（技术）+ -ique → 技术方法。technician（技术员）= techn（技术）+ -ician（人）→ 技术人员。`,
     examples: [
       {
         word: 'technique',
@@ -8096,7 +8096,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'technology 的意思是什么？',
-    options: ["技术", "快速的", "技术的", "科技"],
+    options: ["技术", "变成名词", "技术的", "科技"],
     correctAnswer: 3
   }
   },
@@ -8107,7 +8107,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '地,土',
     meaningEn: 'earth, land',
-    description: `terr 表示「地、土」。territory（领土）= terr（地）+ -itory → 一块土地 → 领土。terrain（地形）= terr（地）+ -ain → 土地的样子 → 地形。subterranean（地下的）= sub-（在下）+ terr（地）+ -anean → 在地下的。`,
+    description: `terr 代表「地、土」。territory（领土）= terr（地）+ -itory → 一块土地 → 领土。terrain（地形）= terr（地）+ -ain → 土地的样子 → 地形。subterranean（地下的）= sub-（在下）+ terr（地）+ -anean → 在地下的。`,
     examples: [
       {
         word: 'territory',
@@ -8130,7 +8130,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'territory 的意思是什么？',
-    options: ["陆地的", "快速的", "领土", "地形"],
+    options: ["陆地的", "做这事的人", "领土", "地形"],
     correctAnswer: 2
   }
   },
@@ -8141,7 +8141,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '证明',
     meaningEn: 'witness',
-    description: `test 表示「证明、见证」。testimony（证词）= test（证明）+ -imony → 证明的话 → 证词。testify（作证）= test（证明）+ -ify → 去证明 → 作证。contest（竞赛）= con-（一起）+ test（证明）→ 一起证明（谁更强）→ 竞赛。`,
+    description: `test 代表「证明、见证」。testimony（证词）= test（证明）+ -imony → 证明的话 → 证词。testify（作证）= test（证明）+ -ify → 去证明 → 作证。contest（竞赛）= con-（一起）+ test（证明）→ 一起证明（谁更强）→ 竞赛。`,
     examples: [
       {
         word: 'test',
@@ -8204,7 +8204,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'theorem 的意思是什么？',
-    options: ["理论", "定理", "理论的", "快速的"],
+    options: ["理论", "定理", "理论的", "可以...的"],
     correctAnswer: 1
   }
   },
@@ -8215,7 +8215,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '放置',
     meaningEn: 'put, place',
-    description: `thes/thet 表示「放置」（希腊语）。thesis（论文）= thes（放置）+ -is → 放置的观点 → 论文。synthesize（合成）= syn-（一起）+ thes（放置）+ -ize → 放在一起 → 合成。hypothesis（假设）= hypo-（在下）+ thes（放置）+ -is → 放在下面的观点 → 假设（作为基础）。`,
+    description: `thes/thet 代表「放置」（希腊语）。thesis（论文）= thes（放置）+ -is → 放置的观点 → 论文。synthesize（合成）= syn-（一起）+ thes（放置）+ -ize → 放在一起 → 合成。hypothesis（假设）= hypo-（在下）+ thes（放置）+ -is → 放在下面的观点 → 假设（作为基础）。`,
     examples: [
       {
         word: 'thesis',
@@ -8238,7 +8238,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'thesis 的意思是什么？',
-    options: ["论文", "合成的", "假设", "快速的"],
+    options: ["论文", "合成的", "假设", "变成动词"],
     correctAnswer: 0
   }
   },
@@ -8249,7 +8249,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '切',
     meaningEn: 'cut',
-    description: `tom 表示「切」（希腊语）。atom（原子）= a-（不）+ tom（切）→ 不可再切的东西 → 原子（古希腊人认为原子是最小单位）。anatomy（解剖学）= ana-（向上）+ tom（切）+ -y → 向上切开研究 → 解剖学。`,
+    description: `tom 代表「切」（希腊语）。atom（原子）= a-（不）+ tom（切）→ 不可再切的东西 → 原子（古希腊人认为原子是最小单位）。anatomy（解剖学）= ana-（向上）+ tom（切）+ -y → 向上切开研究 → 解剖学。`,
     examples: [
       {
         word: 'atom',
@@ -8272,7 +8272,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'epitome 的意思是什么？',
-    options: ["原子", "解剖", "缩影", "快速的"],
+    options: ["原子", "解剖", "缩影", "相关场所"],
     correctAnswer: 2
   }
   },
@@ -8283,7 +8283,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '转',
     meaningEn: 'turn',
-    description: `tour/torn 表示「转」。tour（旅行）原意「转一圈」。tournament（锦标赛）= tourn（转）+ -ament → 骑士转着打比武 → 锦标赛。detour（绕道）= de-（离开）+ tour（转）→ 转离主路 → 绕道。attorney（律师）= at-（向）+ torn（转）+ -ey → 转向（代表）别人的人 → 律师。`,
+    description: `tour/torn 代表「转」。tour（旅行）原意「转一圈」。tournament（锦标赛）= tourn（转）+ -ament → 骑士转着打比武 → 锦标赛。detour（绕道）= de-（离开）+ tour（转）→ 转离主路 → 绕道。attorney（律师）= at-（向）+ torn（转）+ -ey → 转向（代表）别人的人 → 律师。`,
     examples: [
       {
         word: 'tour',
@@ -8306,7 +8306,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'return 的意思是什么？',
-    options: ["旅游", "律师", "快速的", "返回"],
+    options: ["旅游", "律师", "状态", "返回"],
     correctAnswer: 3
   }
   },
@@ -8317,7 +8317,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '给予',
     meaningEn: 'give',
-    description: `trad 表示「给予、交付」。trade（贸易）= trad（交付）+ -e → 互相交付 → 贸易。tradition（传统）= trad（交付）+ -ition → 代代交付下来的东西 → 传统。betray（背叛）= be-（完全）+ tray（交付）→ 把秘密交出去 → 背叛。`,
+    description: `trad 代表「给予、交付」。trade（贸易）= trad（交付）+ -e → 互相交付 → 贸易。tradition（传统）= trad（交付）+ -ition → 代代交付下来的东西 → 传统。betray（背叛）= be-（完全）+ tray（交付）→ 把秘密交出去 → 背叛。`,
     examples: [
       {
         word: 'tradition',
@@ -8340,7 +8340,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'betray 的意思是什么？',
-    options: ["背叛", "快速的", "传统", "贸易"],
+    options: ["背叛", "向外", "传统", "贸易"],
     correctAnswer: 0
   }
   },
@@ -8351,7 +8351,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '给予',
     meaningEn: 'give',
-    description: `tribute 表示「给予、贡献」。tribute（贡品）、contribute（贡献）= con-（一起）+ tribute（给予）→ 一起给予 → 贡献。distribute（分发）= dis-（分开）+ tribute（给予）→ 分开给予 → 分发。attribute（归因于）= at-（向）+ tribute（给予）→ 给予（原因）→ 归因。`,
+    description: `tribute 代表「给予、贡献」。tribute（贡品）、contribute（贡献）= con-（一起）+ tribute（给予）→ 一起给予 → 贡献。distribute（分发）= dis-（分开）+ tribute（给予）→ 分开给予 → 分发。attribute（归因于）= at-（向）+ tribute（给予）→ 给予（原因）→ 归因。`,
     examples: [
       {
         word: 'contribute',
@@ -8374,7 +8374,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'distribute 的意思是什么？',
-    options: ["分配", "贡献", "归因", "快速的"],
+    options: ["分配", "贡献", "归因", "相反"],
     correctAnswer: 0
   }
   },
@@ -8385,7 +8385,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '磨擦',
     meaningEn: 'rub',
-    description: `trit 表示「磨擦、磨碎」。attrition（消耗）= at-（向）+ trit（磨）+ -ion → 磨损 → 消耗。contrite（悔恨的）= con-（完全）+ trit（磨）+ -e → 心灵被完全磨碎的 → 悔恨的。detritus（碎屑）= de-（向下）+ trit（磨）+ -us → 磨下来的东西 → 碎屑。`,
+    description: `trit 代表「磨擦、磨碎」。attrition（消耗）= at-（向）+ trit（磨）+ -ion → 磨损 → 消耗。contrite（悔恨的）= con-（完全）+ trit（磨）+ -e → 心灵被完全磨碎的 → 悔恨的。detritus（碎屑）= de-（向下）+ trit（磨）+ -us → 磨下来的东西 → 碎屑。`,
     examples: [
       {
         word: 'attrition',
@@ -8408,7 +8408,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'contrite 的意思是什么？',
-    options: ["悔恨的", "碎屑", "磨损", "快速的"],
+    options: ["悔恨的", "碎屑", "磨损", "下方"],
     correctAnswer: 0
   }
   },
@@ -8419,7 +8419,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '转',
     meaningEn: 'turn',
-    description: `trop 表示「转」（希腊语）。tropical（热带的）= trop（转）+ -ical → 太阳转到最高处的地方 → 热带。otropism（向性）= trop（转）+ -ism → 植物朝某方向转 → 向性。entropy（熵）= en-（内）+ trop（转）+ -y → 内部转变 → 熵（热力学概念）。`,
+    description: `trop 代表「转」（希腊语）。tropical（热带的）= trop（转）+ -ical → 太阳转到最高处的地方 → 热带。otropism（向性）= trop（转）+ -ism → 植物朝某方向转 → 向性。entropy（熵）= en-（内）+ trop（转）+ -y → 内部转变 → 熵（热力学概念）。`,
     examples: [
       {
         word: 'trophy',
@@ -8442,7 +8442,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'entropy 的意思是什么？',
-    options: ["熵", "快速的", "热带的", "奖杯"],
+    options: ["熵", "一起", "热带的", "奖杯"],
     correctAnswer: 0
   }
   },
@@ -8453,7 +8453,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '搅动',
     meaningEn: 'stir',
-    description: `turb 表示「搅动、混乱」。disturb（打扰）= dis-（分开）+ turb（搅动）→ 搅乱 → 打扰。turbulent（动荡的）= turb（搅动）+ -ulent → 搅动的 → 动荡的。perturb（使不安）= per-（完全）+ turb（搅动）→ 完全搅乱 → 使不安。`,
+    description: `turb 代表「搅动、混乱」。disturb（打扰）= dis-（分开）+ turb（搅动）→ 搅乱 → 打扰。turbulent（动荡的）= turb（搅动）+ -ulent → 搅动的 → 动荡的。perturb（使不安）= per-（完全）+ turb（搅动）→ 完全搅乱 → 使不安。`,
     examples: [
       {
         word: 'disturb',
@@ -8476,7 +8476,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'perturb 的意思是什么？',
-    options: ["快速的", "使不安", "打扰", "动荡的"],
+    options: ["提前", "使不安", "打扰", "动荡的"],
     correctAnswer: 1
   }
   },
@@ -8487,7 +8487,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '类型',
     meaningEn: 'type',
-    description: `typ 表示「类型、印记」（希腊语）。type（类型）、typical（典型的）= typ（类型）+ -ical → 属于某类型的。prototype（原型）= proto-（最初）+ typ（类型）+ -e → 最初的类型 → 原型。stereotype（刻板印象）= stereo-（固定）+ typ（印）+ -e → 固定的印象。`,
+    description: `typ 代表「类型、印记」（希腊语）。type（类型）、typical（典型的）= typ（类型）+ -ical → 属于某类型的。prototype（原型）= proto-（最初）+ typ（类型）+ -e → 最初的类型 → 原型。stereotype（刻板印象）= stereo-（固定）+ typ（印）+ -e → 固定的印象。`,
     examples: [
       {
         word: 'type',
@@ -8510,7 +8510,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'typical 的意思是什么？',
-    options: ["类型", "快速的", "典型的", "原型"],
+    options: ["类型", "否定含义", "典型的", "原型"],
     correctAnswer: 2
   }
   },
@@ -8521,7 +8521,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '价值,强',
     meaningEn: 'worth, strong',
-    description: `val 表示「价值、强」。value（价值）、valid（有效的）= val（强）+ -id → 强有力的 → 有效的。prevalent（流行的）= pre-（在前）+ val（强）+ -ent → 力量在前的 → 流行的。evaluate（评估）= e-（向外）+ val（价值）+ -uate → 看出价值 → 评估。`,
+    description: `val 代表「价值、强」。value（价值）、valid（有效的）= val（强）+ -id → 强有力的 → 有效的。prevalent（流行的）= pre-（在前）+ val（强）+ -ent → 力量在前的 → 流行的。evaluate（评估）= e-（向外）+ val（价值）+ -uate → 看出价值 → 评估。`,
     examples: [
       {
         word: 'value',
@@ -8544,7 +8544,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'valid 的意思是什么？',
-    options: ["快速的", "有效的", "相等的", "价值"],
+    options: ["变成名词", "有效的", "相等的", "价值"],
     correctAnswer: 1
   }
   },
@@ -8555,7 +8555,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变化',
     meaningEn: 'change',
-    description: `var 表示「变化」。vary（变化）、variable（变量）= var（变化）+ -iable → 可变化的东西 → 变量。various（各种各样的）= var（变化）+ -ious → 变化多端的。invariable（不变的）= in-（不）+ var（变化）+ -iable → 不变的。`,
+    description: `var 代表「变化」。vary（变化）、variable（变量）= var（变化）+ -iable → 可变化的东西 → 变量。various（各种各样的）= var（变化）+ -ious → 变化多端的。invariable（不变的）= in-（不）+ var（变化）+ -iable → 不变的。`,
     examples: [
       {
         word: 'vary',
@@ -8578,7 +8578,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'vary 的意思是什么？',
-    options: ["各种各样", "快速的", "变化", "多样性"],
+    options: ["各种各样", "做这事的人", "变化", "多样性"],
     correctAnswer: 2
   }
   },
@@ -8589,7 +8589,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '空',
     meaningEn: 'empty',
-    description: `vac/van 表示「空」。vacant（空的）、vacuum（真空）= vac（空）+ -uum。vanish（消失）= van（空）+ -ish → 变空 → 消失。evacuate（撤离）= e-（向外）+ vac（空）+ -uate → 把空间清空 → 撤离。`,
+    description: `vac/van 代表「空」。vacant（空的）、vacuum（真空）= vac（空）+ -uum。vanish（消失）= van（空）+ -ish → 变空 → 消失。evacuate（撤离）= e-（向外）+ vac（空）+ -uate → 把空间清空 → 撤离。`,
     examples: [
       {
         word: 'vacant',
@@ -8612,7 +8612,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'vanish 的意思是什么？',
-    options: ["空的", "假期", "消失", "快速的"],
+    options: ["空的", "假期", "消失", "可以...的"],
     correctAnswer: 2
   }
   },
@@ -8623,7 +8623,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '价值',
     meaningEn: 'value',
-    description: `vail/val 表示「价值、力量」。available（可用的）= a-（向）+ vail（价值）+ -able → 有价值可用的。prevail（盛行）= pre-（在前）+ vail（力量）→ 力量在前 → 盛行。equivalent（等价的）= equi-（相等）+ val（价值）+ -ent → 价值相等的。`,
+    description: `vail/val 代表「价值、力量」。available（可用的）= a-（向）+ vail（价值）+ -able → 有价值可用的。prevail（盛行）= pre-（在前）+ vail（力量）→ 力量在前 → 盛行。equivalent（等价的）= equi-（相等）+ val（价值）+ -ent → 价值相等的。`,
     examples: [
       {
         word: 'avail',
@@ -8646,7 +8646,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'prevail 的意思是什么？',
-    options: ["快速的", "评估", "有用", "盛行"],
+    options: ["变成动词", "评估", "有用", "盛行"],
     correctAnswer: 3
   }
   },
@@ -8657,7 +8657,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '运送',
     meaningEn: 'carry',
-    description: `veh/vect 表示「运送」。vehicle（车辆）= veh（运送）+ -icle → 运送工具 → 车辆。vector（向量）= vect（运送）+ -or → 运送的方向 → 向量。convey（传达）= con-（一起）+ vey（运送）→ 运送过去 → 传达。`,
+    description: `veh/vect 代表「运送」。vehicle（车辆）= veh（运送）+ -icle → 运送工具 → 车辆。vector（向量）= vect（运送）+ -or → 运送的方向 → 向量。convey（传达）= con-（一起）+ vey（运送）→ 运送过去 → 传达。`,
     examples: [
       {
         word: 'vehicle',
@@ -8680,7 +8680,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'vector 的意思是什么？',
-    options: ["传达", "快速的", "矢量", "车辆"],
+    options: ["传达", "相关场所", "矢量", "车辆"],
     correctAnswer: 2
   }
   },
@@ -8691,7 +8691,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '报复',
     meaningEn: 'avenge',
-    description: `venge 表示「报复」。revenge（复仇）= re-（反）+ venge（报复）→ 反向报复 → 复仇。avenge（为...报仇）= a-（向）+ venge（报复）→ 向某人报复 → 为...报仇。vengeance（复仇心）= venge（报复）+ -ance → 报复之心。`,
+    description: `venge 代表「报复」。revenge（复仇）= re-（反）+ venge（报复）→ 反向报复 → 复仇。avenge（为...报仇）= a-（向）+ venge（报复）→ 向某人报复 → 为...报仇。vengeance（复仇心）= venge（报复）+ -ance → 报复之心。`,
     examples: [
       {
         word: 'revenge',
@@ -8714,7 +8714,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'vengeance 的意思是什么？',
-    options: ["快速的", "报复", "复仇", "为...报仇"],
+    options: ["状态", "报复", "复仇", "为...报仇"],
     correctAnswer: 2
   }
   },
@@ -8725,7 +8725,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '倾向',
     meaningEn: 'incline',
-    description: `verg 表示「倾向、转向」。converge（汇聚）= con-（一起）+ verg（转）→ 转到一起 → 汇聚。diverge（分歧）= di-（分开）+ verg（转）→ 转向不同方向 → 分歧。verge（边缘）= verg（转）+ -e → 转折点 → 边缘。`,
+    description: `verg 代表「倾向、转向」。converge（汇聚）= con-（一起）+ verg（转）→ 转到一起 → 汇聚。diverge（分歧）= di-（分开）+ verg（转）→ 转向不同方向 → 分歧。verge（边缘）= verg（转）+ -e → 转折点 → 边缘。`,
     examples: [
       {
         word: 'verge',
@@ -8748,7 +8748,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'converge 的意思是什么？',
-    options: ["分歧", "快速的", "汇聚", "边缘"],
+    options: ["分歧", "向外", "汇聚", "边缘"],
     correctAnswer: 2
   }
   },
@@ -8759,7 +8759,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '路',
     meaningEn: 'way',
-    description: `vi/via 表示「路」。via（经由）、deviate（偏离）= de-（离开）+ vi（路）+ -ate → 离开道路 → 偏离。obvious（明显的）= ob-（在前）+ vi（路）+ -ous → 挡在路上/摆在面前的 → 明显的。previous（以前的）= pre-（在前）+ vi（路）+ -ous → 在路前面的 → 以前的。`,
+    description: `vi/via 代表「路」。via（经由）、deviate（偏离）= de-（离开）+ vi（路）+ -ate → 离开道路 → 偏离。obvious（明显的）= ob-（在前）+ vi（路）+ -ous → 挡在路上/摆在面前的 → 明显的。previous（以前的）= pre-（在前）+ vi（路）+ -ous → 在路前面的 → 以前的。`,
     examples: [
       {
         word: 'via',
@@ -8782,7 +8782,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'deviate 的意思是什么？',
-    options: ["偏离", "快速的", "明显的", "通过"],
+    options: ["偏离", "相反", "明显的", "通过"],
     correctAnswer: 0
   }
   },
@@ -8793,7 +8793,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '力,伤害',
     meaningEn: 'force, harm',
-    description: `viol 表示「力量、伤害」。violence（暴力）= viol（力）+ -ence → 使用力量 → 暴力。violate（违反）= viol（伤害）+ -ate → 伤害（规则）→ 违反。inviolate（未受侵犯的）= in-（不）+ viol（伤害）+ -ate → 未被伤害的。`,
+    description: `viol 代表「力量、伤害」。violence（暴力）= viol（力）+ -ence → 使用力量 → 暴力。violate（违反）= viol（伤害）+ -ate → 伤害（规则）→ 违反。inviolate（未受侵犯的）= in-（不）+ viol（伤害）+ -ate → 未被伤害的。`,
     examples: [
       {
         word: 'violence',
@@ -8816,7 +8816,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'violence 的意思是什么？',
-    options: ["不受侵犯", "违反", "快速的", "暴力"],
+    options: ["不受侵犯", "违反", "下方", "暴力"],
     correctAnswer: 3
   }
   },
@@ -8827,7 +8827,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '男人,美德',
     meaningEn: 'man, virtue',
-    description: `vir 表示「男人、美德」。virtue（美德）原意「男子气概」。virile（有男子气概的）= vir（男人）+ -ile → 男人的 → 有男子气概的。`,
+    description: `vir 代表「男人、美德」。virtue（美德）原意「男子气概」。virile（有男子气概的）= vir（男人）+ -ile → 男人的 → 有男子气概的。`,
     examples: [
       {
         word: 'virtue',
@@ -8844,7 +8844,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'virile 的意思是什么？',
-    options: ["虚拟的", "快速的", "有男子气概", "美德"],
+    options: ["虚拟的", "一起", "有男子气概", "美德"],
     correctAnswer: 2
   }
   },
@@ -8855,7 +8855,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'French',
     meaning: '变成名词',
     meaningEn: 'state, action',
-    description: `-age 是法语后缀，表示「状态、行为、结果」。package（包裹）= pack（打包）+ -age → 打包的结果。storage（储存）= store（储存）+ -age → 储存的状态。courage（勇气）= cor（心）+ -age → 心的状态 → 勇气。`,
+    description: `-age 是法语后缀，代表「状态、行为、结果」。package（包裹）= pack（打包）+ -age → 打包的结果。storage（储存）= store（储存）+ -age → 储存的状态。courage（勇气）= cor（心）+ -age → 心的状态 → 勇气。`,
     examples: [
       {
         word: 'storage',
@@ -8878,7 +8878,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'storage 的意思是什么？',
-    options: ["包裹", "损害", "快速的", "存储"],
+    options: ["包裹", "损害", "提前", "存储"],
     correctAnswer: 3
   }
   },
@@ -8889,7 +8889,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '相关场所 / 形容词',
     meaningEn: 'place, person',
-    description: `-ary/-ery/-ory 表示「地方、与...相关的人或物」。library（图书馆）= libr（书）+ -ary → 书的地方。bakery（面包店）= bake（烘焙）+ -ery → 烘焙的地方。factory（工厂）= fact（做）+ -ory → 做东西的地方。`,
+    description: `-ary/-ery/-ory 代表「地方、与...相关的人或物」。library（图书馆）= libr（书）+ -ary → 书的地方。bakery（面包店）= bake（烘焙）+ -ery → 烘焙的地方。factory（工厂）= fact（做）+ -ory → 做东西的地方。`,
     examples: [
       {
         word: 'library',
@@ -8912,7 +8912,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'library 的意思是什么？',
-    options: ["快速的", "图书馆", "工厂", "面包店"],
+    options: ["否定含义", "图书馆", "工厂", "面包店"],
     correctAnswer: 1
   }
   },
@@ -8923,7 +8923,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '领域 / 状态',
     meaningEn: 'state, domain',
-    description: `-dom 是古英语后缀，表示「状态、领域」。freedom（自由）= free（自由）+ -dom → 自由的状态。kingdom（王国）= king（国王）+ -dom → 国王的领域。wisdom（智慧）= wise（智慧）+ -dom → 智慧的状态。`,
+    description: `-dom 是古英语后缀，代表「状态、领域」。freedom（自由）= free（自由）+ -dom → 自由的状态。kingdom（王国）= king（国王）+ -dom → 国王的领域。wisdom（智慧）= wise（智慧）+ -dom → 智慧的状态。`,
     examples: [
       {
         word: 'freedom',
@@ -8946,7 +8946,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'wisdom 的意思是什么？',
-    options: ["智慧", "快速的", "自由", "王国"],
+    options: ["智慧", "变成名词", "自由", "王国"],
     correctAnswer: 0
   }
   },
@@ -8957,7 +8957,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '变成动词',
     meaningEn: 'make, become',
-    description: `-en 是古英语后缀，表示「使、变成」。widen（加宽）= wide（宽）+ -en → 使变宽。shorten（缩短）= short（短）+ -en → 使变短。strengthen（加强）= strength（力量）+ -en → 使变强。`,
+    description: `-en 是古英语后缀，代表「使、变成」。widen（加宽）= wide（宽）+ -en → 使变宽。shorten（缩短）= short（短）+ -en → 使变短。strengthen（加强）= strength（力量）+ -en → 使变强。`,
     examples: [
       {
         word: 'soften',
@@ -8980,7 +8980,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'soften 的意思是什么？',
-    options: ["加强", "使软化", "快速的", "加宽"],
+    options: ["加强", "使软化", "做这事的人", "加宽"],
     correctAnswer: 1
   }
   },
@@ -8991,7 +8991,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '人,物',
     meaningEn: 'person, thing',
-    description: `-er/-or 表示「做...的人或物」。teacher（老师）= teach（教）+ -er → 教书的人。actor（演员）= act（表演）+ -or → 表演的人。computer（计算机）= compute（计算）+ -er → 计算的机器。`,
+    description: `-er/-or 代表「做...的人或物」。teacher（老师）= teach（教）+ -er → 教书的人。actor（演员）= act（表演）+ -or → 表演的人。computer（计算机）= compute（计算）+ -er → 计算的机器。`,
     examples: [
       {
         word: 'teacher',
@@ -9014,7 +9014,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'computer 的意思是什么？',
-    options: ["计算机", "快速的", "演员", "教师"],
+    options: ["计算机", "可以...的", "演员", "教师"],
     correctAnswer: 0
   }
   },
@@ -9025,7 +9025,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '女性身份',
     meaningEn: 'female',
-    description: `-ess 表示「女性」。actress（女演员）= actor（演员）+ -ess → 女性演员。princess（公主）= prince（王子）+ -ess → 女性王子。lioness（母狮）= lion（狮子）+ -ess → 女性狮子。`,
+    description: `-ess 代表「女性」。actress（女演员）= actor（演员）+ -ess → 女性演员。princess（公主）= prince（王子）+ -ess → 女性王子。lioness（母狮）= lion（狮子）+ -ess → 女性狮子。`,
     examples: [
       {
         word: 'actress',
@@ -9048,7 +9048,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'actress 的意思是什么？',
-    options: ["女演员", "女服务员", "女主人", "快速的"],
+    options: ["女演员", "女服务员", "女主人", "变成动词"],
     correctAnswer: 0
   }
   },
@@ -9059,7 +9059,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '时期 / 状态',
     meaningEn: 'state, condition',
-    description: `-hood 是古英语后缀，表示「状态、身份、时期」。childhood（童年）= child（孩子）+ -hood → 孩子的时期。neighborhood（邻里）= neighbor（邻居）+ -hood → 邻居的群体。motherhood（母亲身份）= mother（母亲）+ -hood → 母亲的状态。`,
+    description: `-hood 是古英语后缀，代表「状态、身份、时期」。childhood（童年）= child（孩子）+ -hood → 孩子的时期。neighborhood（邻里）= neighbor（邻居）+ -hood → 邻居的群体。motherhood（母亲身份）= mother（母亲）+ -hood → 母亲的状态。`,
     examples: [
       {
         word: 'childhood',
@@ -9082,7 +9082,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'likelihood 的意思是什么？',
-    options: ["可能性", "社区", "快速的", "童年"],
+    options: ["可能性", "社区", "相关场所", "童年"],
     correctAnswer: 0
   }
   },
@@ -9093,7 +9093,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Greek',
     meaning: '变成形容词',
     meaningEn: 'of, pertaining to',
-    description: `-ic/-ical 来自希腊语，表示「...的」。historic（历史的）= histor（历史）+ -ic → 历史的。logical（逻辑的）= log（逻辑）+ -ical → 逻辑的。automatic（自动的）= auto（自己）+ mat（动）+ -ic → 自己动的。`,
+    description: `-ic/-ical 来自希腊语，代表「...的」。historic（历史的）= histor（历史）+ -ic → 历史的。logical（逻辑的）= log（逻辑）+ -ical → 逻辑的。automatic（自动的）= auto（自己）+ mat（动）+ -ic → 自己动的。`,
     examples: [
       {
         word: 'electric',
@@ -9116,7 +9116,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'electric 的意思是什么？',
-    options: ["电的", "逻辑的", "基本的", "快速的"],
+    options: ["电的", "逻辑的", "基本的", "状态"],
     correctAnswer: 0
   }
   },
@@ -9125,9 +9125,9 @@ export const wordRoots: WordRoot[] = [
     id: 229,
     root: '-ship',
     origin: 'Old English',
-    meaning: '状态,技能',
+    meaning: '关系 / 身份',
     meaningEn: 'state, skill',
-    description: `-ship 是古英语后缀，表示「状态、技能、关系」。friendship（友谊）= friend（朋友）+ -ship → 朋友的关系。leadership（领导力）= leader（领导者）+ -ship → 领导的能力。ownership（所有权）= owner（所有者）+ -ship → 所有者的状态。`,
+    description: `-ship 是古英语后缀，代表「状态、技能、关系」。friendship（友谊）= friend（朋友）+ -ship → 朋友的关系。leadership（领导力）= leader（领导者）+ -ship → 领导的能力。ownership（所有权）= owner（所有者）+ -ship → 所有者的状态。`,
     examples: [
       {
         word: 'friendship',
@@ -9150,7 +9150,7 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'leadership 的意思是什么？',
-    options: ["友谊", "快速的", "关系", "领导"],
+    options: ["友谊", "向外", "关系", "领导"],
     correctAnswer: 3
   }
   },
@@ -9161,7 +9161,7 @@ export const wordRoots: WordRoot[] = [
     origin: 'Old English',
     meaning: '向...',
     meaningEn: 'toward',
-    description: `-ward 是古英语后缀，表示「向...方向」。forward（向前）= for（前）+ -ward → 向前方。backward（向后）= back（后）+ -ward → 向后方。toward（朝向）= to + -ward → 朝向某处。homeward（向家）= home（家）+ -ward → 向家的方向。`,
+    description: `-ward 是古英语后缀，代表「向...方向」。forward（向前）= for（前）+ -ward → 向前方。backward（向后）= back（后）+ -ward → 向后方。toward（朝向）= to + -ward → 朝向某处。homeward（向家）= home（家）+ -ward → 向家的方向。`,
     examples: [
       {
         word: 'forward',
@@ -9184,12 +9184,37 @@ export const wordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'forward 的意思是什么？',
-    options: ["向前", "快速的", "向后", "向上"],
+    options: ["向前", "相反", "向后", "向上"],
     correctAnswer: 0
   }
   },
   ...wordRootReplacements,
 ]
+
+const extraExamplesById = new Map<number, WordExample>([
+  [
+    220,
+    {
+      word: 'virtuous',
+      breakdown: { prefix: '', root: 'virtu', suffix: 'ous' },
+      meaning: '品德高尚的',
+      explanation: '美德 + 变成形容词→品德高尚的',
+    },
+  ],
+])
+
+export const wordRoots: WordRoot[] = baseWordRoots.map((root) => {
+  const extraExample = extraExamplesById.get(root.id)
+
+  if (!extraExample || root.examples.length >= 3) {
+    return root
+  }
+
+  return {
+    ...root,
+    examples: [...root.examples, extraExample],
+  }
+})
 
 export const totalWordRoots = wordRoots.length
 

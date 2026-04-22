@@ -1,6 +1,6 @@
-import type { WordRoot } from '@/data/wordRoots'
+import type { WordExample, WordRoot } from '@/data/wordRoots'
 
-export const wordRootReplacements: WordRoot[] = [
+const baseWordRootReplacements: WordRoot[] = [
   {
     id: 231,
     root: 'alt',
@@ -1892,3 +1892,651 @@ export const wordRootReplacements: WordRoot[] = [
     },
   },
 ]
+
+const extraExamplesById = new Map<number, WordExample>([
+  [
+    231,
+    {
+      word: 'altar',
+      breakdown: { prefix: '', root: 'alt', suffix: 'ar' },
+      meaning: '祭坛',
+      explanation: '高 + 相关场所→祭坛',
+    },
+  ],
+  [
+    232,
+    {
+      word: 'amorous',
+      breakdown: { prefix: '', root: 'amor', suffix: 'ous' },
+      meaning: '多情的',
+      explanation: '爱 + 变成形容词→多情的',
+    },
+  ],
+  [
+    233,
+    {
+      word: 'inept',
+      breakdown: { prefix: 'in', root: 'ept', suffix: '' },
+      meaning: '笨拙的',
+      explanation: '否定含义 + 适合→笨拙的',
+    },
+  ],
+  [
+    234,
+    {
+      word: 'armor',
+      breakdown: { prefix: '', root: 'arm', suffix: 'or' },
+      meaning: '盔甲',
+      explanation: '武器 + 相关物品→盔甲',
+    },
+  ],
+  [
+    235,
+    {
+      word: 'artificial',
+      breakdown: { prefix: 'arti', root: 'fic', suffix: 'ial' },
+      meaning: '人造的',
+      explanation: '艺术 + 制作 + 变成形容词→人造的',
+    },
+  ],
+  [
+    236,
+    {
+      word: 'batter',
+      breakdown: { prefix: '', root: 'bat', suffix: 'ter' },
+      meaning: '连续猛击',
+      explanation: '打 + 连击/重复→连续猛击',
+    },
+  ],
+  [
+    237,
+    {
+      word: 'rebellion',
+      breakdown: { prefix: 're', root: 'bell', suffix: 'ion' },
+      meaning: '叛乱',
+      explanation: '相反 + 战争 + 变成名词→叛乱',
+    },
+  ],
+  [
+    238,
+    {
+      word: 'campaign',
+      breakdown: { prefix: '', root: 'camp', suffix: 'aign' },
+      meaning: '战役 / 活动',
+      explanation: '营地/田野 + 变成名词→战役',
+    },
+  ],
+  [
+    239,
+    {
+      word: 'incantation',
+      breakdown: { prefix: 'in', root: 'cant', suffix: 'ation' },
+      meaning: '咒语',
+      explanation: '向内 + 唱 + 变成名词→咒语',
+    },
+  ],
+  [
+    240,
+    {
+      word: 'reincarnation',
+      breakdown: { prefix: 're', root: 'incarn', suffix: 'ation' },
+      meaning: '轮回',
+      explanation: '再次 + 进入肉体 + 变成名词→轮回',
+    },
+  ],
+  [
+    241,
+    {
+      word: 'accuse',
+      breakdown: { prefix: 'ac', root: 'cuse', suffix: '' },
+      meaning: '指控',
+      explanation: '朝向 + 原因/理由→指控',
+    },
+  ],
+  [
+    242,
+    {
+      word: 'eccentric',
+      breakdown: { prefix: 'ec', root: 'centr', suffix: 'ic' },
+      meaning: '古怪的',
+      explanation: '向外 + 中心 + 变成形容词→古怪的',
+    },
+  ],
+  [
+    243,
+    {
+      word: 'certificate',
+      breakdown: { prefix: '', root: 'cert', suffix: 'ificate' },
+      meaning: '证书',
+      explanation: '确定 + 变成名词→证书',
+    },
+  ],
+  [
+    244,
+    {
+      word: 'incision',
+      breakdown: { prefix: 'in', root: 'cis', suffix: 'ion' },
+      meaning: '切口',
+      explanation: '向内 + 切 + 变成名词→切口',
+    },
+  ],
+  [
+    245,
+    {
+      word: 'civilization',
+      breakdown: { prefix: '', root: 'civil', suffix: 'ization' },
+      meaning: '文明',
+      explanation: '公民的 + 变成名词→文明',
+    },
+  ],
+  [
+    246,
+    {
+      word: 'clamor',
+      breakdown: { prefix: '', root: 'clam', suffix: 'or' },
+      meaning: '喧哗',
+      explanation: '呼喊 + 变成名词→喧哗',
+    },
+  ],
+  [
+    247,
+    {
+      word: 'declare',
+      breakdown: { prefix: 'de', root: 'clare', suffix: '' },
+      meaning: '宣布',
+      explanation: '完全 + 清楚→宣布',
+    },
+  ],
+  [
+    248,
+    {
+      word: 'recline',
+      breakdown: { prefix: 're', root: 'clin', suffix: 'e' },
+      meaning: '靠躺',
+      explanation: '向后 + 倾斜→靠躺',
+    },
+  ],
+  [
+    249,
+    {
+      word: 'conclude',
+      breakdown: { prefix: 'con', root: 'clude', suffix: '' },
+      meaning: '结论',
+      explanation: '一起 + 关闭→结论',
+    },
+  ],
+  [
+    250,
+    {
+      word: 'ignore',
+      breakdown: { prefix: 'ig', root: 'nore', suffix: '' },
+      meaning: '忽视',
+      explanation: '否定含义 + 知道→忽视',
+    },
+  ],
+  [
+    251,
+    {
+      word: 'discolor',
+      breakdown: { prefix: 'dis', root: 'color', suffix: '' },
+      meaning: '变色',
+      explanation: '去除/改变 + 颜色→变色',
+    },
+  ],
+  [
+    252,
+    {
+      word: 'crucify',
+      breakdown: { prefix: '', root: 'cruc', suffix: 'ify' },
+      meaning: '钉十字架',
+      explanation: '十字 + 变成动词→钉十字架',
+    },
+  ],
+  [
+    253,
+    {
+      word: 'crusty',
+      breakdown: { prefix: '', root: 'crust', suffix: 'y' },
+      meaning: '酥脆的',
+      explanation: '外壳 + 变成形容词→酥脆的',
+    },
+  ],
+  [
+    254,
+    {
+      word: 'exculpate',
+      breakdown: { prefix: 'ex', root: 'culp', suffix: 'ate' },
+      meaning: '开脱',
+      explanation: '向外 + 罪 + 变成动词→开脱',
+    },
+  ],
+  [
+    255,
+    {
+      word: 'accustom',
+      breakdown: { prefix: 'ac', root: 'custom', suffix: '' },
+      meaning: '使习惯',
+      explanation: '朝向 + 习惯→使习惯',
+    },
+  ],
+  [
+    256,
+    {
+      word: 'indemnity',
+      breakdown: { prefix: 'in', root: 'demn', suffix: 'ity' },
+      meaning: '赔偿',
+      explanation: '否定含义 + 损害 + 变成名词→赔偿',
+    },
+  ],
+  [
+    257,
+    {
+      word: 'demographic',
+      breakdown: { prefix: '', root: 'demo', suffix: 'graphic' },
+      meaning: '人口统计的',
+      explanation: '人民 + 画/写(形容词)→人口统计的',
+    },
+  ],
+  [
+    258,
+    {
+      word: 'dextrous',
+      breakdown: { prefix: '', root: 'dextr', suffix: 'ous' },
+      meaning: '灵巧的',
+      explanation: '熟练 + 变成形容词→灵巧的',
+    },
+  ],
+  [
+    259,
+    {
+      word: 'quotidian',
+      breakdown: { prefix: 'quoti', root: 'dian', suffix: '' },
+      meaning: '每日的',
+      explanation: '每一 + 日子→每日的',
+    },
+  ],
+  [
+    260,
+    {
+      word: 'indignant',
+      breakdown: { prefix: 'in', root: 'dign', suffix: 'ant' },
+      meaning: '愤慨的',
+      explanation: '否定含义 + 尊贵 + 变成形容词→愤慨的',
+    },
+  ],
+  [
+    261,
+    {
+      word: 'individual',
+      breakdown: { prefix: 'in', root: 'divid', suffix: 'ual' },
+      meaning: '个体',
+      explanation: '否定含义 + 分开 + 变成名词→个体',
+    },
+  ],
+  [
+    262,
+    {
+      word: 'doctrine',
+      breakdown: { prefix: '', root: 'doct', suffix: 'rine' },
+      meaning: '教义',
+      explanation: '教 + 变成名词→教义',
+    },
+  ],
+  [
+    263,
+    {
+      word: 'predominant',
+      breakdown: { prefix: 'pre', root: 'domin', suffix: 'ant' },
+      meaning: '占主导的',
+      explanation: '在前 + 主人 + 变成形容词→占主导的',
+    },
+  ],
+  [
+    264,
+    {
+      word: 'dormancy',
+      breakdown: { prefix: '', root: 'dorm', suffix: 'ancy' },
+      meaning: '休眠',
+      explanation: '睡眠 + 变成名词→休眠',
+    },
+  ],
+  [
+    265,
+    {
+      word: 'duration',
+      breakdown: { prefix: '', root: 'dur', suffix: 'ation' },
+      meaning: '持续时间',
+      explanation: '持久 + 变成名词→持续时间',
+    },
+  ],
+  [
+    266,
+    {
+      word: 'dynamite',
+      breakdown: { prefix: '', root: 'dynam', suffix: 'ite' },
+      meaning: '炸药',
+      explanation: '力量 + 变成名词→炸药',
+    },
+  ],
+  [
+    267,
+    {
+      word: 'egoist',
+      breakdown: { prefix: '', root: 'ego', suffix: 'ist' },
+      meaning: '利己主义者',
+      explanation: '自己 + 做这事的人→利己主义者',
+    },
+  ],
+  [
+    268,
+    {
+      word: 'empiric',
+      breakdown: { prefix: '', root: 'empir', suffix: 'ic' },
+      meaning: '经验主义者',
+      explanation: '经验 + 变成名词→经验主义者',
+    },
+  ],
+  [
+    269,
+    {
+      word: 'preemption',
+      breakdown: { prefix: 'pre', root: 'empt', suffix: 'ion' },
+      meaning: '抢先',
+      explanation: '提前 + 拿 + 变成名词→抢先',
+    },
+  ],
+  [
+    270,
+    {
+      word: 'errand',
+      breakdown: { prefix: '', root: 'err', suffix: 'and' },
+      meaning: '差事',
+      explanation: '走动/犯错 + 变成名词→差事',
+    },
+  ],
+  [
+    271,
+    {
+      word: 'profess',
+      breakdown: { prefix: 'pro', root: 'fess', suffix: '' },
+      meaning: '宣称',
+      explanation: '向前 + 说→宣称',
+    },
+  ],
+  [
+    272,
+    {
+      word: 'falsify',
+      breakdown: { prefix: '', root: 'fals', suffix: 'ify' },
+      meaning: '伪造',
+      explanation: '假 + 变成动词→伪造',
+    },
+  ],
+  [
+    273,
+    {
+      word: 'infamous',
+      breakdown: { prefix: 'in', root: 'fam', suffix: 'ous' },
+      meaning: '臭名昭著的',
+      explanation: '否定含义 + 名声 + 变成形容词→臭名昭著的',
+    },
+  ],
+  [
+    274,
+    {
+      word: 'fence',
+      breakdown: { prefix: '', root: 'fenc', suffix: 'e' },
+      meaning: '篱笆',
+      explanation: '防御(物)→篱笆',
+    },
+  ],
+  [
+    275,
+    {
+      word: 'confide',
+      breakdown: { prefix: 'con', root: 'fide', suffix: '' },
+      meaning: '吐露',
+      explanation: '一起 + 相信→吐露',
+    },
+  ],
+  [
+    276,
+    {
+      word: 'filament',
+      breakdown: { prefix: '', root: 'fil', suffix: 'ament' },
+      meaning: '灯丝',
+      explanation: '线 + 变成名词→灯丝',
+    },
+  ],
+  [
+    277,
+    {
+      word: 'infinite',
+      breakdown: { prefix: 'in', root: 'fin', suffix: 'ite' },
+      meaning: '无限的',
+      explanation: '否定含义 + 结束 + 变成形容词→无限的',
+    },
+  ],
+  [
+    278,
+    {
+      word: 'affirm',
+      breakdown: { prefix: 'af', root: 'firm', suffix: '' },
+      meaning: '肯定',
+      explanation: '朝向 + 坚固→肯定',
+    },
+  ],
+  [
+    279,
+    {
+      word: 'suffix',
+      breakdown: { prefix: 'suf', root: 'fix', suffix: '' },
+      meaning: '后缀',
+      explanation: '下方/之后 + 固定→后缀',
+    },
+  ],
+  [
+    280,
+    {
+      word: 'flamboyant',
+      breakdown: { prefix: '', root: 'flam', suffix: 'boyant' },
+      meaning: '耀眼的',
+      explanation: '火焰 + 变成形容词→耀眼的',
+    },
+  ],
+  [
+    281,
+    {
+      word: 'deflation',
+      breakdown: { prefix: 'de', root: 'flat', suffix: 'ion' },
+      meaning: '通货紧缩',
+      explanation: '向下 + 吹气 + 变成名词→通货紧缩',
+    },
+  ],
+  [
+    282,
+    {
+      word: 'deflect',
+      breakdown: { prefix: 'de', root: 'flect', suffix: '' },
+      meaning: '使偏斜',
+      explanation: '向下/偏离 + 弯曲→使偏斜',
+    },
+  ],
+  [
+    283,
+    {
+      word: 'florist',
+      breakdown: { prefix: '', root: 'flor', suffix: 'ist' },
+      meaning: '花商',
+      explanation: '花 + 做这事的人→花商',
+    },
+  ],
+  [
+    284,
+    {
+      word: 'foil',
+      breakdown: { prefix: '', root: 'foil', suffix: '' },
+      meaning: '箔',
+      explanation: '叶片/薄片→箔',
+    },
+  ],
+  [
+    285,
+    {
+      word: 'comfort',
+      breakdown: { prefix: 'com', root: 'fort', suffix: '' },
+      meaning: '安慰',
+      explanation: '一起 + 强大→安慰',
+    },
+  ],
+  [
+    286,
+    {
+      word: 'fraction',
+      breakdown: { prefix: '', root: 'fract', suffix: 'ion' },
+      meaning: '分数',
+      explanation: '打破 + 变成名词→分数',
+    },
+  ],
+  [
+    287,
+    {
+      word: 'frigidity',
+      breakdown: { prefix: '', root: 'frig', suffix: 'idity' },
+      meaning: '寒冷',
+      explanation: '冷 + 变成名词→寒冷',
+    },
+  ],
+  [
+    288,
+    {
+      word: 'fugitive',
+      breakdown: { prefix: '', root: 'fug', suffix: 'itive' },
+      meaning: '逃犯',
+      explanation: '逃跑 + 变成名词→逃犯',
+    },
+  ],
+  [
+    289,
+    {
+      word: 'diffuse',
+      breakdown: { prefix: 'dif', root: 'fuse', suffix: '' },
+      meaning: '扩散',
+      explanation: '分开 + 倒→扩散',
+    },
+  ],
+  [
+    290,
+    {
+      word: 'gene',
+      breakdown: { prefix: '', root: 'gene', suffix: '' },
+      meaning: '基因',
+      explanation: '产生→基因',
+    },
+  ],
+  [
+    291,
+    {
+      word: 'congestion',
+      breakdown: { prefix: 'con', root: 'gest', suffix: 'ion' },
+      meaning: '拥堵',
+      explanation: '一起 + 带 + 变成名词→拥堵',
+    },
+  ],
+  [
+    292,
+    {
+      word: 'glorify',
+      breakdown: { prefix: '', root: 'glor', suffix: 'ify' },
+      meaning: '颂扬',
+      explanation: '荣誉 + 变成动词→颂扬',
+    },
+  ],
+  [
+    293,
+    {
+      word: 'aggressive',
+      breakdown: { prefix: 'ag', root: 'gress', suffix: 'ive' },
+      meaning: '具有攻击性的',
+      explanation: '朝向 + 走 + 变成形容词→具有攻击性的',
+    },
+  ],
+  [
+    294,
+    {
+      word: 'telegram',
+      breakdown: { prefix: 'tele', root: 'gram', suffix: '' },
+      meaning: '电报',
+      explanation: '远程 + 写→电报',
+    },
+  ],
+  [
+    295,
+    {
+      word: 'granular',
+      breakdown: { prefix: '', root: 'gran', suffix: 'ular' },
+      meaning: '颗粒状的',
+      explanation: '颗粒 + 变成形容词→颗粒状的',
+    },
+  ],
+  [
+    296,
+    {
+      word: 'aggravate',
+      breakdown: { prefix: 'ag', root: 'grav', suffix: 'ate' },
+      meaning: '加重',
+      explanation: '朝向 + 重 + 变成动词→加重',
+    },
+  ],
+  [
+    297,
+    {
+      word: 'hostel',
+      breakdown: { prefix: '', root: 'host', suffix: 'el' },
+      meaning: '青年旅舍',
+      explanation: '客人 + 相关场所→青年旅舍',
+    },
+  ],
+  [
+    298,
+    {
+      word: 'exhume',
+      breakdown: { prefix: 'ex', root: 'hum', suffix: 'e' },
+      meaning: '掘出',
+      explanation: '向外 + 泥土→掘出',
+    },
+  ],
+  [
+    299,
+    {
+      word: 'igneous',
+      breakdown: { prefix: '', root: 'ign', suffix: 'eous' },
+      meaning: '火成的',
+      explanation: '火 + 变成形容词→火成的',
+    },
+  ],
+  [
+    300,
+    {
+      word: 'insulate',
+      breakdown: { prefix: '', root: 'insul', suffix: 'ate' },
+      meaning: '绝缘',
+      explanation: '岛屿/隔离 + 变成动词→绝缘',
+    },
+  ],
+])
+
+export const wordRootReplacements: WordRoot[] = baseWordRootReplacements.map(
+  (root) => {
+    const extraExample = extraExamplesById.get(root.id)
+
+    if (!extraExample || root.examples.length >= 3) {
+      return root
+    }
+
+    return {
+      ...root,
+      examples: [...root.examples, extraExample],
+    }
+  },
+)
