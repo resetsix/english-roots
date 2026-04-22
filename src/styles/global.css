@@ -2,7 +2,9 @@
 
 @font-face {
   font-family: 'LXGW WenKai Screen';
-  src: url('/fonts/LXGWWenKaiScreen.ttf') format('truetype');
+  src:
+    url('/fonts/LXGWWenKaiScreen-subset.woff2') format('woff2'),
+    url('/fonts/LXGWWenKaiScreen.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -190,6 +192,10 @@ button {
 
 .word-root-app {
   min-height: 100vh;
+}
+
+html.fonts-loading:not(.fonts-ready):not(.fonts-timeout) .word-root-app {
+  opacity: 0;
 }
 
 .wr-container {

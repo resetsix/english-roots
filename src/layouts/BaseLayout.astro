@@ -48,11 +48,51 @@ const currentYear = new Date().getFullYear()
         delete document.documentElement.dataset.readingTheme
       }
     </script>
+    <script is:inline>
+      ;(() => {
+        const root = document.documentElement
+        const family = 'LXGW WenKai Screen'
+        const timeoutMs = 1800
+        let settled = false
+
+        root.classList.add('fonts-loading')
+
+        const finish = (className) => {
+          if (settled) return
+          settled = true
+          root.classList.remove('fonts-loading')
+          root.classList.add(className)
+        }
+
+        if (!('fonts' in document)) {
+          finish('fonts-timeout')
+          return
+        }
+
+        window.setTimeout(() => finish('fonts-timeout'), timeoutMs)
+
+        const loadFont = () => {
+          document.fonts
+            .load(`1em "${family}"`)
+            .then(() => document.fonts.ready)
+            .then(() => finish('fonts-ready'))
+            .catch(() => finish('fonts-timeout'))
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadFont, {
+            once: true,
+          })
+        } else {
+          loadFont()
+        }
+      })()
+    </script>
     <link
       rel="preload"
-      href="/fonts/LXGWWenKaiScreen.ttf"
+      href="/fonts/LXGWWenKaiScreen-subset.woff2"
       as="font"
-      type="font/ttf"
+      type="font/woff2"
       crossorigin
     />
     <title>{title}</title>
