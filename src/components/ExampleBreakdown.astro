@@ -1,12 +1,19 @@
 ---
 import type { WordExample } from '@/data/wordRoots'
+import { getMorphemeMeaning } from '@/lib/morphemeMeaning'
 
 const { example } = Astro.props as { example: WordExample }
 const parts = [
   example.breakdown.prefix ? ['prefix', example.breakdown.prefix] : null,
   example.breakdown.root ? ['root', example.breakdown.root] : null,
   example.breakdown.suffix ? ['suffix', example.breakdown.suffix] : null,
-].filter(Boolean) as [string, string][]
+]
+  .filter(Boolean) as [string, string][]
+const partsWithMeanings = parts.map(([kind, text]) => [
+  kind,
+  text,
+  getMorphemeMeaning(example, kind as 'prefix' | 'root' | 'suffix', text),
+]) as [string, string, string][]
 ---
 
 <div class="example-breakdown">
@@ -16,10 +23,15 @@ const parts = [
     aria-label={`${example.word} 的词素拆解`}
   >
     {
-      parts.map(([kind, text], index) => (
+      partsWithMeanings.map(([kind, text, meaning], index) => (
         <>
           {index > 0 && <span class="example-breakdown__plus">+</span>}
-          <span class={`wr-morpheme wr-morpheme--${kind}`}>{text}</span>
+          <span class={`wr-morpheme wr-morpheme--${kind}`}>
+            <span class="example-breakdown__part-text">{text}</span>
+            {meaning && (
+              <span class="example-breakdown__part-meaning">{meaning}</span>
+            )}
+          </span>
         </>
       ))
     }
@@ -51,6 +63,28 @@ const parts = [
 
   .example-breakdown__plus {
     color: var(--wr-ink-faint);
+    line-height: 1;
+  }
+
+  .example-breakdown .wr-morpheme {
+    align-items: baseline;
+    gap: 6px;
+    line-height: 1.2;
+  }
+
+  .example-breakdown__part-text {
+    font-size: 0.94rem;
+  }
+
+  .example-breakdown__part-meaning {
+    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  .example-breakdown__part-meaning::before {
+    content: '·';
+    margin-right: 6px;
   }
 
   .example-breakdown__meaning {

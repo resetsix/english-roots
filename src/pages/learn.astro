@@ -24,6 +24,7 @@ import { totalWordRoots } from '@/data/wordRoots'
 
 <script>
   import { wordRoots } from '@/data/wordRoots'
+  import { getMorphemeMeaning } from '@/lib/morphemeMeaning'
   import { displayOrigin } from '@/lib/origin'
   import {
     getProgress,
@@ -71,7 +72,15 @@ import { totalWordRoots } from '@/data/wordRoots'
     return parts
       .map(([kind, text], index) => {
         const plus = index > 0 ? '<span class="learn-plus">+</span>' : ''
-        return `${plus}<span class="wr-morpheme wr-morpheme--${kind}">${escapeHtml(text)}</span>`
+        const meaning = getMorphemeMeaning(
+          example,
+          kind as 'prefix' | 'root' | 'suffix',
+          text,
+        )
+        const meaningHtml = meaning
+          ? `<span class="learn-morpheme-meaning">${escapeHtml(meaning)}</span>`
+          : ''
+        return `${plus}<span class="wr-morpheme wr-morpheme--${kind}"><span class="learn-morpheme-text">${escapeHtml(text)}</span>${meaningHtml}</span>`
       })
       .join('')
   }
@@ -340,6 +349,28 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   :global(.learn-plus) {
     color: var(--wr-ink-faint);
+    line-height: 1;
+  }
+
+  :global(.learn-example .wr-morpheme) {
+    align-items: baseline;
+    gap: 6px;
+    line-height: 1.2;
+  }
+
+  :global(.learn-morpheme-text) {
+    font-size: 0.94rem;
+  }
+
+  :global(.learn-morpheme-meaning) {
+    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  :global(.learn-morpheme-meaning::before) {
+    content: '·';
+    margin-right: 6px;
   }
 
   :global(.learn-example p) {
