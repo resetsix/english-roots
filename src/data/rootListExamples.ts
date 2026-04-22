@@ -18,7 +18,6 @@ export type RootListExamplesEntry = {
   listExamples: RootListExample[]
 }
 
-const curatedListExampleLimit = 230
 const examplesPerCard = 2
 
 function normalizePartMeaning(value: string, fallback = '') {
@@ -72,9 +71,8 @@ function toListExamplesEntry(root: WordRoot): RootListExamplesEntry {
   }
 }
 
-export const rootListExamples: RootListExamplesEntry[] = wordRoots
-  .slice(0, curatedListExampleLimit)
-  .map(toListExamplesEntry)
+export const rootListExamples: RootListExamplesEntry[] =
+  wordRoots.map(toListExamplesEntry)
 
 const rootListExamplesById = new Map(
   rootListExamples.map((entry) => [entry.id, entry.listExamples]),

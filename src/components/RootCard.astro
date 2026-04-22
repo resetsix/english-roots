@@ -9,6 +9,14 @@ import { displayOrigin } from '@/lib/origin'
 const { root } = Astro.props as { root: WordRoot }
 const listExamples = getRootListExamples(root)
 const listExampleSearchText = getRootListExampleSearchText(root)
+const cardSearchText = [
+  root.root,
+  root.meaning,
+  displayOrigin(root.origin),
+  listExampleSearchText,
+]
+  .join(' ')
+  .toLowerCase()
 ---
 
 <a
@@ -16,7 +24,7 @@ const listExampleSearchText = getRootListExampleSearchText(root)
   href={`/roots/${root.id}`}
   data-root-card
   data-origin={root.origin}
-  data-search={`${root.root} ${root.meaning} ${displayOrigin(root.origin)} ${root.description} ${root.examples.map((item) => `${item.word} ${item.meaning}`).join(' ')} ${listExampleSearchText}`.toLowerCase()}
+  data-search={cardSearchText}
 >
   <div class="root-card__top">
     <span class="root-card__root wr-wordmark">{root.root}</span>
