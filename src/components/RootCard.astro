@@ -1,8 +1,14 @@
 ---
 import type { WordRoot } from '@/data/wordRoots'
+import {
+  getRootListExampleSearchText,
+  getRootListExamples,
+} from '@/data/rootListExamples'
 import { displayOrigin } from '@/lib/origin'
 
 const { root } = Astro.props as { root: WordRoot }
+const listExamples = getRootListExamples(root)
+const listExampleSearchText = getRootListExampleSearchText(root)
 ---
 
 <a
@@ -10,18 +16,35 @@ const { root } = Astro.props as { root: WordRoot }
   href={`/roots/${root.id}`}
   data-root-card
   data-origin={root.origin}
-  data-search={`${root.root} ${root.meaning} ${displayOrigin(root.origin)} ${root.description} ${root.examples.map((item) => `${item.word} ${item.meaning}`).join(' ')}`.toLowerCase()}
+  data-search={`${root.root} ${root.meaning} ${displayOrigin(root.origin)} ${root.description} ${root.examples.map((item) => `${item.word} ${item.meaning}`).join(' ')} ${listExampleSearchText}`.toLowerCase()}
 >
   <div class="root-card__top">
     <span class="root-card__root wr-wordmark">{root.root}</span>
     <span class="wr-chip">{displayOrigin(root.origin)}</span>
   </div>
   <p>{root.meaning}</p>
-  <div class="wr-chip-row" aria-label={`${root.root} 例词`}>
+  <div class="root-card__examples" aria-label={`${root.root} 例词`}>
     {
-      root.examples
-        .slice(0, 3)
-        .map((example) => <span class="wr-chip">{example.word}</span>)
+      listExamples.map((example) => (
+        <div class="root-card__example">
+          <div class="root-card__example-word wr-wordmark">{example.word}</div>
+          <div class="root-card__formula">
+            {example.parts.map((part, index) => (
+              <>
+                {index > 0 && <span class="root-card__formula-symbol">+</span>}
+                <span class="root-card__part">
+                  <span class="root-card__part-text">{part.text}</span>
+                  {part.meaning && (
+                    <span class="root-card__part-meaning">{part.meaning}</span>
+                  )}
+                </span>
+              </>
+            ))}
+            <span class="root-card__formula-symbol">→</span>
+            <span class="root-card__example-meaning">{example.meaning}</span>
+          </div>
+        </div>
+      ))
     }
   </div>
   <span class="root-card__id">#{root.id}</span>
@@ -31,11 +54,11 @@ const { root } = Astro.props as { root: WordRoot }
   .root-card {
     position: relative;
     display: block;
-    min-height: 174px;
+    min-height: 218px;
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 18px;
+    padding: 18px 18px 28px;
     text-decoration: none;
     transition:
       border-color 160ms ease,
@@ -62,7 +85,70 @@ const { root } = Astro.props as { root: WordRoot }
 
   .root-card p {
     color: var(--wr-ink-muted);
-    margin: 10px 0 16px;
+    margin: 10px 0 14px;
+  }
+
+  .root-card__examples {
+    display: grid;
+    gap: 12px;
+    padding-bottom: 4px;
+  }
+
+  .root-card__example {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+    border-left: 2px solid var(--wr-margin-line);
+    padding-left: 10px;
+  }
+
+  .root-card__example-word {
+    color: var(--wr-ink);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .root-card__formula {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 6px;
+    color: var(--wr-ink-muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .root-card__part {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .root-card__part-text {
+    color: var(--wr-ink);
+    font-weight: 750;
+  }
+
+  .root-card__part-meaning {
+    color: var(--wr-ink-muted);
+  }
+
+  .root-card__part-meaning::before {
+    content: '(';
+  }
+
+  .root-card__part-meaning::after {
+    content: ')';
+  }
+
+  .root-card__formula-symbol {
+    color: var(--wr-ink-faint);
+  }
+
+  .root-card__example-meaning {
+    color: var(--wr-ink);
+    font-weight: 650;
   }
 
   .root-card__id {
