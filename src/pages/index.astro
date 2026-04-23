@@ -59,11 +59,17 @@ const featuredRoots = wordRoots.slice(0, 6)
       <div class="flex flex-wrap items-center gap-2.5" id="demo-parts">
         <span class="wr-morpheme wr-morpheme--prefix">
           <span class="word-lab__part-text">un</span>
+          <span class="word-lab__part-separator" aria-hidden="true"
+            >&nbsp;·&nbsp;</span
+          >
           <span class="word-lab__part-meaning">不</span>
         </span>
         <span class="word-lab__plus font-extrabold">+</span>
         <span class="wr-morpheme wr-morpheme--root">
           <span class="word-lab__part-text">happy</span>
+          <span class="word-lab__part-separator" aria-hidden="true"
+            >&nbsp;·&nbsp;</span
+          >
           <span class="word-lab__part-meaning">开心</span>
         </span>
       </div>
@@ -206,6 +212,12 @@ const featuredRoots = wordRoots.slice(0, 6)
       part.append(partText)
 
       if (meaning) {
+        const partSeparator = document.createElement('span')
+        partSeparator.className = 'word-lab__part-separator'
+        partSeparator.setAttribute('aria-hidden', 'true')
+        partSeparator.textContent = '\u00a0·\u00a0'
+        part.append(partSeparator)
+
         const partMeaning = document.createElement('span')
         partMeaning.className = 'word-lab__part-meaning'
         partMeaning.textContent = meaning
@@ -428,7 +440,7 @@ const featuredRoots = wordRoots.slice(0, 6)
 
   .word-lab .wr-morpheme {
     align-items: baseline;
-    gap: 6px;
+    gap: 0;
     line-height: 1.2;
   }
 
@@ -443,9 +455,10 @@ const featuredRoots = wordRoots.slice(0, 6)
     font-weight: 650;
   }
 
-  .word-lab__part-meaning::before {
-    content: '·';
-    margin-right: 6px;
+  .word-lab__part-separator {
+    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    font-size: 0.78rem;
+    font-weight: 650;
   }
 
   .word-lab__word-prefix {
