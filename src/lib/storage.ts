@@ -24,9 +24,12 @@ export type Achievement = {
 }
 
 export type ReadingTheme = 'book' | 'classic'
+export type AudioAccent = 'us' | 'uk'
 
 export type SettingsData = {
   readingTheme: ReadingTheme
+  audioEnabled: boolean
+  audioAccent: AudioAccent
 }
 
 function readJson<T>(key: string): T | null {
@@ -40,6 +43,8 @@ function readJson<T>(key: string): T | null {
 
 function createInitialSettings(): SettingsData {
   return {
+    audioEnabled: false,
+    audioAccent: 'us',
     readingTheme: 'book',
   }
 }
@@ -76,6 +81,33 @@ export function setReadingTheme(theme: ReadingTheme): SettingsData {
   const settings = {
     ...getSettings(),
     readingTheme: theme,
+  }
+  saveSettings(settings)
+  return settings
+}
+
+export function getAudioAccent(): AudioAccent {
+  return getSettings().audioAccent === 'uk' ? 'uk' : 'us'
+}
+
+export function getAudioEnabled(): boolean {
+  return getSettings().audioEnabled === true
+}
+
+export function setAudioEnabled(audioEnabled: boolean): SettingsData {
+  const settings = {
+    ...getSettings(),
+    audioEnabled,
+  }
+  saveSettings(settings)
+  return settings
+}
+
+export function setAudioAccent(accent: AudioAccent): SettingsData {
+  const audioAccent: AudioAccent = accent === 'uk' ? 'uk' : 'us'
+  const settings = {
+    ...getSettings(),
+    audioAccent,
   }
   saveSettings(settings)
   return settings
@@ -232,6 +264,7 @@ export function exportLearningData() {
   return {
     progress: getProgress(),
     achievements: getAchievements(),
+    settings: getSettings(),
     exportDate: new Date().toISOString(),
   }
 }
@@ -239,9 +272,11 @@ export function exportLearningData() {
 export function importLearningData(data: {
   progress?: ProgressData
   achievements?: Achievement[]
+  settings?: Partial<SettingsData>
 }) {
   if (data.progress) saveProgress(data.progress)
   if (data.achievements) saveAchievements(data.achievements)
+  if (data.settings) saveSettings({ ...getSettings(), ...data.settings })
 }
 
 export function clearLearningData() {

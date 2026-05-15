@@ -44,8 +44,12 @@ const currentYear = new Date().getFullYear()
         } else {
           delete document.documentElement.dataset.readingTheme
         }
+        document.documentElement.dataset.wordAudioEnabled = String(
+          settings.audioEnabled === true,
+        )
       } catch {
         delete document.documentElement.dataset.readingTheme
+        document.documentElement.dataset.wordAudioEnabled = 'false'
       }
     </script>
     <link
@@ -66,18 +70,50 @@ const currentYear = new Date().getFullYear()
             <span>词词有据</span>
           </a>
 
-          <div class="wr-nav__links">
-            {
-              navItems.map((item) => (
-                <a
-                  class="wr-nav__link"
-                  href={item.href}
-                  aria-current={activePath === item.href ? 'page' : undefined}
+          <div class="wr-nav__right">
+            <div class="wr-nav__links">
+              {
+                navItems.map((item) => (
+                  <a
+                    class="wr-nav__link"
+                    href={item.href}
+                    aria-current={activePath === item.href ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                ))
+              }
+            </div>
+            <div class="wr-audio-controls" aria-label="单词发音设置">
+              <button
+                class="wr-audio-toggle"
+                type="button"
+                data-word-audio-enabled-toggle
+                aria-label="开启单词发音"
+                aria-pressed="false"
+                title="开启单词发音"
+              >
+                发音
+              </button>
+              <div class="wr-accent-toggle" role="group" aria-label="发音口音">
+                <button
+                  type="button"
+                  data-word-audio-accent="us"
+                  aria-label="使用美式发音"
+                  title="使用美式发音"
                 >
-                  {item.label}
-                </a>
-              ))
-            }
+                  美式
+                </button>
+                <button
+                  type="button"
+                  data-word-audio-accent="uk"
+                  aria-label="使用英式发音"
+                  title="使用英式发音"
+                >
+                  英式
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -106,3 +142,10 @@ const currentYear = new Date().getFullYear()
     </div>
   </body>
 </html>
+
+<script>
+  import { initAudioAccentToggle, initWordAudioControls } from '@/lib/wordAudio'
+
+  initAudioAccentToggle()
+  initWordAudioControls()
+</script>

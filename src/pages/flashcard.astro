@@ -51,6 +51,7 @@ import { totalWordRoots } from '@/data/wordRoots'
 <script>
   import { wordRoots } from '@/data/wordRoots'
   import { displayOrigin } from '@/lib/origin'
+  import { initWordAudioControls, renderWordAudioButton } from '@/lib/wordAudio'
   import {
     getProgress,
     markRootAsMastered,
@@ -71,6 +72,7 @@ import { totalWordRoots } from '@/data/wordRoots'
   const practiceButton = document.querySelector('#practice-button')
   let index = 0
 
+  initWordAudioControls()
   updateStudyStreak()
 
   function escapeHtml(value: string) {
@@ -108,7 +110,10 @@ import { totalWordRoots } from '@/data/wordRoots'
         .map(
           (example) => `
             <div class="flash-example">
-              <strong>${escapeHtml(example.word)}</strong>
+              <span class="flash-example__word-row">
+                ${renderWordAudioButton(example.word)}
+                <strong>${escapeHtml(example.word)}</strong>
+              </span>
               <span>${escapeHtml(example.meaning)}</span>
             </div>
           `,
@@ -125,8 +130,17 @@ import { totalWordRoots } from '@/data/wordRoots'
     card?.classList.toggle('is-flipped')
   }
 
-  card?.addEventListener('click', flip)
+  function isCardControlTarget(event: Event) {
+    const target = event.target
+    return target instanceof Element && Boolean(target.closest('button, a'))
+  }
+
+  card?.addEventListener('click', (event) => {
+    if (isCardControlTarget(event)) return
+    flip()
+  })
   card?.addEventListener('keydown', (event) => {
+    if (isCardControlTarget(event)) return
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       flip()
@@ -262,6 +276,7 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   .flash-example {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
     border: 1px solid var(--wr-rule);
@@ -275,8 +290,18 @@ import { totalWordRoots } from '@/data/wordRoots'
     text-align: left;
   }
 
-  .flash-example span {
+  .flash-example > span:not(.flash-example__word-row) {
     color: var(--wr-ink-muted);
+  }
+
+  .flash-example__word-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .flash-example__word-row strong {
+    color: var(--wr-ink);
   }
 
   .flash-inline-actions,

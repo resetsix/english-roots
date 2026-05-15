@@ -5,6 +5,7 @@ import {
   getRootListExamples,
 } from '@/data/rootListExamples'
 import { displayOrigin } from '@/lib/origin'
+import { renderWordAudioButton } from '@/lib/wordAudio'
 
 const { root } = Astro.props as { root: WordRoot }
 const listExamples = getRootListExamples(root)
@@ -19,23 +20,29 @@ const cardSearchText = [
   .toLowerCase()
 ---
 
-<a
+<article
   class="root-card"
-  href={`/roots/${root.id}`}
   data-root-card
   data-origin={root.origin}
   data-search={cardSearchText}
 >
-  <div class="root-card__top">
-    <span class="root-card__root wr-wordmark">{root.root}</span>
-    <span class="wr-chip">{displayOrigin(root.origin)}</span>
-  </div>
-  <p>{root.meaning}</p>
+  <a class="root-card__summary" href={`/roots/${root.id}`}>
+    <div class="root-card__top">
+      <span class="root-card__root wr-wordmark">{root.root}</span>
+      <span class="wr-chip">{displayOrigin(root.origin)}</span>
+    </div>
+    <p>{root.meaning}</p>
+  </a>
   <div class="root-card__examples" aria-label={`${root.root} 例词`}>
     {
       listExamples.map((example) => (
         <div class="root-card__example">
-          <div class="root-card__example-word wr-wordmark">{example.word}</div>
+          <div class="root-card__example-word-row">
+            <Fragment set:html={renderWordAudioButton(example.word)} />
+            <div class="root-card__example-word wr-wordmark">
+              {example.word}
+            </div>
+          </div>
           <div class="root-card__formula">
             {example.parts.map((part, index) => (
               <>
@@ -56,7 +63,7 @@ const cardSearchText = [
     }
   </div>
   <span class="root-card__id">#{root.id}</span>
-</a>
+</article>
 
 <style>
   .root-card {
@@ -73,7 +80,14 @@ const cardSearchText = [
       box-shadow 160ms ease;
   }
 
-  .root-card:hover {
+  .root-card__summary {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .root-card:hover,
+  .root-card:focus-within {
     border-color: var(--wr-rule-strong);
     box-shadow: inset 0 -3px 0
       color-mix(in srgb, var(--wr-ochre) 13%, transparent);
@@ -91,7 +105,7 @@ const cardSearchText = [
     font-size: 1.16rem;
   }
 
-  .root-card p {
+  .root-card__summary p {
     color: var(--wr-ink-muted);
     margin: 10px 0 14px;
   }
@@ -110,9 +124,17 @@ const cardSearchText = [
     padding-left: 10px;
   }
 
+  .root-card__example-word-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    width: fit-content;
+  }
+
   .root-card__example-word {
     color: var(--wr-ink);
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
   }
 

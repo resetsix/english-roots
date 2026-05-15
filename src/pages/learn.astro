@@ -26,6 +26,7 @@ import { totalWordRoots } from '@/data/wordRoots'
   import { wordRoots } from '@/data/wordRoots'
   import { getMorphemeMeaning } from '@/lib/morphemeMeaning'
   import { displayOrigin } from '@/lib/origin'
+  import { initWordAudioControls, renderWordAudioButton } from '@/lib/wordAudio'
   import {
     getProgress,
     markRootAsMastered,
@@ -45,6 +46,7 @@ import { totalWordRoots } from '@/data/wordRoots'
     ? requestedIndex
     : getProgress().currentRootIndex
 
+  initWordAudioControls()
   updateStudyStreak()
 
   function escapeHtml(value: string) {
@@ -127,7 +129,10 @@ import { totalWordRoots } from '@/data/wordRoots'
             .map(
               (example) => `
                 <div class="learn-example">
-                  <div class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</div>
+                  <div class="learn-example__word-row">
+                    ${renderWordAudioButton(example.word)}
+                    <div class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</div>
+                  </div>
                   <div class="learn-example__parts">${renderParts(example)}</div>
                   <strong>${escapeHtml(example.meaning)}</strong>
                   <p>${escapeHtml(example.explanation)}</p>
@@ -337,6 +342,12 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   :global(.learn-example__word) {
     font-size: 1.2rem;
+  }
+
+  :global(.learn-example__word-row) {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 
   :global(.learn-example__parts) {

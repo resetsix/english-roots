@@ -1,14 +1,14 @@
 ---
 import type { WordExample } from '@/data/wordRoots'
 import { getMorphemeMeaning } from '@/lib/morphemeMeaning'
+import { renderWordAudioButton } from '@/lib/wordAudio'
 
 const { example } = Astro.props as { example: WordExample }
 const parts = [
   example.breakdown.prefix ? ['prefix', example.breakdown.prefix] : null,
   example.breakdown.root ? ['root', example.breakdown.root] : null,
   example.breakdown.suffix ? ['suffix', example.breakdown.suffix] : null,
-]
-  .filter(Boolean) as [string, string][]
+].filter(Boolean) as [string, string][]
 const partsWithMeanings = parts.map(([kind, text]) => [
   kind,
   text,
@@ -17,7 +17,10 @@ const partsWithMeanings = parts.map(([kind, text]) => [
 ---
 
 <div class="example-breakdown">
-  <div class="example-breakdown__word wr-wordmark">{example.word}</div>
+  <div class="example-breakdown__word-row">
+    <Fragment set:html={renderWordAudioButton(example.word)} />
+    <div class="example-breakdown__word wr-wordmark">{example.word}</div>
+  </div>
   <div
     class="example-breakdown__parts"
     aria-label={`${example.word} 的词素拆解`}
@@ -50,6 +53,12 @@ const partsWithMeanings = parts.map(([kind, text]) => [
 
   .example-breakdown__word {
     font-size: 1.25rem;
+  }
+
+  .example-breakdown__word-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 10px;
   }
 
