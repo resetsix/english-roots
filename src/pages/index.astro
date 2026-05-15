@@ -74,8 +74,7 @@ const featuredRoots = wordRoots.slice(0, 6)
         </span>
       </div>
       <div class="word-lab__meaning mt-6 border-t">
-        <span class="inline-block" id="demo-meaning-text"
-          >unhappy = 不开心</span
+        <span class="inline-block" id="demo-meaning-text">unhappy = 不开心</span
         >
       </div>
     </div>
@@ -352,11 +351,9 @@ const featuredRoots = wordRoots.slice(0, 6)
         easing: 'cubic-bezier(0.22, 0.78, 0.18, 1)',
       },
     )
-    animation.addEventListener(
-      'finish',
-      () => commitWord(nextExample),
-      { once: true },
-    )
+    animation.addEventListener('finish', () => commitWord(nextExample), {
+      once: true,
+    })
   }, 3200)
 </script>
 
