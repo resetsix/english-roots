@@ -12,28 +12,55 @@ export function getStaticPaths() {
 }
 
 const { root } = Astro.props
+const rootNotes = [
+  root.memoryHint ? ['记忆抓手', root.memoryHint] : null,
+  root.commonPitfall ? ['易错提醒', root.commonPitfall] : null,
+  root.variants?.length ? ['常见变体', root.variants.join(' / ')] : null,
+].filter(Boolean) as [string, string][]
 ---
 
 <BaseLayout title={`${root.root} - 词根详情`} activePath="/roots">
-  <article class="wr-narrow root-detail" data-root-id={root.id}>
+  <article class="wr-container root-detail" data-root-id={root.id}>
     <a class="back-link" href="/roots">← 返回词根列表</a>
 
-    <header class="detail-hero">
-      <div class="wr-kicker">Root #{root.id}</div>
-      <h1 class="detail-title wr-wordmark">{root.root}</h1>
-      <div class="detail-meta">
-        <span class="wr-chip">{displayOrigin(root.origin)}</span>
-        <span>{root.meaning}</span>
+    <header class="detail-hero wr-panel">
+      <div class="detail-hero__main">
+        <div class="wr-kicker">Root #{root.id}</div>
+        <h1 class="detail-title wr-wordmark">{root.root}</h1>
+        <div class="detail-meta">
+          <span class="wr-chip">{displayOrigin(root.origin)}</span>
+          <span>{root.meaning}</span>
+        </div>
+        <p class="detail-description">{root.description}</p>
       </div>
+
+      <aside class="detail-notes" aria-label="词条边注">
+        <div class="detail-notes__title">词条边注</div>
+        <div class="detail-note">
+          <span>学习目标</span>
+          <strong>会用 {root.root} 解释例词，而不是只背中文释义。</strong>
+        </div>
+        {
+          rootNotes.map(([label, text]) => (
+            <div class="detail-note">
+              <span>{label}</span>
+              <strong>{text}</strong>
+            </div>
+          ))
+        }
+      </aside>
     </header>
 
-    <section class="detail-section">
-      <h2 class="wr-section-title">详细说明</h2>
-      <p class="detail-description">{root.description}</p>
-    </section>
-
     <section class="detail-section example-section">
-      <h2 class="wr-section-title">例词解析</h2>
+      <div class="section-head">
+        <div>
+          <h2 class="wr-section-title">例词拆页</h2>
+          <p>
+            每个例词按「词素公式 → 字面组合义 →
+            自然义」阅读，先理解结构，再记住真实用法。
+          </p>
+        </div>
+      </div>
       <div class="example-grid">
         {root.examples.map((example) => <ExampleBreakdown example={example} />)}
       </div>
@@ -44,18 +71,25 @@ const { root } = Astro.props
       data-quiz
       data-correct={root.quiz.correctAnswer}
     >
-      <h2 class="wr-section-title">小测试</h2>
-      <p class="quiz-question">{root.quiz.question}</p>
-      <div class="quiz-options">
-        {
-          root.quiz.options.map((option, index) => (
-            <button class="quiz-option" type="button" data-index={index}>
-              {option}
-            </button>
-          ))
-        }
+      <div class="section-head">
+        <div>
+          <h2 class="wr-section-title">合上书以后</h2>
+          <p>先选最贴近词根核心义的答案，答完再回到例词核对。</p>
+        </div>
       </div>
-      <p class="quiz-feedback" data-feedback hidden></p>
+      <div class="quiz-layout">
+        <p class="quiz-question">{root.quiz.question}</p>
+        <div class="quiz-options">
+          {
+            root.quiz.options.map((option, index) => (
+              <button class="quiz-option" type="button" data-index={index}>
+                {option}
+              </button>
+            ))
+          }
+        </div>
+        <p class="quiz-feedback" data-feedback hidden></p>
+      </div>
     </section>
 
     <div class="detail-actions">
@@ -81,18 +115,35 @@ const { root } = Astro.props
     document.querySelector<HTMLElement>('[data-root-id]')?.dataset.rootId,
   )
 
+  function normalizeQuizAnswer(answer: string) {
+    return answer
+      .replace(/\s+/g, '')
+      .replace(/[，,、/／;；]/g, '/')
+      .trim()
+  }
+
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
       const selectedIndex = Number(button.dataset.index)
-      const isCorrect = selectedIndex === correctIndex
+      const correctAnswer = buttons[correctIndex]?.textContent?.trim() ?? ''
+      const selectedAnswer = button.textContent?.trim() ?? ''
+      const normalizedCorrectAnswer = normalizeQuizAnswer(correctAnswer)
+      const isCorrect =
+        selectedIndex === correctIndex ||
+        normalizeQuizAnswer(selectedAnswer) === normalizedCorrectAnswer
 
       buttons.forEach((item) => {
         const itemIndex = Number(item.dataset.index)
+        const isEquivalentCorrectAnswer =
+          normalizeQuizAnswer(item.textContent?.trim() ?? '') ===
+          normalizedCorrectAnswer
         item.disabled = true
-        item.classList.toggle('is-correct', itemIndex === correctIndex)
+        item.classList.toggle('is-correct', isEquivalentCorrectAnswer)
         item.classList.toggle(
           'is-wrong',
-          itemIndex === selectedIndex && !isCorrect,
+          itemIndex === selectedIndex &&
+            !isCorrect &&
+            !isEquivalentCorrectAnswer,
         )
       })
 
@@ -102,7 +153,7 @@ const { root } = Astro.props
         feedback.classList.toggle('is-wrong', !isCorrect)
         feedback.textContent = isCorrect
           ? '答对了，已计入掌握进度。'
-          : `答错了。正确答案是：${buttons[correctIndex]?.textContent?.trim() ?? ''}`
+          : `答错了。正确答案是：${correctAnswer}`
       }
 
       if (isCorrect && rootId) {
@@ -124,25 +175,19 @@ const { root } = Astro.props
   }
 
   .detail-hero {
-    position: relative;
-    border: 1px solid var(--wr-rule);
-    border-radius: var(--wr-radius);
-    background: var(--wr-paper-panel);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: clamp(18px, 4vw, 34px);
     margin-top: 30px;
-    padding: 30px 22px 32px;
-    text-align: center;
+    padding: clamp(22px, 4vw, 34px);
   }
 
   .detail-hero::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 1px solid color-mix(in srgb, var(--wr-rule) 62%, transparent);
-    pointer-events: none;
+    display: none;
   }
 
   .detail-title {
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(3.2rem, 10vw, 6rem);
     line-height: 1;
     margin: 12px 0 18px;
   }
@@ -150,7 +195,7 @@ const { root } = Astro.props
   .detail-meta {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 14px;
     color: var(--wr-ink-muted);
@@ -169,17 +214,61 @@ const { root } = Astro.props
     margin-top: 36px;
   }
 
-  .detail-description,
-  .quiz-panel {
-    border: 1px solid var(--wr-rule);
-    border-radius: var(--wr-radius);
-    background: var(--wr-paper-panel);
-    padding: 22px;
-  }
-
   .detail-description {
     color: var(--wr-ink-muted);
     font-size: 1.05rem;
+    margin: 22px 0 0;
+    max-width: 700px;
+  }
+
+  .detail-notes {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    border-left: 1px solid var(--wr-rule);
+    padding-left: clamp(18px, 3vw, 28px);
+  }
+
+  .detail-notes__title {
+    color: var(--wr-ink);
+    font-size: 1.05rem;
+    font-weight: 760;
+  }
+
+  .detail-note {
+    display: grid;
+    gap: 5px;
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-deep) 52%,
+      var(--wr-paper-panel)
+    );
+    padding: 12px;
+  }
+
+  .detail-note span,
+  .section-head p {
+    color: var(--wr-ink-faint);
+    font-size: 0.86rem;
+  }
+
+  .detail-note strong {
+    color: var(--wr-ink-muted);
+    font-weight: 650;
+    line-height: 1.65;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+
+  .section-head p {
     margin: 0;
   }
 
@@ -194,6 +283,17 @@ const { root } = Astro.props
     font-size: 1.08rem;
     font-weight: 760;
     margin: 0 0 16px;
+  }
+
+  .quiz-panel {
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: var(--wr-paper-panel);
+    padding: clamp(18px, 3vw, 24px);
+  }
+
+  .quiz-layout {
+    max-width: 720px;
   }
 
   .quiz-options {
@@ -251,6 +351,17 @@ const { root } = Astro.props
   }
 
   @media (max-width: 760px) {
+    .detail-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-notes {
+      border-left: 0;
+      border-top: 1px solid var(--wr-rule);
+      padding-left: 0;
+      padding-top: 18px;
+    }
+
     .example-grid {
       grid-template-columns: 1fr;
     }

@@ -4,52 +4,99 @@ import { totalWordRoots } from '@/data/wordRoots'
 ---
 
 <BaseLayout title="闪卡模式 - 词词有据" activePath="/flashcard">
-  <section class="flash-shell wr-narrow">
-    <div
-      class="flash-card"
-      id="flash-card"
-      role="button"
-      tabindex="0"
-      aria-label="点击翻转闪卡"
-    >
-      <div class="flash-card__inner">
-        <div class="flash-face flash-face--front">
-          <div class="wr-kicker">drawer card</div>
-          <div class="flash-root wr-wordmark" id="front-root">-</div>
-          <div class="flash-meaning" id="front-meaning">-</div>
-          <div class="wr-chip" id="front-origin">拉丁语</div>
-        </div>
-        <div class="flash-face flash-face--back">
-          <div class="flash-back-root wr-wordmark" id="back-root">-</div>
-          <p class="flash-description" id="back-description">-</p>
-          <div class="flash-examples" id="back-examples"></div>
-          <div class="flash-inline-actions">
-            <button
-              class="wr-button wr-button--study"
-              type="button"
-              id="known-button">认识</button
-            >
-            <button class="wr-button" type="button" id="practice-button"
-              >继续练习</button
-            >
-          </div>
-        </div>
+  <section class="flash-shell wr-container">
+    <header class="flash-topline">
+      <div>
+        <div class="wr-kicker">flash workspace</div>
+        <h1>分区闪卡</h1>
       </div>
-    </div>
+      <div class="flash-progress" aria-live="polite">
+        <span id="flash-progress">1/{totalWordRoots}</span>
+        <span id="flash-mastered">已掌握 0</span>
+      </div>
+    </header>
 
-    <div class="flash-controls">
-      <button class="wr-button" type="button" id="prev-card">上一个</button>
-      <div class="flash-progress" id="flash-progress">1/{totalWordRoots}</div>
-      <button class="wr-button wr-button--primary" type="button" id="next-card"
-        >下一个</button
-      >
-    </div>
-    <p class="flash-hint">点击纸卡翻面。键盘可用 ← / → 切换，空格翻转。</p>
+    <article class="flash-workspace wr-panel" data-flash-workspace>
+      <aside class="flash-study-pane">
+        <div class="flash-index" id="flash-index">001</div>
+        <div class="flash-root wr-wordmark" id="flash-root">-</div>
+        <div class="flash-meaning" id="flash-meaning">-</div>
+        <div class="flash-meta">
+          <span class="wr-chip" id="flash-origin">Latin</span>
+          <span id="flash-count">1/{totalWordRoots}</span>
+        </div>
+
+        <div class="flash-progress-track" aria-hidden="true">
+          <span id="flash-progress-bar"></span>
+        </div>
+
+        <div class="flash-pane-actions">
+          <button class="wr-button" type="button" id="prev-card">上一个</button>
+          <button
+            class="wr-button wr-button--primary"
+            type="button"
+            id="next-card"
+          >
+            下一个
+          </button>
+        </div>
+      </aside>
+
+      <section class="flash-detail-pane">
+        <div class="flash-detail-head">
+          <div>
+            <h2 id="flash-detail-title">先猜意思，再展开解释</h2>
+            <p id="flash-key-note">空格键可显示 / 收起解释，← / → 切换。</p>
+          </div>
+          <button
+            class="flash-toggle"
+            type="button"
+            id="toggle-detail"
+            aria-expanded="true"
+          >
+            收起解释
+          </button>
+        </div>
+
+        <div class="flash-detail-body" id="flash-detail-body">
+          <section class="flash-description-card">
+            <div class="flash-label">词条边注</div>
+            <p id="flash-description">-</p>
+            <p class="flash-note" id="flash-root-note" hidden></p>
+          </section>
+
+          <section class="flash-examples-card">
+            <div class="flash-label">例词拆页</div>
+            <div class="flash-examples" id="flash-examples"></div>
+          </section>
+        </div>
+
+        <div class="flash-actions">
+          <button
+            class="wr-button wr-button--study"
+            type="button"
+            id="known-button"
+          >
+            认识
+          </button>
+          <button class="wr-button" type="button" id="practice-button"
+            >继续练</button
+          >
+          <a class="wr-button" href="/roots/1" id="detail-link">查看详情</a>
+        </div>
+      </section>
+    </article>
+
+    <p class="flash-hint">
+      学习提示：先看左侧回忆词根含义，再展开右侧核对例词；空格显示 / 收起解释，←
+      / → 切换。
+    </p>
   </section>
 </BaseLayout>
 
 <script>
   import { wordRoots } from '@/data/wordRoots'
+  import { getMorphemeMeaning } from '@/lib/morphemeMeaning'
   import { displayOrigin } from '@/lib/origin'
   import { initWordAudioControls, renderWordAudioButton } from '@/lib/wordAudio'
   import {
@@ -58,19 +105,31 @@ import { totalWordRoots } from '@/data/wordRoots'
     updateStudyStreak,
   } from '@/lib/storage'
 
-  const card = document.querySelector<HTMLElement>('#flash-card')
-  const frontRoot = document.querySelector('#front-root')
-  const frontMeaning = document.querySelector('#front-meaning')
-  const frontOrigin = document.querySelector('#front-origin')
-  const backRoot = document.querySelector('#back-root')
-  const backDescription = document.querySelector('#back-description')
-  const backExamples = document.querySelector('#back-examples')
+  const rootText = document.querySelector('#flash-root')
+  const meaningText = document.querySelector('#flash-meaning')
+  const originText = document.querySelector('#flash-origin')
+  const countText = document.querySelector('#flash-count')
+  const indexText = document.querySelector('#flash-index')
   const progressText = document.querySelector('#flash-progress')
+  const masteredText = document.querySelector('#flash-mastered')
+  const progressBar = document.querySelector<HTMLElement>('#flash-progress-bar')
+  const descriptionText = document.querySelector('#flash-description')
+  const rootNote = document.querySelector<HTMLElement>('#flash-root-note')
+  const examplesPanel = document.querySelector('#flash-examples')
+  const detailBody = document.querySelector<HTMLElement>('#flash-detail-body')
+  const detailTitle = document.querySelector('#flash-detail-title')
+  const keyNote = document.querySelector('#flash-key-note')
+  const detailLink = document.querySelector<HTMLAnchorElement>('#detail-link')
+  const toggleDetailButton =
+    document.querySelector<HTMLButtonElement>('#toggle-detail')
   const prevButton = document.querySelector('#prev-card')
   const nextButton = document.querySelector('#next-card')
   const knownButton = document.querySelector('#known-button')
   const practiceButton = document.querySelector('#practice-button')
+
   let index = 0
+  let detailVisible = true
+  let touchStartX = 0
 
   initWordAudioControls()
   updateStudyStreak()
@@ -94,94 +153,173 @@ import { totalWordRoots } from '@/data/wordRoots'
     return nextIndex
   }
 
-  function renderCard(nextIndex: number) {
+  function renderParts(
+    example: (typeof wordRoots)[number]['examples'][number],
+  ) {
+    const parts = [
+      example.breakdown.prefix ? ['prefix', example.breakdown.prefix] : null,
+      example.breakdown.root ? ['root', example.breakdown.root] : null,
+      example.breakdown.suffix ? ['suffix', example.breakdown.suffix] : null,
+    ].filter(Boolean) as [string, string][]
+
+    return parts
+      .map(([kind, text], partIndex) => {
+        const plus = partIndex > 0 ? '<span class="flash-plus">+</span>' : ''
+        const meaning = getMorphemeMeaning(
+          example,
+          kind as 'prefix' | 'root' | 'suffix',
+          text,
+        )
+        const meaningHtml = meaning
+          ? `<span class="flash-part-meaning">${escapeHtml(meaning)}</span>`
+          : ''
+        return `${plus}<span class="wr-morpheme wr-morpheme--${kind}"><span>${escapeHtml(text)}</span>${meaningHtml}</span>`
+      })
+      .join('')
+  }
+
+  function getLiteralMeaning(
+    example: (typeof wordRoots)[number]['examples'][number],
+  ) {
+    return (
+      example.literalMeaning || example.explanation.split('→')[0]?.trim() || ''
+    )
+  }
+
+  function syncDetailVisibility() {
+    detailBody?.classList.toggle('is-hidden', !detailVisible)
+    if (toggleDetailButton) {
+      toggleDetailButton.textContent = detailVisible ? '收起解释' : '显示解释'
+      toggleDetailButton.setAttribute('aria-expanded', String(detailVisible))
+    }
+    if (detailTitle) {
+      detailTitle.textContent = detailVisible
+        ? '解释分区'
+        : '先回忆，再展开核对'
+    }
+    if (keyNote) {
+      keyNote.textContent = detailVisible
+        ? '空格键收起解释；← / → 切换。'
+        : '先在左侧回忆意思，再按空格显示解释。'
+    }
+  }
+
+  function renderCard(
+    nextIndex: number,
+    options: { keepDetail?: boolean } = {},
+  ) {
     index = normalize(nextIndex)
     const root = wordRoots[index]
-    card?.classList.remove('is-flipped')
+    const progress = getProgress()
+    const sequence = `${index + 1}/${wordRoots.length}`
 
-    if (frontRoot) frontRoot.textContent = root.root
-    if (frontMeaning) frontMeaning.textContent = root.meaning
-    if (frontOrigin) frontOrigin.textContent = displayOrigin(root.origin)
-    if (backRoot) backRoot.textContent = root.root
-    if (backDescription) backDescription.textContent = root.description
-    if (backExamples) {
-      backExamples.innerHTML = root.examples
+    if (!options.keepDetail) detailVisible = true
+
+    if (rootText) rootText.textContent = root.root
+    if (meaningText) meaningText.textContent = root.meaning
+    if (originText) originText.textContent = displayOrigin(root.origin)
+    if (countText) countText.textContent = sequence
+    if (indexText) indexText.textContent = String(index + 1).padStart(3, '0')
+    if (progressText) progressText.textContent = sequence
+    if (masteredText)
+      masteredText.textContent = `已掌握 ${progress.masteredRoots.length}`
+    if (progressBar)
+      progressBar.style.width = `${((index + 1) / wordRoots.length) * 100}%`
+    if (descriptionText) descriptionText.textContent = root.description
+    if (detailLink) detailLink.href = `/roots/${root.id}`
+
+    const note = root.commonPitfall || root.memoryHint || ''
+    if (rootNote) {
+      rootNote.hidden = !note
+      rootNote.textContent = note
+    }
+
+    if (examplesPanel) {
+      examplesPanel.innerHTML = root.examples
         .slice(0, 3)
         .map(
           (example) => `
-            <div class="flash-example">
-              <span class="flash-example__word-row">
-                ${renderWordAudioButton(example.word)}
-                <strong>${escapeHtml(example.word)}</strong>
-              </span>
-              <span>${escapeHtml(example.meaning)}</span>
-            </div>
+            <article class="flash-example">
+              <div class="flash-example__head">
+                <span class="flash-example__word-row">
+                  ${renderWordAudioButton(example.word)}
+                  <strong class="wr-wordmark">${escapeHtml(example.word)}</strong>
+                </span>
+                <span class="flash-example__meaning">${escapeHtml(example.meaning)}</span>
+              </div>
+              <div class="flash-example__parts">${renderParts(example)}</div>
+              <div class="flash-example__explain">
+                <span>${escapeHtml(getLiteralMeaning(example))}</span>
+                <span aria-hidden="true">→</span>
+                <strong>${escapeHtml(example.meaning)}</strong>
+              </div>
+              ${
+                example.learningNote
+                  ? `<p class="flash-example__note">${escapeHtml(example.learningNote)}</p>`
+                  : ''
+              }
+            </article>
           `,
         )
         .join('')
     }
 
-    const mastered = getProgress().masteredRoots.length
-    if (progressText)
-      progressText.textContent = `${index + 1}/${wordRoots.length} · 已掌握 ${mastered}`
+    syncDetailVisibility()
   }
 
-  function flip() {
-    card?.classList.toggle('is-flipped')
+  function go(nextIndex: number) {
+    renderCard(nextIndex)
   }
 
-  function isCardControlTarget(event: Event) {
-    const target = event.target
-    return target instanceof Element && Boolean(target.closest('button, a'))
-  }
-
-  card?.addEventListener('click', (event) => {
-    if (isCardControlTarget(event)) return
-    flip()
+  toggleDetailButton?.addEventListener('click', () => {
+    detailVisible = !detailVisible
+    syncDetailVisibility()
   })
-  card?.addEventListener('keydown', (event) => {
-    if (isCardControlTarget(event)) return
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      flip()
-    }
-  })
-  prevButton?.addEventListener('click', () => renderCard(index - 1))
-  nextButton?.addEventListener('click', () => renderCard(index + 1))
-  practiceButton?.addEventListener('click', (event) => {
-    event.stopPropagation()
-    renderCard(index + 1)
-  })
-  knownButton?.addEventListener('click', (event) => {
-    event.stopPropagation()
+  prevButton?.addEventListener('click', () => go(index - 1))
+  nextButton?.addEventListener('click', () => go(index + 1))
+  practiceButton?.addEventListener('click', () => go(index + 1))
+  knownButton?.addEventListener('click', () => {
     markRootAsMastered(wordRoots[index].id)
-    renderCard(index + 1)
+    go(index + 1)
   })
 
   document.addEventListener('keydown', (event) => {
+    const target = event.target
+    if (
+      target instanceof HTMLElement &&
+      target.closest('input, textarea, select, button, a')
+    ) {
+      return
+    }
+
     if (event.key === 'ArrowLeft') {
       event.preventDefault()
-      renderCard(index - 1)
+      go(index - 1)
     }
     if (event.key === 'ArrowRight') {
       event.preventDefault()
-      renderCard(index + 1)
+      go(index + 1)
     }
     if (event.key === ' ') {
       event.preventDefault()
-      flip()
+      detailVisible = !detailVisible
+      syncDetailVisibility()
     }
   })
 
-  let touchStartX = 0
-  card?.addEventListener('touchstart', (event) => {
-    touchStartX = event.changedTouches[0].screenX
-  })
-  card?.addEventListener('touchend', (event) => {
-    const diff = touchStartX - event.changedTouches[0].screenX
-    if (Math.abs(diff) < 50) return
-    renderCard(diff > 0 ? index + 1 : index - 1)
-  })
+  document
+    .querySelector<HTMLElement>('[data-flash-workspace]')
+    ?.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].screenX
+    })
+
+  document
+    .querySelector<HTMLElement>('[data-flash-workspace]')
+    ?.addEventListener('touchend', (event) => {
+      const diff = touchStartX - event.changedTouches[0].screenX
+      if (Math.abs(diff) < 50) return
+      go(diff > 0 ? index + 1 : index - 1)
+    })
 
   renderCard(index)
 </script>
@@ -189,150 +327,331 @@ import { totalWordRoots } from '@/data/wordRoots'
 <style>
   .flash-shell {
     display: grid;
-    gap: 22px;
+    gap: 18px;
   }
 
-  .flash-card {
-    height: min(620px, 68vh);
-    min-height: 440px;
-    perspective: 1200px;
-  }
-
-  .flash-card__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 360ms ease;
-    transform-style: preserve-3d;
-  }
-
-  .flash-card.is-flipped .flash-card__inner {
-    transform: rotateY(180deg);
-  }
-
-  .flash-face {
-    position: absolute;
-    inset: 0;
+  .flash-topline {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    backface-visibility: hidden;
-    border: 1px solid var(--wr-rule);
-    border-radius: var(--wr-radius);
-    background:
-      linear-gradient(transparent 31px, var(--wr-paper-line) 32px) 0 0 / 100%
-        32px,
-      var(--wr-paper-panel);
-    padding: clamp(22px, 5vw, 42px);
-    text-align: center;
-    box-shadow: var(--wr-shadow);
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
   }
 
-  .flash-face--front {
+  .flash-topline h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 760;
+    line-height: 1.06;
+    margin: 8px 0 0;
+  }
+
+  .flash-progress {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    color: var(--wr-ink-muted);
+    font-weight: 760;
+  }
+
+  .flash-progress span {
+    border: 1px solid var(--wr-rule);
+    border-radius: 999px;
+    background: var(--wr-paper-panel);
+    padding: 5px 10px;
+  }
+
+  .flash-workspace {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.32fr);
+    min-height: min(680px, calc(100vh - 210px));
+    overflow: hidden;
+  }
+
+  .flash-study-pane,
+  .flash-detail-pane {
+    padding: clamp(20px, 4vw, 34px);
+  }
+
+  .flash-study-pane {
+    position: relative;
+    display: grid;
+    align-content: center;
+    gap: 18px;
+    border-right: 1px solid var(--wr-rule);
     background:
       linear-gradient(90deg, var(--wr-margin-line) 0 1px, transparent 1px) 28px
         0 / 1px 100% no-repeat,
       linear-gradient(transparent 31px, var(--wr-paper-line) 32px) 0 0 / 100%
         32px,
-      var(--wr-paper-panel);
+      color-mix(in srgb, var(--wr-paper-deep) 42%, var(--wr-paper-panel));
   }
 
-  .flash-face--back {
-    transform: rotateY(180deg);
+  .flash-index {
+    color: var(--wr-ink-faint);
+    font-family: 'SF Mono', 'Cascadia Code', ui-monospace, monospace;
+    font-size: 0.86rem;
+    font-weight: 760;
   }
 
   .flash-root {
-    font-size: clamp(3.4rem, 13vw, 7.6rem);
-    line-height: 1;
-    margin: 22px 0 16px;
+    font-size: clamp(3.4rem, 10vw, 6.8rem);
+    line-height: 0.96;
+    overflow-wrap: anywhere;
   }
 
   .flash-meaning {
-    color: var(--wr-ink-muted);
-    font-size: clamp(1.3rem, 4vw, 2.1rem);
-    font-weight: 780;
-    margin-bottom: 16px;
+    color: var(--wr-ink);
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 760;
   }
 
-  .flash-back-root {
-    font-size: clamp(2rem, 7vw, 3.6rem);
-    line-height: 1;
-  }
-
-  .flash-description {
-    color: var(--wr-ink-muted);
-    margin: 18px auto 0;
-    max-width: 620px;
-  }
-
-  .flash-examples {
-    display: grid;
-    gap: 8px;
-    margin-top: 18px;
-    width: min(100%, 520px);
-  }
-
-  .flash-example {
+  .flash-meta,
+  .flash-pane-actions,
+  .flash-actions {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  :global(.flash-example__head),
+  :global(.flash-example__word-row),
+  :global(.flash-example__parts),
+  :global(.flash-example__explain) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .flash-meta {
+    color: var(--wr-ink-muted);
+  }
+
+  .flash-progress-track {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--wr-rule) 52%, transparent);
+  }
+
+  .flash-progress-track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      var(--wr-progress-start),
+      var(--wr-progress-end)
+    );
+    transition: width 180ms ease;
+  }
+
+  .flash-pane-actions {
+    margin-top: 8px;
+  }
+
+  .flash-detail-pane {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 18px;
+    min-width: 0;
+  }
+
+  .flash-detail-head {
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
+    gap: 16px;
+    border-bottom: 1px solid var(--wr-rule);
+    padding-bottom: 16px;
+  }
+
+  .flash-detail-head h2 {
+    font-size: 1.35rem;
+    margin: 0 0 6px;
+  }
+
+  .flash-detail-head p,
+  .flash-hint,
+  .flash-description-card p {
+    color: var(--wr-ink-muted);
+    margin: 0;
+  }
+
+  :global(.flash-example__note) {
+    color: var(--wr-ink-muted);
+    margin: 0;
+  }
+
+  .flash-toggle {
+    min-height: 40px;
+    flex: 0 0 auto;
+    border: 1px solid var(--wr-rule);
+    border-radius: 999px;
+    background: var(--wr-paper-panel);
+    color: var(--wr-ink-muted);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 7px 12px;
+  }
+
+  .flash-detail-body {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    overflow: auto;
+    padding-right: 4px;
+  }
+
+  .flash-detail-body.is-hidden {
+    display: none;
+  }
+
+  .flash-description-card,
+  .flash-examples-card {
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: color-mix(
       in srgb,
-      var(--wr-paper-deep) 50%,
-      var(--wr-paper-panel)
+      var(--wr-paper-panel) 86%,
+      var(--wr-paper-deep)
     );
-    padding: 9px 11px;
-    text-align: left;
   }
 
-  .flash-example > span:not(.flash-example__word-row) {
-    color: var(--wr-ink-muted);
+  :global(.flash-example) {
+    border: 1px solid var(--wr-rule);
+    border-radius: var(--wr-radius);
+    background: color-mix(
+      in srgb,
+      var(--wr-paper-panel) 86%,
+      var(--wr-paper-deep)
+    );
   }
 
-  .flash-example__word-row {
-    display: inline-flex;
-    align-items: center;
+  .flash-description-card,
+  .flash-examples-card {
+    padding: 18px;
+  }
+
+  .flash-label {
+    color: var(--wr-ink-faint);
+    font-size: 0.78rem;
+    font-weight: 760;
+    margin-bottom: 12px;
+  }
+
+  .flash-note {
+    border-left: 2px solid
+      color-mix(in srgb, var(--wr-ochre) 42%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-ochre) 7%, transparent);
+    margin-top: 12px !important;
+    padding: 8px 10px;
+  }
+
+  .flash-examples {
+    display: grid;
+    gap: 18px;
+  }
+
+  :global(.flash-example) {
+    display: grid;
+    gap: 19px;
+    padding: 21px;
+  }
+
+  :global(.flash-example__head) {
+    justify-content: space-between;
+    margin-bottom: 1px;
+  }
+
+  :global(.flash-example__meaning) {
+    border: 1px solid color-mix(in srgb, var(--wr-study) 34%, var(--wr-rule));
+    border-radius: 999px;
+    background: var(--wr-study-soft);
+    color: var(--wr-study);
+    font-size: 0.86rem;
+    font-weight: 760;
+    padding: 3px 9px;
+  }
+
+  :global(.flash-example__parts) {
+    gap: 10px;
+    line-height: 1.35;
+    row-gap: 12px;
+  }
+
+  :global(.flash-example .wr-morpheme) {
     gap: 7px;
   }
 
-  .flash-example__word-row strong {
+  :global(.flash-part-meaning) {
+    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    font-size: 0.78rem;
+  }
+
+  :global(.flash-part-meaning::before) {
+    content: '·';
+    margin-right: 6px;
+  }
+
+  :global(.flash-plus) {
+    color: var(--wr-ink-faint);
+  }
+
+  :global(.flash-example__explain) {
+    align-items: baseline;
+    color: var(--wr-ink-muted);
+    line-height: 1.75;
+    padding-top: 1px;
+  }
+
+  :global(.flash-example__explain strong) {
     color: var(--wr-ink);
   }
 
-  .flash-inline-actions,
-  .flash-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
+  :global(.flash-example__note) {
+    line-height: 1.7;
   }
 
-  .flash-inline-actions {
-    margin-top: 20px;
-  }
-
-  .flash-progress {
-    color: var(--wr-ink-muted);
-    font-weight: 760;
-    min-width: 170px;
-    text-align: center;
+  .flash-actions {
+    border-top: 1px solid var(--wr-rule);
+    padding-top: 16px;
   }
 
   .flash-hint {
-    color: var(--wr-ink-faint);
-    margin: 0;
     text-align: center;
   }
 
-  @media (max-width: 700px) {
-    .flash-card {
-      min-height: 500px;
+  @media (max-width: 860px) {
+    .flash-topline {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .flash-progress {
+      justify-content: flex-start;
+    }
+
+    .flash-workspace {
+      grid-template-columns: 1fr;
+    }
+
+    .flash-study-pane {
+      border-right: 0;
+      border-bottom: 1px solid var(--wr-rule);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .flash-detail-head {
+      flex-direction: column;
+    }
+
+    .flash-actions .wr-button,
+    .flash-pane-actions .wr-button {
+      flex: 1 1 140px;
     }
   }
 </style>

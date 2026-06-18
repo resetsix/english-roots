@@ -14,33 +14,57 @@ const partsWithMeanings = parts.map(([kind, text]) => [
   text,
   getMorphemeMeaning(example, kind as 'prefix' | 'root' | 'suffix', text),
 ]) as [string, string, string][]
+
+const literalMeaning =
+  example.literalMeaning || example.explanation.split('→')[0]?.trim() || ''
 ---
 
 <div class="example-breakdown">
-  <div class="example-breakdown__word-row">
-    <Fragment set:html={renderWordAudioButton(example.word)} />
-    <div class="example-breakdown__word wr-wordmark">{example.word}</div>
+  <div class="example-breakdown__head">
+    <div class="example-breakdown__word-row">
+      <Fragment set:html={renderWordAudioButton(example.word)} />
+      <div class="example-breakdown__word wr-wordmark">{example.word}</div>
+    </div>
+    <div class="example-breakdown__meaning">{example.meaning}</div>
   </div>
-  <div
-    class="example-breakdown__parts"
-    aria-label={`${example.word} 的词素拆解`}
-  >
-    {
-      partsWithMeanings.map(([kind, text, meaning], index) => (
-        <>
-          {index > 0 && <span class="example-breakdown__plus">+</span>}
-          <span class={`wr-morpheme wr-morpheme--${kind}`}>
-            <span class="example-breakdown__part-text">{text}</span>
-            {meaning && (
-              <span class="example-breakdown__part-meaning">{meaning}</span>
-            )}
-          </span>
-        </>
-      ))
-    }
+
+  <div class="example-breakdown__flow">
+    <div class="example-breakdown__label">词素公式</div>
+    <div
+      class="example-breakdown__parts"
+      aria-label={`${example.word} 的词素拆解`}
+    >
+      {
+        partsWithMeanings.map(([kind, text, meaning], index) => (
+          <>
+            {index > 0 && <span class="example-breakdown__plus">+</span>}
+            <span class={`wr-morpheme wr-morpheme--${kind}`}>
+              <span class="example-breakdown__part-text">{text}</span>
+              {meaning && (
+                <span class="example-breakdown__part-meaning">{meaning}</span>
+              )}
+            </span>
+          </>
+        ))
+      }
+    </div>
   </div>
-  <div class="example-breakdown__meaning">{example.meaning}</div>
-  <p>{example.explanation}</p>
+
+  <div class="example-breakdown__flow">
+    <div class="example-breakdown__label">字面组合义</div>
+    <p class="example-breakdown__literal">{literalMeaning}</p>
+  </div>
+
+  <div class="example-breakdown__flow">
+    <div class="example-breakdown__label">自然义</div>
+    <p class="example-breakdown__natural">{example.explanation}</p>
+  </div>
+
+  {
+    example.learningNote && (
+      <p class="example-breakdown__note">{example.learningNote}</p>
+    )
+  }
 </div>
 
 <style>
@@ -48,7 +72,16 @@ const partsWithMeanings = parts.map(([kind, text]) => [
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 18px;
+    padding: 16px;
+  }
+
+  .example-breakdown__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    border-bottom: 1px solid color-mix(in srgb, var(--wr-rule) 72%, transparent);
+    padding-bottom: 12px;
   }
 
   .example-breakdown__word {
@@ -59,7 +92,19 @@ const partsWithMeanings = parts.map(([kind, text]) => [
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 10px;
+    min-width: 0;
+  }
+
+  .example-breakdown__flow {
+    display: grid;
+    gap: 8px;
+    margin-top: 13px;
+  }
+
+  .example-breakdown__label {
+    color: var(--wr-ink-faint);
+    font-size: 0.78rem;
+    font-weight: 760;
   }
 
   .example-breakdown__parts {
@@ -67,7 +112,6 @@ const partsWithMeanings = parts.map(([kind, text]) => [
     align-items: center;
     flex-wrap: wrap;
     gap: 7px;
-    margin-bottom: 10px;
   }
 
   .example-breakdown__plus {
@@ -97,11 +141,40 @@ const partsWithMeanings = parts.map(([kind, text]) => [
   }
 
   .example-breakdown__meaning {
+    border: 1px solid color-mix(in srgb, var(--wr-study) 34%, var(--wr-rule));
+    border-radius: 999px;
+    background: var(--wr-study-soft);
+    color: var(--wr-study);
+    flex: 0 0 auto;
+    font-size: 0.92rem;
     font-weight: 760;
+    line-height: 1.3;
+    padding: 4px 10px;
   }
 
-  .example-breakdown p {
+  .example-breakdown__literal,
+  .example-breakdown__natural,
+  .example-breakdown__note {
     color: var(--wr-ink-muted);
-    margin: 4px 0 0;
+    margin: 0;
+  }
+
+  .example-breakdown__literal {
+    color: var(--wr-ink);
+    font-weight: 700;
+  }
+
+  .example-breakdown__note {
+    border-left: 2px solid
+      color-mix(in srgb, var(--wr-ochre) 42%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-ochre) 7%, transparent);
+    margin-top: 14px;
+    padding: 8px 10px;
+  }
+
+  @media (max-width: 520px) {
+    .example-breakdown__head {
+      flex-direction: column;
+    }
   }
 </style>
