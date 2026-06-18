@@ -5,8 +5,11 @@ export type WordPart = { prefix: string; root: string; suffix: string }
 export type WordExample = {
   word: string
   breakdown: WordPart
+  partMeanings?: Partial<WordPart>
   meaning: string
   explanation: string
+  literalMeaning?: string
+  learningNote?: string
 }
 
 export type WordRoot = {
@@ -16,6 +19,9 @@ export type WordRoot = {
   meaning: string
   meaningEn: string
   description: string
+  variants?: string[]
+  memoryHint?: string
+  commonPitfall?: string
   examples: WordExample[]
   quiz: {
     question: string
@@ -1446,12 +1452,17 @@ const baseWordRoots: WordRoot[] = [
     meaning: '送，放',
     meaningEn: 'mit',
     description: `mit/miss 代表「送、放」。submit（提交）= sub-（向下）+ mit（送）→ 向下送 → 提交。mission（任务）= miss（送）+ -ion → 被派遣去做的事 → 任务。`,
+    memoryHint: 'mit/miss 的核心不是“递东西”，而是把人、信息或许可“送入某个状态”。',
+    commonPitfall: 'admit 不要硬记成“向……送”，可以理解为“让事实进入记录/承认范围”。',
     examples: [
       {
         word: 'admit',
         breakdown: { prefix: 'ad', root: 'mit', suffix: '' },
+        partMeanings: { prefix: '朝向 / 进入', root: '送入 / 放入' },
         meaning: '承认',
-        explanation: '向...送→承认'
+        explanation: '让事实进入承认范围→承认',
+        literalMeaning: '送入某个范围',
+        learningNote: '语义已经抽象化：admit 也可表示“准许进入”。',
       },
       {
         word: 'commit',
@@ -1468,8 +1479,10 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'permit',
         breakdown: { prefix: 'per', root: 'mit', suffix: '' },
+        partMeanings: { prefix: '通过', root: '送 / 放行' },
         meaning: '允许',
-        explanation: '让通过→允许'
+        explanation: '让通过→允许',
+        literalMeaning: '放行通过',
       },
       {
         word: 'transmit',
@@ -1992,6 +2005,8 @@ const baseWordRoots: WordRoot[] = [
     meaning: '时间',
     meaningEn: 'temp',
     description: `temp/tempor 代表「时间」（拉丁语）。temporary（临时的）= tempor（时间）+ -ary → 时间性的 → 临时的。contemporary（当代的）= con-（一起）+ tempor（时间）+ -ary → 同一时间的 → 当代的。`,
+    variants: ['tempo', 'temper'],
+    commonPitfall: 'tempo 和 temper 不是“时间的”直译题：前者偏音乐节拍，后者偏情绪状态/调和后的性情。',
     examples: [
       {
         word: 'temporary',
@@ -2008,20 +2023,27 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'tempo',
         breakdown: { prefix: '', root: 'tempo', suffix: '' },
+        partMeanings: { root: '时间 / 拍子' },
         meaning: '节奏',
-        explanation: '时间→节奏'
+        explanation: '按时间组织的拍子→节奏',
+        literalMeaning: '时间节拍',
+        learningNote: '音乐里 tempo 指速度/拍速，不直接翻成“时间”。',
       },
       {
         word: 'temporal',
         breakdown: { prefix: '', root: 'tempor', suffix: 'al' },
         meaning: '时间的',
-        explanation: '时间的'
+        explanation: '与时间有关→时间的',
+        literalMeaning: '关于时间的',
       },
       {
         word: 'temper',
         breakdown: { prefix: '', root: 'temper', suffix: '' },
+        partMeanings: { root: '调和 / 状态' },
         meaning: '脾气',
-        explanation: '时间状态→脾气'
+        explanation: '被调和出的情绪状态→脾气',
+        literalMeaning: '调和后的状态',
+        learningNote: 'temper 与 temp 同源链较远，适合当联想，不适合硬拆成“时间”。',
       }
     ],
     quiz: {
@@ -4598,12 +4620,16 @@ const baseWordRoots: WordRoot[] = [
     meaning: '拿住，居住',
     meaningEn: 'have, dwell',
     description: `habit/hibit 代表「拿住、居住」。inhabit（居住）= in-（里面）+ habit（住）→ 住在里面 → 居住。exhibit（展览）= ex-（向外）+ hibit（拿）→ 拿出来给人看 → 展览。prohibit（禁止）= pro-（在前）+ hibit（拿）→ 提前拿住阻止 → 禁止。`,
+    commonPitfall: 'habit 作普通词是“习惯”，不是“拿住”的直译；这里用它提示“长期持有/保持”的语义线索。',
     examples: [
       {
         word: 'habit',
         breakdown: { prefix: '', root: 'habit', suffix: '' },
+        partMeanings: { root: '持有 / 保持' },
         meaning: '习惯',
-        explanation: '拿住→习惯'
+        explanation: '长期保持的行为→习惯',
+        literalMeaning: '被持续持有的行为模式',
+        learningNote: '这是自由词，不是最佳拆词例；真正高价值例词是 inhabit / exhibit / prohibit。',
       },
       {
         word: 'inhabit',
@@ -4998,6 +5024,8 @@ const baseWordRoots: WordRoot[] = [
     meaning: '相等',
     meaningEn: 'equal',
     description: `par/peer 代表「相等」。compare（比较）= com-（一起）+ par（相等）+ -e → 放在一起看是否相等 → 比较。peer（同辈）= peer（相等）→ 地位相等的人 → 同辈。parity（平等）= par（相等）+ -ity → 相等状态 → 平等。`,
+    variants: ['pare'],
+    commonPitfall: 'prepare 中的 pare 更接近“安排/整理”，不要机械理解为“提前相等”。',
     examples: [
       {
         word: 'compare',
@@ -5007,15 +5035,20 @@ const baseWordRoots: WordRoot[] = [
       },
       {
         word: 'prepare',
-        breakdown: { prefix: 'pre', root: 'par', suffix: 'e' },
+        breakdown: { prefix: 'pre', root: 'pare', suffix: '' },
+        partMeanings: { prefix: '预先', root: '安排 / 备好' },
         meaning: '准备',
-        explanation: '提前等→准备'
+        explanation: '预先安排好→准备',
+        literalMeaning: '提前备好',
+        learningNote: '这个词保留在本卡作为近缘提醒；不要把 par=相等 套得过硬。',
       },
       {
         word: 'peer',
         breakdown: { prefix: '', root: 'peer', suffix: '' },
         meaning: '同伴',
-        explanation: '相等→同伴'
+        explanation: '地位相等的人→同伴',
+        literalMeaning: '同等地位者',
+        learningNote: 'peer 是自由词，重点记“同级/同辈”的相等感。',
       },
       {
         word: 'parity',
@@ -5135,7 +5168,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'acquire',
         breakdown: { prefix: 'ac', root: 'quir', suffix: 'e' },
         meaning: '获得',
-        explanation: '向...求→获得'
+        explanation: '朝目标寻求→获得'
       },
       {
         word: 'inquire',
@@ -5295,7 +5328,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'assign',
         breakdown: { prefix: 'as', root: 'sign', suffix: '' },
         meaning: '分配',
-        explanation: '向...做记号→分配'
+        explanation: '给对象做标记→分配'
       },
       {
         word: 'signature',
@@ -5335,7 +5368,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'assemble',
         breakdown: { prefix: 'as', root: 'sembl', suffix: 'e' },
         meaning: '集合',
-        explanation: '向...相似→集合'
+        explanation: '使变得相似→集合'
       },
       {
         word: 'dissemble',
@@ -5518,30 +5551,41 @@ const baseWordRoots: WordRoot[] = [
     meaning: '变成形容词',
     meaningEn: 'of, relating to',
     description: `-al/-ial 是形容词后缀，代表「...的、关于...的」。national = nation（国家）+ -al → 国家的。social = soci（社会）+ -al → 社会的。encial = essence（本质）+ -ial → 本质的。`,
+    memoryHint: '-al/-ial 不是给词义“加料”，主要负责把名词/词根变成“与……有关的”形容词。',
+    commonPitfall: 'natural/social/material/special 这类词如果只写“自然的→自然的”，学习价值很低；要看词根义和后缀功能。',
     examples: [
       {
         word: 'natural',
         breakdown: { prefix: '', root: 'natur', suffix: 'al' },
+        partMeanings: { root: '自然 / 出生', suffix: '与……有关的' },
         meaning: '自然的',
-        explanation: '自然的'
+        explanation: '与自然有关→自然的',
+        literalMeaning: '关于自然的',
       },
       {
         word: 'social',
         breakdown: { prefix: '', root: 'soci', suffix: 'al' },
+        partMeanings: { root: '同伴 / 社会', suffix: '与……有关的' },
         meaning: '社会的',
-        explanation: '社会的'
+        explanation: '与社会或群体有关→社会的',
+        literalMeaning: '关于社会关系的',
       },
       {
         word: 'material',
         breakdown: { prefix: '', root: 'mater', suffix: 'ial' },
+        partMeanings: { root: '物质 / 材料', suffix: '与……有关的' },
         meaning: '物质的',
-        explanation: '物质的'
+        explanation: '与材料或物质有关→物质的',
+        literalMeaning: '关于物质材料的',
       },
       {
         word: 'special',
         breakdown: { prefix: '', root: 'spec', suffix: 'ial' },
+        partMeanings: { root: '种类 / 看', suffix: '与……有关的' },
         meaning: '特殊的',
-        explanation: '特殊的'
+        explanation: '归为特定一类→特殊的',
+        literalMeaning: '属于特定类别的',
+        learningNote: 'special 的 spec 与“看/种类”语义有历史分化，适合建立联想，不要逐字硬译。',
       }
     ],
     quiz: {
@@ -6278,30 +6322,39 @@ const baseWordRoots: WordRoot[] = [
     meaning: '生长',
     meaningEn: 'grow',
     description: `cre/cresc 来自拉丁语「生长」。想象植物的「逐渐生长(crescendo)」过程。concrete（混凝土）= con-（一起）+ cre（生长）→ 长在一起/凝结成块的东西 → 具体的。create（创造）= cre（生长）+ -ate → 让东西生长出来 → 创造。记住：increase = in-（向内）+ crease（生长）→ 向内生长 → 增加。`,
+    memoryHint: 'cre/cresc 的核心画面是“长出来、变多、形成”。',
     examples: [
       {
         word: 'create',
         breakdown: { prefix: '', root: 'cre', suffix: 'ate' },
+        partMeanings: { root: '生长 / 产生', suffix: '变成动词' },
         meaning: '创造',
-        explanation: '生长->创造'
+        explanation: '让新事物生长出来→创造',
+        literalMeaning: '使其产生',
       },
       {
         word: 'increase',
         breakdown: { prefix: 'in', root: 'cre', suffix: 'ase' },
+        partMeanings: { prefix: '向内 / 进入', root: '生长' },
         meaning: '增加',
-        explanation: '向内生长->增加'
+        explanation: '数量继续生长→增加',
+        literalMeaning: '生长变多',
       },
       {
         word: 'decrease',
         breakdown: { prefix: 'de', root: 'cre', suffix: 'ase' },
+        partMeanings: { prefix: '向下', root: '生长 / 数量' },
         meaning: '减少',
-        explanation: '向下生长->减少'
+        explanation: '数量往下变化→减少',
+        literalMeaning: '数量下降',
       },
       {
         word: 'concrete',
         breakdown: { prefix: 'con', root: 'cre', suffix: 'te' },
+        partMeanings: { prefix: '一起', root: '生长 / 凝结' },
         meaning: '具体的',
-        explanation: '长在一起/凝结成块->具体的'
+        explanation: '凝结成可感知的整体→具体的',
+        literalMeaning: '长合在一起',
       }
     ],
     quiz: {
@@ -6323,25 +6376,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'credit',
         breakdown: { prefix: '', root: 'cred', suffix: 'it' },
         meaning: '信用',
-        explanation: '相信->信用'
+        explanation: '相信→信用'
       },
       {
         word: 'incredible',
         breakdown: { prefix: 'in', root: 'cred', suffix: 'ible' },
         meaning: '难以置信',
-        explanation: '不能信->难以置信'
+        explanation: '不能信→难以置信'
       },
       {
         word: 'credible',
         breakdown: { prefix: '', root: 'cred', suffix: 'ible' },
         meaning: '可信的',
-        explanation: '能信->可信的'
+        explanation: '能信→可信的'
       },
       {
         word: 'credential',
         breakdown: { prefix: '', root: 'cred', suffix: 'ential' },
         meaning: '证书',
-        explanation: '信用->证书'
+        explanation: '信用→证书'
       }
     ],
     quiz: {
@@ -6363,25 +6416,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'donate',
         breakdown: { prefix: '', root: 'don', suffix: 'ate' },
         meaning: '捐赠',
-        explanation: '给->捐赠'
+        explanation: '给→捐赠'
       },
       {
         word: 'pardon',
         breakdown: { prefix: 'par', root: 'don', suffix: '' },
         meaning: '原谅',
-        explanation: '完全给->原谅'
+        explanation: '完全给→原谅'
       },
       {
         word: 'anecdote',
         breakdown: { prefix: 'anec', root: 'dot', suffix: 'e' },
         meaning: '轶事',
-        explanation: '不公开给->轶事'
+        explanation: '不公开给→轶事'
       },
       {
         word: 'antidote',
         breakdown: { prefix: 'anti', root: 'dot', suffix: 'e' },
         meaning: '解药',
-        explanation: '反给->解药'
+        explanation: '反给→解药'
       }
     ],
     quiz: {
@@ -6409,19 +6462,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'equation',
         breakdown: { prefix: '', root: 'equ', suffix: 'ation' },
         meaning: '方程',
-        explanation: '相等->方程'
+        explanation: '相等→方程'
       },
       {
         word: 'adequate',
         breakdown: { prefix: 'ad', root: 'equ', suffix: 'ate' },
         meaning: '足够的',
-        explanation: '向...等->足够的'
+        explanation: '达到相等水平→足够的'
       },
       {
         word: 'equity',
         breakdown: { prefix: '', root: 'equ', suffix: 'ity' },
         meaning: '公平',
-        explanation: '相等->公平'
+        explanation: '相等→公平'
       }
     ],
     quiz: {
@@ -6443,25 +6496,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'fluid',
         breakdown: { prefix: '', root: 'flu', suffix: 'id' },
         meaning: '流体',
-        explanation: '流->流体'
+        explanation: '流→流体'
       },
       {
         word: 'influence',
         breakdown: { prefix: 'in', root: 'flu', suffix: 'ence' },
         meaning: '影响',
-        explanation: '流入->影响'
+        explanation: '流入→影响'
       },
       {
         word: 'fluent',
         breakdown: { prefix: '', root: 'flu', suffix: 'ent' },
         meaning: '流利的',
-        explanation: '流动->流利的'
+        explanation: '流动→流利的'
       },
       {
         word: 'affluent',
         breakdown: { prefix: 'af', root: 'flu', suffix: 'ent' },
         meaning: '富裕的',
-        explanation: '流向->富裕的'
+        explanation: '流向→富裕的'
       }
     ],
     quiz: {
@@ -6478,30 +6531,40 @@ const baseWordRoots: WordRoot[] = [
     meaning: '基础',
     meaningEn: 'base',
     description: `found/fund 代表「基础、底部」。foundation（基础）= found（基）+ -ation → 打地基。profound（深刻的）= pro-（向前）+ found（底）→ 深到底部的 → 深刻的。fundamental（基本的）= fund（基）+ -amental → 基础的。`,
+    commonPitfall: 'found 既可以是“建立”，也可能是 find 的过去式“找到”；本卡只讲“建立/打基础”的 found。',
     examples: [
       {
         word: 'found',
         breakdown: { prefix: '', root: 'found', suffix: '' },
+        partMeanings: { root: '打基础 / 建立' },
         meaning: '建立',
-        explanation: '基础->建立'
+        explanation: '打下基础→建立',
+        literalMeaning: '把基础放下',
+        learningNote: '自由词示例，注意不要和 find-found-found 混淆。',
       },
       {
         word: 'foundation',
         breakdown: { prefix: '', root: 'found', suffix: 'ation' },
+        partMeanings: { root: '基础', suffix: '变成名词' },
         meaning: '基础',
-        explanation: '基础'
+        explanation: '打基础这件事或结果→基础',
+        literalMeaning: '被建立起来的底部',
       },
       {
         word: 'fundamental',
         breakdown: { prefix: '', root: 'fund', suffix: 'amental' },
+        partMeanings: { root: '基础', suffix: '相关的' },
         meaning: '基本的',
-        explanation: '基础的->基本的'
+        explanation: '属于基础层面的→基本的',
+        literalMeaning: '与基础有关的',
       },
       {
         word: 'profound',
         breakdown: { prefix: 'pro', root: 'found', suffix: '' },
+        partMeanings: { prefix: '向前 / 深入', root: '底部' },
         meaning: '深刻的',
-        explanation: '向前基础->深刻的'
+        explanation: '深入到底部→深刻的',
+        literalMeaning: '深到底部',
       }
     ],
     quiz: {
@@ -6535,13 +6598,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'congratulate',
         breakdown: { prefix: 'con', root: 'grat', suffix: 'ulate' },
         meaning: '祝贺',
-        explanation: '一起感激->祝贺'
+        explanation: '一起感激→祝贺'
       },
       {
         word: 'ingratiate',
         breakdown: { prefix: 'in', root: 'grat', suffix: 'iate' },
         meaning: '讨好',
-        explanation: '向内感激->讨好'
+        explanation: '向内感激→讨好'
       }
     ],
     quiz: {
@@ -6558,30 +6621,38 @@ const baseWordRoots: WordRoot[] = [
     meaning: '粘',
     meaningEn: 'stick',
     description: `her/hes 代表「粘附、坚持」。adhere（坚持）= ad-（向）+ here（粘）→ 粘着 → 坚持。coherent（连贯的）= co-（一起）+ her（粘）+ -ent → 粘在一起的 → 连贯的。hesitate（犹豫）= hes（粘）+ -itate → 粘住不动 → 犹豫。`,
+    variants: ['here'],
+    memoryHint: 'her/hes 的画面是“黏在一起”或“卡住不动”。',
     examples: [
       {
         word: 'adhere',
         breakdown: { prefix: 'ad', root: 'here', suffix: '' },
+        partMeanings: { prefix: '朝向', root: '粘' },
         meaning: '粘附',
-        explanation: '向...粘->粘附'
+        explanation: '向某物粘住→粘附',
+        literalMeaning: '朝向并粘住',
       },
       {
         word: 'cohere',
         breakdown: { prefix: 'co', root: 'here', suffix: '' },
         meaning: '连贯',
-        explanation: '一起粘->连贯'
+        explanation: '一起粘→连贯'
       },
       {
         word: 'inherent',
         breakdown: { prefix: 'in', root: 'her', suffix: 'ent' },
+        partMeanings: { prefix: '在里面', root: '粘', suffix: '变成形容词' },
         meaning: '固有的',
-        explanation: '在里粘->固有的'
+        explanation: '粘在内部不分离→固有的',
+        literalMeaning: '内在粘连的',
       },
       {
         word: 'hesitate',
         breakdown: { prefix: '', root: 'hes', suffix: 'itate' },
+        partMeanings: { root: '粘住 / 停住', suffix: '变成动词' },
         meaning: '犹豫',
-        explanation: '粘住->犹豫'
+        explanation: '行动像被粘住一样停顿→犹豫',
+        literalMeaning: '卡住不动',
       }
     ],
     quiz: {
@@ -6609,19 +6680,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'prejudice',
         breakdown: { prefix: 'pre', root: 'jud', suffix: 'ice' },
         meaning: '偏见',
-        explanation: '预先判断->偏见'
+        explanation: '预先判断→偏见'
       },
       {
         word: 'judicial',
         breakdown: { prefix: '', root: 'judic', suffix: 'ial' },
         meaning: '司法的',
-        explanation: '判断的->司法的'
+        explanation: '判断的→司法的'
       },
       {
         word: 'adjudicate',
         breakdown: { prefix: 'ad', root: 'judic', suffix: 'ate' },
         meaning: '裁决',
-        explanation: '向...判断->裁决'
+        explanation: '对案件作判断→裁决'
       }
     ],
     quiz: {
@@ -6643,25 +6714,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'jury',
         breakdown: { prefix: '', root: 'jur', suffix: 'y' },
         meaning: '陪审团',
-        explanation: '发誓->陪审团'
+        explanation: '发誓→陪审团'
       },
       {
         word: 'justice',
         breakdown: { prefix: '', root: 'jus', suffix: 'tice' },
         meaning: '正义',
-        explanation: '法律->正义'
+        explanation: '法律→正义'
       },
       {
         word: 'injury',
         breakdown: { prefix: 'in', root: 'jur', suffix: 'y' },
         meaning: '伤害',
-        explanation: '不法->伤害'
+        explanation: '不法→伤害'
       },
       {
         word: 'adjust',
         breakdown: { prefix: 'ad', root: 'just', suffix: '' },
         meaning: '调整',
-        explanation: '向...正->调整'
+        explanation: '使其变正→调整'
       }
     ],
     quiz: {
@@ -6683,25 +6754,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'lateral',
         breakdown: { prefix: '', root: 'later', suffix: 'al' },
         meaning: '侧面的',
-        explanation: '边的->侧面的'
+        explanation: '边的→侧面的'
       },
       {
         word: 'bilateral',
         breakdown: { prefix: 'bi', root: 'later', suffix: 'al' },
         meaning: '双边的',
-        explanation: '两边->双边的'
+        explanation: '两边→双边的'
       },
       {
         word: 'unilateral',
         breakdown: { prefix: 'uni', root: 'later', suffix: 'al' },
         meaning: '单边的',
-        explanation: '一边->单边的'
+        explanation: '一边→单边的'
       },
       {
         word: 'collateral',
         breakdown: { prefix: 'col', root: 'later', suffix: 'al' },
         meaning: '抵押品',
-        explanation: '一起边->抵押品'
+        explanation: '一起边→抵押品'
       }
     ],
     quiz: {
@@ -6723,25 +6794,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'elevate',
         breakdown: { prefix: 'e', root: 'lev', suffix: 'ate' },
         meaning: '提升',
-        explanation: '向外举->提升'
+        explanation: '向外举→提升'
       },
       {
         word: 'elevator',
         breakdown: { prefix: 'e', root: 'lev', suffix: 'ator' },
         meaning: '电梯',
-        explanation: '举起器->电梯'
+        explanation: '举起器→电梯'
       },
       {
         word: 'relieve',
         breakdown: { prefix: 're', root: 'liev', suffix: 'e' },
         meaning: '减轻',
-        explanation: '再举->减轻'
+        explanation: '再举→减轻'
       },
       {
         word: 'lever',
         breakdown: { prefix: '', root: 'lev', suffix: 'er' },
         meaning: '杠杆',
-        explanation: '举起->杠杆'
+        explanation: '举起→杠杆'
       }
     ],
     quiz: {
@@ -6769,13 +6840,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'liquidate',
         breakdown: { prefix: '', root: 'liqu', suffix: 'idate' },
         meaning: '清算',
-        explanation: '变液体->清算'
+        explanation: '变液体→清算'
       },
       {
         word: 'liquor',
         breakdown: { prefix: '', root: 'liqu', suffix: 'or' },
         meaning: '酒',
-        explanation: '液体->酒'
+        explanation: '液体→酒'
       }
     ],
     quiz: {
@@ -6803,19 +6874,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'remark',
         breakdown: { prefix: 're', root: 'mark', suffix: '' },
         meaning: '评论',
-        explanation: '再标记->评论'
+        explanation: '再标记→评论'
       },
       {
         word: 'landmark',
         breakdown: { prefix: 'land', root: 'mark', suffix: '' },
         meaning: '地标',
-        explanation: '土地标记->地标'
+        explanation: '土地标记→地标'
       },
       {
         word: 'bookmark',
         breakdown: { prefix: 'book', root: 'mark', suffix: '' },
         meaning: '书签',
-        explanation: '书标记->书签'
+        explanation: '书标记→书签'
       }
     ],
     quiz: {
@@ -6837,25 +6908,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'medium',
         breakdown: { prefix: '', root: 'medi', suffix: 'um' },
         meaning: '中等',
-        explanation: '中间->中等'
+        explanation: '中间→中等'
       },
       {
         word: 'mediate',
         breakdown: { prefix: '', root: 'medi', suffix: 'ate' },
         meaning: '调解',
-        explanation: '居中->调解'
+        explanation: '居中→调解'
       },
       {
         word: 'immediate',
         breakdown: { prefix: 'im', root: 'medi', suffix: 'ate' },
         meaning: '立即的',
-        explanation: '不居中->立即的'
+        explanation: '不居中→立即的'
       },
       {
         word: 'medieval',
         breakdown: { prefix: '', root: 'medi', suffix: 'eval' },
         meaning: '中世纪',
-        explanation: '中间时代->中世纪'
+        explanation: '中间时代→中世纪'
       }
     ],
     quiz: {
@@ -6883,19 +6954,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'immigrate',
         breakdown: { prefix: 'im', root: 'migr', suffix: 'ate' },
         meaning: '移入',
-        explanation: '向内迁->移入'
+        explanation: '向内迁→移入'
       },
       {
         word: 'emigrate',
         breakdown: { prefix: 'e', root: 'migr', suffix: 'ate' },
         meaning: '移出',
-        explanation: '向外迁->移出'
+        explanation: '向外迁→移出'
       },
       {
         word: 'immigrant',
         breakdown: { prefix: 'im', root: 'migr', suffix: 'ant' },
         meaning: '移民',
-        explanation: '迁入者->移民'
+        explanation: '迁入者→移民'
       }
     ],
     quiz: {
@@ -6917,25 +6988,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'mode',
         breakdown: { prefix: '', root: 'mod', suffix: 'e' },
         meaning: '模式',
-        explanation: '方式->模式'
+        explanation: '方式→模式'
       },
       {
         word: 'model',
         breakdown: { prefix: '', root: 'mod', suffix: 'el' },
         meaning: '模型',
-        explanation: '度量->模型'
+        explanation: '度量→模型'
       },
       {
         word: 'moderate',
         breakdown: { prefix: '', root: 'mod', suffix: 'erate' },
         meaning: '适度的',
-        explanation: '有度量->适度的'
+        explanation: '有度量→适度的'
       },
       {
         word: 'modify',
         breakdown: { prefix: '', root: 'mod', suffix: 'ify' },
         meaning: '修改',
-        explanation: '改变方式->修改'
+        explanation: '改变方式→修改'
       }
     ],
     quiz: {
@@ -6957,25 +7028,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'motion',
         breakdown: { prefix: '', root: 'mot', suffix: 'ion' },
         meaning: '运动',
-        explanation: '移动->运动'
+        explanation: '移动→运动'
       },
       {
         word: 'mobile',
         breakdown: { prefix: '', root: 'mob', suffix: 'ile' },
         meaning: '移动的',
-        explanation: '能动->移动的'
+        explanation: '能动→移动的'
       },
       {
         word: 'remove',
         breakdown: { prefix: 're', root: 'mov', suffix: 'e' },
         meaning: '移除',
-        explanation: '再移动->移除'
+        explanation: '再移动→移除'
       },
       {
         word: 'promote',
         breakdown: { prefix: 'pro', root: 'mot', suffix: 'e' },
         meaning: '促进',
-        explanation: '向前移->促进'
+        explanation: '向前移→促进'
       }
     ],
     quiz: {
@@ -6997,25 +7068,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'nature',
         breakdown: { prefix: '', root: 'nat', suffix: 'ure' },
         meaning: '自然',
-        explanation: '出生->自然'
+        explanation: '出生→自然'
       },
       {
         word: 'native',
         breakdown: { prefix: '', root: 'nat', suffix: 'ive' },
         meaning: '本地的',
-        explanation: '出生的->本地的'
+        explanation: '出生的→本地的'
       },
       {
         word: 'nascent',
         breakdown: { prefix: '', root: 'nasc', suffix: 'ent' },
         meaning: '新生的',
-        explanation: '正出生->新生的'
+        explanation: '正出生→新生的'
       },
       {
         word: 'innate',
         breakdown: { prefix: 'in', root: 'nat', suffix: 'e' },
         meaning: '天生的',
-        explanation: '在内出生->天生的'
+        explanation: '在内出生→天生的'
       }
     ],
     quiz: {
@@ -7049,13 +7120,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'neglect',
         breakdown: { prefix: '', root: 'neg', suffix: 'lect' },
         meaning: '忽视',
-        explanation: '不选->忽视'
+        explanation: '不选→忽视'
       },
       {
         word: 'negotiate',
         breakdown: { prefix: '', root: 'neg', suffix: 'otiate' },
         meaning: '谈判',
-        explanation: '不闲着->谈判'
+        explanation: '不闲着→谈判'
       }
     ],
     quiz: {
@@ -7083,19 +7154,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'nominate',
         breakdown: { prefix: '', root: 'nom', suffix: 'inate' },
         meaning: '提名',
-        explanation: '命名->提名'
+        explanation: '命名→提名'
       },
       {
         word: 'anonymous',
         breakdown: { prefix: 'an', root: 'onym', suffix: 'ous' },
         meaning: '匿名的',
-        explanation: '无名->匿名的'
+        explanation: '无名→匿名的'
       },
       {
         word: 'synonym',
         breakdown: { prefix: 'syn', root: 'onym', suffix: '' },
         meaning: '同义词',
-        explanation: '同名->同义词'
+        explanation: '同名→同义词'
       }
     ],
     quiz: {
@@ -7117,25 +7188,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'note',
         breakdown: { prefix: '', root: 'not', suffix: 'e' },
         meaning: '笔记',
-        explanation: '标记->笔记'
+        explanation: '标记→笔记'
       },
       {
         word: 'notice',
         breakdown: { prefix: '', root: 'not', suffix: 'ice' },
         meaning: '注意',
-        explanation: '标记->注意'
+        explanation: '标记→注意'
       },
       {
         word: 'notify',
         breakdown: { prefix: '', root: 'not', suffix: 'ify' },
         meaning: '通知',
-        explanation: '做标记->通知'
+        explanation: '做标记→通知'
       },
       {
         word: 'notorious',
         breakdown: { prefix: '', root: 'not', suffix: 'orious' },
         meaning: '臭名昭著',
-        explanation: '被标记->臭名昭著'
+        explanation: '被标记→臭名昭著'
       }
     ],
     quiz: {
@@ -7157,19 +7228,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'operate',
         breakdown: { prefix: '', root: 'oper', suffix: 'ate' },
         meaning: '操作',
-        explanation: '工作->操作'
+        explanation: '工作→操作'
       },
       {
         word: 'cooperate',
         breakdown: { prefix: 'co', root: 'oper', suffix: 'ate' },
         meaning: '合作',
-        explanation: '一起工作->合作'
+        explanation: '一起工作→合作'
       },
       {
         word: 'opera',
         breakdown: { prefix: '', root: 'oper', suffix: 'a' },
         meaning: '歌剧',
-        explanation: '作品->歌剧'
+        explanation: '作品→歌剧'
       }
     ],
     quiz: {
@@ -7197,13 +7268,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'pacify',
         breakdown: { prefix: '', root: 'paci', suffix: 'fy' },
         meaning: '使平静',
-        explanation: '使和平->使平静'
+        explanation: '使和平→使平静'
       },
       {
         word: 'pacific',
         breakdown: { prefix: '', root: 'paci', suffix: 'fic' },
         meaning: '太平洋',
-        explanation: '和平的->太平洋'
+        explanation: '和平的→太平洋'
       }
     ],
     quiz: {
@@ -7225,19 +7296,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'panorama',
         breakdown: { prefix: '', root: 'pan', suffix: 'orama' },
         meaning: '全景',
-        explanation: '全看->全景'
+        explanation: '全看→全景'
       },
       {
         word: 'pandemic',
         breakdown: { prefix: '', root: 'pan', suffix: 'demic' },
         meaning: '大流行',
-        explanation: '全人民->大流行'
+        explanation: '全人民→大流行'
       },
       {
         word: 'panacea',
         breakdown: { prefix: '', root: 'pan', suffix: 'acea' },
         meaning: '万能药',
-        explanation: '全治->万能药'
+        explanation: '全治→万能药'
       }
     ],
     quiz: {
@@ -7259,7 +7330,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'patriot',
         breakdown: { prefix: '', root: 'patr', suffix: 'iot' },
         meaning: '爱国者',
-        explanation: '父国->爱国者'
+        explanation: '父国→爱国者'
       },
       {
         word: 'paternal',
@@ -7271,7 +7342,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'patron',
         breakdown: { prefix: '', root: 'patr', suffix: 'on' },
         meaning: '赞助人',
-        explanation: '父亲->赞助人'
+        explanation: '父亲→赞助人'
       }
     ],
     quiz: {
@@ -7293,25 +7364,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'propel',
         breakdown: { prefix: 'pro', root: 'pel', suffix: '' },
         meaning: '推进',
-        explanation: '向前推->推进'
+        explanation: '向前推→推进'
       },
       {
         word: 'expel',
         breakdown: { prefix: 'ex', root: 'pel', suffix: '' },
         meaning: '驱逐',
-        explanation: '向外推->驱逐'
+        explanation: '向外推→驱逐'
       },
       {
         word: 'compel',
         breakdown: { prefix: 'com', root: 'pel', suffix: '' },
         meaning: '强迫',
-        explanation: '一起推->强迫'
+        explanation: '一起推→强迫'
       },
       {
         word: 'pulse',
         breakdown: { prefix: '', root: 'puls', suffix: 'e' },
         meaning: '脉搏',
-        explanation: '推动->脉搏'
+        explanation: '推动→脉搏'
       }
     ],
     quiz: {
@@ -7333,19 +7404,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'phantom',
         breakdown: { prefix: '', root: 'phan', suffix: 'tom' },
         meaning: '幽灵',
-        explanation: '显示->幽灵'
+        explanation: '显示→幽灵'
       },
       {
         word: 'phenomenon',
         breakdown: { prefix: '', root: 'phen', suffix: 'omenon' },
         meaning: '现象',
-        explanation: '显示->现象'
+        explanation: '显示→现象'
       },
       {
         word: 'emphasis',
         breakdown: { prefix: 'em', root: 'phas', suffix: 'is' },
         meaning: '强调',
-        explanation: '在内显示->强调'
+        explanation: '在内显示→强调'
       }
     ],
     quiz: {
@@ -7367,25 +7438,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'complicate',
         breakdown: { prefix: 'com', root: 'plic', suffix: 'ate' },
         meaning: '复杂',
-        explanation: '一起折->复杂'
+        explanation: '一起折→复杂'
       },
       {
         word: 'explicit',
         breakdown: { prefix: 'ex', root: 'plic', suffix: 'it' },
         meaning: '明确的',
-        explanation: '展开->明确的'
+        explanation: '展开→明确的'
       },
       {
         word: 'implicit',
         breakdown: { prefix: 'im', root: 'plic', suffix: 'it' },
         meaning: '含蓄的',
-        explanation: '折入->含蓄的'
+        explanation: '折入→含蓄的'
       },
       {
         word: 'duplicate',
         breakdown: { prefix: 'du', root: 'plic', suffix: 'ate' },
         meaning: '复制',
-        explanation: '双折->复制'
+        explanation: '双折→复制'
       }
     ],
     quiz: {
@@ -7407,25 +7478,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'component',
         breakdown: { prefix: 'com', root: 'pon', suffix: 'ent' },
         meaning: '组成部分',
-        explanation: '一起放->组成'
+        explanation: '一起放→组成'
       },
       {
         word: 'compose',
         breakdown: { prefix: 'com', root: 'pos', suffix: 'e' },
         meaning: '组成',
-        explanation: '一起放->组成'
+        explanation: '一起放→组成'
       },
       {
         word: 'propose',
         breakdown: { prefix: 'pro', root: 'pos', suffix: 'e' },
         meaning: '提议',
-        explanation: '向前放->提议'
+        explanation: '向前放→提议'
       },
       {
         word: 'compound',
         breakdown: { prefix: 'com', root: 'pound', suffix: '' },
         meaning: '复合',
-        explanation: '一起放->复合'
+        explanation: '一起放→复合'
       }
     ],
     quiz: {
@@ -7447,19 +7518,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'puncture',
         breakdown: { prefix: '', root: 'punct', suffix: 'ure' },
         meaning: '刺穿',
-        explanation: '刺->刺穿'
+        explanation: '刺→刺穿'
       },
       {
         word: 'punctual',
         breakdown: { prefix: '', root: 'punct', suffix: 'ual' },
         meaning: '准时的',
-        explanation: '在点上->准时的'
+        explanation: '在点上→准时的'
       },
       {
         word: 'acupuncture',
         breakdown: { prefix: 'acu', root: 'punct', suffix: 'ure' },
         meaning: '针灸',
-        explanation: '针刺->针灸'
+        explanation: '针刺→针灸'
       }
     ],
     quiz: {
@@ -7481,25 +7552,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'require',
         breakdown: { prefix: 're', root: 'quir', suffix: 'e' },
         meaning: '需要',
-        explanation: '反复求->需要'
+        explanation: '反复求→需要'
       },
       {
         word: 'acquire',
         breakdown: { prefix: 'ac', root: 'quir', suffix: 'e' },
         meaning: '获得',
-        explanation: '向...求->获得'
+        explanation: '朝目标寻求→获得'
       },
       {
         word: 'inquire',
         breakdown: { prefix: 'in', root: 'quir', suffix: 'e' },
         meaning: '询问',
-        explanation: '向内求->询问'
+        explanation: '向内求→询问'
       },
       {
         word: 'query',
         breakdown: { prefix: '', root: 'quer', suffix: 'y' },
         meaning: '查询',
-        explanation: '寻求->查询'
+        explanation: '寻求→查询'
       }
     ],
     quiz: {
@@ -7521,19 +7592,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'radiate',
         breakdown: { prefix: '', root: 'radi', suffix: 'ate' },
         meaning: '辐射',
-        explanation: '发光->辐射'
+        explanation: '发光→辐射'
       },
       {
         word: 'radio',
         breakdown: { prefix: '', root: 'radi', suffix: 'o' },
         meaning: '无线电',
-        explanation: '光线->无线电'
+        explanation: '光线→无线电'
       },
       {
         word: 'radius',
         breakdown: { prefix: '', root: 'radi', suffix: 'us' },
         meaning: '半径',
-        explanation: '光线->半径'
+        explanation: '光线→半径'
       }
     ],
     quiz: {
@@ -7555,19 +7626,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'interrogate',
         breakdown: { prefix: 'inter', root: 'rog', suffix: 'ate' },
         meaning: '审问',
-        explanation: '之间问->审问'
+        explanation: '之间问→审问'
       },
       {
         word: 'arrogant',
         breakdown: { prefix: 'ar', root: 'rog', suffix: 'ant' },
         meaning: '傲慢的',
-        explanation: '向...要->傲慢的'
+        explanation: '不断索求→傲慢的'
       },
       {
         word: 'prerogative',
         breakdown: { prefix: 'pre', root: 'rog', suffix: 'ative' },
         meaning: '特权',
-        explanation: '预先问->特权'
+        explanation: '预先问→特权'
       }
     ],
     quiz: {
@@ -7595,13 +7666,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'sacrifice',
         breakdown: { prefix: '', root: 'sacr', suffix: 'ifice' },
         meaning: '牺牲',
-        explanation: '神圣做->牺牲'
+        explanation: '神圣做→牺牲'
       },
       {
         word: 'secret',
         breakdown: { prefix: '', root: 'secr', suffix: 'et' },
         meaning: '秘密',
-        explanation: '神圣->秘密'
+        explanation: '神圣→秘密'
       }
     ],
     quiz: {
@@ -7623,19 +7694,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'satisfy',
         breakdown: { prefix: '', root: 'sat', suffix: 'isfy' },
         meaning: '满足',
-        explanation: '足够做->满足'
+        explanation: '足够做→满足'
       },
       {
         word: 'saturate',
         breakdown: { prefix: '', root: 'sat', suffix: 'urate' },
         meaning: '饱和',
-        explanation: '足够->饱和'
+        explanation: '足够→饱和'
       },
       {
         word: 'insatiable',
         breakdown: { prefix: 'in', root: 'sat', suffix: 'iable' },
         meaning: '贪得无厌',
-        explanation: '不足够->贪得无厌'
+        explanation: '不足够→贪得无厌'
       }
     ],
     quiz: {
@@ -7657,19 +7728,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'science',
         breakdown: { prefix: '', root: 'sci', suffix: 'ence' },
         meaning: '科学',
-        explanation: '知识->科学'
+        explanation: '知识→科学'
       },
       {
         word: 'conscious',
         breakdown: { prefix: 'con', root: 'sci', suffix: 'ous' },
         meaning: '意识到的',
-        explanation: '一起知->意识到'
+        explanation: '一起知→意识到'
       },
       {
         word: 'conscience',
         breakdown: { prefix: 'con', root: 'sci', suffix: 'ence' },
         meaning: '良心',
-        explanation: '一起知->良心'
+        explanation: '一起知→良心'
       }
     ],
     quiz: {
@@ -7691,25 +7762,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'sequence',
         breakdown: { prefix: '', root: 'sequ', suffix: 'ence' },
         meaning: '顺序',
-        explanation: '跟随->顺序'
+        explanation: '跟随→顺序'
       },
       {
         word: 'consequence',
         breakdown: { prefix: 'con', root: 'sequ', suffix: 'ence' },
         meaning: '结果',
-        explanation: '跟着来->结果'
+        explanation: '跟着来→结果'
       },
       {
         word: 'execute',
         breakdown: { prefix: 'ex', root: 'ecu', suffix: 'te' },
         meaning: '执行',
-        explanation: '跟着做->执行'
+        explanation: '跟着做→执行'
       },
       {
         word: 'pursue',
         breakdown: { prefix: 'pur', root: 'sue', suffix: '' },
         meaning: '追求',
-        explanation: '跟着->追求'
+        explanation: '跟着→追求'
       }
     ],
     quiz: {
@@ -7731,25 +7802,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'reside',
         breakdown: { prefix: 're', root: 'sid', suffix: 'e' },
         meaning: '居住',
-        explanation: '坐着->居住'
+        explanation: '坐着→居住'
       },
       {
         word: 'preside',
         breakdown: { prefix: 'pre', root: 'sid', suffix: 'e' },
         meaning: '主持',
-        explanation: '坐在前->主持'
+        explanation: '坐在前→主持'
       },
       {
         word: 'session',
         breakdown: { prefix: '', root: 'sess', suffix: 'ion' },
         meaning: '会议',
-        explanation: '坐->会议'
+        explanation: '坐→会议'
       },
       {
         word: 'possess',
         breakdown: { prefix: 'pos', root: 'sess', suffix: '' },
         meaning: '拥有',
-        explanation: '坐在旁->拥有'
+        explanation: '坐在旁→拥有'
       }
     ],
     quiz: {
@@ -7777,19 +7848,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'assimilate',
         breakdown: { prefix: 'as', root: 'simil', suffix: 'ate' },
         meaning: '吸收',
-        explanation: '使相似->吸收'
+        explanation: '使相似→吸收'
       },
       {
         word: 'resemble',
         breakdown: { prefix: 're', root: 'sembl', suffix: 'e' },
         meaning: '像',
-        explanation: '再相似->像'
+        explanation: '再相似→像'
       },
       {
         word: 'simulate',
         breakdown: { prefix: '', root: 'simul', suffix: 'ate' },
         meaning: '模拟',
-        explanation: '相似->模拟'
+        explanation: '相似→模拟'
       }
     ],
     quiz: {
@@ -7817,19 +7888,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'sonic',
         breakdown: { prefix: '', root: 'son', suffix: 'ic' },
         meaning: '声波的',
-        explanation: '声音的->声波的'
+        explanation: '声音的→声波的'
       },
       {
         word: 'resonate',
         breakdown: { prefix: 're', root: 'son', suffix: 'ate' },
         meaning: '共鸣',
-        explanation: '再响->共鸣'
+        explanation: '再响→共鸣'
       },
       {
         word: 'consonant',
         breakdown: { prefix: 'con', root: 'son', suffix: 'ant' },
         meaning: '辅音',
-        explanation: '一起音->辅音'
+        explanation: '一起音→辅音'
       }
     ],
     quiz: {
@@ -7851,19 +7922,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'philosophy',
         breakdown: { prefix: 'philo', root: 'soph', suffix: 'y' },
         meaning: '哲学',
-        explanation: '爱智慧->哲学'
+        explanation: '爱智慧→哲学'
       },
       {
         word: 'sophisticated',
         breakdown: { prefix: '', root: 'soph', suffix: 'isticated' },
         meaning: '复杂的',
-        explanation: '有智慧->复杂的'
+        explanation: '有智慧→复杂的'
       },
       {
         word: 'sophomore',
         breakdown: { prefix: '', root: 'soph', suffix: 'omore' },
         meaning: '大二学生',
-        explanation: '一半智慧一半愚蠢->大二学生'
+        explanation: '一半智慧一半愚蠢→大二学生'
       }
     ],
     quiz: {
@@ -7885,25 +7956,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'spectacle',
         breakdown: { prefix: '', root: 'spec', suffix: 'tacle' },
         meaning: '景象',
-        explanation: '看->景象'
+        explanation: '看→景象'
       },
       {
         word: 'suspect',
         breakdown: { prefix: 'sus', root: 'spec', suffix: 't' },
         meaning: '怀疑',
-        explanation: '从下看->怀疑'
+        explanation: '从下看→怀疑'
       },
       {
         word: 'conspicuous',
         breakdown: { prefix: 'con', root: 'spic', suffix: 'uous' },
         meaning: '显眼的',
-        explanation: '一起看->显眼的'
+        explanation: '一起看→显眼的'
       },
       {
         word: 'perspective',
         breakdown: { prefix: 'per', root: 'spec', suffix: 'tive' },
         meaning: '视角',
-        explanation: '通过看->视角'
+        explanation: '通过看→视角'
       }
     ],
     quiz: {
@@ -7931,13 +8002,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'atmosphere',
         breakdown: { prefix: 'atmo', root: 'sphere', suffix: '' },
         meaning: '大气',
-        explanation: '空气球->大气'
+        explanation: '空气球→大气'
       },
       {
         word: 'hemisphere',
         breakdown: { prefix: 'hemi', root: 'sphere', suffix: '' },
         meaning: '半球',
-        explanation: '半球->半球'
+        explanation: '半球→半球'
       }
     ],
     quiz: {
@@ -7965,19 +8036,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'restrain',
         breakdown: { prefix: 're', root: 'strain', suffix: '' },
         meaning: '约束',
-        explanation: '再拉紧->约束'
+        explanation: '再拉紧→约束'
       },
       {
         word: 'restrict',
         breakdown: { prefix: 're', root: 'strict', suffix: '' },
         meaning: '限制',
-        explanation: '拉紧->限制'
+        explanation: '拉紧→限制'
       },
       {
         word: 'district',
         breakdown: { prefix: 'dis', root: 'strict', suffix: '' },
         meaning: '区域',
-        explanation: '拉开->区域'
+        explanation: '拉开→区域'
       }
     ],
     quiz: {
@@ -7999,25 +8070,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'assume',
         breakdown: { prefix: 'as', root: 'sum', suffix: 'e' },
         meaning: '假设',
-        explanation: '向...拿->假设'
+        explanation: '拿来作为前提→假设'
       },
       {
         word: 'consume',
         breakdown: { prefix: 'con', root: 'sum', suffix: 'e' },
         meaning: '消费',
-        explanation: '一起拿->消费'
+        explanation: '一起拿→消费'
       },
       {
         word: 'presume',
         breakdown: { prefix: 'pre', root: 'sum', suffix: 'e' },
         meaning: '假定',
-        explanation: '预先拿->假定'
+        explanation: '预先拿→假定'
       },
       {
         word: 'resume',
         breakdown: { prefix: 're', root: 'sum', suffix: 'e' },
         meaning: '恢复',
-        explanation: '再拿->恢复'
+        explanation: '再拿→恢复'
       }
     ],
     quiz: {
@@ -8039,25 +8110,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'sustain',
         breakdown: { prefix: 'sus', root: 'tain', suffix: '' },
         meaning: '维持',
-        explanation: '从下持->维持'
+        explanation: '从下持→维持'
       },
       {
         word: 'retain',
         breakdown: { prefix: 're', root: 'tain', suffix: '' },
         meaning: '保留',
-        explanation: '再持->保留'
+        explanation: '再持→保留'
       },
       {
         word: 'entertain',
         breakdown: { prefix: 'enter', root: 'tain', suffix: '' },
         meaning: '娱乐',
-        explanation: '在内持->娱乐'
+        explanation: '在内持→娱乐'
       },
       {
         word: 'continue',
         breakdown: { prefix: 'con', root: 'tin', suffix: 'ue' },
         meaning: '继续',
-        explanation: '一起持->继续'
+        explanation: '一起持→继续'
       }
     ],
     quiz: {
@@ -8085,7 +8156,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'technology',
         breakdown: { prefix: '', root: 'techn', suffix: 'ology' },
         meaning: '科技',
-        explanation: '技术学->科技'
+        explanation: '技术学→科技'
       },
       {
         word: 'technical',
@@ -8113,19 +8184,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'territory',
         breakdown: { prefix: '', root: 'terr', suffix: 'itory' },
         meaning: '领土',
-        explanation: '土地->领土'
+        explanation: '土地→领土'
       },
       {
         word: 'terrain',
         breakdown: { prefix: '', root: 'terr', suffix: 'ain' },
         meaning: '地形',
-        explanation: '土地->地形'
+        explanation: '土地→地形'
       },
       {
         word: 'terrestrial',
         breakdown: { prefix: '', root: 'terr', suffix: 'estrial' },
         meaning: '陆地的',
-        explanation: '土地的->陆地的'
+        explanation: '土地的→陆地的'
       }
     ],
     quiz: {
@@ -8147,25 +8218,25 @@ const baseWordRoots: WordRoot[] = [
         word: 'test',
         breakdown: { prefix: '', root: 'test', suffix: '' },
         meaning: '测试',
-        explanation: '证明->测试'
+        explanation: '证明→测试'
       },
       {
         word: 'testify',
         breakdown: { prefix: '', root: 'test', suffix: 'ify' },
         meaning: '作证',
-        explanation: '证明->作证'
+        explanation: '证明→作证'
       },
       {
         word: 'testimony',
         breakdown: { prefix: '', root: 'test', suffix: 'imony' },
         meaning: '证词',
-        explanation: '证明->证词'
+        explanation: '证明→证词'
       },
       {
         word: 'attest',
         breakdown: { prefix: 'at', root: 'test', suffix: '' },
         meaning: '证实',
-        explanation: '向...证->证实'
+        explanation: '拿证据指向结论→证实'
       }
     ],
     quiz: {
@@ -8187,19 +8258,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'theory',
         breakdown: { prefix: '', root: 'theor', suffix: 'y' },
         meaning: '理论',
-        explanation: '思考->理论'
+        explanation: '思考→理论'
       },
       {
         word: 'theorem',
         breakdown: { prefix: '', root: 'theor', suffix: 'em' },
         meaning: '定理',
-        explanation: '思考->定理'
+        explanation: '思考→定理'
       },
       {
         word: 'theoretical',
         breakdown: { prefix: '', root: 'theor', suffix: 'etical' },
         meaning: '理论的',
-        explanation: '思考的->理论的'
+        explanation: '思考的→理论的'
       }
     ],
     quiz: {
@@ -8221,19 +8292,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'thesis',
         breakdown: { prefix: '', root: 'thes', suffix: 'is' },
         meaning: '论文',
-        explanation: '放置->论文'
+        explanation: '放置→论文'
       },
       {
         word: 'hypothesis',
         breakdown: { prefix: 'hypo', root: 'thes', suffix: 'is' },
         meaning: '假设',
-        explanation: '下面放->假设'
+        explanation: '下面放→假设'
       },
       {
         word: 'synthetic',
         breakdown: { prefix: 'syn', root: 'thet', suffix: 'ic' },
         meaning: '合成的',
-        explanation: '一起放->合成的'
+        explanation: '一起放→合成的'
       }
     ],
     quiz: {
@@ -8255,19 +8326,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'atom',
         breakdown: { prefix: 'a', root: 'tom', suffix: '' },
         meaning: '原子',
-        explanation: '不可切->原子'
+        explanation: '不可切→原子'
       },
       {
         word: 'anatomy',
         breakdown: { prefix: 'ana', root: 'tom', suffix: 'y' },
         meaning: '解剖',
-        explanation: '向上切->解剖'
+        explanation: '向上切→解剖'
       },
       {
         word: 'epitome',
         breakdown: { prefix: 'epi', root: 'tom', suffix: 'e' },
         meaning: '缩影',
-        explanation: '在上切->缩影'
+        explanation: '在上切→缩影'
       }
     ],
     quiz: {
@@ -8289,19 +8360,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'tour',
         breakdown: { prefix: '', root: 'tour', suffix: '' },
         meaning: '旅游',
-        explanation: '转->旅游'
+        explanation: '转→旅游'
       },
       {
         word: 'return',
         breakdown: { prefix: 're', root: 'turn', suffix: '' },
         meaning: '返回',
-        explanation: '再转->返回'
+        explanation: '再转→返回'
       },
       {
         word: 'attorney',
         breakdown: { prefix: 'at', root: 'torn', suffix: 'ey' },
         meaning: '律师',
-        explanation: '转向->律师'
+        explanation: '转向→律师'
       }
     ],
     quiz: {
@@ -8323,19 +8394,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'tradition',
         breakdown: { prefix: '', root: 'trad', suffix: 'ition' },
         meaning: '传统',
-        explanation: '给予->传统'
+        explanation: '给予→传统'
       },
       {
         word: 'trade',
         breakdown: { prefix: '', root: 'trad', suffix: 'e' },
         meaning: '贸易',
-        explanation: '给予->贸易'
+        explanation: '给予→贸易'
       },
       {
         word: 'betray',
         breakdown: { prefix: 'be', root: 'tray', suffix: '' },
         meaning: '背叛',
-        explanation: '给出->背叛'
+        explanation: '给出→背叛'
       }
     ],
     quiz: {
@@ -8357,19 +8428,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'contribute',
         breakdown: { prefix: 'con', root: 'tribute', suffix: '' },
         meaning: '贡献',
-        explanation: '一起给->贡献'
+        explanation: '一起给→贡献'
       },
       {
         word: 'distribute',
         breakdown: { prefix: 'dis', root: 'tribute', suffix: '' },
         meaning: '分配',
-        explanation: '分开给->分配'
+        explanation: '分开给→分配'
       },
       {
         word: 'attribute',
         breakdown: { prefix: 'at', root: 'tribute', suffix: '' },
         meaning: '归因',
-        explanation: '向...给->归因'
+        explanation: '把原因给予某对象→归因'
       }
     ],
     quiz: {
@@ -8391,19 +8462,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'attrition',
         breakdown: { prefix: 'at', root: 'trit', suffix: 'ion' },
         meaning: '磨损',
-        explanation: '磨擦->磨损'
+        explanation: '磨擦→磨损'
       },
       {
         word: 'contrite',
         breakdown: { prefix: 'con', root: 'trit', suffix: 'e' },
         meaning: '悔恨的',
-        explanation: '磨碎->悔恨的'
+        explanation: '磨碎→悔恨的'
       },
       {
         word: 'detritus',
         breakdown: { prefix: 'de', root: 'trit', suffix: 'us' },
         meaning: '碎屑',
-        explanation: '磨下->碎屑'
+        explanation: '磨下→碎屑'
       }
     ],
     quiz: {
@@ -8425,19 +8496,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'trophy',
         breakdown: { prefix: '', root: 'trop', suffix: 'hy' },
         meaning: '奖杯',
-        explanation: '转变->奖杯'
+        explanation: '转变→奖杯'
       },
       {
         word: 'tropical',
         breakdown: { prefix: '', root: 'trop', suffix: 'ical' },
         meaning: '热带的',
-        explanation: '转回点->热带的'
+        explanation: '转回点→热带的'
       },
       {
         word: 'entropy',
         breakdown: { prefix: 'en', root: 'trop', suffix: 'y' },
         meaning: '熵',
-        explanation: '向内转->熵'
+        explanation: '向内转→熵'
       }
     ],
     quiz: {
@@ -8459,19 +8530,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'disturb',
         breakdown: { prefix: 'dis', root: 'turb', suffix: '' },
         meaning: '打扰',
-        explanation: '分开搅->打扰'
+        explanation: '分开搅→打扰'
       },
       {
         word: 'turbulent',
         breakdown: { prefix: '', root: 'turb', suffix: 'ulent' },
         meaning: '动荡的',
-        explanation: '搅动的->动荡的'
+        explanation: '搅动的→动荡的'
       },
       {
         word: 'perturb',
         breakdown: { prefix: 'per', root: 'turb', suffix: '' },
         meaning: '使不安',
-        explanation: '完全搅->使不安'
+        explanation: '完全搅→使不安'
       }
     ],
     quiz: {
@@ -8499,13 +8570,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'typical',
         breakdown: { prefix: '', root: 'typ', suffix: 'ical' },
         meaning: '典型的',
-        explanation: '类型的->典型的'
+        explanation: '类型的→典型的'
       },
       {
         word: 'prototype',
         breakdown: { prefix: 'proto', root: 'typ', suffix: 'e' },
         meaning: '原型',
-        explanation: '最初类型->原型'
+        explanation: '最初类型→原型'
       }
     ],
     quiz: {
@@ -8533,13 +8604,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'valid',
         breakdown: { prefix: '', root: 'val', suffix: 'id' },
         meaning: '有效的',
-        explanation: '强的->有效的'
+        explanation: '强的→有效的'
       },
       {
         word: 'equivalent',
         breakdown: { prefix: 'equi', root: 'val', suffix: 'ent' },
         meaning: '相等的',
-        explanation: '等价->相等的'
+        explanation: '等价→相等的'
       }
     ],
     quiz: {
@@ -8567,13 +8638,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'various',
         breakdown: { prefix: '', root: 'var', suffix: 'ious' },
         meaning: '各种各样',
-        explanation: '变化的->各种'
+        explanation: '变化的→各种'
       },
       {
         word: 'variety',
         breakdown: { prefix: '', root: 'var', suffix: 'iety' },
         meaning: '多样性',
-        explanation: '变化->多样性'
+        explanation: '变化→多样性'
       }
     ],
     quiz: {
@@ -8601,13 +8672,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'vacation',
         breakdown: { prefix: '', root: 'vac', suffix: 'ation' },
         meaning: '假期',
-        explanation: '空闲->假期'
+        explanation: '空闲→假期'
       },
       {
         word: 'vanish',
         breakdown: { prefix: '', root: 'van', suffix: 'ish' },
         meaning: '消失',
-        explanation: '空->消失'
+        explanation: '空→消失'
       }
     ],
     quiz: {
@@ -8629,19 +8700,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'avail',
         breakdown: { prefix: 'a', root: 'vail', suffix: '' },
         meaning: '有用',
-        explanation: '有价值->有用'
+        explanation: '有价值→有用'
       },
       {
         word: 'prevail',
         breakdown: { prefix: 'pre', root: 'vail', suffix: '' },
         meaning: '盛行',
-        explanation: '提前价值->盛行'
+        explanation: '提前价值→盛行'
       },
       {
         word: 'evaluate',
         breakdown: { prefix: 'e', root: 'val', suffix: 'uate' },
         meaning: '评估',
-        explanation: '向外价值->评估'
+        explanation: '向外价值→评估'
       }
     ],
     quiz: {
@@ -8663,19 +8734,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'vehicle',
         breakdown: { prefix: '', root: 'veh', suffix: 'icle' },
         meaning: '车辆',
-        explanation: '运送->车辆'
+        explanation: '运送→车辆'
       },
       {
         word: 'vector',
         breakdown: { prefix: '', root: 'vect', suffix: 'or' },
         meaning: '矢量',
-        explanation: '运送者->矢量'
+        explanation: '运送者→矢量'
       },
       {
         word: 'convey',
         breakdown: { prefix: 'con', root: 'vey', suffix: '' },
         meaning: '传达',
-        explanation: '一起运->传达'
+        explanation: '一起运→传达'
       }
     ],
     quiz: {
@@ -8709,7 +8780,7 @@ const baseWordRoots: WordRoot[] = [
         word: 'vengeance',
         breakdown: { prefix: '', root: 'venge', suffix: 'ance' },
         meaning: '复仇',
-        explanation: '报复->复仇'
+        explanation: '报复→复仇'
       }
     ],
     quiz: {
@@ -8731,19 +8802,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'verge',
         breakdown: { prefix: '', root: 'verg', suffix: 'e' },
         meaning: '边缘',
-        explanation: '倾向->边缘'
+        explanation: '倾向→边缘'
       },
       {
         word: 'converge',
         breakdown: { prefix: 'con', root: 'verg', suffix: 'e' },
         meaning: '汇聚',
-        explanation: '一起倾->汇聚'
+        explanation: '一起倾→汇聚'
       },
       {
         word: 'diverge',
         breakdown: { prefix: 'di', root: 'verg', suffix: 'e' },
         meaning: '分歧',
-        explanation: '分开倾->分歧'
+        explanation: '分开倾→分歧'
       }
     ],
     quiz: {
@@ -8765,19 +8836,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'via',
         breakdown: { prefix: '', root: 'via', suffix: '' },
         meaning: '通过',
-        explanation: '路->通过'
+        explanation: '路→通过'
       },
       {
         word: 'obvious',
         breakdown: { prefix: 'ob', root: 'vi', suffix: 'ous' },
         meaning: '明显的',
-        explanation: '挡在路上/摆在面前->明显的'
+        explanation: '挡在路上/摆在面前→明显的'
       },
       {
         word: 'deviate',
         breakdown: { prefix: 'de', root: 'via', suffix: 'te' },
         meaning: '偏离',
-        explanation: '离开路->偏离'
+        explanation: '离开路→偏离'
       }
     ],
     quiz: {
@@ -8799,19 +8870,19 @@ const baseWordRoots: WordRoot[] = [
         word: 'violence',
         breakdown: { prefix: '', root: 'viol', suffix: 'ence' },
         meaning: '暴力',
-        explanation: '力->暴力'
+        explanation: '力→暴力'
       },
       {
         word: 'violate',
         breakdown: { prefix: '', root: 'viol', suffix: 'ate' },
         meaning: '违反',
-        explanation: '用力->违反'
+        explanation: '用力→违反'
       },
       {
         word: 'inviolate',
         breakdown: { prefix: 'in', root: 'viol', suffix: 'ate' },
         meaning: '不受侵犯',
-        explanation: '不伤害->不受侵犯'
+        explanation: '不伤害→不受侵犯'
       }
     ],
     quiz: {
@@ -8833,13 +8904,13 @@ const baseWordRoots: WordRoot[] = [
         word: 'virtue',
         breakdown: { prefix: '', root: 'vir', suffix: 'tue' },
         meaning: '美德',
-        explanation: '男人->美德'
+        explanation: '男人→美德'
       },
       {
         word: 'virile',
         breakdown: { prefix: '', root: 'vir', suffix: 'ile' },
         meaning: '有男子气概',
-        explanation: '男人的->男子气概'
+        explanation: '男人的→男子气概'
       }
     ],
     quiz: {

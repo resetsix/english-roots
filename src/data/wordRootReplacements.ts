@@ -197,18 +197,25 @@ const baseWordRootReplacements: WordRoot[] = [
     meaning: '田野 / 营地',
     meaningEn: 'field',
     description: `camp 指开阔的空地或营地。campus 就是有大片空地的校园。`,
+    memoryHint: 'camp 的原始画面是“开阔场地”，后来延伸到营地、校园和战场。',
+    commonPitfall:
+      '不要用 camp→camp 这类同词解释；优先看 campus / encamp 这样的派生词。',
     examples: [
       {
         word: 'campus',
         breakdown: { prefix: '', root: 'camp', suffix: 'us' },
+        partMeanings: { root: '开阔场地', suffix: '变成名词' },
         meaning: '校园',
-        explanation: '营地 + 变成名词→校园',
+        explanation: '开阔场地→校园',
+        literalMeaning: '有开阔场地的地方',
       },
       {
-        word: 'camp',
-        breakdown: { prefix: '', root: 'camp', suffix: '' },
-        meaning: '营地',
-        explanation: '营地→营地',
+        word: 'encamp',
+        breakdown: { prefix: 'en', root: 'camp', suffix: '' },
+        partMeanings: { prefix: '进入 / 使成', root: '营地' },
+        meaning: '扎营',
+        explanation: '进入营地状态→扎营',
+        literalMeaning: '使自己进入营地',
       },
     ],
     quiz: {

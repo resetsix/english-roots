@@ -179,6 +179,9 @@ export function getMorphemeMeaning(
   kind: MorphemeKind,
   text: string,
 ) {
+  const explicitMeaning = example.partMeanings?.[kind]?.trim()
+  if (explicitMeaning) return explicitMeaning
+
   const key = normalizeMorpheme(text)
   if (kind === 'prefix') return prefixMeanings[key] ?? ''
   if (kind === 'suffix') return suffixMeanings[key] ?? ''

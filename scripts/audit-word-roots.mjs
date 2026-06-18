@@ -45,6 +45,19 @@ function normalizeAnswer(value) {
     .trim()
 }
 
+function normalizeLetters(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z]/g, '')
+}
+
+function normalizeLooseMeaning(value) {
+  return normalizeAnswer(value)
+    .replace(/^与/, '')
+    .replace(/有关$/, '')
+    .replace(/(的|地|状态|行为|过程|结果)$/g, '')
+}
+
 function rootTokens(root) {
   return root
     .split(/[\-/／,，\s]+/)
@@ -104,6 +117,12 @@ function addIssue(issues, root, message) {
   })
 }
 
+function addWarning(warnings, root, message) {
+  warnings.push(
+    `${formatLocation(root.id)} [id=${root.id} ${root.root}] ${message}`,
+  )
+}
+
 const { wordRootReplacements } = evaluateTsDataModule(
   'src/data/wordRootReplacements.ts',
   {},
@@ -151,9 +170,16 @@ for (const root of wordRoots) {
   }
 
   const optionsByAnswer = new Map()
+  const optionsByLooseAnswer = new Map()
   root.quiz.options.forEach((option, index) => {
     const key = normalizeAnswer(option)
     optionsByAnswer.set(key, [...(optionsByAnswer.get(key) ?? []), index])
+
+    const looseKey = normalizeLooseMeaning(option)
+    optionsByLooseAnswer.set(looseKey, [
+      ...(optionsByLooseAnswer.get(looseKey) ?? []),
+      index,
+    ])
   })
 
   for (const indexes of optionsByAnswer.values()) {
@@ -166,8 +192,24 @@ for (const root of wordRoots) {
     }
   }
 
+  for (const indexes of optionsByLooseAnswer.values()) {
+    if (indexes.length > 1) {
+      addWarning(
+        warnings,
+        root,
+        `quiz 选项可能同义或过近：${indexes.map((index) => root.quiz.options[index]).join(' / ')}`,
+      )
+    }
+  }
+
   const wordsByText = new Map()
   const meaningsByText = new Map()
+  const rootSpellings = new Set(
+    [
+      ...rootTokens(root.root),
+      ...(Array.isArray(root.variants) ? root.variants : []),
+    ].map(normalizeLetters),
+  )
   for (const example of root.examples) {
     const wordKey = normalizeAnswer(example.word)
     wordsByText.set(wordKey, [
@@ -185,6 +227,63 @@ for (const root of wordRoots) {
       ...(globalExampleMeanings.get(meaningKey) ?? []),
       `${root.id}:${example.word}`,
     ])
+
+    if (example.explanation.includes('->')) {
+      addIssue(issues, root, `${example.word} 使用 ASCII 箭头，请改为「→」`)
+    }
+
+    if (example.explanation.includes('...')) {
+      addWarning(
+        warnings,
+        root,
+        `${example.word} 解释含「...」占位，建议改成明确方向或对象`,
+      )
+    }
+
+    const [literalSide] = example.explanation.split('→')
+    const literalIsBareRepeat =
+      literalSide &&
+      normalizeAnswer(literalSide) === normalizeAnswer(example.meaning)
+    const explanationHasNoArrow = !example.explanation.includes('→')
+    const noArrowIsNearRepeat =
+      explanationHasNoArrow &&
+      literalSide &&
+      normalizeLooseMeaning(literalSide) ===
+        normalizeLooseMeaning(example.meaning)
+    if (literalIsBareRepeat || noArrowIsNearRepeat) {
+      addWarning(
+        warnings,
+        root,
+        `${example.word} 字面义和自然义过近：${example.explanation}`,
+      )
+    }
+
+    const wordLetters = normalizeLetters(example.word)
+    const breakdownRoot = normalizeLetters(example.breakdown?.root ?? '')
+    if (
+      breakdownRoot &&
+      wordLetters === breakdownRoot &&
+      !example.learningNote
+    ) {
+      addWarning(
+        warnings,
+        root,
+        `${example.word} 是自由词/同词示例，建议补 learningNote 或换成派生词`,
+      )
+    }
+
+    if (
+      breakdownRoot &&
+      !wordLetters.includes(breakdownRoot) &&
+      !rootSpellings.has(breakdownRoot) &&
+      !example.partMeanings?.root
+    ) {
+      addWarning(
+        warnings,
+        root,
+        `${example.word} 的拆分 root=${example.breakdown.root} 不在拼写中，建议补 variants 或 partMeanings.root`,
+      )
+    }
   }
 
   for (const [, words] of wordsByText) {
@@ -248,7 +347,10 @@ if (issues.length > 0) {
 
 if (warnings.length > 0) {
   console.log(
-    `wordRoots audit warnings: ${warnings.length} non-blocking cross-card duplicate group(s)`,
+    `wordRoots audit warnings: ${warnings.length} non-blocking item(s)`,
   )
-  for (const warning of warnings.slice(0, 10)) console.log(`- ${warning}`)
+  for (const warning of warnings.slice(0, 20)) console.log(`- ${warning}`)
+  if (warnings.length > 20) {
+    console.log(`- ... ${warnings.length - 20} more warning(s) omitted`)
+  }
 }
