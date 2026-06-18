@@ -95,6 +95,12 @@ import { totalWordRoots } from '@/data/wordRoots'
     )
   }
 
+  function getNaturalMeaning(
+    example: (typeof wordRoots)[number]['examples'][number],
+  ) {
+    return example.explanation.split('→')[1]?.trim() || example.meaning
+  }
+
   function syncProgressHeader() {
     const progress = getProgress()
     if (currentIndexText)
@@ -145,21 +151,18 @@ import { totalWordRoots } from '@/data/wordRoots'
               (example) => `
                 <div class="learn-example">
                   <div class="learn-example__word-row">
-                    ${renderWordAudioButton(example.word)}
-                    <div class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</div>
+                    <span class="learn-example__word-cluster">
+                      ${renderWordAudioButton(example.word)}
+                      <span class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</span>
+                    </span>
+                    <span class="learn-example__meaning">${escapeHtml(example.meaning)}</span>
                   </div>
                   <div class="learn-example__parts">${renderParts(example)}</div>
-                  <div class="learn-example__meaning">${escapeHtml(example.meaning)}</div>
-                  <dl class="learn-example__flow">
-                    <div>
-                      <dt>字面组合义</dt>
-                      <dd>${escapeHtml(getLiteralMeaning(example))}</dd>
-                    </div>
-                    <div>
-                      <dt>自然义</dt>
-                      <dd>${escapeHtml(example.explanation)}</dd>
-                    </div>
-                  </dl>
+                  <div class="learn-example__explain">
+                    <span>${escapeHtml(getLiteralMeaning(example))}</span>
+                    <span aria-hidden="true">→</span>
+                    <strong>${escapeHtml(getNaturalMeaning(example))}</strong>
+                  </div>
                   ${
                     example.learningNote
                       ? `<p class="learn-example__note">${escapeHtml(example.learningNote)}</p>`
@@ -375,7 +378,7 @@ import { totalWordRoots } from '@/data/wordRoots'
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 18px;
+    padding: 16px;
   }
 
   :global(.learn-example__word) {
@@ -383,8 +386,17 @@ import { totalWordRoots } from '@/data/wordRoots'
   }
 
   :global(.learn-example__word-row) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  :global(.learn-example__word-cluster) {
     display: inline-flex;
     align-items: center;
+    min-width: 0;
     gap: 8px;
   }
 
@@ -393,7 +405,7 @@ import { totalWordRoots } from '@/data/wordRoots'
     align-items: center;
     flex-wrap: wrap;
     gap: 7px;
-    margin: 9px 0;
+    margin: 7px 0;
   }
 
   :global(.learn-plus) {
@@ -418,29 +430,17 @@ import { totalWordRoots } from '@/data/wordRoots'
     padding: 4px 10px;
   }
 
-  :global(.learn-example__flow) {
-    display: grid;
-    gap: 9px;
-    margin: 12px 0 0;
-  }
-
-  :global(.learn-example__flow div) {
-    display: grid;
-    gap: 3px;
-  }
-
-  :global(.learn-example__flow dt) {
-    color: var(--wr-ink-faint);
-    font-size: 0.78rem;
-    font-weight: 760;
-  }
-
-  :global(.learn-example__flow dd) {
+  :global(.learn-example__explain) {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
     color: var(--wr-ink-muted);
-    margin: 0;
+    line-height: 1.55;
+    margin-top: 8px;
   }
 
-  :global(.learn-example__flow div:first-child dd) {
+  :global(.learn-example__explain strong) {
     color: var(--wr-ink);
     font-weight: 700;
   }
