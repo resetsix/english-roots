@@ -375,10 +375,12 @@ import { totalWordRoots } from '@/data/wordRoots'
   }
 
   :global(.learn-example) {
+    display: grid;
+    gap: 14px;
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 16px;
+    padding: 18px;
   }
 
   :global(.learn-example__word) {
@@ -390,7 +392,7 @@ import { totalWordRoots } from '@/data/wordRoots'
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px 12px;
+    gap: 10px 12px;
   }
 
   :global(.learn-example__word-cluster) {
@@ -404,8 +406,9 @@ import { totalWordRoots } from '@/data/wordRoots'
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 7px;
-    margin: 7px 0;
+    gap: 10px;
+    line-height: 1.35;
+    row-gap: 10px;
   }
 
   :global(.learn-plus) {
@@ -415,7 +418,7 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   :global(.learn-example .wr-morpheme) {
     align-items: baseline;
-    gap: 6px;
+    gap: 7px;
     line-height: 1.2;
   }
 
@@ -425,9 +428,10 @@ import { totalWordRoots } from '@/data/wordRoots'
     border-radius: 999px;
     background: var(--wr-study-soft);
     color: var(--wr-study);
-    font-weight: 760;
-    line-height: 1.3;
-    padding: 4px 10px;
+    font-size: 0.84rem;
+    font-weight: 650;
+    line-height: 1.22;
+    padding: 2px 8px;
   }
 
   :global(.learn-example__explain) {
@@ -437,7 +441,6 @@ import { totalWordRoots } from '@/data/wordRoots'
     gap: 8px;
     color: var(--wr-ink-muted);
     line-height: 1.55;
-    margin-top: 8px;
   }
 
   :global(.learn-example__explain strong) {
