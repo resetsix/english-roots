@@ -101,6 +101,13 @@ import { totalWordRoots } from '@/data/wordRoots'
     return index
   }
 
+  function normalizeQuizAnswer(answer: string) {
+    return answer
+      .replace(/\s+/g, '')
+      .replace(/[，,、/／;；]/g, '/')
+      .trim()
+  }
+
   function renderRoot(index: number) {
     currentIndex = normalizeIndex(index)
     const root = wordRoots[currentIndex]
@@ -178,24 +185,33 @@ import { totalWordRoots } from '@/data/wordRoots'
       button.addEventListener('click', () => {
         const selected = Number(button.dataset.index)
         const correct = root.quiz.correctAnswer
-        const isCorrect = selected === correct
+        const correctAnswer = root.quiz.options[correct]
+        const selectedAnswer = root.quiz.options[selected]
+        const normalizedCorrectAnswer = normalizeQuizAnswer(correctAnswer)
+        const isCorrect =
+          selected === correct ||
+          normalizeQuizAnswer(selectedAnswer) === normalizedCorrectAnswer
 
         options.forEach((option) => {
           const optionIndex = Number(option.dataset.index)
+          const isEquivalentCorrectAnswer =
+            normalizeQuizAnswer(root.quiz.options[optionIndex]) ===
+            normalizedCorrectAnswer
           option.disabled = true
-          option.classList.toggle('is-correct', optionIndex === correct)
+          option.classList.toggle('is-correct', isEquivalentCorrectAnswer)
           option.classList.toggle(
             'is-wrong',
-            optionIndex === selected && !isCorrect,
+            optionIndex === selected &&
+              !isCorrect &&
+              !isEquivalentCorrectAnswer,
           )
           const icon = option.querySelector<HTMLElement>('.learn-option__icon')
           if (icon) {
-            icon.dataset.state =
-              optionIndex === correct
-                ? 'correct'
-                : optionIndex === selected && !isCorrect
-                  ? 'wrong'
-                  : ''
+            icon.dataset.state = isEquivalentCorrectAnswer
+              ? 'correct'
+              : optionIndex === selected && !isCorrect
+                ? 'wrong'
+                : ''
           }
         })
 

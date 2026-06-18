@@ -236,14 +236,14 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'export',
         breakdown: { prefix: 'ex', root: 'port', suffix: '' },
-        meaning: '出口',
-        explanation: '带出去→出口'
+        meaning: '出口 / 输出',
+        explanation: '带出去→出口/输出'
       },
       {
         word: 'exit',
         breakdown: { prefix: 'ex', root: 'it', suffix: '' },
-        meaning: '出口',
-        explanation: '走出去→出口'
+        meaning: '出口 / 退出',
+        explanation: '走出去→出口/退出'
       },
       {
         word: 'emerge',
@@ -260,7 +260,7 @@ const baseWordRoots: WordRoot[] = [
     ],
     quiz: {
       question: 'export 的意思是什么？',
-      options: ["浮现", "出口", "出口", "逃避"],
+      options: ["浮现", "出口 / 输出", "出口 / 退出", "逃避"],
       correctAnswer: 1
     }
   },
@@ -2650,8 +2650,8 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'persist',
         breakdown: { prefix: 'per', root: 'sist', suffix: '' },
-        meaning: '坚持',
-        explanation: '始终站→坚持'
+        meaning: '持续坚持',
+        explanation: '始终站住→持续坚持'
       },
       {
         word: 'pervade',
@@ -3504,8 +3504,8 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'insist',
         breakdown: { prefix: 'in', root: 'sist', suffix: '' },
-        meaning: '坚持',
-        explanation: '在...站→坚持'
+        meaning: '坚持主张',
+        explanation: '站进去不动→坚持主张'
       }
     ],
     quiz: {
@@ -5957,13 +5957,13 @@ const baseWordRoots: WordRoot[] = [
     origin: 'Latin',
     meaning: '变成形容词',
     meaningEn: 'having the nature of',
-    description: `-ive 是形容词后缀，代表「...的、有...性质的」。active（积极的）、creative（创造性的）、effective（有效的）。也可作名词（detective侦探）。`,
+    description: `-ive 是形容词后缀，代表「...的、有...性质的」。active（活跃的）、creative（创造性的）、effective（有效的）。也可作名词（detective侦探）。`,
     examples: [
       {
         word: 'active',
         breakdown: { prefix: '', root: 'act', suffix: 'ive' },
-        meaning: '积极的',
-        explanation: '行动的→积极的'
+        meaning: '活跃的',
+        explanation: '行动的→活跃的'
       },
       {
         word: 'creative',
@@ -6505,7 +6505,7 @@ const baseWordRoots: WordRoot[] = [
       }
     ],
     quiz: {
-    question: 'found 的意思是什么？',
+    question: '单词 found 的意思是什么？',
     options: ["基础", "深刻的", "建立", "基本的"],
     correctAnswer: 2
   }
@@ -7941,7 +7941,7 @@ const baseWordRoots: WordRoot[] = [
       }
     ],
     quiz: {
-    question: 'sphere 的意思是什么？',
+    question: '单词 sphere 的意思是什么？',
     options: ["半球", "大气", "提前", "球体"],
     correctAnswer: 3
   }
@@ -7964,8 +7964,8 @@ const baseWordRoots: WordRoot[] = [
       {
         word: 'restrain',
         breakdown: { prefix: 're', root: 'strain', suffix: '' },
-        meaning: '限制',
-        explanation: '再拉紧->限制'
+        meaning: '约束',
+        explanation: '再拉紧->约束'
       },
       {
         word: 'restrict',
@@ -7982,7 +7982,7 @@ const baseWordRoots: WordRoot[] = [
     ],
     quiz: {
     question: 'restrain 的意思是什么？',
-    options: ["区域", "拉紧", "限制", "否定含义"],
+    options: ["区域", "拉紧", "约束", "否定含义"],
     correctAnswer: 2
   }
   },
@@ -8169,7 +8169,7 @@ const baseWordRoots: WordRoot[] = [
       }
     ],
     quiz: {
-    question: 'test 的意思是什么？',
+    question: '单词 test 的意思是什么？',
     options: ["证实", "作证", "测试", "证词"],
     correctAnswer: 2
   }

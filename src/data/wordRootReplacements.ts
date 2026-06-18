@@ -131,7 +131,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'art 的意思是什么？',
+      question: 'art 这个词根的意思是什么？',
       options: ['技巧 / 艺术', '自然', '科学', '动物'],
       correctAnswer: 0,
     },
@@ -180,8 +180,8 @@ const baseWordRootReplacements: WordRoot[] = [
       {
         word: 'rebellion',
         breakdown: { prefix: 're', root: 'bell', suffix: 'ion' },
-        meaning: '反叛',
-        explanation: '相反 + 战争 + 变成名词→反叛',
+        meaning: '叛乱',
+        explanation: '相反 + 战争 + 变成名词→叛乱',
       },
     ],
     quiz: {
@@ -239,7 +239,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'cent 在这里的意思是什么？',
+      question: 'cent 这个词根的意思是什么？',
       options: ['唱', '跑', '一百', '中心'],
       correctAnswer: 0,
     },
@@ -320,7 +320,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'centr 的意思是什么？',
+      question: 'centr 这个词根的意思是什么？',
       options: ['边缘', '中心', '顶部', '底部'],
       correctAnswer: 1,
     },
@@ -374,7 +374,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'cid / cis 的意思是什么？',
+      question: 'cid/cis 这个词根的意思是什么？',
       options: ['贴', '粘', '切', '补'],
       correctAnswer: 2,
     },
@@ -401,7 +401,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'civ 的意思是什么？',
+      question: 'civ 这个词根的意思是什么？',
       options: ['外星人', '国王', '公民', '敌人'],
       correctAnswer: 2,
     },
@@ -428,7 +428,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'claim 的意思是什么？',
+      question: 'claim 这个词根的意思是什么？',
       options: ['耳语', '呼喊', '哭泣', '微笑'],
       correctAnswer: 1,
     },
@@ -482,7 +482,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'clin 的意思是什么？',
+      question: 'clin 这个词根的意思是什么？',
       options: ['平坦', '倾斜', '折断', '转圈'],
       correctAnswer: 1,
     },
@@ -509,7 +509,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'clud 的意思是什么？',
+      question: 'clud 这个词根的意思是什么？',
       options: ['打开', '关闭', '寻找', '看见'],
       correctAnswer: 1,
     },
@@ -536,7 +536,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'cogn 的意思是什么？',
+      question: 'cogn 这个词根的意思是什么？',
       options: ['忘记', '知道', '猜想', '迷惑'],
       correctAnswer: 1,
     },
@@ -563,7 +563,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'color 的意思是什么？',
+      question: 'color 这个词根的意思是什么？',
       options: ['声音', '形状', '颜色', '气味'],
       correctAnswer: 2,
     },
@@ -590,7 +590,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'cruc 的意思是什么？',
+      question: 'cruc 这个词根的意思是什么？',
       options: ['圆圈', '直线', '十字', '三角'],
       correctAnswer: 2,
     },
@@ -617,7 +617,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'crust 的意思是什么？',
+      question: 'crust 这个词根的意思是什么？',
       options: ['内部', '核心', '外壳', '液体'],
       correctAnswer: 2,
     },
@@ -671,7 +671,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'custom 的意思是什么？',
+      question: 'custom 这个词根的意思是什么？',
       options: ['偶尔', '习惯', '陌生', '新鲜'],
       correctAnswer: 1,
     },
@@ -698,7 +698,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'dam 的意思是什么？',
+      question: 'dam 这个词根的意思是什么？',
       options: ['修复', '建设', '损害', '保护'],
       correctAnswer: 2,
     },
@@ -752,7 +752,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'dexter 的意思是什么？',
+      question: 'dexter 这个词根的意思是什么？',
       options: ['笨拙', '左', '右 / 熟练', '瞎'],
       correctAnswer: 2,
     },
@@ -806,7 +806,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'dign 的意思是什么？',
+      question: 'dign 这个词根的意思是什么？',
       options: ['卑微', '平凡', '尊贵', '可笑'],
       correctAnswer: 2,
     },
@@ -860,7 +860,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'doct 的意思是什么？',
+      question: 'doct 这个词根的意思是什么？',
       options: ['跑', '跳', '教', '玩'],
       correctAnswer: 2,
     },
@@ -914,7 +914,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'dorm 的意思是什么？',
+      question: 'dorm 这个词根的意思是什么？',
       options: ['清醒', '兴奋', '睡眠', '奔跑'],
       correctAnswer: 2,
     },
@@ -968,7 +968,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'dynam 的意思是什么？',
+      question: 'dynam 这个词根的意思是什么？',
       options: ['虚弱', '静止', '力量', '黑暗'],
       correctAnswer: 2,
     },
@@ -1022,7 +1022,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'empir 的意思是什么？',
+      question: 'empir 这个词根的意思是什么？',
       options: ['幻想', '理论', '经验', '猜测'],
       correctAnswer: 2,
     },
@@ -1076,7 +1076,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'err 的意思是什么？',
+      question: 'err 这个词根的意思是什么？',
       options: ['正确', '犯错', '完美', '精准'],
       correctAnswer: 1,
     },
@@ -1130,7 +1130,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'fals 的意思是什么？',
+      question: 'fals 这个词根的意思是什么？',
       options: ['真', '善', '美', '假'],
       correctAnswer: 3,
     },
@@ -1179,12 +1179,12 @@ const baseWordRootReplacements: WordRoot[] = [
       {
         word: 'defense',
         breakdown: { prefix: 'de', root: 'fens', suffix: 'e' },
-        meaning: '防御',
-        explanation: '向下 + 防御→防御',
+        meaning: '防御体系',
+        explanation: '向下 + 防御→防御体系',
       },
     ],
     quiz: {
-      question: 'fend 的意思是什么？',
+      question: 'fend 这个词根的意思是什么？',
       options: ['逃跑', '投降', '防御', '睡觉'],
       correctAnswer: 2,
     },
@@ -1238,7 +1238,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'fil 的意思是什么？',
+      question: 'fil 这个词根的意思是什么？',
       options: ['面', '体', '点', '线'],
       correctAnswer: 3,
     },
@@ -1292,7 +1292,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'firm 的意思是什么？',
+      question: 'firm 这个词根的意思是什么？',
       options: ['脆弱', '松散', '摇晃', '坚固'],
       correctAnswer: 3,
     },
@@ -1346,7 +1346,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'flam 的意思是什么？',
+      question: 'flam 这个词根的意思是什么？',
       options: ['水流', '土壤', '火焰', '风'],
       correctAnswer: 2,
     },
@@ -1400,7 +1400,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'flex 的意思是什么？',
+      question: 'flex 这个词根的意思是什么？',
       options: ['僵硬', '折断', '弯曲', '笔直'],
       correctAnswer: 2,
     },
@@ -1454,7 +1454,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'foli 的意思是什么？',
+      question: 'foli 这个词根的意思是什么？',
       options: ['根', '茎', '叶子', '花瓣'],
       correctAnswer: 2,
     },
@@ -1508,7 +1508,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'frag 的意思是什么？',
+      question: 'frag 这个词根的意思是什么？',
       options: ['粘合', '修复', '建造', '打破'],
       correctAnswer: 3,
     },
@@ -1562,7 +1562,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'fug 的意思是什么？',
+      question: 'fug 这个词根的意思是什么？',
       options: ['追赶', '逃跑', '战斗', '停留'],
       correctAnswer: 1,
     },
@@ -1616,7 +1616,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'gen 的意思是什么？',
+      question: 'gen 这个词根的意思是什么？',
       options: ['毁灭', '破坏', '产生', '消失'],
       correctAnswer: 2,
     },
@@ -1670,7 +1670,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'glor 的意思是什么？',
+      question: 'glor 这个词根的意思是什么？',
       options: ['耻辱', '平庸', '荣誉', '失败'],
       correctAnswer: 2,
     },
@@ -1724,7 +1724,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'gram 的意思是什么？',
+      question: 'gram 这个词根的意思是什么？',
       options: ['听', '读', '写', '说'],
       correctAnswer: 2,
     },
@@ -1778,7 +1778,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'grav 的意思是什么？',
+      question: 'grav 这个词根的意思是什么？',
       options: ['轻', '浮', '重', '飘'],
       correctAnswer: 2,
     },
@@ -1832,7 +1832,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'hum 的意思是什么？',
+      question: 'hum 这个词根的意思是什么？',
       options: ['火焰', '天空', '海洋', '泥土'],
       correctAnswer: 3,
     },
@@ -1886,7 +1886,7 @@ const baseWordRootReplacements: WordRoot[] = [
       },
     ],
     quiz: {
-      question: 'insul 的意思是什么？',
+      question: 'insul 这个词根的意思是什么？',
       options: ['高山', '平原', '沙漠', '岛屿'],
       correctAnswer: 3,
     },
@@ -1942,19 +1942,19 @@ const extraExamplesById = new Map<number, WordExample>([
   [
     236,
     {
-      word: 'batter',
-      breakdown: { prefix: '', root: 'bat', suffix: 'ter' },
-      meaning: '连续猛击',
-      explanation: '打 + 连击/重复→连续猛击',
+      word: 'battle',
+      breakdown: { prefix: '', root: 'bat', suffix: 'tle' },
+      meaning: '战斗',
+      explanation: '打 + 变成名词→战斗',
     },
   ],
   [
     237,
     {
-      word: 'rebellion',
-      breakdown: { prefix: 're', root: 'bell', suffix: 'ion' },
-      meaning: '叛乱',
-      explanation: '相反 + 战争 + 变成名词→叛乱',
+      word: 'belligerent',
+      breakdown: { prefix: '', root: 'bell', suffix: 'igerent' },
+      meaning: '好战的',
+      explanation: '战争 + 变成形容词→好战的',
     },
   ],
   [
@@ -2095,10 +2095,10 @@ const extraExamplesById = new Map<number, WordExample>([
   [
     253,
     {
-      word: 'crusty',
-      breakdown: { prefix: '', root: 'crust', suffix: 'y' },
-      meaning: '酥脆的',
-      explanation: '外壳 + 变成形容词→酥脆的',
+      word: 'encrust',
+      breakdown: { prefix: 'en', root: 'crust', suffix: '' },
+      meaning: '包上硬壳',
+      explanation: '使有 + 外壳→包上硬壳',
     },
   ],
   [
@@ -2212,10 +2212,10 @@ const extraExamplesById = new Map<number, WordExample>([
   [
     266,
     {
-      word: 'dynamite',
-      breakdown: { prefix: '', root: 'dynam', suffix: 'ite' },
-      meaning: '炸药',
-      explanation: '力量 + 变成名词→炸药',
+      word: 'dynamo',
+      breakdown: { prefix: '', root: 'dynam', suffix: 'o' },
+      meaning: '发电机',
+      explanation: '力量 + 相关物→发电机',
     },
   ],
   [
@@ -2293,19 +2293,19 @@ const extraExamplesById = new Map<number, WordExample>([
   [
     275,
     {
-      word: 'confide',
-      breakdown: { prefix: 'con', root: 'fide', suffix: '' },
-      meaning: '吐露',
-      explanation: '一起 + 相信→吐露',
+      word: 'fidelity',
+      breakdown: { prefix: '', root: 'fid', suffix: 'elity' },
+      meaning: '忠诚',
+      explanation: '相信 + 变成名词→忠诚',
     },
   ],
   [
     276,
     {
-      word: 'filament',
-      breakdown: { prefix: '', root: 'fil', suffix: 'ament' },
-      meaning: '灯丝',
-      explanation: '线 + 变成名词→灯丝',
+      word: 'filiform',
+      breakdown: { prefix: '', root: 'fil', suffix: 'iform' },
+      meaning: '线状的',
+      explanation: '线 + 形状→线状的',
     },
   ],
   [
