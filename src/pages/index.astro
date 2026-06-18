@@ -139,6 +139,7 @@ const featuredRoots = wordRoots.slice(0, 6)
   const rollDurationMs = 780
   const detailsDelayMs = 360
   const detailsFadeDurationMs = 360
+  const detailsDimOpacity = 0.28
   const homeProgress = document.querySelector('#home-progress')
   const masteredCount = getProgress().masteredRoots.length
 
@@ -237,7 +238,7 @@ const featuredRoots = wordRoots.slice(0, 6)
       parts.animate(
         [
           { opacity: 1, transform: 'translateY(0)' },
-          { opacity: 0, transform: 'translateY(4px)' },
+          { opacity: detailsDimOpacity, transform: 'translateY(4px)' },
         ],
         {
           duration: detailsFadeDurationMs / 2,
@@ -248,7 +249,7 @@ const featuredRoots = wordRoots.slice(0, 6)
       meaningText.animate(
         [
           { opacity: 1, transform: 'translateY(0)' },
-          { opacity: 0, transform: 'translateY(4px)' },
+          { opacity: detailsDimOpacity, transform: 'translateY(4px)' },
         ],
         {
           duration: detailsFadeDurationMs / 2,
@@ -361,12 +362,18 @@ const featuredRoots = wordRoots.slice(0, 6)
   .home-hero {
     grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.78fr);
     gap: clamp(28px, 4.6vw, 58px);
-    padding-block: clamp(28px, 6vh, 70px);
+    padding-block: clamp(18px, 4vh, 44px) clamp(34px, 7vh, 72px);
+  }
+
+  .home-hero .wr-kicker {
+    font-size: 0.82rem;
+    letter-spacing: 0.055em;
+    text-transform: none;
   }
 
   .home-title {
     max-width: 8.7em;
-    font-size: clamp(3rem, 5.4vw, 4.7rem);
+    font-size: clamp(3rem, 5.15vw, 4.35rem);
     overflow-wrap: anywhere;
     text-wrap: balance;
   }
@@ -383,7 +390,7 @@ const featuredRoots = wordRoots.slice(0, 6)
     border-color: color-mix(in srgb, var(--wr-rule-strong) 54%, var(--wr-rule));
     background: color-mix(
       in srgb,
-      var(--wr-paper-panel) 94%,
+      var(--wr-paper-panel) 96%,
       var(--wr-paper-deep)
     );
   }
@@ -441,19 +448,34 @@ const featuredRoots = wordRoots.slice(0, 6)
     line-height: 1.2;
   }
 
+  .word-lab .wr-morpheme--prefix {
+    border-color: color-mix(in srgb, var(--wr-prefix) 52%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-prefix) 13%, var(--wr-paper-panel));
+  }
+
+  .word-lab .wr-morpheme--root {
+    border-color: color-mix(in srgb, var(--wr-root) 58%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-root) 14%, var(--wr-paper-panel));
+  }
+
+  .word-lab .wr-morpheme--suffix {
+    border-color: color-mix(in srgb, var(--wr-suffix) 52%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-suffix) 13%, var(--wr-paper-panel));
+  }
+
   .word-lab__part-text {
     font-size: 0.94rem;
   }
 
   .word-lab__part-meaning {
-    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    color: color-mix(in srgb, currentColor 82%, var(--wr-ink-muted));
     font-family: inherit;
-    font-size: 0.78rem;
-    font-weight: 650;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 
   .word-lab__part-separator {
-    color: color-mix(in srgb, currentColor 72%, var(--wr-ink-muted));
+    color: color-mix(in srgb, currentColor 78%, var(--wr-ink-muted));
     font-size: 0.78rem;
     font-weight: 650;
   }
@@ -465,7 +487,7 @@ const featuredRoots = wordRoots.slice(0, 6)
 
   .word-lab__meaning {
     border-color: color-mix(in srgb, var(--wr-rule-strong) 42%, var(--wr-rule));
-    color: color-mix(in srgb, var(--wr-ink-muted) 88%, var(--wr-ink));
+    color: color-mix(in srgb, var(--wr-ink-muted) 74%, var(--wr-ink));
     line-height: 1.45;
     min-block-size: calc(1.08rem * 1.45 + 18px);
     padding-top: 18px;
@@ -485,10 +507,21 @@ const featuredRoots = wordRoots.slice(0, 6)
 
   .home-feature-card {
     gap: 6px;
-    border: 1px solid var(--wr-rule);
+    border: 1px solid color-mix(in srgb, var(--wr-rule) 68%, transparent);
     border-radius: var(--wr-radius);
-    background: var(--wr-paper-panel);
-    padding: 14px;
+    background: color-mix(in srgb, var(--wr-paper-panel) 72%, var(--wr-paper));
+    padding: 13px 14px;
+    transition:
+      background 160ms ease,
+      border-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .home-feature-card:hover {
+    border-color: color-mix(in srgb, var(--wr-accent) 34%, var(--wr-rule));
+    background: color-mix(in srgb, var(--wr-paper-panel) 90%, var(--wr-paper));
+    text-decoration: none;
+    transform: translateY(-1px);
   }
 
   .home-feature-card__meaning {
@@ -504,7 +537,7 @@ const featuredRoots = wordRoots.slice(0, 6)
 
   @media (min-width: 1081px) {
     .home-hero {
-      min-height: clamp(440px, 58vh, 650px);
+      min-height: clamp(380px, 48vh, 540px);
     }
   }
 

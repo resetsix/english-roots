@@ -13,7 +13,7 @@
   --wr-paper: #f6f2e9;
   --wr-paper-deep: #f1ece1;
   --wr-paper-panel: #fffdf8;
-  --wr-paper-line: rgba(64, 51, 34, 0.045);
+  --wr-paper-line: rgba(64, 51, 34, 0.032);
   --wr-ink: #1e241f;
   --wr-ink-muted: #687064;
   --wr-ink-faint: #8b9588;
@@ -77,7 +77,7 @@ html[data-reading-theme='classic'] {
   --wr-paper: #f7f1e6;
   --wr-paper-deep: #efe6d4;
   --wr-paper-panel: #fffaf0;
-  --wr-paper-line: rgba(79, 64, 43, 0.12);
+  --wr-paper-line: rgba(79, 64, 43, 0.07);
   --wr-ink: #241f19;
   --wr-ink-muted: #685d4e;
   --wr-ink-faint: #9b8e78;
@@ -112,7 +112,7 @@ html[data-reading-theme='classic'] {
     --wr-paper: #11110f;
     --wr-paper-deep: #171714;
     --wr-paper-panel: #1e1d19;
-    --wr-paper-line: rgba(235, 230, 216, 0.045);
+    --wr-paper-line: rgba(235, 230, 216, 0.032);
     --wr-ink: #f1eadb;
     --wr-ink-muted: #cfc5af;
     --wr-ink-faint: #8d8371;
@@ -151,18 +151,18 @@ body {
   background:
     linear-gradient(
         90deg,
-        transparent 0 27px,
-        var(--wr-paper-line) 27px 28px,
-        transparent 28px
+        transparent 0 19px,
+        var(--wr-paper-line) 19px 20px,
+        transparent 20px
       )
-      0 0 / 28px 28px,
+      0 0 / 20px 20px,
     linear-gradient(
         0deg,
-        transparent 0 27px,
-        var(--wr-paper-line) 27px 28px,
-        transparent 28px
+        transparent 0 19px,
+        var(--wr-paper-line) 19px 20px,
+        transparent 20px
       )
-      0 0 / 28px 28px,
+      0 0 / 20px 20px,
     var(--wr-paper);
   font-size: 16px;
   line-height: 1.7;
@@ -303,7 +303,7 @@ button {
 }
 
 .wr-audio-toggle {
-  min-height: 24px;
+  min-height: 32px;
   align-items: center;
   gap: 4px;
   color: var(--wr-ink-faint);
@@ -311,7 +311,7 @@ button {
   font-size: 0.72rem;
   font-weight: 780;
   letter-spacing: 0.02em;
-  padding: 3px 7px 3px 5px;
+  padding: 5px 10px 5px 7px;
 }
 
 .wr-audio-toggle::before {
@@ -337,6 +337,8 @@ button {
 }
 
 .wr-accent-toggle {
+  min-height: 32px;
+  align-items: center;
   gap: 2px;
 }
 
@@ -345,8 +347,8 @@ button {
 }
 
 .wr-accent-toggle button {
-  min-height: 24px;
-  min-width: 34px;
+  min-height: 26px;
+  min-width: 38px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -355,7 +357,7 @@ button {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.02em;
-  padding: 3px 7px;
+  padding: 3px 9px;
 }
 
 .wr-accent-toggle button[aria-pressed='true'] {
@@ -751,6 +753,10 @@ button {
 }
 
 @media (max-width: 760px) {
+  body {
+    background: var(--wr-paper);
+  }
+
   .wr-nav__inner {
     align-items: flex-start;
     flex-direction: column;
