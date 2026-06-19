@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import 'lxgw-wenkai-screen-webfont/style.css'
+import 'lxgw-wenkai-screen-webfont/lxgwwenkaiscreen.css'
 
 type NavItem = {
   href: string
@@ -55,8 +55,20 @@ const currentYear = new Date().getFullYear()
     </script>
 
     <title>{title}</title>
+    <style>
+      body { opacity: 0; transition: opacity .15s ease; }
+      body.fonts-ready { opacity: 1; }
+    </style>
   </head>
   <body>
+    <script is:inline>
+      document.fonts.ready.then(function() {
+        document.body.classList.add('fonts-ready');
+      });
+      setTimeout(function() {
+        document.body.classList.add('fonts-ready');
+      }, 800);
+    </script>
     <div class="word-root-app">
       <nav class="wr-nav" aria-label="主导航">
         <div class="wr-container wr-nav__inner">
