@@ -23,15 +23,16 @@ const cardSearchText = [
 <article
   class="root-card"
   data-root-card
+  data-root-id={root.id}
   data-origin={root.origin}
   data-search={cardSearchText}
 >
   <a class="root-card__summary" href={`/roots/${root.id}`}>
     <div class="root-card__top">
       <span class="root-card__root wr-wordmark">{root.root}</span>
-      <span class="wr-chip">{displayOrigin(root.origin)}</span>
+      <span class="wr-meaning-chip">{root.meaning}</span>
     </div>
-    <p>{root.meaning}</p>
+    <hr class="wr-divider" />
   </a>
   <div class="root-card__examples" aria-label={`${root.root} 例词`}>
     {
@@ -62,7 +63,10 @@ const cardSearchText = [
       ))
     }
   </div>
-  <span class="root-card__id">#{root.id}</span>
+  <div class="root-card__footer">
+    <span class="root-card__origin">{displayOrigin(root.origin)}</span>
+    <span class="root-card__id">#{root.id}</span>
+  </div>
 </article>
 
 <style>
@@ -73,7 +77,7 @@ const cardSearchText = [
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 18px 18px 28px;
+    padding: 18px 18px 46px;
     text-decoration: none;
     transition:
       border-color 160ms ease,
@@ -103,11 +107,6 @@ const cardSearchText = [
 
   .root-card__root {
     font-size: 1.16rem;
-  }
-
-  .root-card__summary p {
-    color: var(--wr-ink-muted);
-    margin: 10px 0 14px;
   }
 
   .root-card__examples {
@@ -181,11 +180,30 @@ const cardSearchText = [
     font-weight: 650;
   }
 
-  .root-card__id {
+  .root-card__footer {
     position: absolute;
-    right: 16px;
-    bottom: 12px;
+    left: 18px;
+    right: 18px;
+    bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .root-card__origin {
+    color: var(--wr-ink-faint);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .root-card__id {
     color: var(--wr-ink-faint);
     font-size: 0.78rem;
+  }
+
+  .root-card.is-visited {
+    border-color: var(--wr-rule);
+    background: transparent;
+    box-shadow: none;
   }
 </style>

@@ -53,49 +53,109 @@ import { totalWordRoots, wordRoots } from '@/data/wordRoots'
 </BaseLayout>
 
 <script>
-  const searchInput = document.querySelector<HTMLInputElement>('#search-input')
-  const cards = Array.from(
-    document.querySelectorAll<HTMLElement>('[data-root-card]'),
-  )
-  const count = document.querySelector('#display-count')
-  const empty = document.querySelector<HTMLElement>('#empty-state')
-  const tabs = Array.from(
-    document.querySelectorAll<HTMLButtonElement>('.roots-tab'),
-  )
-  const primaryOrigins = new Set(['Greek', 'Latin', 'Old English'])
-  let filter = 'all'
+  document.addEventListener('astro:page-load', () => {
+    const searchInput = document.querySelector<HTMLInputElement>('#search-input')
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-root-card]'))
+    const count = document.querySelector('#display-count')
+    const empty = document.querySelector<HTMLElement>('#empty-state')
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.roots-tab'))
+    const primaryOrigins = new Set(['Greek', 'Latin', 'Old English'])
+    let filter = 'all'
 
-  function matchesOrigin(origin: string | undefined) {
-    if (filter === 'all') return true
-    if (!origin) return false
-    if (filter === 'rare') return !primaryOrigins.has(origin)
-    return origin === filter
-  }
+    const params = new URLSearchParams(window.location.search)
+    const isRestore = params.get('restore') === '1'
+    const SCROLL_KEY = 'english_roots_scroll_pos'
 
-  function applyFilters() {
-    const keyword = searchInput?.value.trim().toLowerCase() ?? ''
-    let visibleCount = 0
+    if (window.location.pathname === '/roots' && !isRestore) {
+      sessionStorage.removeItem(SCROLL_KEY)
+    }
 
-    cards.forEach((card) => {
-      const matchesKeyword = !keyword || card.dataset.search?.includes(keyword)
-      const matchesFilter = matchesOrigin(card.dataset.origin)
-      const visible = Boolean(matchesKeyword && matchesFilter)
-      card.hidden = !visible
-      if (visible) visibleCount += 1
+    // Apply visited styles only to the LAST opened card
+    const lastVisited = sessionStorage.getItem('english_roots_last_visited');
+    document.querySelectorAll('[data-root-card]').forEach(card => {
+      const rootId = (card as HTMLElement).dataset.rootId;
+      if (rootId && rootId === lastVisited) {
+        card.classList.add('is-visited');
+      } else {
+        card.classList.remove('is-visited');
+      }
+    });
+
+    function matchesOrigin(origin: string | undefined) {
+      if (filter === 'all') return true
+      if (!origin) return false
+      if (filter === 'rare') return !primaryOrigins.has(origin)
+      return origin === filter
+    }
+
+    function applyFilters() {
+      const keyword = searchInput?.value.trim().toLowerCase() ?? ''
+      let visibleCount = 0
+
+      cards.forEach((card) => {
+        const matchesKeyword = !keyword || card.dataset.search?.includes(keyword)
+        const matchesFilter = matchesOrigin(card.dataset.origin)
+        const visible = Boolean(matchesKeyword && matchesFilter)
+        card.hidden = !visible
+        if (visible) visibleCount += 1
+      })
+
+      if (count) count.textContent = String(visibleCount)
+      if (empty) empty.hidden = visibleCount > 0
+    }
+
+    searchInput?.addEventListener('input', applyFilters)
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        filter = tab.dataset.filter ?? 'all'
+        tabs.forEach((item) => item.classList.toggle('is-active', item === tab))
+        applyFilters()
+      })
     })
 
-    if (count) count.textContent = String(visibleCount)
-    if (empty) empty.hidden = visibleCount > 0
-  }
-
-  searchInput?.addEventListener('input', applyFilters)
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      filter = tab.dataset.filter ?? 'all'
-      tabs.forEach((item) => item.classList.toggle('is-active', item === tab))
-      applyFilters()
-    })
+    // Scroll restoration inside page-load to ensure DOM is fully ready
+    if (isRestore) {
+      const savedPos = sessionStorage.getItem('english_roots_scroll_pos')
+      if (savedPos) {
+        const targetScroll = parseInt(savedPos, 10)
+        // Force scroll at multiple timing ticks to combat Astro's internal scroll resets
+        window.scrollTo({ top: targetScroll, behavior: 'instant' })
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: targetScroll, behavior: 'instant' })
+          setTimeout(() => {
+            window.scrollTo({ top: targetScroll, behavior: 'instant' })
+          }, 20)
+        })
+      }
+    }
   })
+
+  // Save exact scroll position
+  let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
+  document.addEventListener(
+    'scroll',
+    () => {
+      if (window.location.pathname === '/roots' || window.location.pathname === '/roots/') {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          sessionStorage.setItem('english_roots_scroll_pos', window.scrollY.toString())
+        }, 50);
+      }
+    },
+    { passive: true },
+  )
+
+  // Track the last clicked card to apply low-contrast visited styling on return
+  document.addEventListener('click', (e) => {
+    const link = (e.target as Element).closest('a.root-card__summary');
+    if (link) {
+      const card = link.closest('[data-root-card]') as HTMLElement;
+      const rootId = card?.dataset.rootId;
+      if (rootId) {
+        sessionStorage.setItem('english_roots_last_visited', rootId);
+      }
+    }
+  });
 </script>
 
 <style>

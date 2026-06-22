@@ -35,16 +35,10 @@ import { totalWordRoots } from '@/data/wordRoots'
   } from '@/lib/storage'
 
   const total = wordRoots.length
-  const card = document.querySelector<HTMLElement>('#learn-card')
-  const currentIndexText = document.querySelector('#current-index')
-  const masteredCount = document.querySelector('#mastered-count')
-  const params = new URLSearchParams(window.location.search)
-  const requestedIndexParam = params.get('index')
-  const requestedIndex =
-    requestedIndexParam === null ? NaN : Number(requestedIndexParam)
-  let currentIndex = Number.isFinite(requestedIndex)
-    ? requestedIndex
-    : getProgress().currentRootIndex
+  let card: HTMLElement | null = null
+  let currentIndexText: Element | null = null
+  let masteredCount: Element | null = null
+  let currentIndex = 0
 
   initWordAudioControls()
   updateStudyStreak()
@@ -155,8 +149,9 @@ import { totalWordRoots } from '@/data/wordRoots'
                       ${renderWordAudioButton(example.word)}
                       <span class="wr-wordmark learn-example__word">${escapeHtml(example.word)}</span>
                     </span>
-                    <span class="learn-example__meaning">${escapeHtml(example.meaning)}</span>
+                    <span class="wr-meaning-chip is-study learn-example__meaning">${escapeHtml(example.meaning)}</span>
                   </div>
+                  <hr class="wr-divider" />
                   <div class="learn-example__parts">${renderParts(example)}</div>
                   <div class="learn-example__explain">
                     <span>${escapeHtml(getLiteralMeaning(example))}</span>
@@ -265,7 +260,23 @@ import { totalWordRoots } from '@/data/wordRoots'
     })
   }
 
-  renderRoot(currentIndex)
+  document.addEventListener('astro:page-load', () => {
+    card = document.querySelector<HTMLElement>('#learn-card')
+    if (!card) return
+
+    currentIndexText = document.querySelector('#current-index')
+    masteredCount = document.querySelector('#mastered-count')
+
+    const params = new URLSearchParams(window.location.search)
+    const requestedIndexParam = params.get('index')
+    const requestedIndex =
+      requestedIndexParam === null ? NaN : Number(requestedIndexParam)
+    currentIndex = Number.isFinite(requestedIndex)
+      ? requestedIndex
+      : getProgress().currentRootIndex
+
+    renderRoot(currentIndex)
+  })
 </script>
 
 <style>
@@ -376,11 +387,15 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   :global(.learn-example) {
     display: grid;
-    gap: 14px;
+    gap: 12px;
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
     background: var(--wr-paper-panel);
-    padding: 18px;
+    padding: 14px 16px;
+  }
+
+  :global(.learn-example hr.wr-divider) {
+    margin: 0;
   }
 
   :global(.learn-example__word) {
@@ -423,15 +438,7 @@ import { totalWordRoots } from '@/data/wordRoots'
   }
 
   :global(.learn-example__meaning) {
-    display: inline-flex;
-    border: 1px solid color-mix(in srgb, var(--wr-study) 34%, var(--wr-rule));
-    border-radius: 999px;
-    background: var(--wr-study-soft);
-    color: var(--wr-study);
-    font-size: 0.84rem;
-    font-weight: 650;
-    line-height: 1.22;
-    padding: 2px 8px;
+    flex: 0 0 auto;
   }
 
   :global(.learn-example__explain) {

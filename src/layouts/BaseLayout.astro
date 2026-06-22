@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import '../styles/lxgw-wenkai-screen.css'
+import { ViewTransitions } from 'astro:transitions'
 
 type NavItem = {
   href: string
@@ -55,6 +56,7 @@ const currentYear = new Date().getFullYear()
     </script>
 
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
     <div class="word-root-app">
@@ -141,6 +143,22 @@ const currentYear = new Date().getFullYear()
 <script>
   import { initAudioAccentToggle, initWordAudioControls } from '@/lib/wordAudio'
 
-  initAudioAccentToggle()
-  initWordAudioControls()
+  document.addEventListener('astro:page-load', () => {
+    initAudioAccentToggle()
+    initWordAudioControls()
+
+    // Scroll Reveal Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: '0px 0px -50px 0px', threshold: 0.05 },
+    )
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+  })
 </script>

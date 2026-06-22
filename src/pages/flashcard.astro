@@ -105,27 +105,26 @@ import { totalWordRoots } from '@/data/wordRoots'
     updateStudyStreak,
   } from '@/lib/storage'
 
-  const rootText = document.querySelector('#flash-root')
-  const meaningText = document.querySelector('#flash-meaning')
-  const originText = document.querySelector('#flash-origin')
-  const countText = document.querySelector('#flash-count')
-  const indexText = document.querySelector('#flash-index')
-  const progressText = document.querySelector('#flash-progress')
-  const masteredText = document.querySelector('#flash-mastered')
-  const progressBar = document.querySelector<HTMLElement>('#flash-progress-bar')
-  const descriptionText = document.querySelector('#flash-description')
-  const rootNote = document.querySelector<HTMLElement>('#flash-root-note')
-  const examplesPanel = document.querySelector('#flash-examples')
-  const detailBody = document.querySelector<HTMLElement>('#flash-detail-body')
-  const detailTitle = document.querySelector('#flash-detail-title')
-  const keyNote = document.querySelector('#flash-key-note')
-  const detailLink = document.querySelector<HTMLAnchorElement>('#detail-link')
-  const toggleDetailButton =
-    document.querySelector<HTMLButtonElement>('#toggle-detail')
-  const prevButton = document.querySelector('#prev-card')
-  const nextButton = document.querySelector('#next-card')
-  const knownButton = document.querySelector('#known-button')
-  const practiceButton = document.querySelector('#practice-button')
+  let rootText: Element | null = null
+  let meaningText: Element | null = null
+  let originText: Element | null = null
+  let countText: Element | null = null
+  let indexText: Element | null = null
+  let progressText: Element | null = null
+  let masteredText: Element | null = null
+  let progressBar: HTMLElement | null = null
+  let descriptionText: Element | null = null
+  let rootNote: HTMLElement | null = null
+  let examplesPanel: Element | null = null
+  let detailBody: HTMLElement | null = null
+  let detailTitle: Element | null = null
+  let keyNote: Element | null = null
+  let detailLink: HTMLAnchorElement | null = null
+  let toggleDetailButton: HTMLButtonElement | null = null
+  let prevButton: Element | null = null
+  let nextButton: Element | null = null
+  let knownButton: Element | null = null
+  let practiceButton: Element | null = null
 
   let index = 0
   let detailVisible = true
@@ -245,8 +244,9 @@ import { totalWordRoots } from '@/data/wordRoots'
                   ${renderWordAudioButton(example.word)}
                   <strong class="wr-wordmark">${escapeHtml(example.word)}</strong>
                 </span>
-                <span class="flash-example__meaning">${escapeHtml(example.meaning)}</span>
+                <span class="wr-meaning-chip is-study flash-example__meaning">${escapeHtml(example.meaning)}</span>
               </div>
+              <hr class="wr-divider" />
               <div class="flash-example__parts">${renderParts(example)}</div>
               <div class="flash-example__explain">
                 <span>${escapeHtml(getLiteralMeaning(example))}</span>
@@ -271,19 +271,9 @@ import { totalWordRoots } from '@/data/wordRoots'
     renderCard(nextIndex)
   }
 
-  toggleDetailButton?.addEventListener('click', () => {
-    detailVisible = !detailVisible
-    syncDetailVisibility()
-  })
-  prevButton?.addEventListener('click', () => go(index - 1))
-  nextButton?.addEventListener('click', () => go(index + 1))
-  practiceButton?.addEventListener('click', () => go(index + 1))
-  knownButton?.addEventListener('click', () => {
-    markRootAsMastered(wordRoots[index].id)
-    go(index + 1)
-  })
-
   document.addEventListener('keydown', (event) => {
+    if (!document.querySelector('[data-flash-workspace]')) return
+
     const target = event.target
     if (
       target instanceof HTMLElement &&
@@ -307,21 +297,55 @@ import { totalWordRoots } from '@/data/wordRoots'
     }
   })
 
-  document
-    .querySelector<HTMLElement>('[data-flash-workspace]')
-    ?.addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].screenX
+  document.addEventListener('astro:page-load', () => {
+    const workspace = document.querySelector<HTMLElement>('[data-flash-workspace]')
+    if (!workspace) return
+
+    rootText = document.querySelector('#flash-root')
+    meaningText = document.querySelector('#flash-meaning')
+    originText = document.querySelector('#flash-origin')
+    countText = document.querySelector('#flash-count')
+    indexText = document.querySelector('#flash-index')
+    progressText = document.querySelector('#flash-progress')
+    masteredText = document.querySelector('#flash-mastered')
+    progressBar = document.querySelector<HTMLElement>('#flash-progress-bar')
+    descriptionText = document.querySelector('#flash-description')
+    rootNote = document.querySelector<HTMLElement>('#flash-root-note')
+    examplesPanel = document.querySelector('#flash-examples')
+    detailBody = document.querySelector<HTMLElement>('#flash-detail-body')
+    detailTitle = document.querySelector('#flash-detail-title')
+    keyNote = document.querySelector('#flash-key-note')
+    detailLink = document.querySelector<HTMLAnchorElement>('#detail-link')
+    toggleDetailButton = document.querySelector<HTMLButtonElement>('#toggle-detail')
+    prevButton = document.querySelector('#prev-card')
+    nextButton = document.querySelector('#next-card')
+    knownButton = document.querySelector('#known-button')
+    practiceButton = document.querySelector('#practice-button')
+
+    toggleDetailButton?.addEventListener('click', () => {
+      detailVisible = !detailVisible
+      syncDetailVisibility()
+    })
+    prevButton?.addEventListener('click', () => go(index - 1))
+    nextButton?.addEventListener('click', () => go(index + 1))
+    practiceButton?.addEventListener('click', () => go(index + 1))
+    knownButton?.addEventListener('click', () => {
+      markRootAsMastered(wordRoots[index].id)
+      go(index + 1)
     })
 
-  document
-    .querySelector<HTMLElement>('[data-flash-workspace]')
-    ?.addEventListener('touchend', (event) => {
+    workspace.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].screenX
+    }, { passive: true })
+
+    workspace.addEventListener('touchend', (event) => {
       const diff = touchStartX - event.changedTouches[0].screenX
       if (Math.abs(diff) < 50) return
       go(diff > 0 ? index + 1 : index - 1)
     })
 
-  renderCard(index)
+    renderCard(index)
+  })
 </script>
 
 <style>
@@ -523,11 +547,8 @@ import { totalWordRoots } from '@/data/wordRoots'
   :global(.flash-example) {
     border: 1px solid var(--wr-rule);
     border-radius: var(--wr-radius);
-    background: color-mix(
-      in srgb,
-      var(--wr-paper-panel) 86%,
-      var(--wr-paper-deep)
-    );
+    background: var(--wr-paper-panel);
+    box-shadow: 0 1px 2px rgba(48, 39, 25, 0.02);
   }
 
   .flash-description-card,
@@ -557,23 +578,24 @@ import { totalWordRoots } from '@/data/wordRoots'
 
   :global(.flash-example) {
     display: grid;
-    gap: 14px;
-    padding: 18px;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  :global(.flash-example hr.wr-divider) {
+    margin: 0;
   }
 
   :global(.flash-example__head) {
     justify-content: space-between;
   }
 
+  :global(.flash-example__word-row strong) {
+    font-size: 1.2rem;
+  }
+
   :global(.flash-example__meaning) {
-    border: 1px solid color-mix(in srgb, var(--wr-study) 34%, var(--wr-rule));
-    border-radius: 999px;
-    background: var(--wr-study-soft);
-    color: var(--wr-study);
-    font-size: 0.84rem;
-    font-weight: 650;
-    line-height: 1.22;
-    padding: 2px 8px;
+    flex: 0 0 auto;
   }
 
   :global(.flash-example__parts) {

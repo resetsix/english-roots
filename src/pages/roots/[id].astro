@@ -21,7 +21,7 @@ const rootNotes = [
 
 <BaseLayout title={`${root.root} - 词根详情`} activePath="/roots">
   <article class="wr-container root-detail" data-root-id={root.id}>
-    <a class="back-link" href="/roots">← 返回词根列表</a>
+    <a class="back-link" href="/roots?restore=1">← 返回词根列表</a>
 
     <header class="detail-hero wr-panel">
       <div class="detail-hero__main">
@@ -29,7 +29,7 @@ const rootNotes = [
         <h1 class="detail-title wr-wordmark">{root.root}</h1>
         <div class="detail-meta">
           <span class="wr-chip">{displayOrigin(root.origin)}</span>
-          <span>{root.meaning}</span>
+          <span class="wr-meaning-chip">{root.meaning}</span>
         </div>
         <p class="detail-description">{root.description}</p>
       </div>
@@ -93,7 +93,7 @@ const rootNotes = [
     </section>
 
     <div class="detail-actions">
-      <a class="wr-button" href="/roots">返回列表</a>
+      <a class="wr-button" href="/roots?restore=1">返回列表</a>
       <a
         class="wr-button wr-button--primary"
         href={`/learn?index=${root.id - 1}`}>从这里学习</a
@@ -190,6 +190,7 @@ const rootNotes = [
     font-size: clamp(3.2rem, 10vw, 6rem);
     line-height: 1;
     margin: 12px 0 18px;
+    overflow-wrap: anywhere;
   }
 
   .detail-meta {
