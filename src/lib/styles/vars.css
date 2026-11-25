@@ -1,0 +1,304 @@
+/* Default Light Mode */
+:root {
+  --font-sans-default:
+    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-sans-lxgw-wenkai-screen:
+    'LXGW WenKai Screen', 'Kaiti SC', 'STKaiti', 'KaiTi', serif;
+  --font-sans-current: var(--font-sans-default);
+
+  /* Base Surfaces */
+  --color-bg-primary: oklch(0.99 0 0);
+  --color-bg-secondary: oklch(0.96 0 0);
+  --color-bg-tertiary: oklch(0.935 0 0);
+  --color-bg-quaternary: oklch(0.91 0 0);
+
+  /* 4-Tier Text Ladder (WCAG guarded by theme-contrast.test.ts) */
+  --color-text-primary: oklch(0.16 0 0);
+  --color-text-secondary: oklch(0.34 0 0);
+  --color-text-tertiary: oklch(0.46 0 0);
+  --color-text-quaternary: oklch(0.57 0 0);
+
+  /* Borders (subtle -> strong) */
+  --color-border: oklch(0.92 0 0);
+  --color-border-secondary: oklch(0.89 0 0);
+  --color-border-tertiary: oklch(0.85 0 0);
+  --color-border-quaternary: oklch(0.8 0 0);
+
+  /* Selection */
+  --color-selection-bg: oklch(0.2 0 0 / 0.12);
+
+  /* Accent */
+  --color-accent: #2957b8;
+  --color-accent-foreground: #ffffff;
+
+  /* Morpheme Semantic Palette (Light) */
+  --color-prefix: #9d3f31;
+  --color-prefix-bg: #fbf2f0;
+  --color-prefix-border: #eccfc9;
+
+  --color-root: #25528a;
+  --color-root-bg: #f1f6fc;
+  --color-root-border: #ccdcf0;
+
+  --color-suffix: #22604c;
+  --color-suffix-bg: #eff7f4;
+  --color-suffix-border: #c4e0d5;
+
+  /* Feedback Semantic Palette (Light) */
+  --color-success: #206043;
+  --color-success-bg: #eef7f2;
+  --color-success-border: #c1e0cf;
+
+  --color-danger: #a6322b;
+  --color-danger-bg: #fcf1f0;
+  --color-danger-border: #efcac7;
+
+  --color-warning: #875012;
+  --color-warning-bg: #fbf5eb;
+  --color-warning-border: #e9d4b1;
+}
+
+/* Default Dark Mode */
+:root.dark {
+  --color-bg-primary: #18181b;
+  --color-bg-secondary: #212125;
+  --color-bg-tertiary: #2b2b30;
+  --color-bg-quaternary: #36363c;
+
+  --color-text-primary: #f3f3f6;
+  --color-text-secondary: #c8c8d0;
+  --color-text-tertiary: #a4a4af;
+  --color-text-quaternary: #787885;
+
+  --color-border: #2c2c32;
+  --color-border-secondary: #393941;
+  --color-border-tertiary: #474751;
+  --color-border-quaternary: #575763;
+
+  --color-selection-bg: oklch(0.9 0 0 / 0.18);
+
+  --color-accent: #7da8f7;
+  --color-accent-foreground: #12141a;
+
+  /* Morpheme Semantic Palette (Dark) */
+  --color-prefix: #eba094;
+  --color-prefix-bg: #2e1f1e;
+  --color-prefix-border: #523330;
+
+  --color-root: #8ec0f6;
+  --color-root-bg: #1c2633;
+  --color-root-border: #2e435c;
+
+  --color-suffix: #86d1b6;
+  --color-suffix-bg: #1b2b26;
+  --color-suffix-border: #2c4a40;
+
+  /* Feedback Semantic Palette (Dark) */
+  --color-success: #7fd4a8;
+  --color-success-bg: #1a2c23;
+  --color-success-border: #2c4d3b;
+
+  --color-danger: #f0978e;
+  --color-danger-bg: #301d1c;
+  --color-danger-border: #55302d;
+
+  --color-warning: #e5b776;
+  --color-warning-bg: #2d2418;
+  --color-warning-border: #4f3e26;
+}
+
+/* Pre-hydration Dark Fallback (before .light / .dark class attaches) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --color-bg-primary: #18181b;
+    --color-bg-secondary: #212125;
+    --color-bg-tertiary: #2b2b30;
+    --color-bg-quaternary: #36363c;
+
+    --color-text-primary: #f3f3f6;
+    --color-text-secondary: #c8c8d0;
+    --color-text-tertiary: #a4a4af;
+    --color-text-quaternary: #787885;
+
+    --color-border: #2c2c32;
+    --color-border-secondary: #393941;
+    --color-border-tertiary: #474751;
+    --color-border-quaternary: #575763;
+
+    --color-selection-bg: oklch(0.9 0 0 / 0.18);
+
+    --color-accent: #7da8f7;
+    --color-accent-foreground: #12141a;
+
+    --color-prefix: #eba094;
+    --color-prefix-bg: #2e1f1e;
+    --color-prefix-border: #523330;
+
+    --color-root: #8ec0f6;
+    --color-root-bg: #1c2633;
+    --color-root-border: #2e435c;
+
+    --color-suffix: #86d1b6;
+    --color-suffix-bg: #1b2b26;
+    --color-suffix-border: #2c4a40;
+
+    --color-success: #7fd4a8;
+    --color-success-bg: #1a2c23;
+    --color-success-border: #2c4d3b;
+
+    --color-danger: #f0978e;
+    --color-danger-bg: #301d1c;
+    --color-danger-border: #55302d;
+
+    --color-warning: #e5b776;
+    --color-warning-bg: #2d2418;
+    --color-warning-border: #4f3e26;
+  }
+}
+
+/* Font preset override (loaded on demand) */
+:root[data-font-preset='lxgw-wenkai-screen'] {
+  --font-sans-current: var(--font-sans-lxgw-wenkai-screen);
+}
+
+/* Palette: warm-sand (Light) */
+:root[data-palette='warm-sand'] {
+  --color-bg-primary: #faf8f2;
+  --color-bg-secondary: #f1eee5;
+  --color-bg-tertiary: #e7e3d7;
+  --color-bg-quaternary: #ddd8c8;
+
+  --color-text-primary: #1f1c18;
+  --color-text-secondary: rgba(31, 28, 24, 0.82);
+  --color-text-tertiary: rgba(31, 28, 24, 0.68);
+  --color-text-quaternary: rgba(31, 28, 24, 0.59);
+
+  --color-border: #e3dfd3;
+  --color-border-secondary: #d9d4c6;
+  --color-border-tertiary: #cec8b9;
+  --color-border-quaternary: #c2bba9;
+
+  --color-selection-bg: rgba(157, 75, 41, 0.15);
+
+  --color-accent: #9d4b29;
+  --color-accent-foreground: #faf8f2;
+
+  --color-prefix: #993e2e;
+  --color-prefix-bg: #f6ebe6;
+  --color-prefix-border: #e5c8be;
+
+  --color-root: #25517a;
+  --color-root-bg: #edf2f6;
+  --color-root-border: #c8d7e4;
+
+  --color-suffix: #285d46;
+  --color-suffix-bg: #ecf4ef;
+  --color-suffix-border: #c5dccf;
+}
+
+/* Palette: warm-sand (Dark) */
+:root.dark[data-palette='warm-sand'] {
+  --color-bg-primary: #1e1b17;
+  --color-bg-secondary: #28241f;
+  --color-bg-tertiary: #322d27;
+  --color-bg-quaternary: #3e3830;
+
+  --color-text-primary: #f2efe8;
+  --color-text-secondary: rgba(242, 239, 232, 0.8);
+  --color-text-tertiary: rgba(242, 239, 232, 0.66);
+  --color-text-quaternary: rgba(242, 239, 232, 0.48);
+
+  --color-border: #3a352e;
+  --color-border-secondary: #464038;
+  --color-border-tertiary: #544d43;
+  --color-border-quaternary: #645c50;
+
+  --color-selection-bg: rgba(219, 132, 97, 0.22);
+
+  --color-accent: #db8461;
+  --color-accent-foreground: #1e1b17;
+
+  --color-prefix: #eda291;
+  --color-prefix-bg: #32221e;
+  --color-prefix-border: #553830;
+
+  --color-root: #92bfe8;
+  --color-root-bg: #202831;
+  --color-root-border: #334456;
+
+  --color-suffix: #8bd0b2;
+  --color-suffix-bg: #1e2c25;
+  --color-suffix-border: #314b3e;
+}
+
+/* Palette: ink (Light) */
+:root[data-palette='ink'] {
+  --color-bg-primary: #f7f9fb;
+  --color-bg-secondary: #ecf1f5;
+  --color-bg-tertiary: #e1e8ee;
+  --color-bg-quaternary: #d4dfe7;
+
+  --color-text-primary: #141d24;
+  --color-text-secondary: rgba(20, 29, 36, 0.82);
+  --color-text-tertiary: rgba(20, 29, 36, 0.68);
+  --color-text-quaternary: rgba(20, 29, 36, 0.59);
+
+  --color-border: #dce4eb;
+  --color-border-secondary: #d0dce5;
+  --color-border-tertiary: #c3d1dc;
+  --color-border-quaternary: #b4c5d3;
+
+  --color-selection-bg: rgba(40, 106, 155, 0.15);
+
+  --color-accent: #286a9b;
+  --color-accent-foreground: #f7f9fb;
+
+  --color-prefix: #9b3e4c;
+  --color-prefix-bg: #f7eef0;
+  --color-prefix-border: #e5cad0;
+
+  --color-root: #1e5788;
+  --color-root-bg: #ebf3fa;
+  --color-root-border: #c2d9ec;
+
+  --color-suffix: #1f5f53;
+  --color-suffix-bg: #eaf5f3;
+  --color-suffix-border: #bee0da;
+}
+
+/* Palette: ink (Dark) */
+:root.dark[data-palette='ink'] {
+  --color-bg-primary: #11151c;
+  --color-bg-secondary: #19202a;
+  --color-bg-tertiary: #232c39;
+  --color-bg-quaternary: #2e3949;
+
+  --color-text-primary: #ecf1f7;
+  --color-text-secondary: rgba(236, 241, 247, 0.8);
+  --color-text-tertiary: rgba(236, 241, 247, 0.65);
+  --color-text-quaternary: rgba(236, 241, 247, 0.47);
+
+  --color-border: #27303e;
+  --color-border-secondary: #333f50;
+  --color-border-tertiary: #404f63;
+  --color-border-quaternary: #4f6179;
+
+  --color-selection-bg: rgba(100, 164, 232, 0.22);
+
+  --color-accent: #64a4e8;
+  --color-accent-foreground: #11151c;
+
+  --color-prefix: #e89aa7;
+  --color-prefix-bg: #2b1d25;
+  --color-prefix-border: #4d303f;
+
+  --color-root: #88bef5;
+  --color-root-bg: #172536;
+  --color-root-border: #284260;
+
+  --color-suffix: #7ed0be;
+  --color-suffix-bg: #162a29;
+  --color-suffix-border: #264a48;
+}

@@ -1,8 +1,8 @@
 node_modules/
-dist/
-.astro/
+.svelte-kit/
+build/
 .vercel/
 pnpm-lock.yaml
-src/data/wordRoots.ts
-
+src/lib/data/wordRoots.ts
+src/lib/data/wordRootReplacements.ts
 .omx/

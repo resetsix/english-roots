@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#fcfcfc" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="dns-prefetch" href="https://words.resetsix223.serv00.net" />
+    <script>
+      ;(() => {
+        const root = document.documentElement
+        const applyTheme = (mode) => {
+          root.classList.remove('light', 'dark')
+          root.classList.add(mode)
+          root.style.colorScheme = mode
+        }
+
+        try {
+          const raw = JSON.parse(
+            localStorage.getItem('wordRootSettings') || '{}',
+          )
+          const colorMode = raw.colorMode
+          const resolved =
+            colorMode === 'dark' || colorMode === 'light'
+              ? colorMode
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          applyTheme(resolved)
+
+          let palette = raw.palette
+          if (
+            palette !== 'default' &&
+            palette !== 'warm-sand' &&
+            palette !== 'ink'
+          ) {
+            palette = raw.readingTheme === 'classic' ? 'warm-sand' : 'default'
+          }
+          if (palette === 'default') delete root.dataset.palette
+          else root.dataset.palette = palette
+
+          if (raw.fontPreset === 'lxgw-wenkai-screen') {
+            root.dataset.fontPreset = 'lxgw-wenkai-screen'
+          } else {
+            delete root.dataset.fontPreset
+          }
+        } catch {
+          const resolved = window.matchMedia('(prefers-color-scheme: dark)')
+            .matches
+            ? 'dark'
+            : 'light'
+          applyTheme(resolved)
+        }
+      })()
+    </script>
+    <style>
+      html,
+      body {
+        background-color: var(--color-bg-primary);
+      }
+      html.dark,
+      html.dark body {
+        background-color: var(--color-bg-primary, #18181b);
+        color-scheme: dark;
+      }
+      html.light,
+      html.light body {
+        background-color: var(--color-bg-primary, #fcfcfc);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        html:not(.light),
+        html:not(.light) body {
+          background-color: var(--color-bg-primary, #18181b);
+          color-scheme: dark;
+        }
+      }
+    </style>
+    %sveltekit.head%
+  </head>
+  <body
+    data-sveltekit-preload-data="hover"
+    class="bg-bg-primary text-text-primary font-sans antialiased"
+  >
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
+</html>

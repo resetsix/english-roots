@@ -1,5 +1,7 @@
 node_modules/
+.svelte-kit/
+build/
 dist/
-.astro/
 .vercel/
+.omx/
 .DS_Store

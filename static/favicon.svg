@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <style>
+    .bg {
+      fill: #18181b;
+    }
+    .ring {
+      stroke: transparent;
+    }
+    @media (prefers-color-scheme: dark) {
+      .bg {
+        fill: #212125;
+      }
+      .ring {
+        stroke: #393941;
+      }
+    }
+  </style>
+  <rect
+    class="bg ring"
+    x="0.5"
+    y="0.5"
+    width="31"
+    height="31"
+    rx="7"
+    stroke-width="1"
+  />
+  <text
+    x="16"
+    y="19.8"
+    text-anchor="middle"
+    font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="14.2"
+    font-weight="700"
+    letter-spacing="-0.4"
+  >
+    <tspan fill="#f4f4f5">A</tspan><tspan fill="#8ec0f6">b</tspan>
+  </text>
+  <rect x="6.5" y="24.2" width="4.8" height="2" rx="1" fill="#eba094" />
+  <rect x="12.5" y="24.2" width="7" height="2" rx="1" fill="#8ec0f6" />
+  <rect x="20.7" y="24.2" width="4.8" height="2" rx="1" fill="#86d1b6" />
+</svg>

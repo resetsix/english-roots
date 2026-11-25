@@ -7,7 +7,10 @@ const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 )
-const dataFiles = ['src/data/wordRoots.ts', 'src/data/wordRootReplacements.ts']
+const dataFiles = [
+  'src/lib/data/wordRoots.ts',
+  'src/lib/data/wordRootReplacements.ts',
+]
 
 function readRepoFile(relativePath) {
   return fs.readFileSync(path.join(repoRoot, relativePath), 'utf8')
@@ -124,12 +127,12 @@ function addWarning(warnings, root, message) {
 }
 
 const { wordRootReplacements } = evaluateTsDataModule(
-  'src/data/wordRootReplacements.ts',
+  'src/lib/data/wordRootReplacements.ts',
   {},
   ['wordRootReplacements'],
 )
 const { wordRoots } = evaluateTsDataModule(
-  'src/data/wordRoots.ts',
+  'src/lib/data/wordRoots.ts',
   { wordRootReplacements },
   ['wordRoots'],
 )

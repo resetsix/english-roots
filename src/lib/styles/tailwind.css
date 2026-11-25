@@ -1,0 +1,61 @@
+@import 'tailwindcss' source(none);
+@source '../../app.html';
+@source '../../routes';
+@source '../components';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg-primary: var(--color-bg-primary);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-bg-tertiary: var(--color-bg-tertiary);
+  --color-bg-quaternary: var(--color-bg-quaternary);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-quaternary: var(--color-text-quaternary);
+
+  --color-border: var(--color-border);
+  --color-border-secondary: var(--color-border-secondary);
+  --color-border-tertiary: var(--color-border-tertiary);
+  --color-border-quaternary: var(--color-border-quaternary);
+
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+
+  --color-prefix: var(--color-prefix);
+  --color-prefix-bg: var(--color-prefix-bg);
+  --color-prefix-border: var(--color-prefix-border);
+
+  --color-root: var(--color-root);
+  --color-root-bg: var(--color-root-bg);
+  --color-root-border: var(--color-root-border);
+
+  --color-suffix: var(--color-suffix);
+  --color-suffix-bg: var(--color-suffix-bg);
+  --color-suffix-border: var(--color-suffix-border);
+
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-success-border: var(--color-success-border);
+
+  --color-danger: var(--color-danger);
+  --color-danger-bg: var(--color-danger-bg);
+  --color-danger-border: var(--color-danger-border);
+
+  --color-warning: var(--color-warning);
+  --color-warning-bg: var(--color-warning-bg);
+  --color-warning-border: var(--color-warning-border);
+
+  --font-sans: var(--font-sans-current);
+  --font-mono:
+    'SF Mono', 'JetBrains Mono', 'Cascadia Code', ui-monospace, Menlo, Monaco,
+    Consolas, monospace;
+
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}

@@ -1,82 +1,107 @@
-# 词词有据
+<div align="center">
+  <a href="https://english-roots.netlify.app">
+    <img src="./static/favicon.svg" alt="词根树" width="64" height="64" />
+  </a>
 
-原仓库地址：[https://github.com/joeseesun/word-root-workshop](https://github.com/joeseesun/word-root-workshop)
+  <h1>词根树</h1>
 
-## 功能
+  <p>
+    用构词公式（<code>单词 = 前缀 + 词根 + 后缀</code>）理解与记忆英语单词的纯静态学习工作台<br />
+    300 组高频词素 · 1,125 个拆解例词 · 美/英双口音发音 · Leitner 间隔复习
+  </p>
 
-- 学习模式：逐个学习词根、例词拆解和小测试。
-- 闪卡模式：点击翻转，支持键盘左右切换和空格翻转。
-- 词根列表：本地搜索词根、中文释义和例词，并按来源筛选。
-- 词根详情：静态生成每个词根的详情页。
-- 进度管理：学习数据保存在当前浏览器，记录掌握状态、等级、连续学习和成就。
-- 数据备份：支持导出和导入本地学习数据 JSON。
+  <p>
+    <a href="https://english-roots.netlify.app">
+      <img
+        src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%A2%84%E8%A7%88-english--roots.netlify.app-2563eb?style=flat-square&labelColor=18181b"
+        alt="在线预览"
+      />
+    </a>
+    <img
+      src="https://img.shields.io/badge/Svelte-5_Runes-3f3f46?style=flat-square&logo=svelte&logoColor=ff3e00&labelColor=18181b"
+      alt="Svelte 5 Runes"
+    />
+    <img
+      src="https://img.shields.io/badge/Tailwind_CSS-v4-3f3f46?style=flat-square&logo=tailwindcss&logoColor=38bdf8&labelColor=18181b"
+      alt="Tailwind CSS v4"
+    />
+    <img
+      src="https://img.shields.io/badge/%E8%AF%8D%E5%BA%93-300_%E8%AF%8D%E7%B4%A0_%C2%B7_1%2C125_%E4%BE%8B%E8%AF%8D-3f3f46?style=flat-square&labelColor=18181b"
+      alt="300 词素 · 1,125 例词"
+    />
+  </p>
 
-## 技术栈
+  <p>
+    <a href="https://english-roots.netlify.app"><strong>在线预览</strong></a>
+    &nbsp;·&nbsp;
+    <a href="https://english-ipa.netlify.app">音标表</a>
+    &nbsp;·&nbsp;
+    <a href="./README.en.md">English</a>
+  </p>
+</div>
 
-- Astro 静态输出
-- TypeScript
-- 原生 CSS，使用 `.word-root-app` 命名空间和局部变量隔离样式
-- LocalStorage
+<br />
 
-## 本地运行
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./docs/assets/home-light.png" alt="首页工作台（浅色）" width="100%" />
+      <br />
+      <sub>浅色 · 首页工作台</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="./docs/assets/home-dark.png" alt="首页工作台（深色）" width="100%" />
+      <br />
+      <sub>深色 · 首页工作台</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./docs/assets/roots-light.png" alt="词根库（浅色）" width="100%" />
+      <br />
+      <sub>浅色 · 词根库</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="./docs/assets/roots-dark.png" alt="词根库（深色）" width="100%" />
+      <br />
+      <sub>深色 · 词根库</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./docs/assets/detail-light.png" alt="词素详情（浅色）" width="100%" />
+      <br />
+      <sub>浅色 · 词素详情</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="./docs/assets/detail-dark.png" alt="词素详情（深色）" width="100%" />
+      <br />
+      <sub>深色 · 词素详情</sub>
+    </td>
+  </tr>
+</table>
+
+## 核心功能
+
+- **首页工作台（`/`）**：可交互构词拆词示例、按前缀 / 词根 / 后缀与语源直达，以及高频核心词素速览。
+- **全局检索（`⌘K` / `/`）**：即时搜索 300 组词素与 1,125 个例词，支持预览拆词公式、美/英发音与键盘跳转。
+- **词根库与详情（`/roots` · `/roots/[id]`）**：按词素类型、语源与掌握状态多维筛选，预渲染全部 300 个词素详情页并附随堂自测。
+- **沉浸学习与闪卡（`/learn` · `/flashcard`）**：分离精读与合卷自测两步流程，支持 Leitner 三档间隔复习调度与全键盘操作。
+- **进度与偏好（`/progress`）**：三维掌握统计、待复习清单、浅色 / 深色 / 跟随系统主题、美/英口音及 JSON 本地备份。
+
+## 本地开发
+
+SvelteKit + Svelte 5（Runes）+ Tailwind CSS v4 + `@sveltejs/adapter-static` + Vitest。
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev                # 本地开发
+pnpm audit:word-roots   # 校验 300 条词素数据
+pnpm type-check         # Svelte 5 + TypeScript 检查
+pnpm test               # 对比度、搜索与核心单测
+pnpm build              # 静态预渲染至 build/
 ```
 
-## 构建
+## 致谢
 
-```bash
-pnpm build
-pnpm preview
-```
-
-## 项目结构
-
-```text
-word-root-workshop/
-├── src/
-│   ├── components/         # 公共 UI 组件
-│   ├── data/               # 词根数据
-│   ├── layouts/            # 页面布局
-│   ├── lib/                # LocalStorage 等浏览器逻辑
-│   ├── pages/              # Astro 路由页面
-│   └── styles/             # 全局样式
-├── astro.config.mjs
-├── package.json
-├── tsconfig.json
-└── vercel.json
-```
-
-## 数据说明
-
-词根数据在 `src/data/wordRoots.ts` 中维护。当前包含 300 条记录，其中后段仍有占位数据，后续可以单独清洗或替换。
-
-添加新词根时保持现有结构：
-
-```ts
-{
-  id: 301,
-  root: 'example',
-  origin: 'Latin',
-  meaning: '示例含义',
-  meaningEn: 'example meaning',
-  description: '词根说明',
-  examples: [
-    {
-      word: 'example',
-      breakdown: { prefix: 'ex', root: 'ample', suffix: '' },
-      meaning: '例子',
-      explanation: 'ex + ample = example',
-    },
-  ],
-  quiz: {
-    question: 'example 的意思是什么？',
-    options: ['例子', '出口', '预测', '书写'],
-    correctAnswer: 0,
-  },
-}
-```
-
-修改词根数据后运行 `pnpm audit:word-roots`，确保同一卡片内没有重复例词、重复释义或重复小测试选项；如果题目考词根，问题文案使用「xxx 这个词根的意思是什么？」；如果题目考单词，问题文案使用「单词 xxx 的意思是什么？」或保持目标单词能在 `examples` 中找到。
+- 词素数据与构词灵感源自 [joeseesun/word-root-workshop](https://github.com/joeseesun/word-root-workshop)，本项目在此基础上使用 Svelte 5 重新设计与重构。
